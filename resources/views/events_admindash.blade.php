@@ -33,9 +33,6 @@
         <hr class="separator">
         <div class="mt-4">
             <ul id="userList">
-                @php
-                    $events = \App\Models\Event::latest()->paginate(5);
-                @endphp
 
                 @if ($events->count() > 0)
                     <div class="table-responsive">
