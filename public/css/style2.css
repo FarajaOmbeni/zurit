@@ -659,6 +659,7 @@ background-color: #0c2533;
   min-height: 30em;
   width: 50%;
   height: 100%;
+  margin-left: 20px;
 }
 
 .book-heading {
@@ -692,7 +693,10 @@ background-color: #0c2533;
   background-color: transparent;
 }
 
-
+.custom-card .card-img-top {
+  max-height: 350px;
+  object-fit: cover;
+}
 
 
 

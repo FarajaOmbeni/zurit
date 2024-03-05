@@ -94,7 +94,7 @@
     <section class="light-section">
     <div class="row">
             
-                <div class="col-md-6 mb-4">
+                <div class="col-md-6 mb-5">
                     <div class="card book_card custom-card">
                         <img class="card-img-top card-img" src="" alt="Card image cap">
                         <div class="card-body">

@@ -75,8 +75,129 @@
 
       <!--Training Section-->
 
-    <section class="trainings">
+      <section class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+ <!-- carousel -->
+ <div class="carousel">
+        <!-- list item -->
+        <div class="list">
+            <div class="item">
+                <img src="training_res/img/business.webp">
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">DESIGN SLIDER</div>
+                    <div class="topic">ANIMAL</div>
+                    <div class="des">
+                        <!-- lorem 50 -->
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/chama2.webp">
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">DESIGN SLIDER</div>
+                    <div class="topic">ANIMAL</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/people.webp">
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">DESIGN SLIDER</div>
+                    <div class="topic">ANIMAL</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/trustee.webp">
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">DESIGN SLIDER</div>
+                    <div class="topic">ANIMAL</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- list thumnail -->
+        <div class="thumbnail">
+            <div class="item">
+                <img src="training_res/img/business.webp">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="description">
+                        Description
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/chama2.webp">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="description">
+                        Description
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/people.webp">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="description">
+                        Description
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="training_res/img/trustee.webp">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="description">
+                        Description
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- next prev -->
 
+        <!-- <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div> -->
+        <!-- time running -->
+        <div class="time"></div>
+    </div>
     </section>
 
         <!--end Trainings section-->
@@ -126,42 +247,60 @@
         </footer>
 
     <script>
-        let items = document.querySelectorAll('.slider .item');
-let active = 3;
-function loadShow(){
-    items[active].style.transform = `none`;
-    items[active].style.zIndex = 1;
-    items[active].style.filter = 'none';
-    items[active].style.opacity = 1;
-    // show after
-    let stt = 0;
-    for(var i = active + 1; i < items.length; i ++){
-        stt++;
-        items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(5px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+//step 1: get DOM
+// let nextDom = document.getElementById('next');
+// let prevDom = document.getElementById('prev');
+
+let carouselDom = document.querySelector('.carousel');
+let SliderDom = carouselDom.querySelector('.carousel .list');
+let thumbnailBorderDom = document.querySelector('.carousel .thumbnail');
+let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item');
+let timeDom = document.querySelector('.carousel .time');
+
+thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+let timeRunning = 3000;
+let timeAutoNext = 7000;
+
+// nextDom.onclick = function(){
+//     showSlider('next');    
+// }
+
+// prevDom.onclick = function(){
+//     showSlider('prev');    
+// }
+
+// Add click handlers to each thumbnail
+thumbnailItemsDom.forEach((item, index) => {
+    item.onclick = function() {
+        showSlider(index);
     }
-     stt = 0;
-    for(var i = (active - 1); i >= 0; i --){
-        stt++;
-        items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(5px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
-    }
+});
+let runTimeOut;
+let runNextAuto = setTimeout(() => {
+    next.click();
+}, timeAutoNext)
+
+function showSlider(index){
+    let  SliderItemsDom = SliderDom.querySelectorAll('.carousel .list .item');
+    let thumbnailItemsDom = document.querySelectorAll('.carousel .thumbnail .item');
+    
+    // Move the clicked thumbnail and associated item to the front
+    SliderDom.prepend(SliderItemsDom[index]);
+    thumbnailBorderDom.prepend(thumbnailItemsDom[index]);
+    carouselDom.classList.add('prev');
+    
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
+        carouselDom.classList.remove('next');
+        carouselDom.classList.remove('prev');
+    }, timeRunning);
+
+    clearTimeout(runNextAuto);
+    runNextAuto = setTimeout(() => {
+        next.click();
+    }, timeAutoNext)
 }
-loadShow();
-let next = document.getElementById('next');
-let prev = document.getElementById('prev');
-next.onclick = function(){
-   active = active + 1 < items.length ?  active + 1 : active;
-   loadShow();
-}
-prev.onclick = function(){
-    active = active - 1 >= 0 ? active -1 : active;
-    loadShow();
-}
+
 </script>
       
 </body>    
