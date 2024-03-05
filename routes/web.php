@@ -1,22 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\InvestmentController;
-use App\Http\Controllers\NetworthController;
-use App\Http\Controllers\InsightsController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\InsightsController;
+use App\Http\Controllers\NetworthController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
-use App\Http\Controllers\DebtController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -30,9 +32,8 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class, 'index']);
+Route::post('/', [IndexController::class, 'storeEvent']);
 
 Route::get('about', function () {
     return view('about');
@@ -163,6 +164,10 @@ Route::get('insights_admindash', function () {
 Route::get('/insights_admindash', 'InsightsController@index');
 
 Route::get('/insights_admindash', [InsightsController::class, 'insightdata']);
+
+Route::get('/events_admindash', [EventsController::class, 'index'])->name('events.index');
+Route::post('/events_admindash', [EventsController::class, 'store'])->name('events.store');
+Route::delete('/events_admindash/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
 
 //Password reset Routes
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');

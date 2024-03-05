@@ -78,7 +78,7 @@
             <div class="col-md-6">
               <!-- Video Container -->
               <div class="video-container" onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-              <video src="img/vids/intro.mp4" autoplay muted loop></video>
+              <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
     <div class="play-button">
         <img src="img/play_button.svg" alt="Play">
     </div>
@@ -92,22 +92,20 @@
     <main>
 
     <section class="light-section">
-    <div class="row">
-            
-                <div class="col-md-6 mb-4">
-                    <div class="card book_card custom-card">
-                        <img class="card-img-top card-img" src="" alt="Card image cap">
-                        <div class="card-body">
-                            
-                        </div>
-                        <div class="card-footer text-center">
-                        <button type="button" class="btn btn-primary open-modal">
-                            Register
-                        </button>
-                        </div>
-                    </div>
-                </div>           
-      </div>
+    <div class="upcoming-trainings">
+        <div class="upcoming-training-card">
+          <img class="upcoming-training-image" src="/img/mistakes.jpeg" alt="Image 1">
+          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
+        </div>
+        <div class="upcoming-training-card-center">
+          <img class="upcoming-training-image" src="/img/mistakes.jpeg" alt="Image 2">
+          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
+        </div>
+        <div class="upcoming-training-card">
+          <img class="upcoming-training-image" src="/img/mistakes.jpeg" alt="Image 3">
+          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
+        </div>               
+    </div>
     
 </section>
 
