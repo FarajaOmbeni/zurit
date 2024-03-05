@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<nav class="navbar nav-dark navbar-expand-lg fixed-top py-3">
+<nav class="navbar nav-dark navbar-expand-lg fixed-top py-1">
 <div class="container">
         <a class="navbar-brand" href="index.html">
             <img src="{{ asset('img/logo-white3.png') }}" alt="">
@@ -75,7 +75,7 @@
 
       <!--Training Section-->
 
-      <section class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <section class="d-flex justify-content-center align-items-center" style="height: 100vh; margin-top:70px;">
  <!-- carousel -->
  <div class="carousel">
         <!-- list item -->
@@ -83,8 +83,7 @@
             <div class="item">
                 <img src="training_res/img/business.webp">
                 <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
+                    <div class="title">DESIGN SLIDER 1</div>
                     <div class="topic">ANIMAL</div>
                     <div class="des">
                         <!-- lorem 50 -->
@@ -99,8 +98,7 @@
             <div class="item">
                 <img src="training_res/img/chama2.webp">
                 <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
+                    <div class="title">DESIGN SLIDER 2</div>
                     <div class="topic">ANIMAL</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
@@ -114,8 +112,7 @@
             <div class="item">
                 <img src="training_res/img/people.webp">
                 <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
+                    <div class="title">DESIGN SLIDER 3</div>
                     <div class="topic">ANIMAL</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
@@ -129,8 +126,7 @@
             <div class="item">
                 <img src="training_res/img/trustee.webp">
                 <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
+                    <div class="title">DESIGN SLIDER 4</div>
                     <div class="topic">ANIMAL</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
@@ -148,7 +144,7 @@
                 <img src="training_res/img/business.webp">
                 <div class="content">
                     <div class="title">
-                        Name Slider
+                        Name Slider 1
                     </div>
                     <div class="description">
                         Description
@@ -159,7 +155,7 @@
                 <img src="training_res/img/chama2.webp">
                 <div class="content">
                     <div class="title">
-                        Name Slider
+                        Name Slider 2
                     </div>
                     <div class="description">
                         Description
@@ -170,7 +166,7 @@
                 <img src="training_res/img/people.webp">
                 <div class="content">
                     <div class="title">
-                        Name Slider
+                        Name Slider 3
                     </div>
                     <div class="description">
                         Description
@@ -181,7 +177,7 @@
                 <img src="training_res/img/trustee.webp">
                 <div class="content">
                     <div class="title">
-                        Name Slider
+                        Name Slider 4
                     </div>
                     <div class="description">
                         Description
