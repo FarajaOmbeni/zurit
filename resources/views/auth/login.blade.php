@@ -18,7 +18,6 @@
 
 @extends('layouts.app')
 
-@section('content')
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -107,5 +106,5 @@
         })
     </script>
     <script src="js/main.js"></script>
-@endsection
+
 </html>
