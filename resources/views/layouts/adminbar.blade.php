@@ -29,6 +29,9 @@
                         <li class="{{ Request::is('books_admindash') ? 'active' : '' }}">
                             <a href="{{ url('/books_admindash') }}"><span class="fa fa-book mr-3"></span> Books Management</a>
                         </li>
+                        <li class="{{ Request::is('events_admindash') ? 'active' : '' }}">
+                            <a href="{{ url('/events_admindash') }}"><span class="fa fa-money mr-3"></span> Events Management</a>
+                        </li>
                         <li class="{{ Request::is('insights_admindash') ? 'active' : '' }}">
                             <a href="{{ url('/insights_admindash') }}"><span class="fa fa-sticky-note mr-3"></span> System Insights</a>
                         </li>
@@ -42,7 +45,7 @@
                             <a href="{{ url('/marketing_admindash') }}"><span class="fa fa-cogs mr-3"></span> Marketing emails</a>
                         </li>
                         <li class="{{ Request::is('account_admindash') ? 'active' : '' }}">
-                            <a href="{{ url('/account_admindash') }}"><span class="fa fa-cogs mr-3"></span> Account Management</a>
+                            <a href="{{ url('/account_admindash') }}"><span class="fa fa-cogs mr-3"></span> Account Details</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

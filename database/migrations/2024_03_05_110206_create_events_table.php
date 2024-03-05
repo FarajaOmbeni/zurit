@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('investments', function (Blueprint $table) {
-            $table->string('investment_type')->nullable();
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->String('name');
+            $table->date('date');
+            $table->String('image');
+            $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::table('investments', function (Blueprint $table) {
-            $table->dropColumn('investment_type');
-        });
+        Schema::dropIfExists('events');
     }
 };
