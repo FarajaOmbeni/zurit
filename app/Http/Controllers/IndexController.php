@@ -10,6 +10,9 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $events = Event::orderby('date', 'asc')->paginate(3);
+        return view('index', [
+            'events' => $events,
+        ]);
     }
 }
