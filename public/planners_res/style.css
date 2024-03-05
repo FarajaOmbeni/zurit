@@ -1,0 +1,320 @@
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  
+  *,
+  *::before,
+  *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+body {
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.container.mainmargin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.budget_content {
+    text-align: center;
+}
+
+.icon-large {
+    font-size: 3em;
+    margin-bottom: 1em;
+}
+.form-control {
+    color: black !important; 
+    background-color: white !important; 
+}
+
+
+.input-small {
+    width: 100px;
+}
+
+.progress-circle {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-circle-inner {
+    width: 160px;
+    height: 160px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*Range slider*/
+.range-container {
+    position: relative;
+  }
+
+  input[type="range"] {
+    width: 300px;
+    margin: 18px 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #a882ef 0%, #a882ef 50%, whitesmoke 50%, whitesmoke 100%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.1s;
+  }
+  input[type="range"]:focus {
+    outline: none;
+  }
+  
+  input[type="range"] + label {
+    background-color: #fff;
+    position: absolute;
+    top: -30px;
+    left: 130px;
+    width: 60px;
+    padding: 5px 0px;
+    text-align: center;
+    border-radius: 20px;
+  }
+  
+  input[type="range"] + label:after {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    bottom: -5px;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    transform-origin: bottom-center;
+    transform: rotate(45deg);
+  }
+  
+  /* chrome and safari */
+  
+  input[type="range"]::-webkit-slider-runnable-track {
+    background-color: whitesmoke;
+    border-radius: 4px;
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: transparent;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    transform: translateY(calc(-50% + 2px));
+    cursor: pointer;
+    transition: 0.1s ease;
+  }
+  
+  .range-container:hover input[type="range"]::-webkit-slider-thumb {
+    outline: 4px solid #a882ef ;
+  }
+  
+  /* firefox */
+  input[type="range"]::-moz-range-track {
+    background-color: whitesmoke;
+    border-radius: 4px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: transparent;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    transform: translateY(calc(-50% + 3px));
+    cursor: pointer;
+  }
+  
+  .range-container:hover input[type="range"]::-moz-range-thumb {
+    outline: 4px solid #a882ef ;
+  }
+  
+  /* IE */
+  input[type="range"]::-ms-track {
+    background-color: whitesmoke;
+    border-radius: 4px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: transparent;
+  }
+  
+  input[type="range"]::-ms-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    transform: translateY(calc(-50% + 3px));
+    cursor: pointer;
+  }
+  
+  .range-container:hover input[type="range"]::-ms-thumb {
+    outline: 4px solid #F2AE30;
+  }
+  /*Slider End*/
+
+  /*SIdebar Edit*/
+  #content {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#wrapper {
+    width: 300px;
+    padding-left: 0; /* Updated padding */
+    transition: all 0.3s;
+    overflow: hidden;
+    position: fixed;
+}
+
+#sidebar {
+    height: 100%;
+    position: fixed;
+    margin-left: -300px; /* Adjusted margin */
+}
+
+#menu-toggle {
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    z-index: 11;
+}
+
+.blur-effect {
+    filter: blur(5px);
+}
+
+@media (min-width: 768px) {
+    #wrapper {
+        padding-left: 300px;
+    }
+
+    #wrapper.toggled #sidebar {
+        margin-left: 0;
+    }
+}
+/*sidebar edit end*/
+
+/*progress bar*/
+@keyframes growProgressBar {
+  0%, 33% { --pgPercentage: 0; }
+  100% { --pgPercentage: var(--value); }
+}
+
+@property --pgPercentage {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+div[role="progressbar"] {
+  --size: 12rem;
+  --fg: #369;
+  --bg: #def;
+  --pgPercentage: var(--value);
+  animation: growProgressBar 3s 1 forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: 
+    radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+    conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
+    ;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 5);
+  color: var(--fg);
+}
+
+.custom-card {
+  width: 70%;
+}
+
+.text-container {
+  margin-left: 20px;
+}
+
+.custom-text {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+/*progress bar end*/
+
+/*interest card*/
+#debtDropdown {
+  width: 20%; 
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#paymentDropdown {
+  width: 20%; 
+  position: absolute;
+  right: 0;
+  top: 0;
+}
