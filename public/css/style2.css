@@ -206,10 +206,9 @@ header .header-btn svg {
     background-repeat: no-repeat;
     background-size: auto 80%;
     background-position: center;
-    margin-bottom: 100px;
-    padding-top: 100px;
+    padding-top: 50px;
     border-bottom: 1px solid #0c2533;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
 
 .light-gray-section {

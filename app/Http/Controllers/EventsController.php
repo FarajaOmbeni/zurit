@@ -10,7 +10,9 @@ class EventsController extends Controller
 {
     public function index()
     {
-        return view('events_admindash');
+        $events = Event::all();
+
+        return view('events_admindash', compact('events'));
     }
 
     public function store(Request $request)

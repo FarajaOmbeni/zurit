@@ -228,6 +228,7 @@ header .header-btn svg {
 }
 /*end*/
 
+/* book-card */
 .custom-card .card-img-top {
   max-height: 350px;
   object-fit: cover;
@@ -925,14 +926,12 @@ footer .copyright p a:hover {
 #what-is-budget-planner {
   display: flex;
   align-items: center;
-  background-color: #f2f2f2; /* Grey background color */
+  background-color: #f2f2f2; 
   padding: 50px 0;
   margin: 0;
-  border-radius: 15px; /* Rounded corners */
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; 
   box-shadow: 0 8px 16px rgba(128, 0, 128, 0.3), 0 4px 8px rgba(0, 0, 255, 0.3), 0 2px 4px rgba(255, 191, 0, 0.3);
-  /*box-shadow: 0 8px 16px rgba(128, 0, 128, 0.5), 0 4px 8px rgba(0, 0, 255, 0.3), 0 2px 4px rgba(255, 191, 0, 0.2);
-  overflow: hidden; /* Ensure the shadow doesn't get clipped if the content overflows */
+  overflow: hidden;
 }
 
 #what-is-budget-planner .content {
@@ -946,21 +945,21 @@ footer .copyright p a:hover {
 }
 
 #what-is-budget-planner img {
-  width: 100%; /* Ensure the image is responsive */
+  width: 100%; 
   height: auto;
-  border-radius: 15px; /* Rounded edges for the image */
-  max-height: 300px; /* Limit the maximum height of the image */
+  border-radius: 15px; 
+  max-height: 300px; 
 }
 
 @media (max-width: 768px) {
   #what-is-budget-planner {
-      flex-direction: column; /* Change to a column layout on smaller screens */
-      justify-content: center; /* Center content on smaller screens */
+      flex-direction: column; 
+      justify-content: center; 
   }
 
   #what-is-budget-planner .content,
   #what-is-budget-planner .image {
-      padding: 20px 0; /* Add padding between content and image */
+      padding: 20px 0;
   }
 }
 
@@ -981,13 +980,13 @@ footer .copyright p a:hover {
 #why-use-our-planner .content {
   flex: 1;
   max-width: 60%;
-  padding: 0 20px; /* Add padding to the content for spacing */
+  padding: 0 20px; 
 }
 
 #why-use-our-planner .image-right {
   max-width: 40%;
   text-align: right;
-  padding: 0 20px; /* Add padding to the image for spacing */
+  padding: 0 20px; 
 }
 
 #why-use-our-planner .image-right img {

@@ -92,6 +92,7 @@
     <main>
 
     <section class="light-section">
+      <h2 style="text-align:center; margin-bottom:50px;">Our Events</h2>
     <div class="upcoming-trainings">
       @foreach($events as $event)
         <div class="upcoming-training-card-center">
