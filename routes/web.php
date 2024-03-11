@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
@@ -56,7 +57,8 @@ Route::get('investmentplanner', function () {
 });
 
 Route::get('contactus', function () {
-    return view('contactus');
+    $events = Event::all();
+    return view('contactus', ['events' => $events]);
 });
 
 Route::get('login', function () {
@@ -167,7 +169,8 @@ Route::get('/insights_admindash', [InsightsController::class, 'insightdata']);
 
 Route::get('/events_admindash', [EventsController::class, 'index'])->name('events.index');
 Route::post('/events_admindash', [EventsController::class, 'store'])->name('events.store');
-Route::delete('/events_admindash/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
+Route::delete('/delete-event/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
+Route::post('/give-feedback', [EventsController::class, 'eventFeedback']);
 
 //Password reset Routes
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
