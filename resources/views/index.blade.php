@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style2.css') }}"> 
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
@@ -326,6 +327,25 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+      window.onload = function() {
+    // Check if the 'cookieConsent' cookie is set
+    if (Cookies.get('cookieConsent') !== 'true') {
+        // If the 'cookieConsent' cookie is not set, display the cookie consent banner
+        var cookieBanner = document.createElement('div');
+        cookieBanner.innerHTML = `
+            <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #f5f5f5; padding: 10px; text-align: center; z-index: 1000;">
+                <p style="margin: 0; padding: 0;">This website uses cookies to ensure you get the best experience on our website. <button id="acceptCookies">Accept</button></p>
+            </div>
+        `;
+        document.body.appendChild(cookieBanner);
+
+        // When the 'Accept' button is clicked, set the 'cookieConsent' cookie and hide the cookie consent banner
+        document.getElementById('acceptCookies').onclick = function() {
+            Cookies.set('cookieConsent', 'true', { expires: 365 }); // The 'cookieConsent' cookie expires after 1 year
+            cookieBanner.style.display = 'none';
+        };
+    }
+};
     const video = document.getElementById('sectionVideo');
     const options = {
         root: null,

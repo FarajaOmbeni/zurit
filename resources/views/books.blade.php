@@ -115,7 +115,10 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-success mt-3" id="mpesaButton">Pay with M-Pesa</button>
+                        <div style="margin-top: 20px;">
+                            <img src="{{ asset('books_res/img/mpesa.png') }}" alt="Lipa na M-Pesa details" style="width: 100%; height: auto;">
+                        </div>
+                        <!-- <button class="btn btn-success mt-3" id="mpesaButton">Pay with M-Pesa</button>
                         <form action="{{ url('/stkpush') }}" method="post" id="paymentForm">
                             @csrf
                             <input type="hidden" id="bookName" name="bookName">
@@ -126,7 +129,7 @@
                                 </div>
                                 <input type="tel" id="phone" name="phone" class="form-control" autocomplete="off" placeholder="712345678" onkeypress="return onlyNumberKey(event)">
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
