@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Events Dash</title>
     <meta charset="utf-8">
@@ -9,81 +10,101 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="admin_res/css/style.css">
 </head>
+
 <body>
 
-@extends('layouts.adminbar')
-@include('layouts.app')
+    @extends('layouts.adminbar')
+    @include('layouts.app')
 
-<div class="col-md-8 offset-md-2">
-    <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Events Management</h2>
-    <div class="book_form" id="addBookForm">
-        <form method="POST" action="/events_admindash" enctype="multipart/form-data">
-        @csrf
-        <label for="name">Name of the Event</label>
-        <input type="text" name="name" id="name">
-        <label for="date">Date of the event</label>
-        <input type="date" name="date" id="date">
-        <label for="image">Event ArtWork</label>
-        <input type="file" name="image" id="image" placeholder="Event Image">
-        <button type="submit">Submit</button>
-    </form>
-    </div>
-</div>
+    <div class="col-md-8 offset-md-2" style="position: relative;">
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <h2 class="mb-4">Events Management</h2>
+            <div class="book_form" id="addBookForm">
+                <form method="POST" action="/events_admindash" enctype="multipart/form-data">
+                    @csrf
+                    <label for="name">Name of the Event</label>
+                    <input type="text" name="name" id="name">
+                    <label for="date">Date of the event</label>
+                    <input type="date" name="date" id="date">
+                    <label for="registration_link">Registration Link</label>
+                    <input type="text" name="registration_link" id="registration_link">
+                    <label for="image">Event ArtWork</label>
+                    <input type="file" name="image" id="image" placeholder="Event Image">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
         <hr class="separator">
-        <div class="mt-4">
+        <div class="">
             <ul id="userList">
 
                 @if ($events->count() > 0)
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Event Name</th>
-                                <th>Date</th>
-                                <th>ArtWork</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($events as $event)
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td>{{ $event->name }}</td>
-                                    <td>{{ $event->date }}</td>
-                                    <td>{{ $event->image }}</td>
-                                    <td>
-                                    <button type="button" class="btn btn-warning btn-sm editUserButton" data-toggle="modal" data-target="#editUserModal" data-userid="{{ $event->id }}">Edit</button>                                        
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('events.destroy', $event->id) }}" method="POST"
-                                              style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>ArtWork</th>
+                                    <th>Registration Link</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-</div>
+                            </thead>
+                            <tbody>
+                                @foreach ($events as $event)
+                                    <tr>
+                                        <td>{{ $event->name }}</td>
+                                        <td>{{ $event->date }}</td>
+                                        <td>{{ $event->image }}</td>
+                                        <td>{{ $event->registration_link }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning btn-sm editUserButton"
+                                                data-toggle="modal" data-target="#editUserModal"
+                                                data-userid="{{ $event->id }}">Edit</button>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('events.destroy', $event->id) }}" method="POST"
+                                                style="display: inline-block;" onsubmit="return confirmDelete()">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @else
-                    <tr><td colspan="5">0 results</td></tr>
+                    <tr>
+                        <td colspan="5">0 results</td>
+                    </tr>
                 @endif
             </ul>
         </div>
-</div>
+    </div>
 
 
 
-<!-- Include necessary scripts -->
-<script src="admin_res/js/jquery.min.js"></script>
-<script src="admin_res/js/popper.js"></script>
-<script src="admin_res/js/bootstrap.min.js"></script>
-<script src="admin_res/js/main.js"></script>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <!-- Include necessary scripts -->
+    <script src="admin_res/js/jquery.min.js"></script>
+    <script src="admin_res/js/popper.js"></script>
+    <script src="admin_res/js/bootstrap.min.js"></script>
+    <script src="admin_res/js/main.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
-<script>
-    CKEDITOR.replace( 'blog_message' );
-</script>
+    <script>
+        CKEDITOR.replace('blog_message');
+
+        function confirmDelete() {
+            var confirmation = confirm("Are you sure you want to delete this event?");
+            if (confirmation) {
+                alert("Event deleted successfully.");
+            }
+            return confirmation;
+        }
+    </script>
 </body>
+
 </html>

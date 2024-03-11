@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Mail\EventFeedbackMail;
+use App\Models\EventsFeedback;
+use Illuminate\Support\Facades\Mail;
 
 class EventsController extends Controller
 {
@@ -21,6 +23,7 @@ class EventsController extends Controller
             'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'date' => 'required',
+            'registration_link' => 'required|url',
         ]);
 
         $imageName = ''; // Initialize image name variable
@@ -37,8 +40,54 @@ class EventsController extends Controller
             'name' =>$request->input('name'),
             'image' => $imageName,
             'date' => $request->input('date'),
+            'registration_link' => $request->input('registration_link'),
         ]);
         return redirect()->route('events.index')->with('success', 'Blog added successfully.');
     }
 
+    public function eventFeedback(Request $request){
+        //Store to teh Database
+        EventsFeedback::create([
+            'name' => $request->input('name'),
+            'venue' => $request->input('venue'),
+            'comprehensiveness' => $request->input('comprehensiveness'),
+            'relevance' => $request->input('relevance'),
+            'recommendation' => $request->input('recommendation'),
+            'return_client' => $request->input('return_client'),
+            'value_for_money' => $request->input('value_for_money'),
+            'valuable_aspect' => $request->input('valuable_aspect'),
+            'improvement' => $request->input('improvement'),
+            'suggestion' => $request->input('suggestion'),
+            'improve_experience' => $request->input('improve_experience'),
+            'fav_trainor' => $request->input('fav_trainor'),
+            'testimonial' => $request->input('testimonial'),
+        ]);
+
+
+        //Send email
+        Mail::to('otaodavis.od@gmail.com')->send(new EventFeedbackMail(
+            $request->input('name'),
+            $request->input('venue'),
+            $request->input('comprehensiveness'),
+            $request->input('relevance'),
+            $request->input('recommendation'),
+            $request->input('return_client'),
+            $request->input('value_for_money'),
+            $request->input('valuable_aspect'),
+            $request->input('improvement'),
+            $request->input('suggestion'),
+            $request->input('improve_experience'),
+            $request->input('fav_trainor'),
+            $request->input('testimonial'),
+   
+        ));
+
+        return redirect('/contactus');
+    }
+
+    public function destroy($event){
+        $event = Event::find($event);
+        $event->delete();
+        return redirect()->route('events.index')->with('success', 'Blog deleted successfully.');
+    }
 }

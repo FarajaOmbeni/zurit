@@ -98,16 +98,8 @@
       @foreach($events as $event)
         <div class="upcoming-training-card-center">
           <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $event->image) }}" alt="Image of {{ $event->name }}">
-          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
+          <div class="reglink-container"><a href="{{ $event->registration_link }}" class="registration-link" target="_blank">REGISTER NOW</a></div>
         </div>
-        {{-- <div class="upcoming-training-card-center">
-          <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $nextEvent->image) }}" alt="Image of {{ $nextEvent->name }}">
-          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
-        </div>
-        <div class="upcoming-training-card">
-          <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $event->image) }}" alt="Image of {{ $event->name }}">
-          <div class="reglink-container"><a href="https://forms.gle/gp4TDi87jf5ezmyg8" class="registration-link" target="_blank">REGISTER NOW</a></div>
-        </div> --}}
         @endforeach               
     </div>
     
