@@ -604,7 +604,7 @@ footer .copyright p a:hover {
 }
 
 .video {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 .video-container {
@@ -685,99 +685,148 @@ footer .copyright p a:hover {
     display: inline-block;
     padding: 10px 20px;
     border: none;
+    font-weight: bold;
     border-radius: 25px;
     background: linear-gradient(to right, #3300cc, #6600cc, #ff9900);
     color: white;
     text-decoration: none;
+    transition: background 0.3s; /* This will animate the size change */
+}
+
+.btn-primary:hover {
+    background: black;
+    color: gold;
 }
 
 .card-footer {
     background-color: transparent;
 }
 
-.upcoming-trainings{
-  display: grid;
-  grid-template-columns: 30% 35% 30%;
-  align-items: center;
-  gap: 50px;
-  margin: 0 5rem 0 5rem;
-  justify-content: space-between;
+.upcoming-trainings {
+    display: grid;
+    grid-template-columns: 30% 35% 30%;
+    align-items: center;
+    gap: 50px;
+    margin: 0 5rem 5rem 5rem;
+    justify-content: space-between;
 }
 
 .upcoming-training-card {
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(121, 51, 255);
-  padding: 10px;
-  height: 85%;
-  padding-bottom: 50px;
-  position: relative;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(121, 51, 255);
+    padding: 10px;
+    height: 85%;
+    padding-bottom: 50px;
+    position: relative;
 }
 
-.upcoming-training-card:hover{
-  box-shadow: 0 0 10px rgba(121, 51, 255);
-  transform: scale(1.01);
-  transition: all 0.3s ease;
+.upcoming-training-card:hover {
+    box-shadow: 0 0 10px rgba(121, 51, 255);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
 }
 
 .upcoming-training-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 
 .upcoming-training-card-center {
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(121, 51, 255);
-  padding: 10px;
-  padding-bottom: 50px;
-  height: 100%;
-  position: relative;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(121, 51, 255);
+    padding: 10px;
+    padding-bottom: 50px;
+    height: 100%;
+    position: relative;
 }
 
-.upcoming-training-card-center:hover{
-  box-shadow: 0 0 10px rgba(121, 51, 255);
-  transform: scale(1.01);
-  transition: all 0.3s ease;
+.upcoming-training-card-center:hover {
+    box-shadow: 0 0 10px rgba(121, 51, 255);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
 }
 
-.registration-link{
-  background-color: #6600cc;
-  color: white;
-  padding: 5px;
-  margin: 10px 0px 10px 0px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-family: "Nunito Sans", sans-serif;
-  font-weight: bold;
+.registration-link {
+    background-color: #6600cc;
+    color: white;
+    padding: 5px;
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: bold;
 }
 
-.reglink-container{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
+.reglink-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.registration-link:hover{
-  background-color: #3300cc;
-  color: white;
+.registration-link:hover {
+    background-color: #3300cc;
+    color: white;
 }
 
 @media only screen and (max-width: 768px) {
-  .upcoming-trainings {
-    grid-template-columns: 100%;
-    gap: 100px;
-    padding: 0 2rem 0 2rem;
-    margin: 0 2rem 0 2rem;
-    padding-bottom: 80px;
-  }
+    .upcoming-trainings {
+        grid-template-columns: 100%;
+        gap: 100px;
+        padding: 0 2rem 0 2rem;
+        margin: 0 2rem 0 2rem;
+        padding-bottom: 80px;
+    }
 
-  .upcoming-training-card,
-  .upcoming-training-card-center {
-    height: auto;
-  }
+    .upcoming-training-card,
+    .upcoming-training-card-center {
+        height: auto;
+    }
+}
+
+.past-trainings{
+    display: grid;
+    grid-template-columns: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.accordion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(168, 130, 239);
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.accordion:hover {
+    background-color: rgba(168, 130, 239, 0.9);
+}
+
+.accordion-item {
+    display: flex;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    gap: 2%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-bottom: 15px;
+}
+
+.accordion-image {
+    width: 15%;
+}
+.accordion-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.accordion-content {
+    margin: 10px 0 10px 0;
 }

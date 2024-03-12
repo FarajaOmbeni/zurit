@@ -83,7 +83,12 @@
                             <option selected disabled>No events available</option>
                         @else
                             @foreach ($events as $event)
-                                <option value="{{ $event->name }}">{{ $event->name }}</option>
+                                <option value="{{ $event->name}}">
+                                    {{ $event->name}}</option>
+                            @endforeach
+                            @foreach ($pastevents as $pastevent)
+                                <option value="{{ $pastevent->name }}">
+                                    {{ $pastevent->name }}</option>
                             @endforeach
                         @endif
                     </select>

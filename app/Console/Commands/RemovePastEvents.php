@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Event;
+use App\Models\PastEvent;
 use Illuminate\Console\Command;
 
 class RemovePastEvents extends Command
@@ -13,7 +14,15 @@ class RemovePastEvents extends Command
 
     public function handle()
     {
-        Event::where('date', '<', now())->delete();
-        $this->info('Past events removed successfully.');
+        $events = Event::where('date', '<', now())->get();
+
+        foreach ($events as $event) {
+            PastEvent::create([
+                'name' => $event->name,
+                'date' => $event->date,
+                'image' => $event->image,
+            ]);
+        }
+        $event->delete();
     }
 }
