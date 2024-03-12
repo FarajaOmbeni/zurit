@@ -394,111 +394,112 @@
                 accordion.style.borderBottomLeftRadius = '0px';
                 accordion.style.borderBottomRightRadius = '0px';
             }
+        }
 
-            window.onload = function() {
-                // Check if the 'cookieConsent' cookie is set
-                if (Cookies.get('cookieConsent') !== 'true') {
-                    // If the 'cookieConsent' cookie is not set, display the cookie consent banner
-                    var cookieBanner = document.createElement('div');
-                    cookieBanner.innerHTML = `
+        window.onload = function() {
+            // Check if the 'cookieConsent' cookie is set
+            if (Cookies.get('cookieConsent') !== 'true') {
+                // If the 'cookieConsent' cookie is not set, display the cookie consent banner
+                var cookieBanner = document.createElement('div');
+                cookieBanner.innerHTML = `
             <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #f5f5f5; padding: 10px; text-align: center; z-index: 1000;">
                 <p style="margin: 0; padding: 0;">This website uses cookies to ensure you get the best experience on our website. <button id="acceptCookies">Accept</button></p>
             </div>
         `;
-                    document.body.appendChild(cookieBanner);
+                document.body.appendChild(cookieBanner);
 
-                    // When the 'Accept' button is clicked, set the 'cookieConsent' cookie and hide the cookie consent banner
-                    document.getElementById('acceptCookies').onclick = function() {
-                        Cookies.set('cookieConsent', 'true', {
-                            expires: 365
-                        }); // The 'cookieConsent' cookie expires after 1 year
-                        cookieBanner.style.display = 'none';
-                    };
-                }
-            };
-            const video = document.getElementById('sectionVideo');
-            const options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
-            };
+                // When the 'Accept' button is clicked, set the 'cookieConsent' cookie and hide the cookie consent banner
+                document.getElementById('acceptCookies').onclick = function() {
+                    Cookies.set('cookieConsent', 'true', {
+                        expires: 365
+                    }); // The 'cookieConsent' cookie expires after 1 year
+                    cookieBanner.style.display = 'none';
+                };
+            }
+        };
+        const video = document.getElementById('sectionVideo');
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
+        };
 
-            const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
+        const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    video.play();
+                                    observer.unobserve(entry.target);
+                                }
+                            }
+                            const video = document.getElementById('sectionVideo');
+                            const options = {
+                                root: null,
+                                rootMargin: '0px',
+                                threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
+                            };
+
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
                                     if (entry.isIntersecting) {
                                         video.play();
                                         observer.unobserve(entry.target);
                                     }
-                                }
-                                const video = document.getElementById('sectionVideo');
-                                const options = {
-                                    root: null,
-                                    rootMargin: '0px',
-                                    threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
-                                };
+                                });
+                            }, options);
 
-                                const observer = new IntersectionObserver((entries) => {
-                                    entries.forEach(entry => {
-                                        if (entry.isIntersecting) {
-                                            video.play();
-                                            observer.unobserve(entry.target);
-                                        }
-                                    });
-                                }, options);
+                            observer.observe(document.querySelector('.light-section2'));
 
-                                observer.observe(document.querySelector('.light-section2'));
+                            $(document).ready(function() {
+                                $('.navbar-toggler').click(function() {
+                                    var targetCollapse = $($(this).data('bs-target'));
+                                    targetCollapse.collapse('toggle');
 
-                                $(document).ready(function() {
-                                    $('.navbar-toggler').click(function() {
-                                        var targetCollapse = $($(this).data('bs-target'));
-                                        targetCollapse.collapse('toggle');
-
-                                        // Toggle the icon classes
-                                        $(this).toggleClass('collapsed');
-                                        $(this).find('.navbar-toggler-icon').toggleClass('d-none');
-                                        $(this).find('.fa-bars, .fa-times').toggleClass('d-none');
-                                    });
-
-                                    // Close the navbar when a menu item is clicked
-                                    $('.navbar-nav>li>a').on('click', function() {
-                                        $('.navbar-collapse').collapse('hide');
-                                    });
+                                    // Toggle the icon classes
+                                    $(this).toggleClass('collapsed');
+                                    $(this).find('.navbar-toggler-icon').toggleClass('d-none');
+                                    $(this).find('.fa-bars, .fa-times').toggleClass('d-none');
                                 });
 
-                                // data for the donut chart and the list
-                                var data = {
-                                    labels: ['Rent', 'Groceries', 'Bills', 'Entertainment', 'Other'],
-                                    datasets: [{
-                                        data: [300, 50, 100, 50, 100],
-                                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#AA6384', '#2CA21B']
-                                    }]
-                                };
-
-                                // create the donut chart
-                                var ctx = document.getElementById('donutChart').getContext('2d'); new Chart(ctx, {
-                                    type: 'doughnut',
-                                    data: data
+                                // Close the navbar when a menu item is clicked
+                                $('.navbar-nav>li>a').on('click', function() {
+                                    $('.navbar-collapse').collapse('hide');
                                 });
+                            });
 
-                                // add expense types to the list
-                                var ul = document.getElementById('expenseTypes'); data.labels.forEach(function(label, i) {
-                                    var li = document.createElement('li');
-                                    li.className = 'list-group-item';
+                            // data for the donut chart and the list
+                            var data = {
+                                labels: ['Rent', 'Groceries', 'Bills', 'Entertainment', 'Other'],
+                                datasets: [{
+                                    data: [300, 50, 100, 50, 100],
+                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#AA6384', '#2CA21B']
+                                }]
+                            };
 
-                                    // create a span for the colored bullet
-                                    var span = document.createElement('span');
-                                    span.style.display = 'inline-block';
-                                    span.style.width = '10px';
-                                    span.style.height = '10px';
-                                    span.style.marginRight = '5px';
-                                    span.style.backgroundColor = data.datasets[0].backgroundColor[i];
-                                    li.appendChild(span);
+                            // create the donut chart
+                            var ctx = document.getElementById('donutChart').getContext('2d'); new Chart(ctx, {
+                                type: 'doughnut',
+                                data: data
+                            });
 
-                                    // add the expense type and amount
-                                    li.appendChild(document.createTextNode(label + ': $' + data.datasets[0].data[i]));
+                            // add expense types to the list
+                            var ul = document.getElementById('expenseTypes'); data.labels.forEach(function(label, i) {
+                                var li = document.createElement('li');
+                                li.className = 'list-group-item';
 
-                                    ul.appendChild(li);
-                                });
+                                // create a span for the colored bullet
+                                var span = document.createElement('span');
+                                span.style.display = 'inline-block';
+                                span.style.width = '10px';
+                                span.style.height = '10px';
+                                span.style.marginRight = '5px';
+                                span.style.backgroundColor = data.datasets[0].backgroundColor[i];
+                                li.appendChild(span);
+
+                                // add the expense type and amount
+                                li.appendChild(document.createTextNode(label + ': $' + data.datasets[0].data[i]));
+
+                                ul.appendChild(li);
+                            });
     </script>
 </body>
 
