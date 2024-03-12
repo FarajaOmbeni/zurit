@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Event;
+use App\Models\PastEvent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
@@ -58,7 +60,8 @@ Route::get('investmentplanner', function () {
 
 Route::get('contactus', function () {
     $events = Event::all();
-    return view('contactus', ['events' => $events]);
+    $pastevents = PastEvent::all();
+    return view('contactus', ['events' => $events, 'pastevents' => $pastevents]);
 });
 
 Route::get('login', function () {

@@ -1436,10 +1436,10 @@ label {
     font-size: 1.3rem;
 }
 
-select{
-  width: 30%;
-  height: 40px;
-  border-radius: 6px;
+select {
+    width: 30%;
+    height: 40px;
+    border-radius: 6px;
 }
 
 textarea {
@@ -1475,15 +1475,23 @@ textarea {
     overflow: hidden;
 }
 
-.feedback-button:hover{
-  background: #0c2533;
-  color: #f2ae30;
+.feedback-button:hover {
+    background: #0c2533;
+    color: #f2ae30;
+}
+
+.questionnaire-info {
+}
+
+.information-logo {
+    margin-right: 10px;
 }
 
 @media screen and (max-width: 480px) {
-    label, select, textarea {
+    label,
+    select,
+    textarea {
         font-size: 16px;
-        /* Add more styles as needed */
     }
 
     .feedback-form {
@@ -1491,13 +1499,13 @@ textarea {
         margin-bottom: 4rem;
         margin-right: 4rem;
         margin-left: 4rem;
-        /* Add more styles as needed */
     }
 
     .feedback-button {
         width: 100%;
         font-size: 1rem;
         margin: 2px auto;
-        /* Add more styles as needed */
     }
 }
+
+
