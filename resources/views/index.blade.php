@@ -116,7 +116,7 @@
             <div class="past-trainings">
                 @foreach ($pastevents as $pastevent)
                     <div class="container">
-                        <div class="accordion" id="accordion" onclick="openAccordion(event)">
+                        <div class="accordion" onclick="openAccordion(event)">
                             <div class="accordion-title">
                                 {{ $pastevent->name }}
                             </div>
@@ -129,7 +129,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="accordion-item" id="accordion-item">
+                        <div class="accordion-item">
                             <img class="accordion-image" src="{{ asset('events_res/img/' . $pastevent->image) }}"
                                 alt="Event Image">
                             <div class="accordion-content">
