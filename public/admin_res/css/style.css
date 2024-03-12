@@ -8451,11 +8451,6 @@ table th, table td {
   color: white;
   border: none;
 }
-
-
-
-
-
 /*sidebar edit*/
 #wrapper.toggled #sidebar {
   margin-left: -250px;

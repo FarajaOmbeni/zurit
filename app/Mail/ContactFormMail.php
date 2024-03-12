@@ -12,13 +12,13 @@ class ContactFormMail extends Mailable
 
     public $name;
     public $email;
-    public $userMessage; // changed from $message
+    public $userMessage; 
 
-    public function __construct($name, $email, $userMessage) // changed from $message
+    public function __construct($name, $email, $userMessage) 
     {
         $this->name = (string)$name;
         $this->email = (string)$email;
-        $this->userMessage = (string)$userMessage; // changed from $message
+        $this->userMessage = (string)$userMessage; 
     }
 
     public function build()
@@ -27,7 +27,7 @@ class ContactFormMail extends Mailable
             ->with([
                 'name' => $this->name,
                 'email' => $this->email,
-                'userMessage' => $this->userMessage, // changed from $message
+                'userMessage' => $this->userMessage, 
             ])
             ->subject('New Contact Form Submission');
     }

@@ -10,7 +10,7 @@
         <div class="mt-4">
             <ul id="userList">
                 @php
-                    $users = \App\Models\User::latest()->paginate(5);
+                $users = \App\Models\User::all();
                 @endphp
 
                 @if ($users->count() > 0)
