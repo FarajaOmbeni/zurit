@@ -704,7 +704,7 @@ footer .copyright p a:hover {
 
 .upcoming-trainings {
     display: grid;
-    grid-template-columns: 30% 35% 30%;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 50px;
     margin: 0 5rem 5rem 5rem;

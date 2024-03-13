@@ -28,6 +28,11 @@
                     <input type="date" name="date" id="date">
                     <label for="registration_link">Registration Link</label>
                     <input type="text" name="registration_link" id="registration_link">
+                    <label for="price">Free or Paid?</label> <br>
+                    <select name="price" id="">
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                    </select> <br><br>
                     <label for="image">Event ArtWork</label>
                     <input type="file" name="image" id="image" placeholder="Event Image">
                     <button type="submit">Submit</button>

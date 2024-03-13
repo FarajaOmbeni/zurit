@@ -23,6 +23,7 @@ class EventsController extends Controller
             'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'date' => 'required',
+            'price' => 'required',
             'registration_link' => 'required|url',
         ]);
 
@@ -40,6 +41,7 @@ class EventsController extends Controller
             'name' =>$request->input('name'),
             'image' => $imageName,
             'date' => $request->input('date'),
+            'price' => $request->input('price'),
             'registration_link' => $request->input('registration_link'),
         ]);
         return redirect()->route('events.index')->with('success', 'Blog added successfully.');

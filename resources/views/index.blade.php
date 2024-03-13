@@ -106,7 +106,13 @@
                         <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $event->image) }}"
                             alt="Image of {{ $event->name }}">
                         <div class="reglink-container"><a href="{{ $event->registration_link }}"
-                                class="registration-link" target="_blank">REGISTER NOW</a></div>
+                                class="registration-link" target="_blank">
+                            @if ($event->price == 'free')
+                                JOIN NOW
+                            @else
+                                REGISTER NOW
+                            @endif
+                            </a></div>
                     </div>
                 @endforeach
             </div>
@@ -387,7 +393,7 @@
                 item.style.maxHeight = null;
                 accordion.style.borderBottomLeftRadius = '12px';
                 accordion.style.borderBottomRightRadius = '12px';
-                
+
             } else {
                 item.style.maxHeight = 150 + "px";
                 accordion.style.borderBottomLeftRadius = '0px';

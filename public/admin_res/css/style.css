@@ -8495,4 +8495,8 @@ table th, table td {
   }
 }
 
-
+select {
+    width: 30%;
+    height: 40px;
+    border-radius: 6px;
+}
