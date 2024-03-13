@@ -709,44 +709,28 @@ footer .copyright p a:hover {
     gap: 50px;
     margin: 0 5rem 5rem 5rem;
     justify-content: space-between;
+    height:30rem;
 }
 
 .upcoming-training-card {
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(121, 51, 255);
     padding: 10px;
-    height: 85%;
+    height: 100%;
     padding-bottom: 50px;
     position: relative;
 }
 
 .upcoming-training-card:hover {
     box-shadow: 0 0 10px rgba(121, 51, 255);
-    transform: scale(1.01);
     transition: all 0.3s ease;
 }
 
 .upcoming-training-image {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-}
-
-.upcoming-training-card-center {
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(121, 51, 255);
-    padding: 10px;
-    padding-bottom: 50px;
-    height: 100%;
-    position: relative;
-}
-
-.upcoming-training-card-center:hover {
-    box-shadow: 0 0 10px rgba(121, 51, 255);
-    transform: scale(1.01);
-    transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
 .registration-link {
@@ -754,7 +738,7 @@ footer .copyright p a:hover {
     color: white;
     padding: 5px;
     margin: 10px 0px 10px 0px;
-    border-radius: 5px;
+    border-radius: 2px;
     text-decoration: none;
     font-family: "Nunito Sans", sans-serif;
     font-weight: bold;
@@ -782,8 +766,7 @@ footer .copyright p a:hover {
         padding-bottom: 80px;
     }
 
-    .upcoming-training-card,
-    .upcoming-training-card-center {
+    .upcoming-training-card,{
         height: auto;
     }
 }

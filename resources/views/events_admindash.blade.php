@@ -64,9 +64,8 @@
                                         <td>{{ $event->image }}</td>
                                         <td>{{ $event->registration_link }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-warning btn-sm editUserButton"
-                                                data-toggle="modal" data-target="#editUserModal"
-                                                data-userid="{{ $event->id }}">Edit</button>
+                                            <a href="/editEvent/{{$event->id}}" class="btn btn-warning btn-sm editEventButton"
+                                                >Edit</a>
                                         </td>
                                         <td>
                                             <form action="{{ route('events.destroy', $event->id) }}" method="POST"

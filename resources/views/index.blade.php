@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{time()}}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
 </head>
 
@@ -102,7 +102,7 @@
             <h2 style="text-align:center; margin-bottom:50px;">Our Events</h2>
             <div class="upcoming-trainings">
                 @foreach ($events as $event)
-                    <div class="upcoming-training-card-center">
+                    <div class="upcoming-training-card">
                         <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $event->image) }}"
                             alt="Image of {{ $event->name }}">
                         <div class="reglink-container"><a href="{{ $event->registration_link }}"
@@ -140,7 +140,7 @@
                             <div class="accordion-content">
                                 <h4><b>{{ $pastevent->name }}</b></h4>
                                 <h5>{{ $pastevent->date }}</h5>
-                                <a class="registration-link" href="/contactus">Leave a review!</a>
+                                <a class="registration-link" href="/contactus" target="_blank">Leave a review!</a>
                             </div>
                         </div>
                     </div>
