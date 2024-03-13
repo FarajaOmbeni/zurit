@@ -1449,6 +1449,7 @@ textarea {
 }
 
 .feedback-form {
+    position: relative;
     background-color: whitesmoke;
     padding: 2rem;
     margin-bottom: 8rem;
@@ -1508,4 +1509,12 @@ textarea {
     }
 }
 
+.download-pdf {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.download-pdf-image {
+    width: 70px;
+}
 

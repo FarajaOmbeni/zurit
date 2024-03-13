@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class EventsFeedback extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'venue', 'comprehensiveness', 'relevance', 'recommendation', 'return_client', 'value_for_money', 'valuable_aspect', 'improvement', 'suggestion', 'improve_experience', 'fav_trainor', 'testimonial'];
+    protected $fillable = ['name', 'venue', 'comprehensiveness', 'relevance', 'recommendation', 'return_client', 'value_for_money', 'valuable_aspect', 'improvement', 'suggestion', 'fav_trainor'];
 }
