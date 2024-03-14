@@ -174,6 +174,8 @@ Route::get('/events_admindash', [EventsController::class, 'index'])->name('event
 Route::post('/events_admindash', [EventsController::class, 'store'])->name('events.store');
 Route::delete('/delete-event/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
 Route::post('/give-feedback', [EventsController::class, 'eventFeedback']);
+Route::get('/editEvent/{id}', [EventsController::class, 'edit'])->name('editEvent');
+Route::post('editEvent/{id}', [EventsController::class, 'update'])->name('updateEvent');
 
 //Password reset Routes
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');

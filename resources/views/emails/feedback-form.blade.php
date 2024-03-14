@@ -40,6 +40,9 @@
         <p><b>Question: </b>How would you rate the relevance of the topics covered in our training sessions to your financial goals and needs?
 </p>
         <p><b>Answer: </b>{{ $relevance }}/5</p>
+
+        <hr>
+
         <p><b>Question: </b>How likely are you to recommend Zurit Consulting's trainings to others based on your experience?
 </p>
         <p><b>Answer: </b>{{ $recommendation }}/5</p>
@@ -64,17 +67,12 @@
 </p>
         <p><b>Answer: </b>{{ $suggestion }}</p>
         <hr>
-        <p><b>Question: </b>Do you have any suggestions or ideas for how we can enhance the overall customer experience during our training sessions?
-</p>
-        <p><b>Answer: </b>{{ $improve_experience }}</p>
-        <hr>
+
         <p><b>Question: </b>Who was your favourite trainor/trainors?
 </p>
         <p><b>Answer: </b>{{ $fav_trainor }}</p>
         <hr>
-        <p><b>Question: </b>Kindly tell us what you think about our trainings in general
-</p>
-        <p><b>Answer: </b>{{ $testimonial }}</p>
+
 
         <div class="footer">
             <p>This is a system generated email, please do not reply directly.</p>

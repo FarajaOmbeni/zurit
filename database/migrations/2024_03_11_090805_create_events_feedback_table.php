@@ -24,9 +24,7 @@ return new class extends Migration
             $table->String('valuable_aspect');
             $table->String('improvement');
             $table->String('suggestion');
-            $table->String('improve_experience');
             $table->String('fav_trainor');
-            $table->String('testimonial');
             $table->timestamps();
         });
 

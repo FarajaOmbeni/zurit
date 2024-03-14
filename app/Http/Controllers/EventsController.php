@@ -13,8 +13,9 @@ class EventsController extends Controller
     public function index()
     {
         $events = Event::all();
+        $event_id = $events->pluck('id');
 
-        return view('events_admindash', compact('events'));
+        return view('events_admindash', ['events' => $events, 'event_id' => $event_id]);
     }
 
     public function store(Request $request)
@@ -23,6 +24,7 @@ class EventsController extends Controller
             'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'date' => 'required',
+            'price' => 'required',
             'registration_link' => 'required|url',
         ]);
 
@@ -37,15 +39,56 @@ class EventsController extends Controller
 
         // Create blog with file path
         Event::create([
-            'name' =>$request->input('name'),
+            'name' => $request->input('name'),
             'image' => $imageName,
             'date' => $request->input('date'),
+            'price' => $request->input('price'),
             'registration_link' => $request->input('registration_link'),
         ]);
         return redirect()->route('events.index')->with('success', 'Blog added successfully.');
     }
 
-    public function eventFeedback(Request $request){
+    public function edit($id)
+    {
+        $event = Event::find($id);
+
+        return view('events_edit_admindash', ['event' => $event]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        $imageName = ''; // Initialize image name variable
+
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('events_res/img'), $imageName);
+        }
+
+        //validate the inputs
+        $request->validate([
+            'name' => 'required',
+            'date' => 'required',
+            'price' => 'required',
+            'registration_link' => 'required|url',
+        ]);
+
+        $event->name = $request->name;
+        $event->date = $request->date;
+        $event->registration_link = $request->registration_link;
+        $event->price = $request->price;
+        $event->image = $imageName;
+
+        $event->save();
+
+        return redirect('/events_admindash');
+    }
+
+    public function eventFeedback(Request $request)
+    {
         //Store to teh Database
         EventsFeedback::create([
             'name' => $request->input('name'),
@@ -79,13 +122,14 @@ class EventsController extends Controller
             $request->input('improve_experience'),
             $request->input('fav_trainor'),
             $request->input('testimonial'),
-   
+
         ));
 
         return redirect('/contactus');
     }
 
-    public function destroy($event){
+    public function destroy($event)
+    {
         $event = Event::find($event);
         $event->delete();
         return redirect()->route('events.index')->with('success', 'Blog deleted successfully.');
