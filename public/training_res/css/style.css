@@ -44,76 +44,71 @@ ul.text-list {
   }
 
 
-nav {
+  nav {
     height: 15%;
-  }
-  #navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: transparent;
 }
-  
-  nav .navbar-brand {
+
+nav .navbar-brand {
     width: 150px;
-  }
-  
-  nav .navbar-brand img {
+}
+
+nav .navbar-brand img {
     position: relative;
     height: 150px;
     width: 150px;
     margin-top: -30px;
-  }
-  nav .navbar-toggler:focus,
-  nav .navbar-toggler:active,
-  nav .navbar-toggler-icon:focus {
+}
+nav .navbar-toggler:focus,
+nav .navbar-toggler:active,
+nav .navbar-toggler-icon:focus {
     outline: none;
     -webkit-box-shadow: none;
-            box-shadow: none;
-  }
-  
-  nav .fas {
+    box-shadow: none;
+}
+
+nav .fas {
     color: white;
-  }
-  
-  nav .navbar-nav .nav-item {
-    padding: 5px;
-  }
-  
-  nav .navbar-nav .nav-item a {
+}
+nav .navbar-nav .nav-item {
+  padding: 5px;
+  background-color: #0c2533;
+}
+
+nav .navbar-nav .nav-item a {
     color: white;
-  }
-  
-  nav .navbar-nav .nav-item .btn-item {
+}
+
+nav .navbar-nav .nav-item .btn-item {
     padding: 5px 20px;
     background-color: white;
     border: none;
     border-radius: 20px;
-  }
-  
-
-  .navbar-nav .nav-item.active .nav-link {
+}
+.navbar-nav .nav-item.active .nav-link {
     font-weight: bold;
-    color: #F2AE30;
-  }
-  
-  .nav-dark {
+    color: #f2ae30;
+}
+.nav-dark {
     background-color: #0c2533;
-  }
-  
-  /* Custom CSS for the Prosperity Tools dropdown */
-  .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-    background: #0c2533;
-  }
-  
-  .nav-item.dropdown:hover .nav-link {
-    color: whitesmoke;
-  }
-  
-  .nav-item.dropdown:hover .dropdown-item{
-    color: #F2AE30;
-  }
+}
 
+/* Custom CSS for the Prosperity Tools dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #0c2533;
+}
+
+.nav-item.dropdown:hover .nav-link {
+    color: whitesmoke;
+}
+
+.nav-item.dropdown:hover .dropdown-item {
+    color: #f2ae30;
+}
+
+.shadow-bg {
+    background-color: #0c2533;
+}
 /*trainings section*/ 
 .item {
   position: relative;
@@ -613,4 +608,5 @@ footer .copyright p a:hover {
   background: linear-gradient(to right, #3300cc, #6600cc, #ff9900); 
   
 }
+
 

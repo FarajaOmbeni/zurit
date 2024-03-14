@@ -106,14 +106,14 @@
                         <p class="card-text" id="modalBookDescription"></p>
                         <p class="fw-bold" id="modalBookPrice"></p> 
                         <div id="bookType" style="margin-top: 20px;">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-secondary active">
                                     <input type="radio" name="bookType" id="soft" value="soft" checked> Soft copy
                                 </label>
                                 <label class="btn btn-secondary">
                                     <input type="radio" name="bookType" id="hard" value="hard"> Hard copy
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                         <div style="margin-top: 20px;">
                             <img src="{{ asset('books_res/img/mpesa.png') }}" alt="Lipa na M-Pesa details" style="width: 100%; height: auto;">
