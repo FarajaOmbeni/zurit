@@ -1,7 +1,7 @@
 <?php
-    
+
 namespace App\Http\Controllers;
-    
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -12,7 +12,7 @@ use Hash;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-    
+
 use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
 
@@ -26,11 +26,11 @@ class UserController extends Controller
     public function index(Request $request): View
     {
         $data = User::latest()->get();
-  
-        return view('users.index',compact('data'))
+
+        return view('users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,10 +38,10 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        $roles = Role::pluck('username','username')->all();
-        return view('users.create',compact('roles'));
+        $roles = Role::pluck('username', 'username')->all();
+        return view('users.create', compact('roles'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,17 +58,17 @@ class UserController extends Controller
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-    
+
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-    
+
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+            ->with('success', 'User created successfully');
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -78,30 +78,31 @@ class UserController extends Controller
     public function show($id): View
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        return view('users.show', compact('user'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id): View{
+    public function edit($id): View
+    {
         $user = User::find($id);
-    
+
         if (!$user) {
             // Handle case where user with the given ID is not found
             return abort(404);
         }
-    
+
         // Assuming you have a 'roles' relationship defined in your User model
         $roles = Role::all();
-    
+
         return view('users.edit', compact('user', 'roles'));
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -110,40 +111,40 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id): RedirectResponse
-{
-    $this->validate($request, [
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email,' . $id,
-        'phone' => 'required',
-        'password' => 'same:confirm-password',
-        'roles' => 'required'
-    ]);
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phone' => 'required',
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
 
-    // Get the user from the database
-    $user = User::find($id);
+        // Get the user from the database
+        $user = User::find($id);
 
-    // Update user details
-    $user->name = $request->input('name');
-    $user->email = $request->input('email');
-    $user->phone = $request->input('phone');
+        // Update user details
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
 
-    // Hash the password if it's present in the input
-    if ($request->filled('password')) {
-        $user->password = Hash::make($request->input('password'));
+        // Hash the password if it's present in the input
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        // Save the changes to the user
+        $user->save();
+
+        // Sync user roles
+        $user->syncRoles([$request->input('roles')]);
+
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully');
     }
 
-    // Save the changes to the user
-    $user->save();
-
-    // Sync user roles
-    $user->syncRoles([$request->input('roles')]);
-
-    return redirect()->route('users.index')
-        ->with('success', 'User updated successfully');
-}
 
 
-    
     /**
      * Remove the specified resource from storage.
      *
@@ -151,25 +152,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id): RedirectResponse
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
 
-    // Delete the user's assets
-    foreach ($user->assets as $asset) {
-        $asset->delete();
+        // Delete the user's assets
+        foreach ($user->assets as $asset) {
+            $asset->delete();
+        }
+
+        // Delete the user's liabilities
+        foreach ($user->liabilities as $liability) {
+            $liability->delete();
+        }
+
+        // Delete the user
+        $user->delete();
+
+        return redirect()->route('admin')
+            ->with('success', 'User deleted successfully');
     }
-
-    // Delete the user's liabilities
-    foreach ($user->liabilities as $liability) {
-        $liability->delete();
-    }
-
-    // Delete the user
-    $user->delete();
-
-    return redirect()->route('admin')
-                    ->with('success','User deleted successfully');
-}
 
     public function showBudgetPlanner()
     {
@@ -180,16 +181,16 @@ class UserController extends Controller
     }
 
     public function account_admin()
-    {   
+    {
         $user = Auth::user();
         return view('account_admindash', compact('user'));
-    } 
+    }
 
     public function account_user()
-    {   
+    {
         $user = Auth::user();
         return view('account_userdash', compact('user'));
-    } 
+    }
     public function updateadminProfile(Request $request)
     {
         $user = Auth::user();

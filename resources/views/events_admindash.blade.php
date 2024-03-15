@@ -19,6 +19,17 @@
     <div class="col-md-8 offset-md-2" style="position: relative;">
         <div id="content" class="p-4 p-md-5 pt-5">
             <h2 class="mb-4">Events Management</h2>
+            @if (session('success'))
+                <div class="alert alert-success" id="success-alert">
+                    {{ session('success')['message'] }}
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('fast');
+                    }, {{ session('success')['duration'] }});
+                </script>
+            @endif
             <div class="book_form" id="addBookForm">
                 <form method="POST" action="/events_admindash" enctype="multipart/form-data">
                     @csrf
@@ -64,8 +75,8 @@
                                         <td>{{ $event->image }}</td>
                                         <td>{{ $event->registration_link }}</td>
                                         <td>
-                                            <a href="/editEvent/{{$event->id}}" class="btn btn-warning btn-sm editEventButton"
-                                                >Edit</a>
+                                            <a href="/editEvent/{{ $event->id }}"
+                                                class="btn btn-warning btn-sm editEventButton">Edit</a>
                                         </td>
                                         <td>
                                             <form action="{{ route('events.destroy', $event->id) }}" method="POST"
