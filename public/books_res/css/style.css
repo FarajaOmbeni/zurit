@@ -91,10 +91,12 @@ nav .fas {
 
 nav .navbar-nav .nav-item {
   padding: 5px;
+  background-color: #0c2533;
 }
 
 nav .navbar-nav .nav-item a {
   color: white;
+  background-color: #0c2533;
 }
 
 nav .navbar-nav .nav-item .btn-item {

@@ -14,6 +14,8 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
+    <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfFWpgpAAAAAFmqOvRms4BS4Exr58fISintayc7"></script> -->
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 </head>
 
 <body>
@@ -73,25 +75,25 @@
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="img/dots.svg" alt=""></div>
         <div class="container">
-            <div class="header row py-md-5">
-                <div class="header-text col-md-6">
-                    <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
-                    <p>We are a bespoke Wealth Management Company focused on both individuals and corporates looking at
-                        growing wealth sustainably.</p>
-                    <a class="btn btn-light header-btn">Learn More <img src="img/arrow-right.svg" alt=""
-                            style="width:20px"></a>
-                </div>
-                <div class="col-md-6">
-                    <!-- Video Container -->
-                    <div class="video-container"
-                        onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-                        <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
-                        <div class="play-button">
-                            <img src="img/play_button.svg" alt="Play">
-                        </div>
-                    </div>
+        <div class="header row py-md-5">
+        <div class="header-text col-md-6 col-sm-12">
+            <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
+            <p>We are a bespoke Wealth Management Company focused on both individuals and corporates looking at
+                growing wealth sustainably.</p>
+            <a class="btn btn-light header-btn">Learn More <img src="img/arrow-right.svg" alt=""
+                    style="width:20px"></a>
+        </div>
+        <div class="col-md-6">
+            <!-- Video Container -->
+            <div class="d-flex justify-content-center mt-3 video-container"
+                onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
+                <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
+                <div class="play-button">
+                    <img src="img/play_button.svg" alt="Play">
                 </div>
             </div>
+        </div>
+    </div>
         </div>
         </div>
         </div>
@@ -232,11 +234,12 @@
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="contact-form">
-                        <form action="{{ route('contact.store') }}" method="post">
+                        <form id="contact-form" action="{{ route('contact.store') }}" method="post">
                             @csrf
                             <input type="text" name="name" placeholder="Your Name">
                             <input type="email" name="email" placeholder="Your Email">
                             <textarea name="userMessage" placeholder="Your Message"></textarea>
+                            <div class="d-flex justify-content-center g-recaptcha" data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact"></div>
                             <button type="submit">Send Message</button>
                         </form>
                         <div class="contact-icons">
@@ -257,6 +260,7 @@
                 </div>
             </div>
         </section>
+
         <div class="light-gray-section bottom py-5">
             <div class="img-circle-left"><img src="img/circle.svg" alt=""></div>
             <div class="img-circle-right"><img src="img/circle.svg" alt=""></div>
@@ -388,6 +392,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            // e.preventDefault();
+            grecaptcha.enterprise.ready(async function() {
+                const token = await grecaptcha.enterprise.execute('6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e', {action: 'submit'});
+                // Add the token to the form
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'g-recaptcha-response';
+                input.value = token;
+                document.getElementById('contact-form').appendChild(input);
+                // Submit the form
+                document.getElementById('contact-form').submit();
+            });
+        });
+
         function openAccordion(event) {
             const accordion = event.target;
             const item = accordion.nextElementSibling;
