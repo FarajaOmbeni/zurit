@@ -78,10 +78,13 @@
         <div class="header row py-md-5">
         <div class="header-text col-md-6 col-sm-12">
             <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
-            <p>We are a bespoke Wealth Management Company focused on both individuals and corporates looking at
-                growing wealth sustainably.</p>
-            <a class="btn btn-light header-btn">Learn More <img src="img/arrow-right.svg" alt=""
-                    style="width:20px"></a>
+            <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
+            <div class="training-links">
+                <a href="/individual" class="training-link">Individual</a>
+                <a href="/corporate" class="training-link">Corporate</a>
+                <a href="/quarterly" class="training-link">Quarterly</a>
+                <a href="/wealth-wave" class="training-link">Wealth Wave</a>
+            </div>
         </div>
         <div class="col-md-6">
             <!-- Video Container -->

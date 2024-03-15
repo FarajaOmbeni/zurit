@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+//use Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-//use Request;
-use Illuminate\Http\Request;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -64,7 +64,10 @@ class LoginController extends Controller
                     return redirect('/login')->with('error', 'Ooops! Something went wrong!');
             }
     }else{
-        return redirect('/login');
+        return redirect('/login')->withErrors([
+            'message'=>'Invalid Credetials!',
+            'duration'=>3000,
+        ]);
     }
 }
 

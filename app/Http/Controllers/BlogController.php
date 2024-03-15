@@ -44,7 +44,10 @@ class BlogController extends Controller
             'blog_title' => $request->input('blog_title'),
             'blog_message' => $request->input('blog_message'),
         ]);
-        return redirect()->route('blogs_admindash')->with('success', 'Blog added successfully.');
+        return redirect()->route('blogs_admindash')->with('success', [
+            'message' => 'Blog Created Successfully!',
+            'duration' => 3000,
+        ]);
     }
     public function show($id)
     {
@@ -81,7 +84,10 @@ class BlogController extends Controller
             'blog_message' => $request->input('blog_message'),
         ]);
 
-        return redirect()->route('blogs_admindash')->with('success', 'Blog added successfully.');
+        return redirect()->route('blogs_admindash')->with('success', [
+            'message' => 'Blog Updated Successfully!',
+            'duration' => 3000,
+        ]);
 
 
     }

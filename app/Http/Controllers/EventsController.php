@@ -45,7 +45,10 @@ class EventsController extends Controller
             'price' => $request->input('price'),
             'registration_link' => $request->input('registration_link'),
         ]);
-        return redirect()->route('events.index')->with('success', 'Blog added successfully.');
+        return redirect()->route('events.index')->with('success', [
+            'message' => 'Event Created Successfully!',
+            'duration' => 3000,
+        ]);;
     }
 
     public function edit($id)
@@ -84,7 +87,10 @@ class EventsController extends Controller
 
         $event->save();
 
-        return redirect('/events_admindash');
+        return redirect('/events_admindash')->with('success', [
+            'message' => 'Event Updated Successfully!',
+            'duration' => 3000,
+        ]);
     }
 
     public function eventFeedback(Request $request)
