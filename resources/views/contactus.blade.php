@@ -73,6 +73,7 @@
     <div class="container mainmargin">
         <div class="row">
             <section class="feedback-form" style="display: block">
+                <div class="download-pdf"><a href="https://server144.web-hosting.com:2083/cpsess1894755583/frontend/jupiter/filemanager/showfile.html?file=Zurit+Consulting+Customer+Feedback+Form.pdf&fileop=&dir=%2Fhome%2Fzuriuhqx%2Fpublic_html%2Fevents_res&dirop=&charset=&file_charset=utf-8&baseurl=&basedir=" target="_blank"><img class="download-pdf-image" src="{{ asset('img/pdf.png') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">
                     @csrf
@@ -164,13 +165,8 @@
                     <label for="suggestion">Are there any additional topics or areas of interest you would like to see
                         covered in future training sessions?</label>
                     <textarea rows="4" type="text" name="suggestion" required></textarea>
-                    <label for="improve_experience">Do you have any suggestions or ideas for how we can enhance the
-                        overall customer experience during our training sessions?</label>
-                    <textarea rows="4" type="text" name="improve_experience" required></textarea>
                     <label for="fav_trainor">Who was your favourite trainor/trainors?</label>
                     <textarea rows="4" type="text" name="fav_trainor" required></textarea>
-                    <label for="testimonial">Kindly tell us what you think about our trainings in general</label>
-                    <textarea rows="4" type="text" name="testimonial" required></textarea>
                     <button class="feedback-button" type="submit">Submit</button>
                 </form>
             </section>

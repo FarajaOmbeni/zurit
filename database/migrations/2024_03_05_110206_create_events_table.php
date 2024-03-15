@@ -16,6 +16,7 @@ return new class extends Migration
             $table->String('name');
             $table->date('date');
             $table->String('image');
+            $table->String('price');
             $table->String('registration_link');
             $table->timestamps();
         });

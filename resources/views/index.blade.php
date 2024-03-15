@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
     <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfFWpgpAAAAAFmqOvRms4BS4Exr58fISintayc7"></script> -->
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
@@ -104,45 +104,53 @@
             <h2 style="text-align:center; margin-bottom:50px;">Our Events</h2>
             <div class="upcoming-trainings">
                 @foreach ($events as $event)
-                    <div class="upcoming-training-card-center">
+                    <div class="upcoming-training-card">
                         <img class="upcoming-training-image" src="{{ asset('events_res/img/' . $event->image) }}"
                             alt="Image of {{ $event->name }}">
                         <div class="reglink-container"><a href="{{ $event->registration_link }}"
-                                class="registration-link" target="_blank">REGISTER NOW</a></div>
+                                class="registration-link" target="_blank">
+                                @if ($event->price == 'free')
+                                    JOIN NOW
+                                @else
+                                    REGISTER NOW
+                                @endif
+                            </a></div>
                     </div>
                 @endforeach
             </div>
 
-            <h2 style="text-align:center; margin-bottom:50px;">Past Events</h2>
-            <div class="past-trainings">
-                @foreach ($pastevents as $pastevent)
-                    <div class="container">
-                        <div class="accordion" id="accordion" onclick="openAccordion(event)">
-                            <div class="accordion-title">
-                                {{ $pastevent->name }}
-                            </div>
+            <div>
+                <h2 style="text-align:center; margin-bottom:50px;">Past Events</h2>
+                <div class="past-trainings">
+                    @foreach ($pastevents as $pastevent)
+                        <div class="container">
+                            <div class="accordion" id="accordion" onclick="openAccordion(event)">
+                                <div class="accordion-title">
+                                    {{ $pastevent->name }}
+                                </div>
 
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                    fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
-                                </svg>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                        fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="accordion-item" id="accordion-item">
+                                <img class="accordion-image" src="{{ asset('events_res/img/' . $pastevent->image) }}"
+                                    alt="Event Image">
+                                <div class="accordion-content">
+                                    <h4><b>{{ $pastevent->name }}</b></h4>
+                                    <h5>{{ $pastevent->date }}</h5>
+                                    <a class="registration-link" href="/contactus" target="_blank">Leave a
+                                        review!</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="accordion-item" id="accordion-item">
-                            <img class="accordion-image" src="{{ asset('events_res/img/' . $pastevent->image) }}"
-                                alt="Event Image">
-                            <div class="accordion-content">
-                                <h4><b>{{ $pastevent->name }}</b></h4>
-                                <h5>{{ $pastevent->date }}</h5>
-                                <a class="registration-link" href="/contactus">Leave a review!</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-
         </section>
 
 
@@ -406,7 +414,7 @@
                 item.style.maxHeight = null;
                 accordion.style.borderBottomLeftRadius = '12px';
                 accordion.style.borderBottomRightRadius = '12px';
-                
+
             } else {
                 item.style.maxHeight = 150 + "px";
                 accordion.style.borderBottomLeftRadius = '0px';
