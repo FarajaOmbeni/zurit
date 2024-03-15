@@ -15,57 +15,7 @@
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
 </head>
 <body>
-<nav class="navbar nav-dark navbar-expand-lg fixed-top py-3">
-<div class="container">
-        <a class="navbar-brand" href="index.html">
-            <img src="{{ asset('img/logo-white3.png') }}" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('/') }}">Home</a>
-                </li>
-                <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('about') }}">About us</a>
-                </li>
-                <li class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
-                    <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Prosperity Tools
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
-                        <a class="dropdown-item" href="{{ url('budgetplanner') }}">Budget Planner</a>
-                        <a class="dropdown-item" href="{{ url('networthcalculator') }}">Networth Calculator</a>
-                        <a class="dropdown-item" href="{{ url('debtmanager') }}">Debt Manager</a>
-                        <a class="dropdown-item" href="{{ url('investmentplanner') }}">Investment Planner</a>
-                    </div>
-                </li>
-                <li class="nav-item {{ Request::is('training') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('training') }}">Training</a>
-                </li>
-                <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('advisory') }}">Advisory</a>
-                </li>-->
-                <li class="nav-item {{ Request::is('books') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('books') }}">Books</a>
-                </li>
-                <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>
-                </li>
-                <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('login') }}"><button class="btn-item">Join Us</button></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+@include('layouts.navbar')
       <div class="container mainmargin">
     <div class="row">
         <div class="main col-md-8">

@@ -49,8 +49,17 @@
                             <a class="dropdown-item" href="{{ url('investmentplanner') }}">Investment Planner</a>
                         </div>
                     </li>
-                    <li class="nav-item {{ Request::is('training') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('training') }}">Training</a>
+                    <li
+                        class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Services
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
+                            <a class="dropdown-item" href="{{ url('training') }}">Training</a>
+                            <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
+                            <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
+                        </div>
                     </li>
                     <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('advisory') }}">Advisory</a>
@@ -344,50 +353,7 @@
                 </div>
             </div>
         </div>
-        <footer class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-item col-md-3">
-                        <!--<img src="img/logo-white3.webp" style="width: 50% height: 50%"alt="">-->
-                        <p>Address: Zuidier Complex</p>
-                        <p>Ngumo, Off Mbagathi Road</p>
-                        <p>Nairobi, KE </p>
-                        <p>Phone: +254 759 092 412</p>
-                        <p>Email: info@zuritconsulting.com</p>
-                    </div>
-                    <div class="footer-item col-md-3">
-                        <p class="footer-item-title">Services</p>
-                        <p class="footer-text">Budget Management:</p>
-                        <p>Financial Training</p>
-                        <p>Investment Advisory</p>
-                        <p>Debt Management</p>
-                    </div>
-                    <div class="footer-item col-md-3">
-                        <p class="footer-item-title">Links</p>
-                        <a href="">About Us</a>
-                        <a href="">Home</a>
-                        <a href="">Training</a>
-                        <a href="">Contact Us</a>
-                    </div>
-                    <div class="footer-item col-md-3">
-                        <p class="footer-item-title">Get In Touch</p>
-                        <form action="{{ route('subscribe') }}" method="post">
-                            @csrf
-                            <div class="mb-3 pb-3">
-                                <label for="exampleInputEmail1" class="form-label pb-3">Enter your email and we'll
-                                    send you more information.</label>
-                                <input type="email" name="email" placeholder="Your Email" class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Subscribe</button>
-                        </form>
-                    </div>
-                    <div class="copyright pt-4 text-center text-muted">
-                        <p>&copy; {{ date('Y') }} ZURIT CONSULTING</p>
-
-                    </div>
-                </div>
-        </footer>
+ @include('layouts.footer')
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
