@@ -47,15 +47,20 @@
                     <span class="name d-block">Brian Salau</span>
                     <span class="position">Manager</span>
                 </div>
+                <div class="team-item">
+                        <div class="photo"><img class="uniform-img" src="img/ken_img.webp" alt="Ken Ndwigah" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Ken Ndwigah</span>
+                        <span class="position">Head Of Finance</span>
+                    </div>
                     <div class="team-item">
-                        <div class="photo"><img class="uniform-img" src="img/Noel.webp" alt="Noel Jentrix" style="width: 100%; height: auto; margin-top:-80px;"></div>
+                        <div class="photo"><img class="uniform-img" src="img/noelle.webp" alt="Noel Jentrix" style="width: 100%; height: auto; margin-top:-80px;"></div>
                         <span class="name d-block">Noel Jentrix</span>
                         <span class="position">Client Relations</span>
                     </div>
                     <div class="team-item">
-                        <div class="photo"><img class="uniform-img" src="img/Davis.webp" alt="Davis Otao" style="width: 100%; height: auto;"></div>
-                        <span class="name d-block">Davis Otao</span>
-                        <span class="position">Developer</span>
+                        <div class="photo"><img class="uniform-img" src="img/gitia.webp" alt="Bryan Gitia" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Bryan Gitia</span>
+                        <span class="position">Investment Specialist</span>
                     </div>
                     <div class="team-item">
                         <div class="photo"><img class="uniform-img" src="img/Bramwel.webp" alt="Bramwel Tum" style="width: 100%; height: auto;"></div>
@@ -63,14 +68,19 @@
                         <span class="position">Developer</span>
                     </div>
                     <div class="team-item">
-                        <div class="photo"><img class="uniform-img" src="img/bryan_investment.jpg" alt="Davis Otao" style="width: 100%; height: auto;"></div>
-                        <span class="name d-block">Bryan Gitia</span>
-                        <span class="position">Investment Specialist</span>
+                        <div class="photo"><img class="uniform-img" src="img/Davis.webp" alt="Davis Otao" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Davis Otao</span>
+                        <span class="position">Developer</span>
                     </div>
                     <div class="team-item">
-                        <div class="photo"><img class="uniform-img" src="img/ken_img.jpg" alt="Davis Otao" style="width: 100%; height: auto;"></div>
-                        <span class="name d-block">Ken Ndwigah</span>
-                        <span class="position">Head Of Finance</span>
+                        <div class="photo"><img class="uniform-img" src="img/faraja.webp" alt="Ombeni Faraja" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Ombeni Faraja</span>
+                        <span class="position">Developer</span>
+                    </div>
+                    <div class="team-item">
+                        <div class="photo"><img class="uniform-img" src="img/churchill.webp" alt="Churchill Wagwa" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Churchill Wagwa</span>
+                        <span class="position">Multimedia Creative Artist</span>
                     </div>
                 </div>
             </div>
@@ -110,7 +120,7 @@
     <h4>Why Choose Our Tools</h4>            
     <div class="sidebar-benefits-item">
         <div class="sidebar-benefits-item-title d-flex">
-            <div class="icon"><img src="img/debt.jpg" alt="Debt Manager Icon"></div>
+            <div class="icon"><img src="img/debt.webp" alt="Debt Manager Icon"></div>
             <p class="title">Debt Manager</p>
         </div>
         <div class="text-gray">
@@ -123,7 +133,7 @@
     <!-- Investment Planner Benefits -->
     <div class="sidebar-benefits-item">
         <div class="sidebar-benefits-item-title d-flex">
-            <div class="icon"><img src="img/invest.jpg" alt="Investment Planner Icon"></div>
+            <div class="icon"><img src="img/invest.webp" alt="Investment Planner Icon"></div>
             <p class="title">Investment Planner</p>
         </div>
         <div class="text-gray">
@@ -136,7 +146,7 @@
     <!-- Net Worth Calculator Benefits -->
     <div class="sidebar-benefits-item">
         <div class="sidebar-benefits-item-title d-flex">
-            <div class="icon"><img src="img/networth.jpg" alt="Net Worth Calculator Icon"></div>
+            <div class="icon"><img src="img/networth.webp" alt="Net Worth Calculator Icon"></div>
             <p class="title">Net Worth Calculator</p>
         </div>
         <div class="text-gray">
@@ -149,7 +159,7 @@
     <!-- Budget Planner Benefits -->
     <div class="sidebar-benefits-item">
         <div class="sidebar-benefits-item-title d-flex">
-            <div class="icon"><img src="img/budget.jpg" alt="Budget Planner Icon"></div>
+            <div class="icon"><img src="img/budget.webp" alt="Budget Planner Icon"></div>
             <p class="title">Budget Planner</p>
         </div>
         <div class="text-gray">

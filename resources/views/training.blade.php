@@ -111,6 +111,7 @@
 
                 <div class="category_card_desc">
                 <p class="card_title">PODCAST</p> 
+                <p class="card_desc">Navigating Finance's Dynamic World</p> 
                 <button class="brochure_btn" type="button" data-toggle="modal" data-target="#modal_podcast">Learn more</button>
                 </div>
                 
@@ -394,7 +395,7 @@
           <p>Click on the button to visit our channel</p>
       </div>
       <div class="modal-footer">
-      <a href="https://www.youtube.com/playlist?list=PLxcZQqn1KJeaceh8cA3CA-noho19CIXeJ" class="btn btn-danger" target="_blank">Subscribe</a>
+      <a href="https://www.youtube.com/playlist?list=PLxcZQqn1KJeaceh8cA3CA-noho19CIXeJ" class="btn btn-primary" target="_blank">Visit Channel</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
