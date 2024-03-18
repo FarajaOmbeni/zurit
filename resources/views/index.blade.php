@@ -14,7 +14,6 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
-    <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfFWpgpAAAAAFmqOvRms4BS4Exr58fISintayc7"></script> -->
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 </head>
 
@@ -89,10 +88,10 @@
             <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
             <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
             <div class="training-links">
-                <a href="/individual" class="training-link">Individual</a>
-                <a href="/corporate" class="training-link">Corporate</a>
-                <a href="/quarterly" class="training-link">Quarterly</a>
-                <a href="/wealth-wave" class="training-link">Wealth Wave</a>
+                <a href="training#individual" class="training-link">Individual</a>
+                <a href="training#corporate" class="training-link">Corporate</a>
+                <a href="training#quarterly" class="training-link">Quarterly</a>
+                <a href="training#wealth-wave" class="training-link">Wealth Wave</a>
             </div>
         </div>
         <div class="col-md-6">
@@ -364,7 +363,8 @@
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             // e.preventDefault();
             grecaptcha.enterprise.ready(async function() {
-                const token = await grecaptcha.enterprise.execute('6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e', {action: 'submit'});
+                const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
+                const token = await grecaptcha.enterprise.execute(recaptchaKey, {action: 'submit'});
                 // Add the token to the form
                 var input = document.createElement('input');
                 input.type = 'hidden';
@@ -425,42 +425,6 @@
             });
         });
 
-        // data for the donut chart and the list
-        var data = {
-            labels: ['Rent', 'Groceries', 'Bills', 'Entertainment', 'Other'],
-            datasets: [{
-                data: [300, 50, 100, 50, 100],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#AA6384', '#2CA21B']
-            }]
-        };
-
-        // create the donut chart
-        var ctx = document.getElementById('donutChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: data
-        });
-
-        // add expense types to the list
-        var ul = document.getElementById('expenseTypes');
-        data.labels.forEach(function(label, i) {
-            var li = document.createElement('li');
-            li.className = 'list-group-item';
-
-            // create a span for the colored bullet
-            var span = document.createElement('span');
-            span.style.display = 'inline-block';
-            span.style.width = '10px';
-            span.style.height = '10px';
-            span.style.marginRight = '5px';
-            span.style.backgroundColor = data.datasets[0].backgroundColor[i];
-            li.appendChild(span);
-
-            // add the expense type and amount
-            li.appendChild(document.createTextNode(label + ': $' + data.datasets[0].data[i]));
-
-            ul.appendChild(li);
-        });
     </script>
 </body>
 

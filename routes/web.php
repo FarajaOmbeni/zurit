@@ -22,6 +22,7 @@ use App\Http\Controllers\NetworthController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
+use App\Http\Controllers\TrainingController;
 
 
 /*
@@ -231,4 +232,6 @@ Route::get('optimize-images', [ImageController::class, 'optimizeImagesInDirector
 Route::post('stkpush', [PaymentController::class, 'stkPushRequest']);
 Route::post('callback', [PaymentController::class, 'callback']);
 
+// training enrollment
+Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll');
 

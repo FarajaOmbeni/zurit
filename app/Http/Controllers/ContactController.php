@@ -32,7 +32,7 @@ class ContactController extends Controller
     
         $body = $response->json();
        
-        \Log::info('reCAPTCHA response: ', $body);
+        // \Log::info('reCAPTCHA response: ', $body);
     
         if ($response->status() == 200) {
     

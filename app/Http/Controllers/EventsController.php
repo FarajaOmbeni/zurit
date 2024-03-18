@@ -131,7 +131,10 @@ class EventsController extends Controller
 
         ));
 
-        return redirect('/contactus');
+        return redirect('/contactus')->with('success', [
+            'message' => 'Feedback Sent Successfully!',
+            'duration' => 3000,
+        ]);
     }
 
     public function destroy($event)

@@ -15,20 +15,27 @@
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
  @include('layouts.navbar')
 
+ <div class="alert alert-success" id="success-alert" style="display: none;">
+    
+</div>
+
     <div class="container mainmargin">
         <div class="row">
-            <section class="feedback-form" style="display: block">
+            <section class="feedback-form" id="feedback-form" style="display: block">
                 <div class="download-pdf"><a href="#" target="_blank"><img class="download-pdf-image" src="{{ asset('img/pdf.png') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">
                     @csrf
                     <!--Rating Questions-->
-                    <label for="name">Name of the Event</label>
+                    <label for="name">Name of the Event</label><br>
                     <select name="name" id="name">
                         @if ($events->isempty())
                             <option selected disabled>No events available</option>
@@ -82,10 +89,10 @@
                         <option value="3">3 - Neutral</option>
                         <option value="4">4 - Likely</option>
                         <option value="5">5 - Very Likely</option>
-                    </select>
+                    </select><br>
                     <label for="return_client">How likely are you to attend other Zurit Consulting's trainings based on
                         your experience?
-                    </label>
+                    </label><br>
                     <select name="return_client" id="" required>
                         <option value="1">1 - Unlikely</option>
                         <option value="2">2 - Less Likely</option>
@@ -95,14 +102,14 @@
                     </select>
                     <label for="value_for_money">Please rate the value for money of the financial training and services
                         provided by Zurit Consulting.
-                    </label>
+                    </label><br>
                     <select name="value_for_money" id="" required>
                         <option value="1">1 - No Value</option>
                         <option value="2">2 - Poor Value</option>
                         <option value="3">3 - Fair Value</option>
                         <option value="4">4 - Good Value</option>
                         <option value="5">5 - Excellent Value</option>
-                    </select>
+                    </select><br>
 
                     <!--Open ended Questions-->
                     <label for="valuable_aspect">What aspects of our training sessions did you find most valuable?
@@ -115,8 +122,9 @@
                     <label for="suggestion">Are there any additional topics or areas of interest you would like to see
                         covered in future training sessions?</label>
                     <textarea rows="4" type="text" name="suggestion" required></textarea>
-                    <label for="fav_trainor">Who was your favourite trainor/trainors?</label>
+                    <br><label for="fav_trainor">Who was your favourite trainor/trainors?</label><br>
                     <textarea rows="4" type="text" name="fav_trainor" required></textarea>
+                    <div class="d-flex justify-content-center g-recaptcha" data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact"></div>
                     <button class="feedback-button" type="submit">Submit</button>
                 </form>
             </section>
@@ -168,6 +176,41 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/addshadow.js"></script>
+
+    <script>
+        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+            // e.preventDefault();
+            grecaptcha.enterprise.ready(async function() {
+                const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
+                const token = await grecaptcha.enterprise.execute(recaptchaKey, {action: 'submit'});
+                // Add the token to the form
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'g-recaptcha-response';
+                input.value = token;
+                document.getElementById('feedback-form').appendChild(input);
+                // Submit the form
+                document.getElementById('feedback-form').submit();
+            });
+        });
+
+        $('#feedback-form').on('submit', function(e) {
+        $.ajax({
+            url: '/give-feedback',  // Replace with your route
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                // Show the alert box with the message
+                $('#success-alert').text(response.message).fadeIn('fast');
+
+                // Hide the alert box after the specified duration
+                setTimeout(function() {
+                    $('#success-alert').fadeOut('fast');
+                }, response.duration);
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

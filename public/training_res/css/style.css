@@ -22,98 +22,11 @@ body .sub-header {
     padding-bottom: 50px;
 }
 
-ul.text-list {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-  }
-  
-  ul.text-list li {
-    padding-left: 1em;
-    text-indent: -1em;
-  }
-  
-  ul.text-list li:before {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    content: "\f111";
-    color: rgba(97, 81, 249, 0.13);
-    padding-right: 10px;
-    font-size: 0.8em;
-  }
-
-
-  nav {
-    height: 15%;
-    background-color: #0c2533;
-}
-
-nav .navbar-brand {
-    width: 150px;
-}
-
-nav .navbar-brand img {
-    position: relative;
-    height: 150px;
-    width: 150px;
-    margin-top: -30px;
-}
-nav .navbar-toggler:focus,
-nav .navbar-toggler:active,
-nav .navbar-toggler-icon:focus {
-    outline: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-nav .fas {
-    color: white;
-}
-nav .navbar-nav .nav-item {
-  padding: 5px;
-}
-
-nav .navbar-nav .nav-item a {
-    color: white;
-}
-
-nav .navbar-nav .nav-item .btn-item {
-    padding: 5px 20px;
-    background-color: white;
-    border: none;
-    border-radius: 20px;
-}
-.navbar-nav .nav-item.active .nav-link {
-    font-weight: bold;
-    color: #f2ae30;
-}
-.nav-dark {
-    background-color: #0c2533;
-}
-
-/* Custom CSS for the Prosperity Tools dropdown */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-    background-color: #0c2533;
-}
-
-.nav-item.dropdown:hover .nav-link {
-    color: whitesmoke;
-}
-
-.nav-item.dropdown:hover .dropdown-item {
-    color: #f2ae30;
-}
-
-.shadow-bg {
-    background-color: #0c2533;
-}
-
 /*trainings section*/
 .training_section{
   padding: 50px;
   padding-bottom: 150px;
-  background-image: linear-gradient(120deg, rgba(53, 56, 155, 0.2) 0%, rgba(168, 130, 239, 0.2) 80%), url("../img/circle.svg");
+  background-image: url("../img/circle.svg"), linear-gradient(120deg, rgba(53, 56, 155, 0.8) 0%, rgba(168, 130, 239, 0.8) 80%);
 }
 .training_text{
   margin-top: 7%;
@@ -230,7 +143,6 @@ nav .navbar-nav .nav-item .btn-item {
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
-  padding-bottom: 0px;
   color: white;
   text-align: left;
 
@@ -238,6 +150,7 @@ nav .navbar-nav .nav-item .btn-item {
 .card_desc{
   font-size: 15px;
   margin-left: 30px;
+  margin-top: -10px;
   color: white;
   text-align: left;
 
@@ -253,6 +166,81 @@ nav .navbar-nav .nav-item .btn-item {
 }
 
 #modal_prosperity .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+#modal_fundamentals .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_fundamentals .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+
+#modal_retirement1 .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_retirement1 .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+
+#modal_wellness .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_wellness .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+
+#modal_retirement2 .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_retirement2 .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+#modal_wealthWave .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_wealthWave .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+
+#modal_assetClass .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_assetClass .modal-content {
+  max-height: 800px; 
+  background-color: #0c2533; 
+  color: #0c2533;
+}
+
+#modal_podcast .modal-dialog {
+  max-width: 800px; 
+  margin: auto;
+}
+
+#modal_podcast .modal-content {
   max-height: 800px; 
   background-color: #0c2533; 
   color: #0c2533;

@@ -62,6 +62,16 @@
                         <span class="name d-block">Bramwel Tum</span>
                         <span class="position">Developer</span>
                     </div>
+                    <div class="team-item">
+                        <div class="photo"><img class="uniform-img" src="img/bryan_investment.jpg" alt="Davis Otao" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Bryan Gitia</span>
+                        <span class="position">Investment Specialist</span>
+                    </div>
+                    <div class="team-item">
+                        <div class="photo"><img class="uniform-img" src="img/ken_img.jpg" alt="Davis Otao" style="width: 100%; height: auto;"></div>
+                        <span class="name d-block">Ken Ndwigah</span>
+                        <span class="position">Head Of Finance</span>
+                    </div>
                 </div>
             </div>
         </div>
