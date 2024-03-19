@@ -23,10 +23,54 @@
             <a class="navbar-brand" href="index.html">
                 <img src="{{ asset('img/logo-white3.webp') }}" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="offcanvas-link"><a href="/">Home</a></div>
+                    <div class="nav-menu">
+                        <input id="toggle" type="checkbox" checked>
+                        <div class="dropdown-title">
+                            <a class="tools-link">Services</a>
+                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                        </div>
+                        <ul>
+                            <li><a class="dropdown-link" href="{{ url('training') }}">Training</a></li>
+                            <li><a class="dropdown-link" href="{{ url('advisory') }}">Advisory</a></li>
+                            <li><a class="dropdown-link" href="{{ url('chama') }}">Chama Advisory</a></li>
+                            <li><a class="dropdown-link" href="{{ url('trustees') }}">Trustees Advisory</a></li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-link"><a href="{{ url('books') }}">Books</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('blogs') }}">Blogs</a></div>
+                    <div class="nav-menu">
+                        <input id="toggle" type="checkbox" checked>
+                        <div class="dropdown-title">
+                            <a class="tools-link">Prosperity Tools</a>
+                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                        </div>
+                        <ul>
+                            <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
+                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a></li>
+                            <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
+                            <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a></li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('contactus') }}">Contact Us</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('login') }}">Log In</a></div>
+                </div>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
@@ -50,14 +94,15 @@
                     </li>
                     <li
                         class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
                             <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
                             <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
+                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a>
                         </div>
                     </li>
                     <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
@@ -83,28 +128,31 @@
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="img/dots.svg" alt=""></div>
         <div class="container">
-        <div class="header row py-md-5">
-        <div class="header-text col-md-6 col-sm-12">
-            <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
-            <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
-            <div class="training-links">
-                <a href="{{ url('training') }}" class="training-link">Individual</a>
-                <a href="{{ url('training') }}" class="training-link">Corporate</a>
-                <a href="{{ url('training') }}" class="training-link">Quarterly</a>
-                <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <!-- Video Container -->
-            <div class="d-flex justify-content-center mt-3 video-container"
-                onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-                <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
-                <div class="play-button">
-                    <img src="img/play_button.svg" alt="Play">
+            <div class="header row py-md-5">
+                <div class="header-text col-md-6 col-sm-12">
+                    <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
+                    <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory
+                        solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and
+                            individuals</span> to navigate the complexities of finance with confidence.<br> Below are
+                        the trainings we offer:</p>
+                    <div class="training-links">
+                        <a href="{{ url('training') }}" class="training-link">Individual</a>
+                        <a href="{{ url('training') }}" class="training-link">Corporate</a>
+                        <a href="{{ url('training') }}" class="training-link">Quarterly</a>
+                        <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Video Container -->
+                    <div class="d-flex justify-content-center mt-3 video-container"
+                        onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
+                        <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
+                        <div class="play-button">
+                            <img src="img/play_button.svg" alt="Play">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
         </div>
         </div>
         </div>
@@ -250,7 +298,9 @@
                             <input type="text" name="name" placeholder="Your Name">
                             <input type="email" name="email" placeholder="Your Email">
                             <textarea name="userMessage" placeholder="Your Message"></textarea>
-                            <div class="d-flex justify-content-center g-recaptcha" data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact"></div>
+                            <div class="d-flex justify-content-center g-recaptcha"
+                                data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact">
+                            </div>
                             <button type="submit">Send Message</button>
                         </form>
                         <div class="contact-icons">
@@ -352,7 +402,7 @@
                 </div>
             </div>
         </div>
- @include('layouts.footer')
+        @include('layouts.footer')
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
@@ -364,7 +414,9 @@
             // e.preventDefault();
             grecaptcha.enterprise.ready(async function() {
                 const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
-                const token = await grecaptcha.enterprise.execute(recaptchaKey, {action: 'submit'});
+                const token = await grecaptcha.enterprise.execute(recaptchaKey, {
+                    action: 'submit'
+                });
                 // Add the token to the form
                 var input = document.createElement('input');
                 input.type = 'hidden';
@@ -407,24 +459,6 @@
         }, options);
 
         observer.observe(document.querySelector('.light-section2'));
-
-        $(document).ready(function() {
-            $('.navbar-toggler').click(function() {
-                var targetCollapse = $($(this).data('bs-target'));
-                targetCollapse.collapse('toggle');
-
-                // Toggle the icon classes
-                $(this).toggleClass('collapsed');
-                $(this).find('.navbar-toggler-icon').toggleClass('d-none');
-                $(this).find('.fa-bars, .fa-times').toggleClass('d-none');
-            });
-
-            // Close the navbar when a menu item is clicked
-            $('.navbar-nav>li>a').on('click', function() {
-                $('.navbar-collapse').collapse('hide');
-            });
-        });
-
     </script>
 </body>
 
