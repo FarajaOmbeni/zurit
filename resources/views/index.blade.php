@@ -88,10 +88,10 @@
             <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
             <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
             <div class="training-links">
-                <a href="training#individual" class="training-link">Individual</a>
-                <a href="training#corporate" class="training-link">Corporate</a>
-                <a href="training#quarterly" class="training-link">Quarterly</a>
-                <a href="training#wealth-wave" class="training-link">Wealth Wave</a>
+                <a href="{{ url('training') }}" class="training-link">Individual</a>
+                <a href="{{ url('training') }}" class="training-link">Corporate</a>
+                <a href="{{ url('training') }}" class="training-link">Quarterly</a>
+                <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
             </div>
         </div>
         <div class="col-md-6">

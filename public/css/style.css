@@ -1299,10 +1299,11 @@ footer .copyright p a:hover {
     font-size: 34px;
     margin-top: auto;
     position: absolute;
-    bottom: 5;
+    top: 90%;
+    left: 0;
     width: 100%;
     height: 100%;
-    padding-bottom: 20px;
+    z-index: 1;
 }
 
 .social_icon ul li {
@@ -1318,9 +1319,30 @@ footer .copyright p a:hover {
 }
 
 .read_bt {
-    position: relative;
+    position: absolute;
+    top: 85%;
+    right: 0;
     margin-top: 20px;
     text-align: right;
+    border-radius: 25px;
+    background: linear-gradient(to right, #3300cc, #6600cc, #ff9900);
+    padding: 10px;
+    transition: background 0.5s ease-in-out;
+    z-index: 2;
+}
+.read_bt a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.5s ease-in-out;
+}
+
+.read_bt:hover {
+    background: none;
+    background-color: #0c2533;
+}
+
+.read_bt:hover a {
+    color: #f2ae30;
 }
 
 .blog-post {

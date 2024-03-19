@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/vendor/animate/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/vendor/css-hamburgers/hamburgers.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('login_res/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/css/util.css">
+    <link rel="stylesheet" type="text/css" href="login_res/css/main.css">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
 </head>
 
-
+@extends('layouts.app')
 
 <div class="limiter">
     <div class="container-login100">
@@ -32,6 +32,18 @@
                     User Login
                 </span>
 
+                @if ($errors->any())
+                    <div class="alert alert-danger" id="error-alert">
+                        {{ $errors->first('message') }}
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            $('#error-alert').fadeOut('fast');
+                        }, {{ $errors->first('duration') }});
+                    </script>
+                @endif
+
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <label for="email" class="label-input100">Email Address</label>
                     <input id="email" type="text" class="input100" name="email" value="{{ old('email') }}"
@@ -40,6 +52,11 @@
                     <span class="symbol-input100">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                     </span>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
@@ -50,6 +67,11 @@
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="wrap-input100">
@@ -89,16 +111,16 @@
 <!-- Additional Styles and Scripts -->
 
 
-<script src="{{ asset('login_res/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('login_res/vendor/bootstrap/js/popper.js') }}"></script>
-<script src="{{ asset('login_res/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('login_res/vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('login_res/vendor/tilt/tilt.jquery.min.js') }}"></script>
+<script src="login_res/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="login_res/vendor/bootstrap/js/popper.js"></script>
+<script src="login_res/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="login_res/vendor/select2/select2.min.js"></script>
+<script src="login_res/vendor/tilt/tilt.jquery.min.js"></script>
 <script>
     $('.js-tilt').tilt({
         scale: 1.1
     })
 </script>
-<script src="{{ asset('login_res/js/main.js') }}"></script>
+<script src="login_res/js/main.js"></script>
 
 </html>

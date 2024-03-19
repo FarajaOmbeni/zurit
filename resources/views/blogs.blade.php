@@ -26,7 +26,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="card card-custom">
                         <img src="{{ asset('blogs_res/img/' . $blog->blog_image) }}" class="card-img-top" alt="Blog Image">
-                        <div class="like_icon"><img src="{{ asset('blogs_res/img/like-icon.png') }}"></div>
+                        <!-- <div class="like_icon"><img src="{{ asset('blogs_res/img/like-icon.png') }}"></div> -->
                         <div class="card-body card-body-custom">
                             
                             <p class="post_text">Posted On: {{ $blog->created_at->format('d-m-Y') }}</p>
