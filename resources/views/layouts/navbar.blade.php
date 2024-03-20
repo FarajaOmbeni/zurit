@@ -18,16 +18,61 @@
 </head>
 
 <body>
-
-<nav class="navbar nav-dark navbar-expand-lg fixed-top py-3">
-<div class="container">
+    <nav class="navbar nav-dark navbar-expand-lg navbar-dark fixed-top py-1">
+        <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="{{ asset('img/logo-white3.webp') }}" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="offcanvas-link"><a href="/">Home</a></div>
+                    <div class="nav-menu">
+                        <input id="toggle" type="checkbox" checked>
+                        <div class="dropdown-title">
+                            <a class="tools-link">Services</a>
+                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                        </div>
+                        <ul>
+                            <li><a class="dropdown-link" href="{{ url('training') }}">Training</a></li>
+                            <li><a class="dropdown-link" href="{{ url('advisory') }}">Advisory</a></li>
+                            <li><a class="dropdown-link" href="{{ url('chama') }}">Chama Advisory</a></li>
+                            <li><a class="dropdown-link" href="{{ url('trustees') }}">Trustees Advisory</a></li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-link"><a href="{{ url('books') }}">Books</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('blogs') }}">Blogs</a></div>
+                    <div class="nav-menu">
+                        <input id="toggle" type="checkbox" checked>
+                        <div class="dropdown-title">
+                            <a class="tools-link">Prosperity Tools</a>
+                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                        </div>
+                        <ul>
+                            <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
+                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a>
+                            </li>
+                            <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
+                            <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('contactus') }}">Contact Us</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('login') }}">Log In</a></div>
+                </div>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
@@ -38,8 +83,8 @@
                     </li>
                     <li
                         class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Prosperity Tools
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
@@ -50,15 +95,16 @@
                         </div>
                     </li>
                     <li
-                        class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
                             <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
                             <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
+                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a>
                         </div>
                     </li>
                     <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
@@ -79,7 +125,8 @@
                 </ul>
             </div>
         </div>
-</nav>
+    </nav>
 
 </body>
+
 </html>

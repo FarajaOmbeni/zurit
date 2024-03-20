@@ -403,6 +403,12 @@ footer .copyright p a:hover {
     color: #0a58ca;
 }
 @media (min-width: 768px) {
+    nav {
+        height: 8rem;
+    }
+    header {
+        padding-top: 5rem;
+    }
     footer {
         text-align: left;
     }
@@ -439,11 +445,171 @@ footer .copyright p a:hover {
         bottom: 0;
         right: 0;
     }
-    .training-link{
+    .training-link {
         font-size: 15px;
     }
 }
+
+/* The media query below is for screens from 0px to 767px */
+.arrow-icon {
+    width: 1.5rem;
+}
+.dropdown-title {
+    display: flex;
+    justify-content: space-between;
+}
+.nav-menu {
+    margin: auto;
+    position: relative;
+    width: 100%;
+}
+.nav-menu h2 {
+    position: relative;
+    margin-bottom: 0;
+    color: inherit;
+}
+
+.nav-menu ul {
+    padding-left: 0;
+    padding-top: 1rem;
+    margin-top: 0;
+    background: #ece5da;
+    list-style: none;
+    overflow: hidden;
+    text-align: right;
+    text-align: center;
+    transition: all 0.4s ease-out;
+    width: 100%;
+    position: absolute;
+}
+
+.nav-menu ul li {
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    line-height: 1.5;
+    width: 100%;
+    margin: 0 0 0.25rem 0;
+    background: #9c27b0;
+    transition: background 3s;
+    box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.35);
+}
+
+.nav-menu ul a {
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    line-height: 1.5;
+    width: 100%;
+    margin: 0 0 0.25rem 0;
+    background: #9c27b0;
+}
+
+#toggle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    height: 40px;
+}
+#toggle:not(:checked) ~ h2::before {
+    transform: rotate(0deg) scale(0.75);
+}
+
+#toggle:checked ~ ul {
+    visibility: hidden;
+    opacity: 0;
+}
+.offcanvas-link {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-link:hover {
+    color: white !important;
+}
+
+.tools-link:hover {
+    color: #9c27b0 !important;
+}
+
+.offcanvas-body a {
+    text-decoration: none;
+    width: 100%;
+    color: black;
+}
+.offcanvas-body a:hover {
+    color: #9c27b0;
+}
+.offcanvas-body {
+    display: grid;
+}
+@media (max-width: 767px) {
+    .contact-icons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 20px;
+    }
+    nav {
+        height: 8rem;
+    }
+    header {
+        padding-top: 8rem;
+        padding-bottom: 4rem;
+    }
+    .header-text {
+        margin-bottom: 2rem;
+    }
+    footer {
+        text-align: left;
+    }
+    .bottom {
+        text-align: left;
+    }
+    .testimonial {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .testimonial .client .photo {
+        width: 280px;
+        height: 250px;
+        border-radius: 7px;
+    }
+    .testimonial .client .photo img {
+        width: 100%;
+    }
+    .testimonial .client .name {
+        font-weight: 600;
+        font-size: 1.5em;
+        padding: 10px 0px;
+        margin: 0;
+    }
+    .testimonial .client .position {
+        font-size: 0.8em;
+    }
+    .testimonial .testimonial-text {
+        padding: 20px 80px;
+    }
+    .controllers {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .training-link {
+        font-size: 15px;
+    }
+}
+
 @media (min-width: 992px) {
+    .offcanvas {
+        display: none;
+    }
+
     header {
         padding-top: 100px;
         padding-bottom: 100px;
@@ -543,15 +709,6 @@ footer .copyright p a:hover {
     }
 }
 
-@media (max-width: 768px) {
-    nav .navbar-nav .nav-item {
-        background-color: #0c2533;
-    }
-    .bg-img {
-        width: 100%;
-        margin-right: 0;
-    }
-}
 /*contact us section*/
 .contact-us {
     padding-bottom: 40px;
@@ -787,7 +944,6 @@ footer .copyright p a:hover {
     }
 
     .upcoming-training-card {
-
         height: auto;
     }
 }
@@ -854,13 +1010,16 @@ footer .copyright p a:hover {
     border-radius: 5px;
     text-decoration: none;
     font-family: "Nunito Sans", sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, font-weight 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border 0.3s ease,
+        font-weight 0.3s ease;
 }
 
-.training-link:hover{
+.training-link:hover {
     background-color: #7933ff;
-    color: #F2AE30;
+    color: #f2ae30;
     font-weight: bold;
     border: none;
 }
-
