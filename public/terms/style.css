@@ -1,0 +1,88 @@
+*,
+*::after,
+*::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background-color: white;
+    font-family: "Nunito Sans", sans-serif;
+    overflow: hidden;
+}
+
+body h2 {
+    font-weight: bold;
+}
+
+body .sub-header {
+    color: #777;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.navbar-brand {
+    display: block;
+    position: relative;
+    margin-bottom: auto;
+    width: 150px;
+}
+
+.main_container{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0 100px 0;
+    width: 80%;
+    box-shadow: 
+        10px 50px 10px 1px #a882ef  , /* right shadow */
+        -10px 80px 20px 1px #7933ff; /* left shadow */
+}
+.inner_container {
+    box-sizing: border-box;
+    overflow-y: scroll;
+    height: 200%;
+    padding-bottom: 50px;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.inner_container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.inner_container {
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.inner_container {
+    -ms-overflow-style: none;
+}
+
+.main_container a{
+    color: #7933ff;
+    text-decoration: none;
+
+}
+
+.main_container a:hover{
+    color: #0c2533;
+
+}
+
+.main_container p{
+    padding: 5px;
+}
+.main_container li{
+    padding: 2px;
+}
+
