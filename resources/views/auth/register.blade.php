@@ -98,7 +98,7 @@
                         <span class="txt1">
                            By signing up you agree to our
                         </span>
-                        <a class="txt2" href="#">
+                        <a class="txt2" href="{{ route('termsandconditions') }}">
                             Terms and Conditions
                         </a>
                     </div>
