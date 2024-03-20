@@ -114,7 +114,8 @@ Route::get('advisory', function () {
 Route::get('user_debtcalc', function () {
     return view('user_debtcalc');
 });
-Route::get('/terms_and_conditions', function () {
+Route::get('terms_and_conditions', function () {
+    return view('terms_and_conditions');
 })->name('termsandconditions');
 
 
