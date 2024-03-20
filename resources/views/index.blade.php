@@ -128,29 +128,25 @@
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="img/dots.svg" alt=""></div>
         <div class="container">
-            <div class="header row py-md-5">
-                <div class="header-text col-md-6 col-sm-12">
-                    <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
-                    <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory
-                        solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and
-                            individuals</span> to navigate the complexities of finance with confidence.<br> Below are
-                        the trainings we offer:</p>
-                    <div class="training-links">
-                        <a href="{{ url('training') }}" class="training-link">Individual</a>
-                        <a href="{{ url('training') }}" class="training-link">Corporate</a>
-                        <a href="{{ url('training') }}" class="training-link">Quarterly</a>
-                        <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Video Container -->
-                    <div class="d-flex justify-content-center mt-3 video-container"
-                        onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-                        <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
-                        <div class="play-button">
-                            <img src="img/play_button.svg" alt="Play">
-                        </div>
-                    </div>
+
+        <div class="header row py-md-5 pt-md-5">
+        <div class="header-text col-md-6 col-sm-12">
+            <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
+            <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
+            <div class="training-links">
+                <a href="{{ url('training') }}" class="training-link">Individual</a>
+                <a href="{{ url('training') }}" class="training-link">Corporate</a>
+                <a href="{{ url('training') }}" class="training-link">Quarterly</a>
+                <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Video Container -->
+            <div class="d-flex justify-content-center mt-3 video-container"
+                onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
+                <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
+                <div class="play-button">
+                    <img src="img/play_button.svg" alt="Play">
                 </div>
             </div>
         </div>
