@@ -83,7 +83,7 @@
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="img/dots.svg" alt=""></div>
         <div class="container">
-        <div class="header row py-md-5">
+        <div class="header row py-md-5 pt-md-5">
         <div class="header-text col-md-6 col-sm-12">
             <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
             <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
