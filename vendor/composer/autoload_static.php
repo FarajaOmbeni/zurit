@@ -136,6 +136,7 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
+            'Ladumor\\LaravelPwa\\' => 19,
         ),
         'I' => 
         array (
@@ -459,6 +460,10 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
         ),
+        'Ladumor\\LaravelPwa\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ladumor/laravel-pwa/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -555,6 +560,7 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\RemovePastEvents' => __DIR__ . '/../..' . '/app/Console/Commands/RemovePastEvents.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdvisoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdvisoryController.php',
@@ -571,8 +577,10 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'App\\Http\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DebtController' => __DIR__ . '/../..' . '/app/Http/Controllers/DebtController.php',
+        'App\\Http\\Controllers\\EventsController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventsController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageController.php',
+        'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
         'App\\Http\\Controllers\\InsightsController' => __DIR__ . '/../..' . '/app/Http/Controllers/InsightsController.php',
         'App\\Http\\Controllers\\InvestmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/InvestmentController.php',
         'App\\Http\\Controllers\\MarketingMessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MarketingMessageController.php',
@@ -580,6 +588,7 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\SubscriptionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubscriptionController.php',
+        'App\\Http\\Controllers\\TrainingController' => __DIR__ . '/../..' . '/app/Http/Controllers/TrainingController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
@@ -598,6 +607,7 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\BookingFormMail' => __DIR__ . '/../..' . '/app/Mail/BookingFormMail.php',
         'App\\Mail\\ContactFormMail' => __DIR__ . '/../..' . '/app/Mail/ContactFormMail.php',
+        'App\\Mail\\EventFeedbackMail' => __DIR__ . '/../..' . '/app/Mail/EventFeedbackMail.php',
         'App\\Mail\\MarketingMessage' => __DIR__ . '/../..' . '/app/Mail/MarketingMessage.php',
         'App\\Models\\Asset' => __DIR__ . '/../..' . '/app/Models/Asset.php',
         'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
@@ -606,6 +616,8 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'App\\Models\\BudgetPlanner' => __DIR__ . '/../..' . '/app/Models/BudgetPlanner.php',
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
         'App\\Models\\Debt' => __DIR__ . '/../..' . '/app/Models/Debt.php',
+        'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
+        'App\\Models\\EventsFeedback' => __DIR__ . '/../..' . '/app/Models/EventsFeedback.php',
         'App\\Models\\Expense' => __DIR__ . '/../..' . '/app/Models/Expense.php',
         'App\\Models\\ExtraPayment' => __DIR__ . '/../..' . '/app/Models/ExtraPayment.php',
         'App\\Models\\Income' => __DIR__ . '/../..' . '/app/Models/Income.php',
@@ -614,7 +626,9 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'App\\Models\\MarketingMessage' => __DIR__ . '/../..' . '/app/Models/MarketingMessage.php',
         'App\\Models\\MonthlyPayment' => __DIR__ . '/../..' . '/app/Models/MonthlyPayment.php',
         'App\\Models\\Mpesa' => __DIR__ . '/../..' . '/app/Models/Mpesa.php',
+        'App\\Models\\PastEvent' => __DIR__ . '/../..' . '/app/Models/PastEvent.php',
         'App\\Models\\Subscription' => __DIR__ . '/../..' . '/app/Models/Subscription.php',
+        'App\\Models\\Training' => __DIR__ . '/../..' . '/app/Models/Training.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\WithholdingTax' => __DIR__ . '/../..' . '/app/Models/WithholdingTax.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -2839,6 +2853,9 @@ class ComposerStaticInit46297cee56e5b7ede519c12d2d5b24b8
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Ladumor\\LaravelPwa\\LaravelPwa' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/LaravelPwa.php',
+        'Ladumor\\LaravelPwa\\PWAServiceProvider' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/PWAServiceProvider.php',
+        'Ladumor\\LaravelPwa\\commands\\PublishPWA' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/commands/PublishPWA.php',
         'Laravel\\Prompts\\Concerns\\Colors' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Colors.php',
         'Laravel\\Prompts\\Concerns\\Cursor' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Cursor.php',
         'Laravel\\Prompts\\Concerns\\Erase' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Erase.php',

@@ -1506,24 +1506,11 @@ textarea {
     margin-right: 10px;
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
     label,
     select,
     textarea {
         font-size: 16px;
-    }
-
-    .feedback-form {
-        padding: 1rem;
-        margin-bottom: 4rem;
-        margin-right: 4rem;
-        margin-left: 4rem;
-    }
-
-    .feedback-button {
-        width: 100%;
-        font-size: 1rem;
-        margin: 2px auto;
     }
 }
 

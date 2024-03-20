@@ -227,6 +227,10 @@ header .header-btn svg {
   .dropdown-menu {
       background-color: #0c2533;
   }
+
+  .custom-card{
+    width: 100%;
+  }
 }
 /*end*/
 

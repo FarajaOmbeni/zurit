@@ -18,19 +18,25 @@
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
 </head>
 
 <body>
- @include('layouts.navbar')
+    @include('layouts.navbar')
 
- <div class="alert alert-success" id="success-alert" style="display: none;">
-    
-</div>
+    <div class="alert alert-success" id="success-alert" style="display: none;">
+
+    </div>
 
     <div class="container mainmargin">
         <div class="row">
             <section class="feedback-form" id="feedback-form" style="display: block">
-                <div class="download-pdf"><a href="#" target="_blank"><img class="download-pdf-image" src="{{ asset('img/pdf.png') }}" alt=""></a></div>
+                <div class="download-pdf"><a href="{{asset('events_res/feedback.pdf')}}" download><img class="download-pdf-image"
+                            src="{{ asset('img/pdf.png') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">
                     @csrf
@@ -41,8 +47,8 @@
                             <option selected disabled>No events available</option>
                         @else
                             @foreach ($events as $event)
-                                <option value="{{ $event->name}}">
-                                    {{ $event->name}}</option>
+                                <option value="{{ $event->name }}">
+                                    {{ $event->name }}</option>
                             @endforeach
                             @foreach ($pastevents as $pastevent)
                                 <option value="{{ $pastevent->name }}">
@@ -124,7 +130,8 @@
                     <textarea rows="4" type="text" name="suggestion" required></textarea>
                     <br><label for="fav_trainor">Who was your favourite trainor/trainors?</label><br>
                     <textarea rows="4" type="text" name="fav_trainor" required></textarea>
-                    <div class="d-flex justify-content-center g-recaptcha" data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact"></div>
+                    <div class="d-flex justify-content-center g-recaptcha"
+                        data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact"></div>
                     <button class="feedback-button" type="submit">Submit</button>
                 </form>
             </section>
@@ -171,6 +178,27 @@
 
     @include('layouts.footer')
     </main>
+
+    {{-- PWA --}}
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
+    {{-- END OF PWA --}}
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
@@ -182,7 +210,9 @@
             // e.preventDefault();
             grecaptcha.enterprise.ready(async function() {
                 const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
-                const token = await grecaptcha.enterprise.execute(recaptchaKey, {action: 'submit'});
+                const token = await grecaptcha.enterprise.execute(recaptchaKey, {
+                    action: 'submit'
+                });
                 // Add the token to the form
                 var input = document.createElement('input');
                 input.type = 'hidden';
@@ -195,21 +225,21 @@
         });
 
         $('#feedback-form').on('submit', function(e) {
-        $.ajax({
-            url: '/give-feedback',  // Replace with your route
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                // Show the alert box with the message
-                $('#success-alert').text(response.message).fadeIn('fast');
+            $.ajax({
+                url: '/give-feedback', // Replace with your route
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Show the alert box with the message
+                    $('#success-alert').text(response.message).fadeIn('fast');
 
-                // Hide the alert box after the specified duration
-                setTimeout(function() {
-                    $('#success-alert').fadeOut('fast');
-                }, response.duration);
-            }
+                    // Hide the alert box after the specified duration
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('fast');
+                    }, response.duration);
+                }
+            });
         });
-    });
     </script>
 </body>
 

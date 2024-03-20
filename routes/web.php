@@ -126,8 +126,6 @@ Route::get('user_investmentplanner', [BlogController::class, 'showuser_investmen
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
 
-
-
 Route::get('books', [BookController::class, 'index']);
 Route::get('bookdetails/{id}',[BookController::class,'show'])->name('bookdetails');
 Route::get('booklist',[BookController::class,'index'])->name('booklist');
