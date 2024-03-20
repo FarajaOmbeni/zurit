@@ -14,6 +14,10 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('terms/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body>
@@ -98,6 +102,26 @@
         
 
 </div>
+
+{{-- PWA --}}
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
+    {{-- END OF PWA --}}
 
 </body>
 

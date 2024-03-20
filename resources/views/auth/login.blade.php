@@ -15,6 +15,10 @@
     <link rel="stylesheet" type="text/css" href="login_res/css/util.css">
     <link rel="stylesheet" type="text/css" href="login_res/css/main.css">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 @extends('layouts.app')
@@ -109,7 +113,25 @@
 </div>
 
 <!-- Additional Styles and Scripts -->
-
+{{-- PWA --}}
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
+    {{-- END OF PWA --}}
 
 <script src="login_res/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="login_res/vendor/bootstrap/js/popper.js"></script>
