@@ -484,13 +484,17 @@ footer .copyright p a:hover {
 .offcanvas-body a {
     text-decoration: none;
     width: 100%;
-    color: black;
+    color: white;
 }
 .offcanvas-body a:hover {
     color: #9c27b0;
 }
 .offcanvas-body {
     display: grid;
+}
+.offcanvas-body, .offcanvas-header{
+    background-color: #0c2533;
+    color: white;
 }
 @media (max-width: 767px) {
     .contact-icons {
