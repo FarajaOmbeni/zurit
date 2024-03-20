@@ -1,0 +1,17 @@
+{
+    "name": "Zurit Consulting",
+    "short_name": "Zurit",
+    "start_url": "/index.php",
+    "background_color": "#fff",
+    "description": "Zurit Consulting",
+    "display": "fullscreen",
+    "theme_color": "#fff",
+    "icons": [
+        {
+            "src": "logo-white.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

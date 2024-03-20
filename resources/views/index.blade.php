@@ -15,11 +15,16 @@
     <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <!-- <div class="container"> -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
+        <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="{{ asset('img/logo-white3.webp') }}" alt="">
             </a>
@@ -61,9 +66,11 @@
                         </div>
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
-                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a></li>
+                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a>
+                            </li>
                             <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
-                            <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a></li>
+                            <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
@@ -81,8 +88,8 @@
                     </li>
                     <li
                         class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Prosperity Tools
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
@@ -122,31 +129,35 @@
                     </li>
                 </ul>
             </div>
-        <!-- </div> -->
+        </div>
     </nav>
     <header class="header-background">
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="img/dots.svg" alt=""></div>
         <div class="container">
-
-        <div class="header row py-md-5 pt-md-5">
-        <div class="header-text col-md-6 col-sm-12">
-            <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
-            <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and individuals</span> to navigate the complexities of finance with confidence.<br> Below are the trainings we offer:</p>
-            <div class="training-links">
-                <a href="{{ url('training') }}" class="training-link">Individual</a>
-                <a href="{{ url('training') }}" class="training-link">Corporate</a>
-                <a href="{{ url('training') }}" class="training-link">Quarterly</a>
-                <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <!-- Video Container -->
-            <div class="d-flex justify-content-center mt-3 video-container"
-                onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-                <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
-                <div class="play-button">
-                    <img src="img/play_button.svg" alt="Play">
+            <div class="header row py-md-5">
+                <div class="header-text col-md-6 col-sm-12">
+                    <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
+                    <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory
+                        solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and
+                            individuals</span> to navigate the complexities of finance with confidence.<br> Below are
+                        the trainings we offer:</p>
+                    <div class="training-links">
+                        <a href="{{ url('training') }}" class="training-link">Individual</a>
+                        <a href="{{ url('training') }}" class="training-link">Corporate</a>
+                        <a href="{{ url('training') }}" class="training-link">Quarterly</a>
+                        <a href="{{ url('training') }}" class="training-link">Wealth Wave</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Video Container -->
+                    <div class="d-flex justify-content-center mt-3 video-container"
+                        onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
+                        <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
+                        <div class="play-button">
+                            <img src="img/play_button.svg" alt="Play">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -400,6 +411,28 @@
         </div>
         @include('layouts.footer')
     </main>
+
+    {{-- PWA --}}
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
+    {{-- END OF PWA --}}
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="js/addshadow.js"></script>
