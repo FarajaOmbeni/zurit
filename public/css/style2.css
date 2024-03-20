@@ -199,12 +199,6 @@ header .header-btn svg {
     border-radius: 10px;
     cursor: pointer;
 }
-@media (max-width: 767px) {
-    .header-text {
-        margin-top: 100px; /* Adjust this value as needed */
-    }
-    
-}
 .video-container:hover::after {
     content: "";
     position: absolute;
@@ -548,6 +542,10 @@ footer .copyright p a:hover {
     display: grid;
 }
 @media (max-width: 767px) {
+    .video{
+        display: flex;
+        justify-content: center;
+    }
     .contact-icons {
         display: flex;
         flex-direction: column;
@@ -565,40 +563,44 @@ footer .copyright p a:hover {
         margin-bottom: 2rem;
     }
     footer {
-        text-align: left;
+        text-align: center;
     }
     .bottom {
         text-align: left;
     }
-    .testimonial {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
+    .light-gray-section {
+        position: relative;
+        text-align: left;
     }
-    .testimonial .client .photo {
-        width: 280px;
-        height: 250px;
-        border-radius: 7px;
+    .light-gray-section .text {
+        z-index: 5;
     }
-    .testimonial .client .photo img {
-        width: 100%;
+    .light-gray-section .bg-img {
+        position: absolute;
+        top: 0;
+        right: -50%;
     }
-    .testimonial .client .name {
-        font-weight: 600;
-        font-size: 1.5em;
-        padding: 10px 0px;
-        margin: 0;
+    .light-gray-section .bg-img img {
+        width: 90%;
     }
-    .testimonial .client .position {
-        font-size: 0.8em;
+    .quote img{
+        display: none;
+    }
+    .testimonial .quote {
+        display: block;
     }
     .testimonial .testimonial-text {
-        padding: 20px 80px;
+        font-size: 1em;
+        text-align: center;
+    }
+    .container h2{
+        text-align: center;
+    }
+    .testimonial .client .name, .testimonial .client .position {
+        text-align: center;
     }
     .controllers {
-        position: absolute;
-        bottom: 0;
-        right: 0;
+        display: none;
     }
     .training-link {
         font-size: 15px;

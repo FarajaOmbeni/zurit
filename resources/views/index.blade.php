@@ -18,8 +18,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <!-- <div class="container"> -->
             <a class="navbar-brand" href="index.html">
                 <img src="{{ asset('img/logo-white3.webp') }}" alt="">
             </a>
@@ -122,7 +122,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        <!-- </div> -->
     </nav>
     <header class="header-background">
         <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
