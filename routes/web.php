@@ -236,3 +236,7 @@ Route::post('callback', [PaymentController::class, 'callback']);
 // training enrollment
 Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll');
 
+//google auth sign in
+Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
