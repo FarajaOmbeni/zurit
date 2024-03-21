@@ -35,7 +35,7 @@
     <div class="container mainmargin">
         <div class="row">
             <section class="feedback-form" id="feedback-form" style="display: block">
-                <div class="download-pdf"><a href="{{asset('events_res/feedback.pdf')}}" download><img class="download-pdf-image"
+                <div class="download-pdf"><a href="{{asset('downloads/feedback.pdf')}}" download><img class="download-pdf-image"
                             src="{{ asset('img/pdf.png') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">

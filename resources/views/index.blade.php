@@ -42,6 +42,7 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="offcanvas-body">
+                    <div class="offcanvas-link"><a href="{{ asset('/downloads/zurit.apk') }}" download>Download App</a></div>
                     <div class="offcanvas-link"><a href="/">Home</a></div>
                     <div class="nav-menu">
                         <input id="toggle" type="checkbox" checked>
