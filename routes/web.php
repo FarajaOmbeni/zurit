@@ -23,6 +23,7 @@ use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 /*
@@ -237,6 +238,6 @@ Route::post('callback', [PaymentController::class, 'callback']);
 Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll');
 
 //google auth sign in
-Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
-Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [LoginController::class, 'GoogleCallback']);
 

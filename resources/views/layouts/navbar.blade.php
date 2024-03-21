@@ -100,16 +100,16 @@
                         </div>
                     </li>
                     <li
-                        class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
+                        class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama', 'trustee') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
                             role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
-                            <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
+                            <!-- <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
                             <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
-                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a>
+                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a> -->
                         </div>
                     </li>
                     <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">

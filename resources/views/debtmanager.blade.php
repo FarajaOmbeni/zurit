@@ -36,7 +36,7 @@
                     </p>
                 </div>
                 <div class="image">
-                    <img src="img/debtmanager1.jpg" alt="Budget Image">
+                    <img src="img/debtmanager1.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/debtmanager2.jpg" alt="Budget 2 Image">
+                    <img src="img/debtmanager2.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -65,17 +65,17 @@
                     <div class="step">
                         <h3>Step 1: Gather Information</h3>
                         <p>Start by gathering details about your debts—amounts, interest rates, and due dates.</p>
-                        <img src="img/debtstep1.jpg" alt="Step 1 Image">
+                        <img src="img/debtstep1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Prioritize Debts</h3>
                         <p>Evaluate debts and prioritize repayments—high-interest debts should take precedence.</p>
-                        <img src="img/debtstep2.jpg" alt="Step 2 Image">
+                        <img src="img/debtstep2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Create a Repayment Plan</h3>
                         <p>Devise a structured repayment plan based on your financial situation and prioritization.</p>
-                        <img src="img/debtstep3.png" alt="Step 3 Image">
+                        <img src="img/debtstep3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>

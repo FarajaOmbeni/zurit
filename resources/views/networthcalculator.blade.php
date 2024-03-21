@@ -37,7 +37,7 @@
                     </p>
                 </div>
                 <div class="image">
-                    <img src="img/networth1.jpg" alt="Budget Image">
+                    <img src="img/networth1.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/Calculator.png" alt="Budget 2 Image">
+                    <img src="img/Calculator.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -65,19 +65,19 @@
                     <div class="step">
                         <h3>Step 1: Sign Up</h3>
                         <p>Get started by signing up for our net worth calculator. It's quick and easy!</p>
-                        <img src="img/login1.png" alt="Step 1 Image">
+                        <img src="img/login1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Set Your Goals</h3>
                         <p>Define your financial goals and priorities. Whether it's saving, investing, or debt
                             reduction, we've got you covered.</p>
-                        <img src="img/step2.png" alt="Step 2 Image">
+                        <img src="img/step2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Track and Analyze</h3>
                         <p>Use our intuitive dashboard to track your expenses, analyze your spending patterns, and get
                             insights.</p>
-                        <img src="img/step3.png" alt="Step 3 Image">
+                        <img src="img/step3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>

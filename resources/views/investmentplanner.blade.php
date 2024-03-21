@@ -39,7 +39,7 @@
                     </ul>
                 </div>
                 <div class="image">
-                    <img src="img/invest.jpg" alt="Budget Image">
+                    <img src="img/invest.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -57,7 +57,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/Questions.png" alt="Budget 2 Image">
+                    <img src="img/Questions.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -67,17 +67,17 @@
                     <div class="step">
                         <h3>Step 1: Set Your Investment Goals</h3>
                         <p>Define your investment goals and risk tolerance to tailor your strategy.</p>
-                        <img src="img/invest1.png" alt="Step 1 Image">
+                        <img src="img/invest1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Diversify Your Portfolio</h3>
                         <p>Explore various investment options to build a diversified portfolio.</p>
-                        <img src="img/invest2.png" alt="Step 2 Image">
+                        <img src="img/invest2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Monitor and Adjust</h3>
                         <p>Regularly track and review your investments, adjusting for market changes.</p>
-                        <img src="img/invest3.png" alt="Step 3 Image">
+                        <img src="img/invest3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>
