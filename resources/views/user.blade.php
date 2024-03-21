@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- PWA  -->
     <meta name="theme-color" content="#fff" />
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
