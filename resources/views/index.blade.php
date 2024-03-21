@@ -52,7 +52,7 @@
                         </div>
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('training') }}">Training</a></li>
-                            <li><a class="dropdown-link" href="{{ url('advisory') }}">Advisory</a></li>
+                            <li><a class="dropdown-link" href="#">Advisory</a></li>
                             <li><a class="dropdown-link" href="{{ url('chama') }}">Chama Advisory</a></li>
                             <li><a class="dropdown-link" href="{{ url('trustees') }}">Trustees Advisory</a></li>
                         </ul>

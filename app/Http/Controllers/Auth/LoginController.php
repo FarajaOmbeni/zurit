@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 //use Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -69,6 +72,33 @@ class LoginController extends Controller
             'duration'=>3000,
         ]);
     }
+
 }
+
+        public function redirectToGoogle(){
+             return Socialite::driver('google')->redirect();
+         }
+
+        public function handleGoogleCallback()
+        {
+            $user = Socialite::driver('google')->user();
+        
+            $finduser = User::where('google_id', $user->id)->first();
+        
+            if($finduser){
+                Auth::login($finduser);
+                return redirect('user_budgetplanner');
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->id,
+                ]);
+            
+                Auth::login($newUser);
+            
+                return redirect('user_budgetplanner');
+            }
+        }
 
 }

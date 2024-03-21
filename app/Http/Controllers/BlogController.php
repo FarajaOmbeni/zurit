@@ -74,6 +74,7 @@ class BlogController extends Controller
             $image = $request->file('blog_image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('blogs_res/img'), $imageName);
+            // $image->move(base_path('../public_html/blogs_res/img'), $imageName);
         }
 
         // Create book with file path
