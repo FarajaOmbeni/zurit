@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
     <title>Contact @ Zurit</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
     <div class="container mainmargin">
         <div class="row">
             <section class="feedback-form" id="feedback-form" style="display: block">
-                <div class="download-pdf"><a href="{{asset('events_res/feedback.pdf')}}" download><img class="download-pdf-image"
+                <div class="download-pdf"><a href="{{asset('downloads/feedback.pdf')}}" download><img class="download-pdf-image"
                             src="{{ asset('img/pdf.png') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">

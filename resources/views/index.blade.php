@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
     <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,6 +42,7 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="offcanvas-body">
+                    <div class="offcanvas-link"><a href="{{ asset('/downloads/zurit.apk') }}" download>Download App</a></div>
                     <div class="offcanvas-link"><a href="/">Home</a></div>
                     <div class="nav-menu">
                         <input id="toggle" type="checkbox" checked>
