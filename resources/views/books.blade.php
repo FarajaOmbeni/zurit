@@ -31,9 +31,7 @@
     <div class="container mainmargin">
         <h1 class="book-heading">Books</h1>
 
-        <div class="row">
-            @foreach ($books as $book)
-                <div class="col-md-6 mb-4">
+        {{-- <div class="col-md-6 mb-4">
                     <div class="card book_card custom-card">
                         <img class="card-img-top card-img" src="{{ asset('books_res/img/' . $book->book_image) }}"
                             alt="Card image cap">
@@ -51,9 +49,28 @@
                             </button>
                         </div>
                     </div>
+                </div> --}}
+        <div class="books-container">
+            @foreach ($books as $book)
+                <div class="book-card">
+                    <div class="card-body">
+                        <div><img class="card-img-top card-img" src="{{ asset('books_res/img/' . $book->book_image) }}"
+                                alt="Card image cap"></div>
+                        <div class="description">
+                            <h5 class="book-title"><b>{{ $book->book_name }}</b></h5>
+                            <p class="book-text">{{ $book->description }}</p>
+                            <p class="book-price">Price: Kshs <b>{{ $book->current_price }}</b></p>
+                        </div>
+                        <div type="button" class="btn btn-primary open-modal" data-toggle="modal"
+                            data-target="#myModal" data-img="{{ asset('books_res/img/' . $book->book_image) }}"
+                            data-id="{{ $book->id }}" data-name="{{ $book->book_name }}"
+                            data-description="{{ $book->description }}" data-price="{{ $book->current_price }}">Get a
+                            Copy</div>
+                    </div>
                 </div>
             @endforeach
         </div>
+
         <!-- End of Bootstrap Card -->
 
         <!--Get a copy modal-->

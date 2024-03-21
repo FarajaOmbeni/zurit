@@ -32,10 +32,10 @@
         </div>
 
         <div class="category_btn_container">
-            <button id="individual" class="category_btn"> Individual <span>no.</span></button>
-            <button id="quarterly" class="category_btn"> Quarterly <span>no.</span></button>
-            <button id="corporate" class="category_btn"> Corporate <span>no.</span></button>
-            <button id= "wealth_wave" class="category_btn"> Wealth Wave <span>no.</span></button>
+            <button id="individual" class="category_btn"> Individual</button>
+            <button id="quarterly" class="category_btn"> Quarterly</button>
+            <button id="corporate" class="category_btn"> Corporate</button>
+            <button id= "wealth_wave" class="category_btn"> Wealth Wave</button>
         </div>
 
         <div class="category_cards_container">
@@ -204,7 +204,7 @@
                     <p><b>Who should attend?</b></p>
                     <p>Pension Trustees, Human Resources professionals, Sacco Board</p>
                     <span style="font-size:20px;"><b>Price:</b> Kshs 79,000<br></span>
-                    <span style="font-size:20px;"><b>Duration:</b> 3-day workshop<br></span>
+                    <span style="font-size:20px;"><b>Duration:</b> 3-5 days<br></span>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
@@ -243,7 +243,7 @@
                     <p><b>Who should attend?</b></p>
                     <p>Staff of Corporate institutions, owner management</p>
                     <span style="font-size:20px;"><b>Price:</b> Kshs 79,000<br></span>
-                    <span style="font-size:20px;"><b>Duration:</b> ..<br></span>
+                    <span style="font-size:20px;"><b>Duration:</b> 3-5 days<br></span>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
@@ -285,7 +285,7 @@
 
                     <span style="font-size:20px;"><b>Price:</b> Kshs 5,000 per person OR Kshs 45,000(group of
                         10)<br></span>
-                    <span style="font-size:20px;"><b>Duration:</b> ..<br></span>
+                    <span style="font-size:20px;"><b>Duration:</b> 1 day<br></span>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
@@ -327,7 +327,7 @@
                     <p>Staff of Corporate institutions, owner management</p>
 
                     <span style="font-size:20px;"><b>Price:</b> Tailor Made<br></span>
-                    <span style="font-size:20px;"><b>Duration:</b> ..<br></span>
+                    <span style="font-size:20px;"><b>Duration:</b> ?<br></span>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
