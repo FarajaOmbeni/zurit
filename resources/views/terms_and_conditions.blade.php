@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('terms/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
+    <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
     <!-- PWA  -->
     <meta name="theme-color" content="#fff" />
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
@@ -23,8 +23,8 @@
 <body>
     <div class="main_container">
         <div class="inner_container">
-        <a class="navbar-brand" href="index.html">
-                <img src="{{ asset('img/logo-white2.webp') }}" alt="">
+        <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('home_res/img/logo-white2.webp') }}" alt="">
             </a>
         <h2>Terms and Conditions</h2>
     <p>

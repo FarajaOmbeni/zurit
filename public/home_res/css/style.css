@@ -816,9 +816,17 @@ footer .copyright p a:hover {
 /*end contact us section*/
 
 /*Partners*/
+.partners_container{
+    background-color: white;
+    margin-top: 20px;
+}
 .partners-grid {
     display: flex;
     animation: scroll 30s linear infinite; /* Adjust duration and timing function as needed */
+}
+.partners-grid:hover {
+    animation-play-state: paused;
+    cursor: pointer;
 }
 
 .partners-grid img {

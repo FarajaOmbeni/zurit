@@ -131,7 +131,7 @@
                     <br><label for="fav_trainor">Who was your favourite trainor/trainors?</label><br>
                     <textarea rows="4" type="text" name="fav_trainor" required></textarea>
                     <div class="d-flex justify-content-center g-recaptcha"
-                        data-sitekey="{{ env('RECAPTCHA_SECRET') }}" data-action="SendContact"></div>
+                        data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
                     <button class="feedback-button" type="submit">Submit</button>
                 </form>
             </section>

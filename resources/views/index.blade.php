@@ -154,7 +154,7 @@
                 <div class="col-md-6">
                     <!-- Video Container -->
                     <div class="d-flex justify-content-center mt-3 video-container"
-                        onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
+                        onclick="window.open('https://www.youtube.com/@zuritconsulting', '_blank')">
                         <video class="video" src="home_res/vids/intro.mp4" autoplay muted loop></video>
                         <div class="play-button">
                             <img src="home_res/img/play_button.svg" alt="Play">
@@ -308,8 +308,7 @@
                             <input type="email" name="email" placeholder="Your Email">
                             <textarea name="userMessage" placeholder="Your Message"></textarea>
                             <div class="d-flex justify-content-center g-recaptcha"
-                                data-sitekey="{{ env('RECAPTCHA_SECRET') }}" data-action="SendContact">
-                            </div>
+                        data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
                             <button type="submit">Send Message</button>
                         </form>
                         <div class="contact-icons">
@@ -387,7 +386,7 @@
                     </div>
                 </div>
                 <!--PARTNERS SECTION-->
-                <div class="container">
+                <div class="partners_container">
                     <h2>Our Partners</h2>
                     <div class="partners-grid">
                         <img src="home_res/img/beyond-the-stethescope.webp" alt="Logo 1">
