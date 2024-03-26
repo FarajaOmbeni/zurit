@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('home_res/css/style2.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
     <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfFWpgpAAAAAFmqOvRms4BS4Exr58fISintayc7"></script> -->
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
@@ -26,7 +26,7 @@
     <nav class="navbar nav-dark navbar-expand-lg navbar-dark fixed-top py-1">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="{{ asset('img/logo-white3.webp') }}" alt="">
+                <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
@@ -68,9 +68,8 @@
                         </div>
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
-                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a>
-                            </li>
                             <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
+                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a></li>
                             <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a>
                             </li>
                         </ul>
@@ -109,7 +108,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
-                            <!-- <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
+                            <!--<a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
                             <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
                             <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a> -->
                         </div>

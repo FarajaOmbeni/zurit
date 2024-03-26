@@ -1,0 +1,117 @@
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  background-color: white;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+body h2 {
+  font-weight: bold;
+}
+
+body .sub-header {
+  color: #777;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+html::-webkit-scrollbar{
+  width: .7rem;
+
+}
+
+html::-webkit-scrollbar-track{
+  background: #0c2533;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: transparent;
+  background-color: #F2AE30;
+  border-radius: 5rem;
+}
+
+.mainmargin {
+    margin-top: 180px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    font-size: 1.3rem;
+}
+
+select {
+    width: 30%;
+    height: 40px;
+    border-radius: 6px;
+}
+
+textarea {
+    display: inline;
+    width: 60%;
+    border-radius: 8px;
+}
+
+.feedback-form {
+    position: relative;
+    background-color: whitesmoke;
+    padding: 2rem;
+    margin-bottom: 8rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-button {
+    width: 20%;
+    background: linear-gradient(to right, #3300cc, #6600cc, #ff9900);
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 4px auto;
+    cursor: pointer;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.feedback-button:hover {
+    background: #0c2533;
+    color: #f2ae30;
+}
+
+
+.information-logo {
+    margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+    label,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+}
+
+.download-pdf {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.download-pdf-image {
+    width: 70px;
+}

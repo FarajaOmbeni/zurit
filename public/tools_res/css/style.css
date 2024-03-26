@@ -1,0 +1,207 @@
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  background-color: white;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+body h2 {
+  font-weight: bold;
+}
+
+body .sub-header {
+  color: #777;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+html::-webkit-scrollbar{
+  width: .7rem;
+
+}
+
+html::-webkit-scrollbar-track{
+  background: #0c2533;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: transparent;
+  background-color: #F2AE30;
+  border-radius: 5rem;
+}
+
+.mainmargin {
+    margin-top: 180px;
+}
+
+#what-is-budget-planner {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 50px 0;
+    margin: 0;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(128, 0, 128, 0.3),
+        0 4px 8px rgba(0, 0, 255, 0.3), 0 2px 4px rgba(255, 191, 0, 0.3);
+    /*box-shadow: 0 8px 16px rgba(128, 0, 128, 0.5), 0 4px 8px rgba(0, 0, 255, 0.3), 0 2px 4px rgba(255, 191, 0, 0.2);*/
+    overflow: hidden; /* Ensure the shadow doesn't get clipped if the content overflows */
+}
+
+#what-is-budget-planner .content {
+    flex: 1;
+    padding: 0 20px;
+}
+
+#what-is-budget-planner .image {
+    padding: 0 20px;
+    flex: 1;
+}
+
+#what-is-budget-planner img {
+    width: 100%; 
+    height: auto;
+    border-radius: 15px;
+    max-height: 300px; 
+}
+
+@media (max-width: 768px) {
+    #what-is-budget-planner {
+        flex-direction: column; 
+        justify-content: center; 
+    }
+
+    #what-is-budget-planner .content,
+    #what-is-budget-planner .image {
+        padding: 20px 0; 
+    }
+}
+
+/* our planner*/
+#why-use-our-planner {
+    background-image: url("../img/circle.svg");
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(150, 43, 183, 0.1);
+}
+
+#why-use-our-planner .content {
+    flex: 1;
+    max-width: 60%;
+    padding: 0 20px; 
+}
+
+#why-use-our-planner .image-right {
+    max-width: 40%;
+    text-align: right;
+    padding: 0 20px; 
+}
+
+#why-use-our-planner .image-right img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    max-height: 300px;
+}
+
+@media (max-width: 768px) {
+    #why-use-our-planner {
+        flex-direction: column;
+    }
+
+    #why-use-our-planner .content,
+    #why-use-our-planner .image-right {
+        max-width: 100%;
+        text-align: center;
+        padding: 20px 0;
+    }
+}
+
+#what-is-budget-planner,
+#why-use-our-planner {
+    margin-bottom: 50px; 
+}
+
+#why-use-our-planner {
+    background-size: contain;
+}
+
+#budget-planning-made-simple {
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(10, 51, 183, 0.1);
+    margin-bottom: 50px;
+}
+
+#budget-planning-made-simple .button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(
+        to right,
+        #3300cc,
+        #6600cc,
+        #ff9900
+    );
+    color: white;
+    text-decoration: none;
+}
+
+#how-it-works {
+    padding: 50px 0;
+}
+
+#how-it-works h2 {
+    text-align: center;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.step {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 30%; 
+}
+
+.step h3 {
+    margin-bottom: 10px;
+}
+.step img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px;
+}
+.step {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%; /* Adjust width to fit your layout */
+    box-shadow: 0 4px 8px rgba(128, 0, 128, 0.4),
+        0 0 10px rgba(255, 191, 0, 0.3);
+
+    @media (max-width: 768px) {
+        width: 80%;
+        margin: 10px auto;
+    }
+}

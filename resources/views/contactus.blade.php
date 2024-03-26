@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="feedback_res/css/style.css">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -36,7 +36,7 @@
         <div class="row">
             <section class="feedback-form" id="feedback-form" style="display: block">
                 <div class="download-pdf"><a href="{{asset('downloads/feedback.pdf')}}" download><img class="download-pdf-image"
-                            src="{{ asset('img/pdf.png') }}" alt=""></a></div>
+                            src="{{ asset('feedback_res/img/pdf.webp') }}" alt=""></a></div>
                 <h2 style="text-align: center;">Customer Feedback</h2>
                 <form action="/give-feedback" method="POST">
                     @csrf

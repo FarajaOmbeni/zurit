@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('tools_res/css/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
 
     <!-- PWA  -->
@@ -36,7 +36,7 @@
                     </p>
                 </div>
                 <div class="image">
-                    <img src="img/debtmanager1.webp" alt="Budget Image">
+                    <img src="tools_res/img/debtmanager1.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/debtmanager2.webp" alt="Budget 2 Image">
+                    <img src="tools_res/img/debtmanager2.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -65,17 +65,17 @@
                     <div class="step">
                         <h3>Step 1: Gather Information</h3>
                         <p>Start by gathering details about your debts—amounts, interest rates, and due dates.</p>
-                        <img src="img/debtstep1.webp" alt="Step 1 Image">
+                        <img src="tools_res/img/debtstep1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Prioritize Debts</h3>
                         <p>Evaluate debts and prioritize repayments—high-interest debts should take precedence.</p>
-                        <img src="img/debtstep2.webp" alt="Step 2 Image">
+                        <img src="tools_res/img/debtstep2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Create a Repayment Plan</h3>
                         <p>Devise a structured repayment plan based on your financial situation and prioritization.</p>
-                        <img src="img/debtstep3.webp" alt="Step 3 Image">
+                        <img src="tools_res/img/debtstep3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>

@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-    <title>Zurit_about</title>
+    <title>Investment Planner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('tools_res/css/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
     <!-- PWA  -->
     <meta name="theme-color" content="#fff" />
@@ -39,7 +39,7 @@
                     </ul>
                 </div>
                 <div class="image">
-                    <img src="img/invest.webp" alt="Budget Image">
+                    <img src="tools_res/img/invest.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -57,7 +57,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/Questions.webp" alt="Budget 2 Image">
+                    <img src="tools_res/img/Questions.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -67,17 +67,17 @@
                     <div class="step">
                         <h3>Step 1: Set Your Investment Goals</h3>
                         <p>Define your investment goals and risk tolerance to tailor your strategy.</p>
-                        <img src="img/invest1.webp" alt="Step 1 Image">
+                        <img src="tools_res/img/invest1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Diversify Your Portfolio</h3>
                         <p>Explore various investment options to build a diversified portfolio.</p>
-                        <img src="img/invest2.webp" alt="Step 2 Image">
+                        <img src="tools_res/img/invest2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Monitor and Adjust</h3>
                         <p>Regularly track and review your investments, adjusting for market changes.</p>
-                        <img src="img/invest3.webp" alt="Step 3 Image">
+                        <img src="tools_res/img/invest3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>

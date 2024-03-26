@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-    <title>Blogs Zurit</title>
+    <title>Our Blogs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,8 @@
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="home_res/css/style.css"> -->
+    <link rel="stylesheet" href="{{ asset('blogs_res/css/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
 
     <!-- PWA  -->
@@ -103,7 +104,7 @@
         </div>
     </div>
 
-    <div class="pagination-container position-absolute bottom-1">
+    <div class="pagination-container">
         {{ $blogs->links('vendor.pagination.custom') }}
     </div>
 
@@ -138,35 +139,37 @@
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/addshadow.js"></script>
+    <script src="home_res/js/addshadow.js"></script>
 
     <script>
         $(document).ready(function() {
-                    $(document).on('click', '.pagination-links a', function(e) {
-                                e.preventDefault();
+    $(document).on('click', '.pagination-links a', function(e) {
+        e.preventDefault();
 
-                                var url = $(this).attr('href');
+        var url = $(this).attr('href');
 
-                                $.get(url, function(data) {
-                                    var newData = $(data);
-                                    var newBlogs = newData.find('#blog-container').html();
-                                    var newPagination = newData.find('.pagination-links').html();
+        $.get(url, function(data) {
+            var newData = $(data);
+            var newBlogs = newData.find('#blog-container').html();
+            var newPagination = newData.find('.pagination-links').html();
 
-                                    $('#blog-container').html(newBlogs).addClass(
-                                        'animate__animated animate__slideInRight');
-                                    $('.pagination-links').html(newPagination);
+            $('#blog-container').html(newBlogs).addClass('animate__animated animate__slideInRight');
+            $('.pagination-links').html(newPagination);
 
-                                    var contentHeight = $('.content').outerHeight(true);
-                                    var windowHeight = $(window).height();
+            // var contentHeight = $('#blog-container').outerHeight(true);
+            // var windowHeight = $(window).height();
 
-                                    if (contentHeight < windowHeight) {
-                                        $('.pagination-container').css('position', 'absolute');
-                                        $('.pagination-container').css('bottom', '100px');
-                                    } else {
-                                        $('.pagination-container').css('position', 'absolute');
-                                        $('.pagination-container').css('bottom', '300px');
-                                    }
-                                });
+            // if (contentHeight < windowHeight) {
+            //     $('.pagination-container').css('position', 'absolute');
+            //     $('.pagination-container').css('bottom', '100px');
+            // } else {
+            //     $('.pagination-container').css('position', 'absolute');
+            //     $('.pagination-container').css('bottom', '300px');
+            // }
+        });
+    });
+});
+
     </script>
 </body>
 

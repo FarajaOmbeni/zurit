@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
 
-    <title>Zurit_about</title>
+    <title>About Us</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="about_res/style.css">
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+    <link rel="stylesheet" href="about_res/css/style.css">
+    <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
     <!-- PWA  -->
     <meta name="theme-color" content="#fff" />
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
@@ -24,6 +24,7 @@
 
 <body>
     @include('layouts.navbar')
+
     <div class="container mainmargin">
         <div class="row">
             <div class="main col-md-8">
@@ -48,7 +49,7 @@
                     <h2>Meet Our Team</h2>
                     <div class="team">
                         <div class="col-12 team-item text-center">
-                            <div class="photo" style="position: relative; margin: auto;"><img src="img/Liz.webp"
+                            <div class="photo" style="position: relative; margin: auto;"><img src="about_res/img/liz.webp"
                                     alt="Elizabeth Nkukuu" style="position: absolute; left: -10%;"></div>
                             <div class="text-center">
                                 <strong><span>Elizabeth Nkukuu</span></strong>
@@ -56,49 +57,49 @@
                             </div>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/Brian.webp" alt="Brian Salau"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/brian.webp" alt="Brian Salau"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Brian Salau</span>
                             <span class="position">Manager</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/ken_img.webp" alt="Ken Ndwigah"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/ken_img.webp" alt="Ken Ndwigah"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Ken Ndwigah</span>
                             <span class="position">Head Of Finance</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/noelle.webp" alt="Noel Jentrix"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/noelle.webp" alt="Noel Jentrix"
                                     style="width: 100%; height: auto; margin-top:-80px;"></div>
                             <span class="name d-block">Noel Jentrix</span>
                             <span class="position">Client Relations</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/gitia.webp" alt="Bryan Gitia"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/gitia.webp" alt="Bryan Gitia"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Bryan Gitia</span>
                             <span class="position">Investment Specialist</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/Bramwel.webp" alt="Bramwel Tum"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/Bramwel.webp" alt="Bramwel Tum"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Bramwel Tum</span>
                             <span class="position">Developer</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/Davis.webp" alt="Davis Otao"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/Davis.webp" alt="Davis Otao"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Davis Otao</span>
                             <span class="position">Developer</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/faraja.webp" alt="Ombeni Faraja"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/faraja.webp" alt="Ombeni Faraja"
                                     style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Ombeni Faraja</span>
                             <span class="position">Developer</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="img/churchill.webp"
+                            <div class="photo"><img class="uniform-img" src="about_res/img/churchill.webp"
                                     alt="Churchill Wagwa" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Churchill Wagwa</span>
                             <span class="position">Multimedia Creative Artist</span>
@@ -143,7 +144,7 @@
                     <h4>Why Choose Our Tools</h4>
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="img/debt.webp" alt="Debt Manager Icon"></div>
+                            <div class="icon"><img src="about_res/img/debt.webp" alt="Debt Manager Icon"></div>
                             <p class="title">Debt Manager</p>
                         </div>
                         <div class="text-gray">
@@ -157,7 +158,7 @@
                     <!-- Investment Planner Benefits -->
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="img/invest.webp" alt="Investment Planner Icon"></div>
+                            <div class="icon"><img src="about_res/img/invest.webp" alt="Investment Planner Icon"></div>
                             <p class="title">Investment Planner</p>
                         </div>
                         <div class="text-gray">
@@ -171,7 +172,7 @@
                     <!-- Net Worth Calculator Benefits -->
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="img/networth.webp" alt="Net Worth Calculator Icon"></div>
+                            <div class="icon"><img src="about_res/img/networth.webp" alt="Net Worth Calculator Icon"></div>
                             <p class="title">Net Worth Calculator</p>
                         </div>
                         <div class="text-gray">
@@ -185,7 +186,7 @@
                     <!-- Budget Planner Benefits -->
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="img/budget.webp" alt="Budget Planner Icon"></div>
+                            <div class="icon"><img src="about_res/img/budget.webp" alt="Budget Planner Icon"></div>
                             <p class="title">Budget Planner</p>
                         </div>
                         <div class="text-gray">
@@ -199,50 +200,9 @@
             </div>
         </div>
     </div>
-    <footer class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="footer-item col-md-3">
-                    <!--<img src="img/logo-white3.png" style="width: 50% height: 50%"alt="">-->
-                    <p>Address: Zuidier Complex</p>
-                    <p>Ngumo, Off Mbagathi Road</p>
-                    <p>Nairobi, KE </p>
-                    <p>Phone: +254 759 092 412</p>
-                    <p>Email: info@zuritconsulting.com</p>
-                </div>
-                <div class="footer-item col-md-3">
-                    <p class="footer-item-title">Services</p>
-                    <p class="footer-text">Budget Management:</p>
-                    <p>Financial Training</p>
-                    <p>Investment Advisory</p>
-                    <p>Debt Management</p>
-                </div>
-                <div class="footer-item col-md-3">
-                    <p class="footer-item-title">Links</p>
-                    <a href="">About Us</a>
-                    <a href="">Home</a>
-                    <a href="">Training</a>
-                    <a href="">Contact Us</a>
-                </div>
-                <div class="footer-item col-md-3">
-                    <p class="footer-item-title">Get In Touch</p>
-                    <form action="{{ route('subscribe') }}" method="post">
-                        @csrf
-                        <div class="mb-3 pb-3">
-                            <label for="exampleInputEmail1" class="form-label pb-3">Enter your email and we'll send
-                                you more information.</label>
-                            <input type="email" name="email" placeholder="Your Email" class="form-control"
-                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </form>
-                </div>
-                <div class="copyright pt-4 text-center text-muted">
-                    <p>&copy; {{ date('Y') }} ZURIT CONSULTING</p>
 
-                </div>
-            </div>
-    </footer>
+@include('layouts.footer')
+
     </main>
     {{-- PWA --}}
     <script src="{{ asset('/sw.js') }}"></script>

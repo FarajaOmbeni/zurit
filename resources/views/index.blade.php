@@ -12,12 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style2.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
+    <link rel="stylesheet" href="{{ asset('home_res/css/style.css') }}?v={{ time() }}">
+    <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 
     <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
+    <meta name="theme-color" content="#fff">
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
@@ -26,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="{{ asset('img/logo-white3.webp') }}" alt="">
+                <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
@@ -48,7 +49,7 @@
                         <input id="toggle" type="checkbox" checked>
                         <div class="dropdown-title">
                             <a class="tools-link">Services</a>
-                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                            <img class="arrow-icon" src="{{ asset('home_res/img/icon/arrow.png') }}" alt="">
                         </div>
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('training') }}">Training</a></li>
@@ -63,7 +64,7 @@
                         <input id="toggle" type="checkbox" checked>
                         <div class="dropdown-title">
                             <a class="tools-link">Prosperity Tools</a>
-                            <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
+                            <img class="arrow-icon" src="{{ asset('home_res/img/icon/arrow.png') }}" alt="">
                         </div>
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
@@ -101,16 +102,16 @@
                         </div>
                     </li>
                     <li
-                        class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
+                        class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama', 'trustees') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
                             role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
-                            <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
+                            <!-- <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
                             <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
-                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a>
+                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a> -->
                         </div>
                     </li>
                     <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
@@ -133,8 +134,8 @@
         </div>
     </nav>
     <header class="header-background">
-        <div class="img-circle"><img src="img/second-circle.svg" alt=""></div>
-        <div class="img-dots"><img src="img/dots.svg" alt=""></div>
+        <div class="img-circle"><img src="home_res/img/second-circle.svg" alt=""></div>
+        <div class="img-dots"><img src="home_res/img/dots.svg" alt=""></div>
         <div class="container">
             <div class="header row py-md-5">
                 <div class="header-text col-md-6 col-sm-12">
@@ -154,9 +155,9 @@
                     <!-- Video Container -->
                     <div class="d-flex justify-content-center mt-3 video-container"
                         onclick="window.open('https://www.youtube.com/watch?v=dmEYWmpfmgk', '_blank')">
-                        <video class="video" src="img/vids/intro.mp4" autoplay muted loop></video>
+                        <video class="video" src="home_res/vids/intro.mp4" autoplay muted loop></video>
                         <div class="play-button">
-                            <img src="img/play_button.svg" alt="Play">
+                            <img src="home_res/img/play_button.svg" alt="Play">
                         </div>
                     </div>
                 </div>
@@ -250,7 +251,7 @@
                 </div>
             </div>
             <div class="bg-img">
-                <img src="img/why-us.webp" alt="">
+                <img src="home_res/img/why-us.webp" alt="">
             </div>
         </section>
 
@@ -297,7 +298,7 @@
                         <!-- Embed your map here -->
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.7744044269725!2d36.801995999999995!3d-1.3107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTgnMzguNSJTIDM2wrA0OCcwNy4yIkU!5e0!3m2!1sen!2ske!4v1707382631263!5m2!1sen!2ske"
-                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="contact-form">
@@ -331,8 +332,8 @@
         </section>
 
         <div class="light-gray-section bottom py-5">
-            <div class="img-circle-left"><img src="img/circle.svg" alt=""></div>
-            <div class="img-circle-right"><img src="img/circle.svg" alt=""></div>
+            <div class="img-circle-left"><img src="home_res/img/circle.svg" alt=""></div>
+            <div class="img-circle-right"><img src="home_res/img/circle.svg" alt=""></div>
             <div class="container">
                 <h2>Check testimonials for our satisfied clients</h2>
                 <div id="carouseltestimonials" class="carousel slide w-100" data-bs-ride="carousel">
@@ -340,10 +341,10 @@
                         <div class="carousel-item active">
                             <div class="testimonial">
                                 <div class="client">
-                                    <div class="photo"><img style="height: 90%; width: 90%;" src="img/Davis.webp"
-                                            alt=""></div>
-                                    <p class="name">Davis Otao</p>
-                                    <p class="position">DevOps Engineer</p>
+                                <div class="photo">
+                                    <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
+                                </div>
+                                    <p class="name">Anonymous Client</p>
                                 </div>
                                 <div class="testimonial-text">
                                     <p>Zurit Financial Consultancy has been an invaluable asset to our team, providing
@@ -354,27 +355,23 @@
                                         Financial Consultancy to any DevOps professional seeking top-notch financial
                                         expertise.</p>
                                 </div>
-                                <div class="quote"><img src="img/left-quote.svg" alt=""></div>
+                                <div class="quote"><img src="home_res/img/left-quote.svg" alt=""></div>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="testimonial">
                                 <div class="client">
-                                    <div class="photo"><img style="height: 90%; width: 90%;" src="img/Bramwel.webp"
-                                            alt=""></div>
-                                    <p class="name">Bramwel Tum</p>
-                                    <p class="position">Project Manager</p>
+                                <div class="photo">
+                                    <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
+                                </div>
+                                    <p class="name">Anonymous Client</p>
                                 </div>
                                 <div class="testimonial-text">
-                                    <p>Zurit Financial Consultancy has been an indispensable partner for our project
-                                        management team. Their astute financial solutions and strategic insights have
-                                        played a pivotal role in optimizing our project budgets and resource
-                                        allocations. The team's responsiveness and dedication to client success make
-                                        them stand out in the industry. I enthusiastically recommend Zurit Financial
-                                        Consultancy to any project manager seeking a reliable financial ally for project
-                                        success.</p>
+                                    <p>"I can't express enough gratitude for the invaluable guidance provided by Zurit Consulting during Their recent discussion on the costly mistakes people often make when investing. 
+                                        They also helped highlight common pitfalls people tend to get into and equipped me with practical strategies to navigate this journey with confidence. 
+                                        Thanks to their insights, I now approach investing with a newfound clarity and assurance. I highly recommend Zurit Consulting to anyone seeking comprehensive and reliable financial advice.</p>
                                 </div>
-                                <div class="quote"><img src="img/left-quote.svg" alt=""></div>
+                                <div class="quote"><img src="home_res/img/left-quote.svg" alt=""></div>
                             </div>
                         </div>
                         <div class="controllers">
@@ -393,19 +390,26 @@
                 <div class="container">
                     <h2>Our Partners</h2>
                     <div class="partners-grid">
-                        <img src="img/beyond-the-stethescope.webp" alt="Logo 1">
-                        <img src="img/college-of-insurance.webp" alt="Logo 2">
-                        <img src="img/kozi.webp" alt="Logo 3">
-                        <img src="img/look-up-tv.webp" alt="Logo 4">
-                        <img src="img/mol logistics.webp" alt="Logo 5">
-                        <img src="img/mywage-pay.webp" alt="Logo 6">
-                        <img src="img/nca.webp" alt="Logo 7">
-                        <img src="img/nita.webp" alt="Logo 8">
-                        <img src="img/parkland.webp" alt="Logo 9">
-                        <img src="img/salaam.webp" alt="Logo 10">
-                        <img src="img/sinapis.webp" alt="Logo 11">
-                        <img src="img/sme.webp" alt="Logo 12">
-                        <img src="img/taaj.webp" alt="Logo 13">
+                        <img src="home_res/img/beyond-the-stethescope.webp" alt="Logo 1">
+                        <img src="home_res/img/college-of-insurance.webp" alt="Logo 2">
+                        <img src="home_res/img/kozi.webp" alt="Logo 3">
+                        <img src="home_res/img/look-up-tv.webp" alt="Logo 4">
+                        <img src="home_res/img/mol logistics.webp" alt="Logo 5">
+                        <img src="home_res/img/mywage-pay.webp" alt="Logo 6">
+                        <img src="home_res/img/nca.webp" alt="Logo 7">
+                        <img src="home_res/img/nita.webp" alt="Logo 8">
+                        <img src="home_res/img/parkland.webp" alt="Logo 9">
+                        <img src="home_res/img/salaam.webp" alt="Logo 10">
+                        <img src="home_res/img/sinapis.webp" alt="Logo 11">
+                        <img src="home_res/img/sme.webp" alt="Logo 12">
+                        <img src="home_res/img/taaj.webp" alt="Logo 13">
+                        <img src="home_res/img/maasai_mara.webp" alt="Logo 14">
+                        <img src="home_res/img/masinde.webp" alt="Logo 15">
+                        <img src="home_res/img/kibabii.webp" alt="Logo 16">
+                        <img src="home_res/img/kise.webp" alt="Logo 13">
+                        <img src="home_res/img/kpc.webp" alt="Logo 13">
+                        <img src="home_res/img/lake_basin.webp" alt="Logo 13">
+
                     </div>
                 </div>
             </div>
@@ -436,7 +440,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="js/addshadow.js"></script>
+    <script src="home_res/js/addshadow.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>

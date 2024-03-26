@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('tools_res/css/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
 
     <!-- PWA  -->
@@ -36,7 +36,7 @@
                     </p>
                 </div>
                 <div class="image">
-                    <img src="img/budget1.webp" alt="Budget Image">
+                    <img src="tools_res/img/budget1.webp" alt="Budget Image">
                 </div>
             </section>
 
@@ -54,7 +54,7 @@
                     </ul>
                 </div>
                 <div class="image-right">
-                    <img src="img/budget2.webp" alt="Budget 2 Image">
+                    <img src="tools_res/img/budget2.webp" alt="Budget 2 Image">
                 </div>
             </section>
 
@@ -64,19 +64,19 @@
                     <div class="step">
                         <h3>Step 1: Sign Up</h3>
                         <p>Get started by signing up for our budget planner. It's quick and easy!</p>
-                        <img src="img/login1.webp" alt="Step 1 Image">
+                        <img src="tools_res/img/login1.webp" alt="Step 1 Image">
                     </div>
                     <div class="step">
                         <h3>Step 2: Set Your Goals</h3>
                         <p>Define your financial goals and priorities. Whether it's saving, investing, or debt
                             reduction, we've got you covered.</p>
-                        <img src="img/step2.webp" alt="Step 2 Image">
+                        <img src="tools_res/img/step2.webp" alt="Step 2 Image">
                     </div>
                     <div class="step">
                         <h3>Step 3: Track and Analyze</h3>
                         <p>Use our intuitive dashboard to track your expenses, analyze your spending patterns, and get
                             insights.</p>
-                        <img src="img/step3.webp" alt="Step 3 Image">
+                        <img src="tools_res/img/step3.webp" alt="Step 3 Image">
                     </div>
                 </div>
             </section>
@@ -96,6 +96,7 @@
     </div>
 
     @include('layouts.footer')
+
     </main>
 
     {{-- PWA --}}
@@ -121,7 +122,7 @@
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/addshadow.js"></script>
+    <script src="home_res/js/addshadow.js"></script>
 </body>
 
 </html>
