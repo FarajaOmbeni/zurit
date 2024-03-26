@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('home_res/css/style2.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('home_res/css/style.css') }}?v={{ time() }}">
     <link rel="icon" href="{{ asset('img/ico_logo.webp') }}">
     <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfFWpgpAAAAAFmqOvRms4BS4Exr58fISintayc7"></script> -->
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
