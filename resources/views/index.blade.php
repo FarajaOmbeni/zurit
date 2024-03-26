@@ -308,7 +308,7 @@
                             <input type="email" name="email" placeholder="Your Email">
                             <textarea name="userMessage" placeholder="Your Message"></textarea>
                             <div class="d-flex justify-content-center g-recaptcha"
-                                data-sitekey="6LfPfpgpAAAAAOrYpn4JGNITc0ggaiJQ8MUMgF0e" data-action="SendContact">
+                                data-sitekey="{{ env('RECAPTCHA_SECRET') }}" data-action="SendContact">
                             </div>
                             <button type="submit">Send Message</button>
                         </form>
