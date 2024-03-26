@@ -25,7 +25,7 @@ class ResetPassword extends Notification
     /**
      * The callback that should be used to build the mail message.
      *
-     * @var (\Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage)|null
+     * @var (\Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage|\Illuminate\Contracts\Mail\Mailable)|null
      */
     public static $toMailCallback;
 
@@ -59,26 +59,11 @@ class ResetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-       /*
-       *
-       * 
-       * 
-       * 
-       *  if (static::$toMailCallback) {
+        if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
 
         return $this->buildMailMessage($this->resetUrl($notifiable));
-        *
-        *
-        *
-        */
-        return (new MailMessage)
-            ->mailer('mailgun_password_reset')
-            ->subject('Your Password Reset Request')
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url(config('app.url').route('password.reset', $this->token, false)))
-            ->line('If you did not request a password reset, no further action is required.');
     }
 
     /**
@@ -129,7 +114,7 @@ class ResetPassword extends Notification
     /**
      * Set a callback that should be used when building the notification mail message.
      *
-     * @param  \Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage  $callback
+     * @param  \Closure(mixed, string): (\Illuminate\Notifications\Messages\MailMessage|\Illuminate\Contracts\Mail\Mailable)  $callback
      * @return void
      */
     public static function toMailUsing($callback)
