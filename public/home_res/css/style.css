@@ -616,6 +616,14 @@ footer .copyright p a:hover {
     .training-link {
         font-size: 15px;
     }
+    .header{
+        max-width: 100%;
+    }
+
+    .photo{
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (min-width: 992px) {

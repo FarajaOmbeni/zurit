@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <div id="content" class="p-4 p-md-5 pt-5">
+                <div id="content" class="p-md-5 pt-5">
                     <div class="budget_content">
                         <div class="container mt-5">
                             <!-- Add new income and expense buttons -->
@@ -282,8 +282,12 @@
 
     <script>
         // Dummy data for the last 12 months
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const currentMonth = new Date().getMonth();
+        const labels = [...monthNames.slice(currentMonth), ...monthNames.slice(0, currentMonth)];
+
         const monthlyData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: labels,
             income: @json(array_values($monthlyIncomes)),
             expenses: @json(array_values($monthlyExpenses)),
         };

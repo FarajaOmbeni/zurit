@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <div id="content" class="p-4 p-md-5 pt-5">
+                <div id="content" class="p-md-5 pt-5">
                     <div class="mb-3">
                         <!-- Trigger button for the asset modal -->
                         <button type="button" class="btn btn-primary mr-2" data-toggle="modal"

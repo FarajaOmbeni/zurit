@@ -143,7 +143,7 @@
                             <!-- Embed your map here -->
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.772966870618!2d36.79918977496576!3d-1.3116021986759463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f139a2af6edab%3A0xa6fa99525e66f680!2sZuidier%20Ltd.!5e0!3m2!1sen!2ske!4v1699780330698!5m2!1sen!2ske"
-                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                         <div class="contact-form">
@@ -152,6 +152,9 @@
                                 <input type="text" name="name" placeholder="Your Name">
                                 <input type="email" name="email" placeholder="Your Email">
                                 <textarea name="userMessage" placeholder="Your Message"></textarea>
+                                <div class="d-flex justify-content-center g-recaptcha"
+                                    data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact">
+                                </div>
                                 <button type="submit">Send Message</button>
                             </form>
                             <div class="contact-icons">

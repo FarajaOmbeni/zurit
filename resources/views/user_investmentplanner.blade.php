@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <div id="content" class="p-4 p-md-5 pt-5">
+                <div id="content" class="p-md-5 pt-5">
                     <div class="budget_content">
                         @php
                             // Get the current month (adjust timezone if needed)

@@ -138,7 +138,7 @@
         <div class="img-dots"><img src="home_res/img/dots.svg" alt=""></div>
         <div class="container">
             <div class="header row py-md-5">
-                <div class="header-text col-md-6 col-sm-12">
+                <div class="header-text col-md-6 col-sm-6">
                     <h1>Zurit <span class="consult-text" style="color: #F2AE30">Consulting</span></h1>
                     <p>Unlock financial prosperity with Zurit Consulting. Our tailored financial trainings and advisory
                         solutions empower <span style="color: #F2AE30; font-weight: bold;">trustees, corporates, and
@@ -298,7 +298,7 @@
                         <!-- Embed your map here -->
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.7744044269725!2d36.801995999999995!3d-1.3107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTgnMzguNSJTIDM2wrA0OCcwNy4yIkU!5e0!3m2!1sen!2ske!4v1707382631263!5m2!1sen!2ske"
-                            width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="contact-form">

@@ -105,22 +105,26 @@
 
             <!-- Payoff Progress Card -->
             <div class="card mt-3 custom-card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div role="progressbar"
-                            aria-valuenow="{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"
-                            aria-valuemin="0" aria-valuemax="100"
-                            style="--value:{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"
-                            data-percentage="{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"></div>
-                        <div class="text-container">
-                            <!-- Principal Paid -->
-                            <p class="custom-text">Principal Paid: ${{ number_format($principalPaid, 2) }}</p>
-                            <!-- Balance -->
-                            <p class="custom-text">Balance: ${{ number_format($remainingBalance, 2) }}</p>
-                        </div>
-                    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            @if ($principalPaid === null || $totalDebt === null || $totalDebt == 0)
+                <p class="card-text text-white">Please add your debt data to calculate the progress.</p>
+            @else
+                <div role="progressbar"
+                    aria-valuenow="{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"
+                    aria-valuemin="0" aria-valuemax="100"
+                    style="--value:{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"
+                    data-percentage="{{ number_format(($principalPaid / $totalDebt) * 100, 2) }}"></div>
+                <div class="text-container">
+                    <!-- Principal Paid -->
+                    <p class="custom-text">Principal Paid: ${{ number_format($principalPaid, 2) }}</p>
+                    <!-- Balance -->
+                    <p class="custom-text">Balance: ${{ number_format($remainingBalance, 2) }}</p>
                 </div>
-            </div>
+            @endif
+        </div>
+    </div>
+</div>
 
             <!-- Categories Cards -->
             <div class="row mt-3">
