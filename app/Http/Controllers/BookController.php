@@ -17,9 +17,11 @@ class BookController extends Controller
         $this->middleware('permission:book-delete', ['only' => ['destroy']]);
     }
 
-    public function edit(Book $book): View
+    public function edit($id)
     {
-        return view('books.edit', compact('book'));
+        $book = Book::find($id);
+
+        return view('books_editdash', ['book' => $book]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -54,34 +56,33 @@ class BookController extends Controller
     }
 
     public function update(Request $request, Book $book): RedirectResponse
-    {
-        $this->authorize('update', $book);
+{
+    $this->authorize('update', $book);
 
-        $request->validate([
-            'book_image' => 'required',
-            'book_name' => 'required',
-            'description' => 'required',
-            'current_price' => 'required|numeric',
-            'previous_price' => 'required|numeric',
-        ]);
+    $request->validate([
+        'book_name' => 'required',
+        'description' => 'required',
+        'current_price' => 'required|numeric',
+        'previous_price' => 'required|numeric',
+    ]);
 
-        $book_image = $book->book_image;
+    $book_image = $book->book_image;
 
-        if ($request->hasFile('book_image')) {
-            Storage::delete('public/' . $book->book_image);
-            $book_image = $request->book_image->store('img', 'public');
-        }
-
-        $book->update([
-            'book_image' => $book_image,
-            'book_name' => $request->input('book_name'),
-            'description' => $request->input('description'),
-            'current_price' => $request->input('current_price'),
-            'previous_price' => $request->input('previous_price'),
-        ]);
-
-        return redirect()->route('books')->with('success', 'Book updated successfully');
+    if ($request->hasFile('book_image')) {
+        Storage::delete('public/' . $book->book_image);
+        $book_image = $request->file('book_image')->store('img', 'public');
     }
+
+    $book->update([
+        'book_image' => $book_image,
+        'book_name' => $request->input('book_name'),
+        'description' => $request->input('description'),
+        'current_price' => $request->input('current_price'),
+        'previous_price' => $request->input('previous_price'),
+    ]);
+
+    return redirect()->route('books')->with('success', 'Book updated successfully');
+}
     public function getBookDetails($id){
     $book = Book::find($id);
 
