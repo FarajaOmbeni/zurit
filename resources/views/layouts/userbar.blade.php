@@ -18,7 +18,7 @@
             <button class="btn btn-primary menu-button" id="menu-toggle"><i class="fa fa-bars"></i></button>
             <nav id="sidebar" class="img" style="background-image: url(admin_res/images/bg_1.jpg);">
                 <div class="p-4">
-                    <a href="index.html"><img class="logo" src="admin_res/images/logo-white3.png" alt=""></a><span><br>User Dashboard</span>
+                    <a href="/"><img class="logo" src="admin_res/images/logo-white3.png" alt=""></a><span><br>User Dashboard</span>
                     <ul class="list-unstyled components mb-5 flex-container">
                         <!--<li class="{{ Request::is('userhome') ? 'active' : '' }}">
                             <a href="{{ url('/userhome') }}"><span class="bi bi-house-door-fill icon-class"></span>Home</a>

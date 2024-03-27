@@ -25,7 +25,7 @@
 <body>
     <nav class="navbar nav-dark navbar-expand-lg navbar-dark fixed-top py-1">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
             </a>
 
@@ -69,7 +69,8 @@
                         <ul>
                             <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
                             <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
-                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a></li>
+                            <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth Calculator</a>
+                            </li>
                             <li><a class="dropdown-link" href="{{ url('investmentplanner') }}">Investment Planner</a>
                             </li>
                         </ul>
@@ -125,9 +126,23 @@
                     <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url('login') }}"><button class="btn-item">Join Us</button></a>
-                    </li>
+                    @if (Auth::check())
+                        <li
+                            class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama', 'trustees') ? 'active' : '' }}">
+                            <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
+                                <a class="dropdown-item" href="/user_budgetplanner">Go to Dashboard</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ url('login') }}"><button class="btn-item">Join Us</button></a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

@@ -26,7 +26,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
             </a>
 
@@ -43,7 +43,8 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="offcanvas-body">
-                    <div class="offcanvas-link"><a href="{{ asset('/downloads/zurit.apk') }}" download>Download App</a></div>
+                    <div class="offcanvas-link"><a href="{{ asset('/downloads/zurit.apk') }}" download>Download App</a>
+                    </div>
                     <div class="offcanvas-link"><a href="/">Home</a></div>
                     <div class="nav-menu">
                         <input id="toggle" type="checkbox" checked>
@@ -126,9 +127,23 @@
                     <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
                     </li>
-                    <li class="nav-item">
+                    @if (Auth::check())
+                        <li
+                            class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama', 'trustees') ? 'active' : '' }}">
+                            <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
+                                <a class="dropdown-item" href="/user_budgetplanner">Go to Dashboard</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    @else
+                        <li class="nav-item">
                         <a href="{{ url('login') }}"><button class="btn-item">Join Us</button></a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -308,7 +323,7 @@
                             <input type="email" name="email" placeholder="Your Email">
                             <textarea name="userMessage" placeholder="Your Message"></textarea>
                             <div class="d-flex justify-content-center g-recaptcha"
-                        data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
+                                data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
                             <button type="submit">Send Message</button>
                         </form>
                         <div class="contact-icons">
@@ -340,9 +355,9 @@
                         <div class="carousel-item active">
                             <div class="testimonial">
                                 <div class="client">
-                                <div class="photo">
-                                    <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
-                                </div>
+                                    <div class="photo">
+                                        <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
+                                    </div>
                                     <p class="name">Anonymous Client</p>
                                 </div>
                                 <div class="testimonial-text">
@@ -360,15 +375,20 @@
                         <div class="carousel-item">
                             <div class="testimonial">
                                 <div class="client">
-                                <div class="photo">
-                                    <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
-                                </div>
+                                    <div class="photo">
+                                        <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
+                                    </div>
                                     <p class="name">Anonymous Client</p>
                                 </div>
                                 <div class="testimonial-text">
-                                    <p>"I can't express enough gratitude for the invaluable guidance provided by Zurit Consulting during Their recent discussion on the costly mistakes people often make when investing. 
-                                        They also helped highlight common pitfalls people tend to get into and equipped me with practical strategies to navigate this journey with confidence. 
-                                        Thanks to their insights, I now approach investing with a newfound clarity and assurance. I highly recommend Zurit Consulting to anyone seeking comprehensive and reliable financial advice.</p>
+                                    <p>"I can't express enough gratitude for the invaluable guidance provided by Zurit
+                                        Consulting during Their recent discussion on the costly mistakes people often
+                                        make when investing.
+                                        They also helped highlight common pitfalls people tend to get into and equipped
+                                        me with practical strategies to navigate this journey with confidence.
+                                        Thanks to their insights, I now approach investing with a newfound clarity and
+                                        assurance. I highly recommend Zurit Consulting to anyone seeking comprehensive
+                                        and reliable financial advice.</p>
                                 </div>
                                 <div class="quote"><img src="home_res/img/left-quote.svg" alt=""></div>
                             </div>

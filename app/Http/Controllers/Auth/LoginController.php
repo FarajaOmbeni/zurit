@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 //use Request;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -49,12 +50,16 @@ class LoginController extends Controller
             'email'=>'required|email',
             'password'=>'required'
         ]);
+        $email = $request->input('email');
+
+        Session::put('name', $email);
+
         if(Auth::attempt($credentials)){
             $user_role=Auth::user()->role;
 
             switch($user_role){
                 case 0:
-                    return redirect('/user_budgetplanner');
+                    return redirect('/');
                     break;
                 case 1:
                     return redirect('/editor');

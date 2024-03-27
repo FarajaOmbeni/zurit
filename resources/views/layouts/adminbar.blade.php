@@ -18,7 +18,7 @@
             <button class="btn btn-primary menu-button" id="menu-toggle"><i class="fa fa-bars"></i></button>
             <nav id="sidebar" class="img" style="background-image: url(admin_res/images/bg_1.jpg);">
                 <div class="p-4">
-                    <a href="index.html"><img class="logo" src="{{ asset('admin_res/images/logo-white3.png') }}" alt=""></a><span><br>Admin Dashboard</span>
+                    <a href="/"><img class="logo" src="{{ asset('admin_res/images/logo-white3.png') }}" alt=""></a><span><br>Admin Dashboard</span>
                     <ul class="list-unstyled components mb-5 flex-container">
                         <li class="{{ Request::is('admin') ? 'active' : '' }}">
                             <a href="{{ url('/admin') }}"><span class="fa fa-home mr-3"></span> User Management</a>
