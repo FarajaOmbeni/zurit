@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>Admin Template</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Link your CSS files -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="admin_res/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+    <head>
+        <title>Admin Template</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Link your CSS files -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="admin_res/css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
 
 <body>
     <div id="content">
@@ -59,20 +60,19 @@
                 </div>
             </nav>
         </div>
-    </div>
 
-    <script>
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
 
-            if ($("#wrapper").hasClass("toggled")) {
-                $("#content").removeClass("blur-effect");
-            } else {
-                $("#content").addClass("blur-effect");
-            }
-        });
-    </script>
-</body>
+                if ($("#wrapper").hasClass("toggled")) {
+                    $("#content").removeClass("blur-effect");
+                } else {
+                    $("#content").addClass("blur-effect");
+                }
+            });
+        </script>
+    </body>
 
 </html>

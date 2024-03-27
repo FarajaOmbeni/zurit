@@ -10,7 +10,7 @@
 </head>
 
 <div class="col-lg-8 offset-lg-2">
-    <div id="content" class="p-4 p-md-5 pt-5">
+    <div id="content" class="p-md-5 pt-5">
         <h2 class="mb-4">User Management</h2>
 
         <hr class="separator">

@@ -134,20 +134,17 @@ Route::get('bookdetails/{id}',[BookController::class,'show'])->name('bookdetails
 Route::get('booklist',[BookController::class,'index'])->name('booklist');
 Route::get('bookadd',[BookController::class,'create'])->name('bookadd');
 Route::post('bookadd',[BookController::class,'store'])->name('bookadd.store'); 
-Route::get('bookedit/{id}',[BookController::class,'edit'])->name('bookedit');
-Route::put('bookupdate/{id}',[BookController::class,'update'])->name('bookupdate'); 
+Route::get('/editbook/{id}',[BookController::class,'edit']);
+Route::put('/editbook/{id}',[BookController::class,'update'])->name('bookedit.update');
 Route::delete('bookdelete/{id}',[BookController::class,'destroy'])->name('bookdelete'); 
 
-Route::get('blogs', [BlogController::class, 'index']);
+Route::get('blogs', [BlogController::class, 'index'])->name('bloglist');
 Route::get('blogdetails/{id}',[BlogController::class,'show'])->name('blogdetails');
-Route::get('bloglist',[BlogController::class,'index'])->name('bloglist');
 Route::get('blogadd',[BlogController::class,'create'])->name('blogadd');
 Route::post('blogadd',[BlogController::class,'store'])->name('blogadd.store'); 
-Route::get('blogedit/{id}',[BlogController::class,'edit'])->name('blogedit');
-Route::put('blogupdate/{id}',[BlogController::class,'update'])->name('blogupdate'); 
-Route::delete('blogdelete/{id}',[BlogController::class,'destroy'])->name('blogdelete'); 
-Route::get('/blogs/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('blogs.show');
-Route::get('/blog/view/{id}/{title}', [App\Http\Controllers\BlogController::class, 'view'])->name('blog.view');
+Route::get('/editblog/{id}',[BlogController::class,'edit']);
+Route::put('/editblog/{id}',[BlogController::class,'update'])->name('blogedit.update');
+Route::delete('blogdelete/{id}',[BlogController::class,'destroy'])->name('blogdelete');
 
 //Budget Planner Routes
 Route::post('/storeIncome', [BudgetController::class, 'storeIncome'])->name('storeIncome');

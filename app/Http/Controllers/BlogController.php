@@ -56,41 +56,41 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
-        return view('edit', compact('blog')); // assuming you have an 'edit' view
+
+        return view('blogs_editdash', ['blog' => $blog]);
     }
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'blog_tag' => 'required',
-            'blog_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'blog_title' => 'required',
-            'blog_message' => 'required',
-        ]);
+        $blog = Blog::findOrFail($id);
 
         $imageName = ''; // Initialize image name variable
 
         // Handle file upload
-        if ($request->hasFile('blog_image')) {
-            $image = $request->file('blog_image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('blogs_res/img'), $imageName);
-            // $image->move(base_path('../public_html/blogs_res/img'), $imageName);
         }
 
-        // Create book with file path
-        Blog::create([
-            'blog_tag' =>$request->input('blog_tag'),
-            'blog_image' => $imageName,
-            'blog_title' => $request->input('blog_title'),
-            'blog_message' => $request->input('blog_message'),
+        //validate the inputs
+        $request->validate([
+            'blog_image' => 'required|image',
+            'blog_tag' => 'required',
+            'blog_title' => 'required',
+            'blog_message' => 'required',
         ]);
 
-        return redirect()->route('blogs_admindash')->with('success', [
+        $blog->blog_image = $request->file('blog_image')->store('public/blogs');
+        $blog->blog_tag = $request->blog_tag;
+        $blog->blog_title = $request->blog_title;
+        $blog->blog_message = $request->blog_message;
+
+        $blog->save();
+
+        return redirect('/blogs_admindash')->with('success', [
             'message' => 'Blog Updated Successfully!',
             'duration' => 3000,
         ]);
-
-
     }
     
     public function destroy($id)

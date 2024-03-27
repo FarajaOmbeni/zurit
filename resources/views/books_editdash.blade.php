@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Events Dash</title>
+        <title>Blogs Dash</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Link your CSS files -->
@@ -22,26 +22,27 @@
         @include('layouts.app')
 
         <div class="col-md-8 offset-md-2" style="position: relative;">
-            <div id="content" class="p-4 p-md-5 pt-5">
-                <h2 class="mb-4">Events Management</h2>
+            <div id="content" class="p-md-5 pt-5">
+                <h2 class="mb-4">Edit Book</h2>
                 <div class="book_form" id="addBookForm">
-                    <form method="POST" action="/editEvent/{{ $event->id }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('bookedit.update', $book->id) }}"
+                        enctype="multipart/form-data">
                         @csrf
-                        <label for="name">Name of the Event</label>
-                        <input value="{{ $event->name }}" type="text" name="name" id="name" required>
-                        <label for="date">Date of the event</label>
-                        <input {{ $event->date }} type="date" name="date" id="date" required>
-                        <label for="registration_link">Registration Link</label>
-                        <input value="{{ $event->registration_link }}"" type="text" name="registration_link"
-                            id="registration_link" required>
-                        <label for="price">Free or Paid?</label> <br>
-                        <select name="price" id="" required>
-                            <option value="free">Free</option>
-                            <option value="paid">Paid</option>
-                        </select> <br><br>
-                        <label for="image">Event ArtWork</label>
-                        <input type="file" name="image" id="image" placeholder="Event Image" required>
-                        <button type="submit">Submit</button>
+                        @method('PUT')
+                        <label for="book_image">Book Image</label>
+                        <input type="file" name="book_image" id="book_image">
+                        <label for="book_name">Book Name</label>
+                        <input value="{{ $book->book_name }}" type="text" name="book_name" id="book_name" required>
+                        <label for="description">Book Description</label>
+                        <input value="{{ $book->description }}" type="text" name="description" id="description"
+                            required>
+                        <label for="current_price">Current Price</label>
+                        <input value="{{ $book->current_price }}" type="number" name="current_price" id="current_price"
+                            required>
+                        <label for="previous_price">Previous Price</label>
+                        <input value="{{ $book->previous_price }}" type="number" name="previous_price"
+                            id="previous_price" required>
+                        <button type="submit">Update</button>
                     </form>
                 </div>
             </div>
@@ -73,9 +74,6 @@
         <script src="admin_res/js/popper.js"></script>
         <script src="admin_res/js/bootstrap.min.js"></script>
         <script src="admin_res/js/main.js"></script>
-        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-
-        <script></script>
     </body>
 
 </html>
