@@ -39,6 +39,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::post('/', [IndexController::class, 'storeEvent']);
+Route::get('/logout', [HomeController::class, 'logout']);
 
 Route::get('about', function () {
     return view('about');
@@ -75,7 +76,7 @@ Route::get('register', function () {
 });
 
 Route::post('Register', function () {
-    return view('user_budgetplanner');
+    return view('/');
 });
 Auth::routes();
 
