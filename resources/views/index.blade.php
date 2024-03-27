@@ -24,19 +24,17 @@
         <link rel="manifest" href="{{ asset('/manifest.json') }}">
     </head>
 
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
-            </a>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
 
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
                     aria-labelledby="offcanvasExampleLabel">
@@ -44,7 +42,6 @@
                         <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
                         <button type="button" class="close-canvas" data-bs-dismiss="offcanvas"
                             aria-label="Close">X</button>
-
                     </div>
                     <div class="offcanvas-body">
                         <div class="offcanvas-link"><a href="{{ asset('/downloads/zurit.apk') }}" download>Download
@@ -126,17 +123,16 @@
                         <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('advisory') }}">Advisory</a>
                 </li>-->
-
-                    <li class="nav-item {{ Request::is('books') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('books') }}">Books</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
-                    </li>
-                    @if (Auth::check())
+                        <li class="nav-item {{ Request::is('books') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('books') }}">Books</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
+                        </li>
+                        @if (Auth::check())
                         <li
                             class="nav-item dropdown d-md-inline {{ Request::is('training', 'advisory', 'chama', 'trustees') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
@@ -153,8 +149,8 @@
                         <a href="{{ url('login') }}"><button class="btn-item">Join Us</button></a>
                     </li>
                     @endif
-                </ul>
-
+                    </ul>
+                </div>
             </div>
         </nav>
         <header class="header-background">
@@ -320,61 +316,33 @@
 </section>-->
 
 
-        <section class="contact-us" id="contact-us">
-            <div class="container">
-                <h2>Contact Us</h2>
-                <div class="contact-content d-flex flex-column flex-lg-row">
-                    <div class="map mb-4 mb-lg-0">
-                        <!-- Embed your map here -->
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.7744044269725!2d36.801995999999995!3d-1.3107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTgnMzguNSJTIDM2wrA0OCcwNy4yIkU!5e0!3m2!1sen!2ske!4v1707382631263!5m2!1sen!2ske"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div class="contact-form">
-                        <form id="contact-form" action="{{ route('contact.store') }}" method="post">
-                            @csrf
-                            <input type="text" name="name" placeholder="Your Name">
-                            <input type="email" name="email" placeholder="Your Email">
-                            <textarea name="userMessage" placeholder="Your Message"></textarea>
-                            <div class="d-flex justify-content-center g-recaptcha"
-                                data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
-                            <button type="submit">Send Message</button>
-                        </form>
-                        <div class="contact-icons">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                                <p>+254 759 092 412</p>
-                            </div>
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p>Zuidier Complex, <br>Mbagathi Hospital Road<br>Off Mbagathi Way</p>
-                            </div>
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                                <p>info@zuritconsulting.com</p>
-                            </div>
+            <section class="contact-us" id="contact-us">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <div class="contact-content d-flex flex-column flex-lg-row">
+                        
+                        <div class="map mb-4 mb-lg-0">
+                            <a href="https://maps.app.goo.gl/awNjntYupy6x7SNz5" target="_blank"><img class="map_image" src="{{ asset('home_res/img/map.webp') }}" alt=""></a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <div class="light-gray-section bottom py-5">
-            <div class="img-circle-left"><img src="home_res/img/circle.svg" alt=""></div>
-            <div class="img-circle-right"><img src="home_res/img/circle.svg" alt=""></div>
-            <div class="container">
-                <h2>Check testimonials for our satisfied clients</h2>
-                <div id="carouseltestimonials" class="carousel slide w-100" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="testimonial">
-                                <div class="client">
-                                    <div class="photo">
-                                        <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
-                                    </div>
-                                    <p class="name">Anonymous Client</p>
-
+                        <div class="contact-form">
+                            <form id="contact-form" action="{{ route('contact.store') }}" method="post">
+                                @csrf
+                                <input type="text" name="name" placeholder="Your Name">
+                                <input type="email" name="email" placeholder="Your Email">
+                                <textarea name="userMessage" placeholder="Your Message"></textarea>
+                                <div class="d-flex justify-content-center g-recaptcha"
+                                    data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
+                                <button type="submit">Send Message</button>
+                            </form>
+                            <div class="contact-icons">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                    <p>+254 759 092 412</p>
+                                </div>
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Zuidier Complex, <br>Mbagathi Hospital Road<br>Off Mbagathi Way</p>
                                 </div>
                                 <div class="contact-icon">
                                     <i class="fas fa-envelope"></i>
@@ -382,7 +350,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -438,7 +405,6 @@
                                             comprehensive and reliable financial advice.</p>
                                     </div>
                                     <div class="quote"><img src="home_res/img/left-quote.svg" alt=""></div>
-
                                 </div>
                             </div>
                             <div class="controllers">

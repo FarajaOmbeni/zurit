@@ -821,6 +821,10 @@ footer .copyright p a:hover {
 .contact-us .contact-form form textarea::placeholder {
     color: #f2ae30;
 }
+
+.map_image{
+    width: 100%;
+}
 /*end contact us section*/
 
 /*Partners*/
