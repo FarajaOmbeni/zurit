@@ -533,6 +533,15 @@ footer .copyright p a:hover {
     color: white !important;
 }
 
+.download_button{
+    background-color: #0c2533;
+    color: white;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+
 .tools-link:hover {
     color: #9c27b0 !important;
 }

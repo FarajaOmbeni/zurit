@@ -10,8 +10,9 @@ self.addEventListener("install", function (event) {
 });
 
 const filesToCache = [
-    '/',
-    '/offline.html'
+    "/",
+    "/offline.html",
+    "https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap",
 ];
 
 const checkResponse = function (request) {
