@@ -10,12 +10,12 @@ use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:book-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:book-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:book-delete', ['only' => ['destroy']]);
-    }
+    // function __construct()
+    // {
+    //     $this->middleware('permission:book-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:book-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+    // }
 
     public function edit($id)
     {
@@ -26,7 +26,7 @@ class BookController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $this->authorize('create', Book::class);
+        // $this->authorize('create', Book::class);
 
         $request->validate([
             'book_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -52,7 +52,10 @@ class BookController extends Controller
             'previous_price' => $request->input('previous_price'),
         ]);
 
-        return redirect()->route('books_admindash')->with('success', 'Book added successfully.');
+        return redirect()->route('books_admindash')->with('success', [
+            'message' => 'Book Added Successfully!',
+            'duration' => 3000,
+        ]);
     }
 
     public function update(Request $request, Book $book): RedirectResponse
@@ -81,7 +84,10 @@ class BookController extends Controller
         'previous_price' => $request->input('previous_price'),
     ]);
 
-    return redirect()->route('books')->with('success', 'Book updated successfully');
+    return redirect()->route('books_admindash')->with('success', [
+        'message' => 'Book Updated Successfully!',
+        'duration' => 3000,
+    ]);
 }
     public function getBookDetails($id){
     $book = Book::find($id);
@@ -94,5 +100,16 @@ class BookController extends Controller
         $books = Book::all();
 
         return view('books', compact('books'));
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $blog = Book::findOrFail($id);
+            $blog->delete();
+            return redirect()->route('books_admindash')->with('success', 'Book deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('books_admindash')->with('error', 'Failed to delete blog.');
+        }
     }
 }

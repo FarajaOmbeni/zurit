@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="admin_res/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <!-- PWA  -->
         <meta name="theme-color" content="#fff" />
@@ -25,13 +26,13 @@
                 <h2 class="mb-4">Blogs Management</h2>
                 @if (session('success'))
                     <div class="alert alert-success" id="success-alert">
-                        {{ session('success')['message'] }}
+                        {{ session('success') }}
                     </div>
 
                     <script>
                         setTimeout(function() {
                             $('#success-alert').fadeOut('fast');
-                        }, {{ session('success')['duration'] }});
+                        }, 3000);
                     </script>
                 @endif
                 <!-- Cards -->
@@ -39,7 +40,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <button id="addBookButton" class="btn btn-primary">
-                                <i class="fas fa-user-plus"></i> Add Blog
+                                <i class="fas fa-plus"></i> Add Blog
                             </button>
                         </div>
                     </div>
@@ -93,7 +94,7 @@
                                                         class="btn btn-warning btn-sm editEventButton">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <form action="#" method="POST" style="display: inline-block;">
+                                                    <form action="{{ route('blogdelete', ['id' => $blog->id]) }}" method="POST" style="display: inline-block;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>

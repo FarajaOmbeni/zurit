@@ -32,7 +32,7 @@
     <body>
         <div class="email-container">
             <div class="logo">
-                <img src="zuritconsulting.com/home/res/img/logo-white2.webp" alt="Logo">
+                <img src="https://zuritconsulting.com/home/res/img/logo-white2.webp" alt="Logo">
             </div>
             <p><strong>Name:</strong> {{ $name }}</p>
             <p><strong>Email:</strong> {{ $email }}</p>

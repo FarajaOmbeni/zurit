@@ -152,18 +152,28 @@
                 @php
                     $debts = \App\Models\Debt::where('user_id', Auth::id())->orderBy('end_period')->get();
                     $nextDebt = $debts->first();
-                    $endPeriod = \Carbon\Carbon::parse($debts->last()->end_period);
-                    $now = \Carbon\Carbon::now();
-                    $totalYears = $now->diffInYears($endPeriod);
-                    $totalMonths = $now->copy()->addYears($totalYears)->diffInMonths($endPeriod);
+
+                    if ($debts->last()) {
+                        $endPeriod = \Carbon\Carbon::parse($debts->last()->end_period);
+                        $now = \Carbon\Carbon::now();
+                        $totalYears = $now->diffInYears($endPeriod);
+                        $totalMonths = $now->copy()->addYears($totalYears)->diffInMonths($endPeriod);
+                    } else {
+                        $endPeriod = null;
+                        $totalYears = 0;
+                        $totalMonths = 0;
+                    }
                 @endphp
 
                 <!-- Pay Off Card -->
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h5 class="card-title">Next Debt to be Cleared: <strong>{{ $nextDebt->debt_name }}</strong>
-                        </h5>
-                        <p>{{ \Carbon\Carbon::parse($nextDebt->end_period)->diffForHumans() }}</p>
+                        @if ($nextDebt)
+                            <h5 class="card-title">Next Debt to be Cleared: <strong>{{ $nextDebt->debt_name }}</strong></h5>
+                            <p>{{ \Carbon\Carbon::parse($nextDebt->end_period)->diffForHumans() }}</p>
+                        @else
+                            <h5 class="card-title">No debts to be cleared.</h5>
+                        @endif
                         <h5 class="card-title">All Debts to be Cleared</h5>
                         <p>In {{ $totalYears }} years {{ $totalMonths }} months</p>
                     </div>

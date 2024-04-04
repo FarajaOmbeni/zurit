@@ -50,6 +50,20 @@ body::before {
     opacity: 0.5;
 }
 
+html::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #ececec;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: transparent;
+  background-color: #f2ae30;
+  border-radius: 5rem;
+}
+
 .container.mainmargin {
     display: flex;
     justify-content: center;

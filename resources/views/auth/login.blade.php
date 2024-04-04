@@ -7,13 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
         <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="register_res/vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="register_res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="register_res/vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="register_res/vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="register_res/vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="register_res/css/util.css">
-        <link rel="stylesheet" type="text/css" href="register_res/css/main.css">
+        <link rel="stylesheet" type="text/css" href="login_res/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="login_res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="login_res/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="login_res/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="login_res/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="login_res/css/util.css">
+        <link rel="stylesheet" type="text/css" href="login_res/css/main.css">
         <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
         <!-- PWA  -->
         <meta name="theme-color" content="#fff" />
@@ -27,7 +27,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
-                    <a href="{{ url('/') }}"><img src="register_res/images/logo-white2.png" alt="IMG"></a>
+                    <a href="{{ url('/') }}"><img src="login_res/images/logo-white2.png" alt="IMG"></a>
                 </div>
 
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
@@ -38,45 +38,31 @@
 
                     @if ($errors->any())
                         <div class="alert alert-danger" id="error-alert">
-                            {{ $errors->first('message') }}
+                            {{ $errors->first() }}
                         </div>
 
                         <script>
                             setTimeout(function() {
                                 $('#error-alert').fadeOut('fast');
-                            }, {{ $errors->first('duration') }});
+                            }, 3000);  // Set the duration to 3 seconds
                         </script>
                     @endif
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <label for="email" class="label-input100">Email Address</label>
-                        <input id="email" type="text" class="input100" name="email" value="{{ old('email') }}"
-                            required autocomplete="email" autofocus>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <label for="password" class="label-input100">Password</label>
-                        <input id="password" type="password" class="input100" name="password" required
-                            autocomplete="current-password">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
 
                     <div class="wrap-input100">
                         <div class="form-check">
@@ -139,16 +125,16 @@
     </script>
     {{-- END OF PWA --}}
 
-    <script src="register_res/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="register_res/vendor/bootstrap/js/popper.js"></script>
-    <script src="register_res/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="register_res/vendor/select2/select2.min.js"></script>
-    <script src="register_res/vendor/tilt/tilt.jquery.min.js"></script>
+    <script src="login_res/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="login_res/vendor/bootstrap/js/popper.js"></script>
+    <script src="login_res/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="login_res/vendor/select2/select2.min.js"></script>
+    <script src="login_res/vendor/tilt/tilt.jquery.min.js"></script>
     <script>
         $('.js-tilt').tilt({
             scale: 1.1
         })
     </script>
-    <script src="register_res/js/main.js"></script>
+    <script src="login_res/js/main.js"></script>
 
 </html>

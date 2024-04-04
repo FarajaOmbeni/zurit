@@ -20,35 +20,37 @@ class BlogController extends Controller
         return view('blogs');
     }
     public function store(Request $request)
-    {
-        $request->validate([
-            'blog_tag' => 'required',
-            'blog_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'blog_title' => 'required',
-            'blog_message' => 'required',
-        ]);
+{
+    $request->validate([
+        'blog_tag' => 'required',
+        'blog_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'blog_title' => 'required',
+        'blog_message' => 'required',
+    ]);
 
-        $imageName = ''; // Initialize image name variable
+    $imageName = ''; // Initialize image name variable
 
-        // Handle file upload
-        if ($request->hasFile('blog_image')) {
-            $image = $request->file('blog_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('blogs_res/img'), $imageName);
-        }
-
-        // Create blog with file path
-        Blog::create([
-            'blog_tag' =>$request->input('blog_tag'),
-            'blog_image' => $imageName,
-            'blog_title' => $request->input('blog_title'),
-            'blog_message' => $request->input('blog_message'),
-        ]);
-        return redirect()->route('blogs_admindash')->with('success', [
-            'message' => 'Blog Created Successfully!',
-            'duration' => 3000,
-        ]);
+    // Handle file upload
+    if ($request->hasFile('blog_image')) {
+        $image = $request->file('blog_image');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('blogs_res/img'), time() . '_' . $imageName);
     }
+
+    // Create blog with file path
+    Blog::create([
+        'blog_tag' =>$request->input('blog_tag'),
+        'blog_image' => $imageName,
+        'blog_title' => $request->input('blog_title'),
+        'blog_message' => $request->input('blog_message'),
+        'slug' => Str::slug($request->input('blog_title'), '-'),
+    ]);
+
+    return redirect()->route('blogs_admindash')->with('success', [
+        'message' => 'Blog Created Successfully!',
+        'duration' => 3000,
+    ]);
+}
     public function show($id)
     {
         return view('blogs');
@@ -95,17 +97,17 @@ class BlogController extends Controller
     
     public function destroy($id)
     {
-        $blog = Blog::find($id);
-        $blog->delete();
-        return redirect()->route('blogs_admindash')->with('success', 'Blog deleted successfully.');
+        try {
+            $blog = Blog::findOrFail($id);
+            $blog->delete();
+            return redirect()->route('blogs_admindash')->with('success', 'Blog deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('blogs_admindash')->with('error', 'Failed to delete blog.');
+        }
     }
-    public function showUserHome()
-    {
-        $blogs = Blog::orderBy('created_at', 'desc')->take(7)->get();
-        return view('userhome', ['blogs' => $blogs]);
-    }
-    public function view($id, $title){
-    $blog = Blog::findOrFail($id);
+   
+    public function view($slug){
+    $blog = Blog::where('slug', $slug)->firstOrFail();
     return view('blog_view', compact('blog'));
 }
 

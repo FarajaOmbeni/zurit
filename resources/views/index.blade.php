@@ -152,6 +152,17 @@
             </div>
         </div>
     </nav>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <header class="header-background">
         <div class="img-circle"><img src="home_res/img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="home_res/img/dots.svg" alt=""></div>

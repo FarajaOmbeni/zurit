@@ -303,6 +303,10 @@ iframe {
   padding-left: 28px;
 }
 
+.error-message {
+  color: red;
+  display: block;
+}
 /* Radio buttons */
 .gender-selection {
   display: flex;

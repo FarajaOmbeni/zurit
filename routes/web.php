@@ -120,9 +120,6 @@ Route::get('terms_and_conditions', function () {
     return view('terms_and_conditions');
 })->name('termsandconditions');
 
-
-Route::get('userhome', [BlogController::class, 'showUserHome']);
-Route::get('home', [BlogController::class, 'showUserHome']);
 Route::get('user_budgetplanner', [BlogController::class, 'showuser_budgetplanner']);
 Route::get('user_networthcalc', [BlogController::class, 'showuser_networthcalc']);
 Route::get('user_investmentplanner', [BlogController::class, 'showuser_investmentplanner']);
@@ -139,7 +136,7 @@ Route::put('/editbook/{id}',[BookController::class,'update'])->name('bookedit.up
 Route::delete('bookdelete/{id}',[BookController::class,'destroy'])->name('bookdelete'); 
 
 Route::get('blogs', [BlogController::class, 'index'])->name('bloglist');
-Route::get('blogdetails/{id}',[BlogController::class,'show'])->name('blogdetails');
+Route::get('blogdetails/{slug}',[BlogController::class,'view'])->name('blogdetails');
 Route::get('blogadd',[BlogController::class,'create'])->name('blogadd');
 Route::post('blogadd',[BlogController::class,'store'])->name('blogadd.store'); 
 Route::get('/editblog/{id}',[BlogController::class,'edit']);

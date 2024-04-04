@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="admin_res/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <!-- Add Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- PWA  -->
@@ -25,13 +26,28 @@
         <div class="col-lg-8 offset-lg-2">
             <div id="content" class="p-md-5 pt-5">
                 <h2 class="mb-4">Book Management</h2>
+                @if (session('success'))
+                    <div class="alert alert-success" id="success-alert">
+                        @if (is_array(session('success')))
+                            {{ implode(', ', session('success')) }}
+                        @else
+                            {{ session('success') }}
+                        @endif
+                    </div>
+                
+                    <script>
+                        setTimeout(function() {
+                            $('#success-alert').fadeOut('fast');
+                        }, 3000);
+                    </script>
+                @endif
                 <!-- Cards -->
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card">
                             <!-- Card content -->
                             <button id="addBookButton" class="btn btn-primary">
-                                <i class="fas fa-user-plus"></i> Add Book
+                                <i class="fas fa-plus"></i> Add Book
                             </button>
                         </div>
                     </div>
@@ -87,7 +103,7 @@
                                                         class="btn btn-warning btn-sm editEventButton">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <form action="#" method="POST" style="display: inline-block;">
+                                                    <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST" style="display: inline-block;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>

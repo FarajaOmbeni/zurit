@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         <!-- <link rel="stylesheet" href="home_res/css/style.css"> -->
         <link rel="stylesheet" href="{{ asset('blogs_res/css/style.css') }}?v={{ time() }}">
-        <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+        <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
 
         <!-- PWA  -->
         <meta name="theme-color" content="#fff" />
@@ -48,16 +48,14 @@
                                     <div class="social_icon_main">
                                         <div class="social_icon">
                                             <ul>
-                                                <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
-                                                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-                                                <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-                                                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/company/zuritconsultingke"><i class="bi bi-linkedin"></i></a></li>
+                                                <li><a href="https://www.facebook.com/ZuritConsultingKE/"><i class="bi bi-facebook"></i></a></li>
+                                                <li><a href="https://twitter.com/ZuritConsulting"><i class="bi bi-twitter"></i></a></li>
+                                                <li><a href="https://www.instagram.com/zuritconsultingke/"><i class="bi bi-instagram"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="read_bt">
-                                            <a
-                                                href="{{ route('blog.view', ['id' => $blog->id, 'title' => \Illuminate\Support\Str::slug($blog->blog_title)]) }}">Read
-                                                More</a>
+                                        <a href="{{ route('blogdetails', ['slug' => $blog->slug]) }}">Read More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -80,11 +78,11 @@
                         @foreach ($recentBlogs as $recentBlog)
                             <div class="blog-post">
                                 <a
-                                    href="{{ route('blog.view', ['id' => $recentBlog->id, 'title' => \Illuminate\Support\Str::slug($recentBlog->blog_title)]) }}"><img
+                                    href="{{ route('blogdetails', ['slug' => $recentBlog->slug, 'title' => \Illuminate\Support\Str::slug($recentBlog->blog_title)]) }}"><img
                                         src="{{ asset('blogs_res/img/' . $recentBlog->blog_image) }}"
                                         class="recent-blog-image" alt="Blog Image"></a>
                                 <div>
-                                    <a href="{{ route('blog.view', ['id' => $recentBlog->id, 'title' => \Illuminate\Support\Str::slug($recentBlog->blog_title)]) }}"
+                                    <a href="{{ route('blogdetails', ['slug' => $recentBlog->slug, 'title' => \Illuminate\Support\Str::slug($recentBlog->blog_title)]) }}"
                                         class="recent-blog-title">{{ $recentBlog->blog_title }}</a>
                                     <p class="lorem_text">
                                         {{ \Illuminate\Support\Str::limit(strip_tags(html_entity_decode($recentBlog->blog_message)), 100, $end = '...') }}

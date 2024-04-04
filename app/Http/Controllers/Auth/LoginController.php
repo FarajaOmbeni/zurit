@@ -73,7 +73,7 @@ class LoginController extends Controller
             }
     }else{
         return redirect('/login')->withErrors([
-            'message'=>'Invalid Credetials!',
+            'message'=>'Wrong username Or password!',
             'duration'=>3000,
         ]);
     }

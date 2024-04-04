@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -48,14 +49,33 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'min:10', 'max:10'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+{
+    $messages = [
+        'password.confirmed' => 'The passwords do not match.',
+        'email.unique' => 'A user with this email already exists.',
+    ];
+
+    $passwordValidator = Validator::make($data, [
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ], $messages);
+
+    if ($passwordValidator->fails()) {
+        throw new \Illuminate\Validation\ValidationException($passwordValidator);
     }
+
+    $validator = Validator::make($data, [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'phone' => ['required', 'string', 'min:10', 'max:10'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ], $messages);
+
+    if ($validator->fails()) {
+        throw new \Illuminate\Validation\ValidationException($validator);
+    }
+
+    return $validator;
+}
 
     /**
      * Create a new user instance after a valid registration.
@@ -70,6 +90,14 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        return redirect('/user_budgetplanner')->with('success', [
+            'message' => 'Registration successful.',
+            'duration' => 3000,
         ]);
     }
 }
