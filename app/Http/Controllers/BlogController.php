@@ -8,6 +8,8 @@ use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
+
 
 class BlogController extends Controller
 {
@@ -42,8 +44,8 @@ class BlogController extends Controller
         'blog_tag' =>$request->input('blog_tag'),
         'blog_image' => $imageName,
         'blog_title' => $request->input('blog_title'),
+        'slug' =>$request->input('blog_title'),
         'blog_message' => $request->input('blog_message'),
-        'slug' => Str::slug($request->input('blog_title'), '-'),
     ]);
 
     return redirect()->route('blogs_admindash')->with('success', [

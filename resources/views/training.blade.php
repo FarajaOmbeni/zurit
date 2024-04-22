@@ -583,15 +583,13 @@
                             setTimeout(function() {
                                 $('#success-message').css('display', 'none');
                             }, 2000);
-                            $('#enrollmentModal').modal('hide');
+                            $('#modal_enroll').modal('hide');
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.error(textStatus, errorThrown);
                         }
                     });
 
-                    // Close the enroll modal
-                    $('#modal_enroll').modal('hide');
                 });
             });
         </script>

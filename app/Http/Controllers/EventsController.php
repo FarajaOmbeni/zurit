@@ -114,7 +114,7 @@ class EventsController extends Controller
 
 
         //Send email
-        Mail::to('otaodavis.od@gmail.com')->send(new EventFeedbackMail(
+        Mail::to('info@zuritconsulting.com')->send(new EventFeedbackMail(
             $request->input('name'),
             $request->input('venue'),
             $request->input('comprehensiveness'),
@@ -141,6 +141,9 @@ class EventsController extends Controller
     {
         $event = Event::find($event);
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'Blog deleted successfully.');
+        return redirect()->route('events_admindash')->with('success', [
+            'message' => 'Event Deleted Successfully!',
+            'duration' => 3000,
+        ]);
     }
 }
