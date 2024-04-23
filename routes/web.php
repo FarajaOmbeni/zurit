@@ -19,11 +19,12 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\InsightsController;
 use App\Http\Controllers\NetworthController;
+use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
-use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\Auth\LoginController;
 
 
 /*
@@ -174,6 +175,10 @@ Route::delete('/delete-event/{event}', [EventsController::class, 'destroy'])->na
 Route::post('/give-feedback', [EventsController::class, 'eventFeedback']);
 Route::get('/editEvent/{id}', [EventsController::class, 'edit'])->name('editEvent');
 Route::post('editEvent/{id}', [EventsController::class, 'update'])->name('updateEvent');
+
+Route::get('/marketing_contacts_admindash', [MarketingController::class, 'index']);
+Route::post('/add_one_contact', [MarketingController::class, 'add_one_contact']);
+Route::post('/upload_contacts', [MarketingController::class, 'upload_contacts']);
 
 //Password reset Routes
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
