@@ -9,7 +9,9 @@ class MarketingController extends Controller
 {
     public function index()
     {
-        return view('upload_contacts');
+        $contacts = Marketing_Contact::paginate(10);
+
+        return view('upload_contacts', ['contacts' => $contacts]);
     }
 
     public function add_one_contact(Request $request)

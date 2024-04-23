@@ -38,9 +38,9 @@
 
             @if ($errors->any())
                 <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            {{ $error }}
-                        @endforeach
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
                 </div>
             @endif
 
@@ -71,17 +71,17 @@
                 <h3>Uploaded Contacts</h3>
                 <table>
                     <thead>
-                        <th>Email</th>
-                        <th>Name</th>
-                        <th>Phone Number</th>
+                        <th class="border">Email</th>
+                        <th class="border">Name</th>
+                        <th class="border">Phone Number</th>
                     </thead>
-                    <tbody>
+                    @foreach ($contacts as $contact)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="border">{{ $contact->email }}</td>
+                            <td class="border">{{ $contact->name }}</td>
+                            <td class="border">{{ $contact->phone }}</td>
                         </tr>
-                    </tbody>
+                    @endforeach
                 </table>
             </div>
 
