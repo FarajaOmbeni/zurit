@@ -40,6 +40,9 @@
                     aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+                        @if(Auth::check())
+                            <span>{{ Auth::user()->name }}</span>
+                        @endif
                         <button type="button" class="close-canvas" data-bs-dismiss="offcanvas"
                             aria-label="Close">X</button>
                     </div>
@@ -82,7 +85,12 @@
                         </div>
                         <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
                         <div class="offcanvas-link"><a href="{{ url('contactus') }}">Contact Us</a></div>
-                        <div class="offcanvas-link"><a href="{{ url('login') }}">Log In</a></div>
+                        @if (Auth::check())
+                            <div class="offcanvas-link"><a href="/user_budgetplanner">Go to Dashboard</a></div>
+                            <div class="offcanvas-link"><a href="/logout">Logout</a></div>
+                        @else
+                            <div class="offcanvas-link"><a href="{{ url('login') }}">Log In</a></div>
+                        @endif
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarNav">
