@@ -25,6 +25,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
+use App\Http\Controllers\GoalController;
 
 
 /*
@@ -62,10 +63,10 @@ Route::get('investmentplanner', function () {
     return view('investmentplanner');
 });
 
-Route::get('contactus', function () {
+Route::get('feedback', function () {
     $events = Event::all();
     $pastevents = PastEvent::all();
-    return view('contactus', ['events' => $events, 'pastevents' => $pastevents]);
+    return view('feedback', ['events' => $events, 'pastevents' => $pastevents]);
 });
 
 Route::get('login', function () {
@@ -121,9 +122,6 @@ Route::get('terms_and_conditions', function () {
     return view('terms_and_conditions');
 })->name('termsandconditions');
 
-Route::get('user_budgetplanner', [BlogController::class, 'showuser_budgetplanner']);
-Route::get('user_networthcalc', [BlogController::class, 'showuser_networthcalc']);
-Route::get('user_investmentplanner', [BlogController::class, 'showuser_investmentplanner']);
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
 
@@ -143,6 +141,14 @@ Route::post('blogadd',[BlogController::class,'store'])->name('blogadd.store');
 Route::get('/editblog/{id}',[BlogController::class,'edit']);
 Route::put('/editblog/{id}',[BlogController::class,'update'])->name('blogedit.update');
 Route::delete('blogdelete/{id}',[BlogController::class,'destroy'])->name('blogdelete');
+
+//Goal Setting Routes
+Route::get('init', function () {
+    return view('init');
+});
+Route::post('/goal/store', [GoalController::class, 'storeGoal'])->name('storeGoal');
+Route::get('user_goalsetting', [GoalController::class, 'showGoalData'])->name('showGoalData');
+Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount']);
 
 //Budget Planner Routes
 Route::post('/storeIncome', [BudgetController::class, 'storeIncome'])->name('storeIncome');

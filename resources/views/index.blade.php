@@ -83,7 +83,7 @@
                         </ul>
                     </div>
                     <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
-                    <div class="offcanvas-link"><a href="{{ url('contactus') }}">Contact Us</a></div>
+                    <div class="offcanvas-link"><a href="{{ url('feedback') }}">Feedback</a></div>
                     @if (Auth::check())
                         <div class="offcanvas-link"><a href="/user_budgetplanner">Go to Dashboard</a></div>
                         <div class="offcanvas-link"><a href="/logout">Logout</a></div>
@@ -136,8 +136,8 @@
                     <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>
                     </li>
-                    <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
+                    <li class="nav-item {{ Request::is('feedback') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('feedback') }}">Feedback</a>
                     </li>
                     @if (Auth::check())
                         <li
@@ -252,7 +252,7 @@
                                 <div class="accordion-content">
                                     <h4><b>{{ $pastevent->name }}</b></h4>
                                     <h5>{{ $pastevent->date }}</h5>
-                                    <a class="registration-link" href="/contactus" target="_blank">Leave a
+                                    <a class="registration-link" href="/feedback" target="_blank">Leave a
                                         review!</a>
                                 </div>
                             </div>

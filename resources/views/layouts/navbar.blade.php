@@ -84,7 +84,7 @@
                             </ul>
                         </div>
                         <div class="offcanvas-link"><a href="{{ url('about') }}">About Us</a></div>
-                        <div class="offcanvas-link"><a href="{{ url('contactus') }}">Contact Us</a></div>
+                        <div class="offcanvas-link"><a href="{{ url('feedback') }}">Feedback</a></div>
                         @if (Auth::check())
                             <div class="offcanvas-link"><a href="/user_budgetplanner">Go to Dashboard</a></div>
                             <div class="offcanvas-link"><a href="/logout">Logout</a></div>
@@ -138,8 +138,8 @@
                     <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>
                     </li>
-                    <li class="nav-item {{ Request::is('contactus') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('contactus') }}">Contact Us</a>
+                    <li class="nav-item {{ Request::is('feedback') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('feedback') }}">Feedback</a>
                     </li>
                     @if (Auth::check())
                         <li

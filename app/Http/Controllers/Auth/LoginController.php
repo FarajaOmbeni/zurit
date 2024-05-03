@@ -59,7 +59,7 @@ class LoginController extends Controller
 
             switch($user_role){
                 case 0:
-                    return redirect('/');
+                    return redirect('user_budgetplanner');
                     break;
                 case 1:
                     return redirect('/editor');

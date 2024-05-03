@@ -20,10 +20,10 @@
                 <div class="p-4">
                     <a href="/"><img class="logo" src="admin_res/images/logo-white3.png" alt=""></a><span><br>User Dashboard</span>
                     <ul class="list-unstyled components mb-5 flex-container">
-                        <!--<li class="{{ Request::is('userhome') ? 'active' : '' }}">
-
-                            <a href="{{ url('/userhome') }}"><span class="bi bi-house-door-fill icon-class"></span>Home</a>
-                        </li>-->
+                            <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
+                                <a href="{{ url('user_goalsetting') }}"><span class="bi bi-target icon-class"></span>
+                                    Goal Setting</a>
+                            </li>
                             <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
                                 <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span>
                                     Budget Planner</a>

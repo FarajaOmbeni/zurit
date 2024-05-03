@@ -332,3 +332,116 @@ div[role="progressbar"] {
   right: 0;
   top: 0;
 }
+
+/* goal setting styles */
+.goal_container{
+  text-align: center;
+}
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient( to right, #3300cc, #6600cc, #ff9900 );
+  color: white;
+  text-decoration: none;
+  transition: background 1s ease, color 1s ease;
+}
+
+.button:hover {
+  background: #0c2533;
+  color: #f2ae30;
+}
+
+.break {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border: 1px solid #9e9c99;
+}
+
+.period_card{
+  width: 20rem;
+  height: 12rem;
+}
+
+.category_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category_btn {
+  padding: 15px 25px;
+  border: none;
+  background-color: white;
+  font-size: 20px;
+  color: #a882ef;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) inset; 
+}
+
+.category_btn:hover {
+  transform: translateY(-2px); 
+}
+
+.category_btn.active {
+  background-color: white;
+  color: #F2AE30;
+  box-shadow: 0 0 10px rgba(168, 130, 239, 0.8); /* Adjusted box shadow */
+  transform: translateY(-2px);
+}
+
+.category_btn_container .category_btn:first-child {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px; 
+}
+
+.category_btn_container .category_btn:last-child {
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px; 
+}
+
+#customForm .form-control,
+#customForm .form-group input,
+#customForm .form-group select,
+#customForm .form-group textarea {
+    color: black !important;
+    border: 1px solid #a882ef;
+    border-radius: 15px;
+    background-color: #b2afaf;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select-wrapper i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+#customForm .form-control::placeholder,
+#customForm .form-group input::placeholder,
+#customForm .form-group select::placeholder,
+#customForm .form-group textarea::placeholder {
+    color: #a882ef !important;
+}
+
+#addAmount{
+  padding: 20px;
+  border-radius: 20px;
+  border-color: #a882ef;
+  color: #0c2533;
+}

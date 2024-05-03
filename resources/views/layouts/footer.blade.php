@@ -18,10 +18,10 @@
             </div>
             <div class="footer-item col-md-3">
                 <p class="footer-item-title">Links</p>
-                <a href="">About Us</a>
-                <a href="">Home</a>
-                <a href="">Training</a>
-                <a href="">Contact Us</a>
+                <a href="{{ url('about') }}">About Us</a>
+                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ url('training') }}">Training</a>
+                <a href="/#contact-us">Contact Us</a>
             </div>
             <div class="footer-item col-md-3">
                 <p class="footer-item-title">Get In Touch</p>
