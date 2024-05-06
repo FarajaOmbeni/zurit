@@ -64,7 +64,7 @@
                             <button type="submit" class="button mt-2">Submit</button>
                         </form>
                     </div>
-                    @if (session('success'))
+                    @if (session('success') && array_key_exists('goal_id', session('success')))
                         @foreach ($goals as $goal)
                             @if (session('success')['goal_id'] == $goal->id)
                                 <div class="alert alert-success mt-3 success-alert">
@@ -216,7 +216,7 @@
             successAlerts.forEach((alert, index) => {
                 setTimeout(function () {
                     alert.style.display = 'none';
-                }, {{ session('success')['duration'] }});
+                }, {{ session('success') ? session('success')['duration'] : '2000' }});
             });
             $('#plusIcon').click(function(e){
                 e.preventDefault();

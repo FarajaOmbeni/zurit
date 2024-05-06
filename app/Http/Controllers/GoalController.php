@@ -12,13 +12,14 @@ class GoalController extends Controller
 {
     public function showGoalData(){
         $goals = Goal::where('user_id', auth()->id())->get();
+        $projected_attainment_date = $this->calculateProjectedDates($goals);
     
-        if ($goals->isEmpty()) {
-            return view('user_goalsetting', ['noDataMessage' => 'No goals set yet. Start setting your goals today😎!']);
-        }else{
+        // if ($goals->isEmpty()) {
+        //     return view('user_goalsetting', ['noDataMessage' => 'No goals set yet. Start setting your goals today😎!']);
+        // }else{
 
             return view('user_goalsetting', ['goals' => $goals,]);
-        }
+        
     
     }
     
