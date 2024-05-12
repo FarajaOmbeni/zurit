@@ -93,11 +93,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function registered(Request $request, $user)
-    {
-        return redirect('/user_budgetplanner')->with('success', [
-            'message' => 'Registration successful.',
-            'duration' => 3000,
-        ]);
-    }
+protected function registered(Request $request, $user)
+{
+    Mail::to($user->email)->send(new VerificationEmail($user));
+
+    return redirect($this->redirectPath())->with('status', 'Verification link sent to your email.');
+}
 }

@@ -4,6 +4,8 @@ use App\Models\Event;
 use App\Models\PastEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DebtController;
@@ -122,20 +124,25 @@ Route::get('terms_and_conditions', function () {
     return view('terms_and_conditions');
 })->name('termsandconditions');
 
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
+Route::get('blogs', [BlogController::class, 'index'])->name('bloglist');
+Route::get('blogdetails/{slug}',[BlogController::class,'view'])->name('blogdetails');
 
 Route::get('books', [BookController::class, 'index']);
 Route::get('bookdetails/{id}',[BookController::class,'show'])->name('bookdetails');
 Route::get('booklist',[BookController::class,'index'])->name('booklist');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('users/{user}', [UserController::class, 'edit'])->name('user.edit');
+
 Route::get('bookadd',[BookController::class,'create'])->name('bookadd');
 Route::post('bookadd',[BookController::class,'store'])->name('bookadd.store'); 
 Route::get('/editbook/{id}',[BookController::class,'edit']);
 Route::put('/editbook/{id}',[BookController::class,'update'])->name('bookedit.update');
 Route::delete('bookdelete/{id}',[BookController::class,'destroy'])->name('bookdelete'); 
 
-Route::get('blogs', [BlogController::class, 'index'])->name('bloglist');
-Route::get('blogdetails/{slug}',[BlogController::class,'view'])->name('blogdetails');
+
 Route::get('blogadd',[BlogController::class,'create'])->name('blogadd');
 Route::post('blogadd',[BlogController::class,'store'])->name('blogadd.store'); 
 Route::get('/editblog/{id}',[BlogController::class,'edit']);
@@ -197,13 +204,6 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/contacts_admindash', [ContactController::class, 'showAdminDashboard'])->name('contacts_admindash');
 
-//Booking routes
-Route::post('/training/book', [TrainingBookingController::class, 'store'])->name('training.booking.store');
-Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
-Route::get('/training', function () {
-    return view('training');
-})->name('training');
-
 //subscription Routes
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/subscription_admindash', [SubscriptionController::class, 'index'])->name('subscriptions.index');
@@ -233,6 +233,8 @@ Route::post('debt_store', [DebtController::class, 'store'])->name('debt_store');
 Route::get('user_debtcalc', [DebtController::class, 'showDebtFreeCountdown']);
 Route::post('extraPayment_store',[DebtController::class, 'storeExtraPayment'])->name('extraPayment_store');
 
+});
+
 //Imge optimization
 Route::get('optimize-images', [ImageController::class, 'optimizeImagesInDirectory'])->name('optimizeImages');
 
@@ -246,4 +248,28 @@ Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll');
 //google auth sign in
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'GoogleCallback']);
+
+//email verification
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/user_budgetplanner');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
 

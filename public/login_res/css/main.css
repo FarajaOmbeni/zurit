@@ -461,3 +461,23 @@ iframe {
     opacity: 1;
   }
 }
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(
+      to right,
+      #3300cc,
+      #6600cc,
+      #ff9900
+  );
+  color: white;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #0c2533;
+  color: #f2ae30;
+}
