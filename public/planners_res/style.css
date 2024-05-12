@@ -403,14 +403,13 @@ div[role="progressbar"] {
   border-bottom-right-radius: 40px; 
 }
 
-#customForm .form-control,
-#customForm .form-group input,
-#customForm .form-group select,
-#customForm .form-group textarea {
+.form-control,
+.form-group input,
+.form-group select,
+.form-group textarea {
     color: black !important;
     border: 1px solid #a882ef;
     border-radius: 15px;
-    background-color: #b2afaf;
 }
 
 .select-wrapper {

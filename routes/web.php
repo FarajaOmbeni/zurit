@@ -163,6 +163,9 @@ Route::post('/storeExpense', [BudgetController::class, 'storeExpense'])->name('s
 Route::get('user_budgetplanner', [BudgetController::class, 'showBudgetData']);
 Route::get('budget', [BudgetController::class, 'showBudgetData']);
 Route::get('netIncome', [BudgetController::class, 'showNetIncome']);
+Route::get('user_debtcalc', [BudgetController::class, 'pushtoDebtCalc']);
+Route::delete('/income/{income}', 'BudgetController@destroy')->name('income.destroy');
+Route::delete('/expense/{expense}', 'BudgetController@destroy')->name('expenses.destroy');
 
 //Investment Calculator Routes
 Route::post('storemonthlyInvestment', [InvestmentController::class, 'storemonthlyInvestment'])->name('storemonthlyInvestment');

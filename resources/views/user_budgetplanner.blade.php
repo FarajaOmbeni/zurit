@@ -15,7 +15,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <link rel="stylesheet" href="planner_res/css/style.css">
+        <link rel="stylesheet" href="planners_res/style.css">
         <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
         <!-- PWA  -->
         <meta name="theme-color" content="#fff" />
@@ -33,12 +33,12 @@
                 <div class="col-lg-8 col-md-10">
                     <div id="content" class="p-md-5 pt-5">
                         <div class="budget_content">
-                            <div class="container mt-5">
+                            <div class="container mt-2">
                                 <!-- Add new income and expense buttons -->
                                 <div class="mb-3">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    <button type="button" class="button" data-toggle="modal"
                                         data-target="#incomeModal">Add Income</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    <button type="button" class="button" data-toggle="modal"
                                         data-target="#expenseModal">Add Expense</button>
                                 </div>
                                 <!-- Income Modal -->
@@ -205,15 +205,24 @@
                                                 <tr>
                                                     @if ($income)
                                                         <td>{{ $income->income_type }}</td>
-                                                        <td>{{ $income->expected_income }}</td>
-                                                        <td>{{ $income->actual_income }}</td>
+                                                        <td>{{ number_format($income->expected_income) }}</td>
+                                                        <td>{{ number_format($income->actual_income) }}</td>
+                                                        <td>
+                                                            <form action="{{ route('income.destroy', $income) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
                                                     @else
                                                         <td colspan="3">No Income data for this entry</td>
                                                     @endif
                                                     @if ($expenses)
                                                         <td>{{ $expenses->expense_type }}</td>
-                                                        <td>{{ $expenses->expected_expense }}</td>
-                                                        <td>{{ $expenses->actual_expense }}</td>
+                                                        <td>{{ number_format($expenses->expected_expense) }}</td>
+                                                        <td>{{ number_format($expenses->actual_expense) }}</td>
                                                     @else
                                                         <td colspan="3">No expense data for this entry</td>
                                                     @endif
@@ -225,6 +234,24 @@
                                                         data.</td>
                                                 </tr>
                                             @endforelse
+
+                                            <tr>
+                                                <td>Total</td>
+                                                <td></td>
+                                                <td>{{ number_format($actualIncome) }}</td>
+                                                <td>Total</td>
+                                                <td></td>
+                                                <td>{{ number_format($actualExpenses) }}</td>
+                                                <td>
+                                                    <form action="{{ route('expenses.destroy', $expenses) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>                                         
                                         </tbody>
                                     </table>
                                 </div>

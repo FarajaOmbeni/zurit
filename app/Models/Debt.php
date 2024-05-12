@@ -21,4 +21,9 @@ class Debt extends Model
         'payment_strategy',
         'debt_priority'
     ];
+
+    const DEBT_TYPES = [
+        'income_overdraft' => 'Income Overdraft',
+        'loan' => 'Loan from Budget',
+    ];
 }

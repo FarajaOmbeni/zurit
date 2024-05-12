@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\BudgetPlanner;
 use App\Models\Income;
 use App\Models\Expense;
+use App\Models\Debt;
 use Auth;
 use Carbon\Carbon;
 
@@ -24,7 +25,7 @@ class BudgetController extends Controller
                 'expected_income' => $data['expected_income'],
                 'actual_income' => $data['actual_income'],
                 'user_id' => Auth::id(),
-                'year_month' => now()->format('Y-m'),
+                'year_month' => Carbon::now()->month,
             ];
 
             Income::create($validatedData);
@@ -50,10 +51,23 @@ public function storeExpense(Request $request)
                 'expected_expense' => $data['expected_expense'],
                 'actual_expense' => $data['actual_expense'],
                 'user_id' => auth()->id(),
-                'year_month' => now()->format('Y-m'),
+                'year_month' => Carbon::now()->format('Y-m'),
             ];
 
             Expense::create($validatedData);
+
+            // If the expense category is "Loans", add to debt manager
+            if ($category == 'Loans') {
+                $debtName = 'Loan from Budget';
+                $debt = Debt::create([
+                    'user_id' => auth()->id(),
+                    'debt' => $data['actual_expense'],
+                    'debt_name' => $debtName,
+                    'category' => $debtName, // Set category to be the same as debt_name
+                    'current_balance' => $data['actual_expense'],
+                ]);
+                $debtName = Debt::DEBT_TYPES['loan'];
+            }
         }
     }
 
@@ -82,6 +96,17 @@ public function showBudgetData(){
     $actualIncome = Income::where('user_id', auth()->id())->sum('actual_income');
     $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
     $netIncome = $actualIncome - $actualExpenses;
+    // If net income is negative, add to debt manager
+    if ($netIncome < 0) {
+        $income_debt= 'Income Overdraft';
+        Debt::create([
+            'user_id' => auth()->id(),
+            'debt' => abs($netIncome),
+            'debt_name' => $income_debt,
+            'category' => $income_debt,
+            'current_balance' => abs($netIncome),
+        ]);
+    }
 
     // Calculate monthly incomes and expenses
     $monthlyIncomes = Income::where('user_id', auth()->id())
@@ -118,5 +143,17 @@ public function showBudgetData(){
         'currentYear' => $currentYear
     ]);
 }
+
+
+public function destroy($id)
+{
+    $income = Income::find($id);
+    $income->delete();
+    $expense = Expense::find($id);
+    $expense->delete();
+
+    return redirect()->route('user_budgetplanner')->with('success', 'Income deleted successfully');
+}
+
 }
 
