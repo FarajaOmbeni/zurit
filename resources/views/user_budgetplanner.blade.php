@@ -195,63 +195,56 @@
                                                 <th>Income Type</th>
                                                 <th>Expected Income</th>
                                                 <th>Actual Income</th>
+                                                <th></th>
                                                 <th>Expense Type</th>
                                                 <th>Expected Expense</th>
                                                 <th>Actual Expense</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($income->zip($expenses) as [$income, $expenses])
-                                                <tr>
-                                                    @if ($income)
-                                                        <td>{{ $income->income_type }}</td>
-                                                        <td>{{ number_format($income->expected_income) }}</td>
-                                                        <td>{{ number_format($income->actual_income) }}</td>
-                                                        <td>
-                                                            <form action="{{ route('income.destroy', $income) }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                    @else
-                                                        <td colspan="3">No Income data for this entry</td>
-                                                    @endif
-                                                    @if ($expenses)
-                                                        <td>{{ $expenses->expense_type }}</td>
-                                                        <td>{{ number_format($expenses->expected_expense) }}</td>
-                                                        <td>{{ number_format($expenses->actual_expense) }}</td>
-                                                    @else
-                                                        <td colspan="3">No expense data for this entry</td>
-                                                    @endif
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="6">No data found. Please add your income and
-                                                        expense
-                                                        data.</td>
-                                                </tr>
-                                            @endforelse
+                                            
+@forelse($income->zip($expenses) as [$income, $expenses])
+    <tr>
+        @if ($income)
+            <td>{{ $income->income_type }}</td>
+            <td>{{ number_format($income->expected_income) }}</td>
+            <td>{{ number_format($income->actual_income) }}</td>
+            <td>
+                <form action="{{ route('income.destroy', $income) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        @else
+            <td colspan="4">No Income data for this entry</td>
+        @endif
+        @if ($expenses)
+            <td>{{ $expenses->expense_type }}</td>
+            <td>{{ number_format($expenses->expected_expense) }}</td>
+            <td>{{ number_format($expenses->actual_expense) }}</td>
+            <td>
+                <form action="{{ route('expenses.destroy', $expenses) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        @else
+            <td colspan="4">No expense data for this entry</td>
+        @endif
+    </tr>
+@empty
+    <tr>
+        <td colspan="8">No data found. Please add your income and expense data.</td>
+    </tr>
+@endforelse
 
-                                            <tr>
-                                                <td>Total</td>
-                                                <td></td>
-                                                <td>{{ number_format($actualIncome) }}</td>
-                                                <td>Total</td>
-                                                <td></td>
-                                                <td>{{ number_format($actualExpenses) }}</td>
-                                                <td>
-                                                    <form action="{{ route('expenses.destroy', $expenses) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>                                         
                                         </tbody>
                                     </table>
                                 </div>

@@ -304,6 +304,14 @@
                     document.getElementById('paymentDropdown').addEventListener('change', function() {
                         document.getElementById('paymentDisplay').textContent = '$' + Number(this.value).toFixed(2);
                     });
+                    
+                    window.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelector('#overlay').addEventListener('click', function(event) {
+        if (event.target == this) {
+            this.style.display = 'none';
+        }
+    });
+});
                 </script>
     </body>
 

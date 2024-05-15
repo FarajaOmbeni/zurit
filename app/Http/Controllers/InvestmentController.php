@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\InvestmentPlanner;
 use App\Models\WithholdingTax;
 use Illuminate\Support\Facades\Log;
+use App\Models\Asset;
 
 class InvestmentController extends Controller
 {
@@ -32,10 +33,11 @@ class InvestmentController extends Controller
         return redirect()->back()->with('success', 'Investment plan has been created successfully.');
     }
 
-    public function showinvestmentData()
+    public function showinvestmentData(Request $request)
     {
     $investments = InvestmentPlanner::where('user_id', auth()->id())->get();
     $withholdingTaxRates = WithholdingTax::all();
+    $defaultRate = $withholdingTaxRates->isEmpty() ? null : $withholdingTaxRates->first()->tax_rate;
 
     $monthlyInvestments = [];
 
@@ -80,6 +82,7 @@ class InvestmentController extends Controller
                 'withholding_tax' => $withholdingTax,
                 'net_interest' => $netInterest,
                 'cumulative_investment_value' => $cumulativeInvestmentValue,
+                'withholding_tax_id' => $investment->withholding_tax_id,
             ];
         
             $currentMonth++;
@@ -92,9 +95,38 @@ class InvestmentController extends Controller
         }
     }
 
+
+
+    // After the investment calculations
+
+// After the investment calculations
+foreach ($investments as $investment) {
+    // Get the selected withholding tax
+    $withholdingTax = WithholdingTax::find($investment->withholding_tax_id);
+
+    if ($withholdingTax) {
+        $withholdingTaxName = $withholdingTax->investment_type;
+    } else {
+        $withholdingTaxName = 'Investment';
+    }
+
+    // Get the last cumulative investment value
+    $lastCumulativeInvestmentValue = end($monthlyInvestments[$investment->id])['cumulative_investment_value'];
+
+    // Create a new asset
+    Asset::updateOrCreate(
+        ['user_id' => auth()->id(), 'asset_description' => $withholdingTaxName],
+        ['asset_value' => $lastCumulativeInvestmentValue]
+    );
+}
+
+
+
+
     return view('user_investmentplanner', [
         'monthlyInvestments' => $monthlyInvestments,
-        'withholdingTaxRates' => $withholdingTaxRates
+        'withholdingTaxRates' => $withholdingTaxRates,
+        'defaultRate' => $defaultRate
     ]);
 }
     

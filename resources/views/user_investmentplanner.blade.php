@@ -5,9 +5,8 @@
         <title>Investment Planner</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Link your CSS files -->
+        <link rel="stylesheet" href="planners_res/style.css">
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -38,10 +37,31 @@
 
                             <!-- Buttons for Monthly and Yearly Calculations -->
                             <div class="text-center mb-5">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                <button type="button" class="button" data-toggle="modal"
                                     data-target="#monthlyModal">Add Investment</button>
                                 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#yearlyModal">Yearly Calculations</button>-->
                             </div>
+                            <div class="type-row">
+    @foreach ($monthlyInvestments as $investmentId => $investmentData)
+        @foreach ($investmentData as $investment)
+            <div class="scrollable-card">
+                <div class="card mb-4 type_card">
+                    <div class="card-body">
+                        @php
+                            $withholdingTax = \App\Models\WithholdingTax::find($investment['withholding_tax_id']);
+                            if (!$withholdingTax) {
+                                throw new \Exception('Withholding tax not found for investment id: ' . $investmentId);
+                            }
+                            $investmentType = $withholdingTax->investment_type;
+                        @endphp
+                        <p class="card-title">{{ $investmentType }}</p>
+                        <a href="#" class="card-link text-danger float-right" data-investment-id="{{ $investmentId }}"><i class="bi bi-trash-fill"></i></a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endforeach
+</div>
                             <!-- Monthly Modal -->
                             <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog"
                                 aria-labelledby="monthlyModalLabel" aria-hidden="true">
@@ -59,10 +79,9 @@
                                                 @csrf
                                                 <div class="">
                                                     <label for="investmentType">Investment Type</label>
-                                                    <select name="investment[investment_type]" id="investmentType"
-                                                        class=" ">
+                                                    <select name="investment[investment_type]" id="investmentType" class=" ">
                                                         @foreach ($withholdingTaxRates as $rate)
-                                                            <option value="{{ $rate->id }}">
+                                                            <option value="{{ $rate->id }}" data-rate="{{ $rate->tax_rate }}">
                                                                 {{ $rate->investment_type }}
                                                             </option>
                                                         @endforeach
@@ -70,28 +89,22 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="initialInvestment">Initial Investment</label>
-                                                    <input type="number" name="investment[initialInvestment]"
-                                                        placeholder="Enter initial investment">
+                                                    <input type="number" name="investment[initialInvestment]" placeholder="Enter initial investment">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="monthlyAdditionalInvestment">Monthly Additional
-                                                        Investment</label>
-                                                    <input type="number" name="investment[AdditionalInvestment]"
-                                                        placeholder="Enter monthly additional investment">
+                                                    <label for="monthlyAdditionalInvestment">Monthly Additional Investment</label>
+                                                    <input type="number" name="investment[AdditionalInvestment]" placeholder="Enter monthly additional investment">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="numberOfMonths">Number of Months</label>
-                                                    <input type="number" name="investment[numberOfMonths]"
-                                                        placeholder="Enter number of months">
+                                                    <input type="number" name="investment[numberOfMonths]" placeholder="Enter number of months">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="projectedRateOfReturn">Projected Rate of Return</label>
-                                                    <input type="number" name="investment[projectedRateOfReturn]"
-                                                        placeholder="Enter projected rate of return">
+                                                    <input type="number" name="investment[projectedRateOfReturn]" id="projectedRateOfReturn" placeholder="Enter projected rate of return" step="0.01">
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                                 </div>
                                                 <input type="hidden" name="calc_duration" value="monthly">
@@ -122,12 +135,12 @@
                                                 @foreach ($monthlyData as $month => $investment)
                                                     <tr>
                                                         <td>{{ date('F', mktime(0, 0, 0, $month, 10)) }}</td>
-                                                        <td>{{ $investment['initial_investment'] }}</td>
-                                                        <td>{{ $investment['additional_deposits'] }}</td>
-                                                        <td>{{ $investment['gross_interest'] }}</td>
-                                                        <td>{{ $investment['withholding_tax'] }}</td>
-                                                        <td>{{ $investment['net_interest'] }}</td>
-                                                        <td>{{ $investment['cumulative_investment_value'] }}</td>
+                                                        <td>{{ number_format($investment['initial_investment']) }}</td>
+                                                        <td>{{ number_format($investment['additional_deposits']) }}</td>
+                                                        <td>{{ number_format($investment['gross_interest']) }}</td>
+                                                        <td>{{ number_format($investment['withholding_tax']) }}</td>
+                                                        <td>{{ number_format($investment['net_interest']) }}</td>
+                                                        <td>{{ number_format($investment['cumulative_investment_value']) }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endforeach
@@ -212,6 +225,11 @@
                     }]
                 });
             }
+            document.getElementById('investmentType').addEventListener('change', function() {
+                var selectedOption = this.options[this.selectedIndex];
+                var rate = selectedOption.getAttribute('data-rate');
+                document.getElementById('projectedRateOfReturn').value = rate;
+            });
         </script>
     </body>
 

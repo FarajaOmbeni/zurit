@@ -18,4 +18,9 @@ class InvestmentPlanner extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function withholdingTax(){
+        return $this->belongsTo(WithholdingTax::class);
+    }
+
 }

@@ -408,7 +408,7 @@ div[role="progressbar"] {
 .form-group select,
 .form-group textarea {
     color: black !important;
-    border: 1px solid #a882ef;
+    border: 2px solid #a882ef;
     border-radius: 15px;
 }
 
@@ -443,4 +443,28 @@ div[role="progressbar"] {
   border-radius: 20px;
   border-color: #a882ef;
   color: #0c2533;
+}
+
+.modal-body {
+  text-align: left;
+}
+
+.modal-content {
+  width: 100%;
+}
+.type-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.scrollable-card {
+    flex: 0 0 auto;
+    margin-right: 30px; /* Optional: add some space between the cards */
+}
+
+.type_card{
+  width: 200px;
+  height: 200px;
 }
