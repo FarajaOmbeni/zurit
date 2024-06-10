@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
         <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -31,9 +31,9 @@
 
 
         <div class="col-lg-8 offset-lg-2">
-            <div class="container mt-5">
+            <div class="container mt-5 ml-5">
                 <!-- Add Debt Button -->
-                <button class="btn btn-primary mb-3" id="add-debt-button">Add Debt</button>
+                <button class="button" id="add-debt-button">Add Debt</button>
 
                 <div id="overlay"
                     style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 2; cursor: pointer;">
@@ -120,9 +120,9 @@
                                 </div>
                                 <div class="text-container">
                                     <!-- Principal Paid -->
-                                    <p class="custom-text">Principal Paid: ${{ number_format($principalPaid, 2) }}</p>
+                                    <p class="custom-text">Principal Paid: {{ number_format($principalPaid, 2) }}</p>
                                     <!-- Balance -->
-                                    <p class="custom-text">Balance: ${{ number_format($remainingBalance, 2) }}</p>
+                                    <p class="custom-text">Balance: {{ number_format($remainingBalance, 2) }}</p>
                                 </div>
                             @endif
                         </div>
@@ -143,6 +143,7 @@
                                         $months = $now->copy()->addYears($years)->diffInMonths($endPeriod);
                                     @endphp
                                     <p>Paid off in {{ $years }} years {{ $months }} months</p>
+                                    <p>Amount Due {{ $debt->current_balance }}</p>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +171,7 @@
                     <div class="card-body">
                         @if ($nextDebt)
                             <h5 class="card-title">Next Debt to be Cleared: <strong>{{ $nextDebt->debt_name }}</strong></h5>
-                            <p>{{ \Carbon\Carbon::parse($nextDebt->end_period)->diffForHumans() }}</p>
+                            <!-- <p>{{ \Carbon\Carbon::parse($nextDebt->end_period)->diffForHumans() }}</p> -->
                         @else
                             <h5 class="card-title">No debts to be cleared.</h5>
                         @endif
@@ -197,7 +198,7 @@
                             @endforeach
                             <option value="{{ $totalInterest }}">All</option>
                         </select>
-                        <p id="interestDisplay">${{ number_format($totalInterest, 2) }}</p>
+                        <p id="interestDisplay">{{ number_format($totalInterest, 2) }}</p>
                     </div>
                 </div>
 
@@ -221,7 +222,7 @@
                             @endforeach
                             <option value="{{ $totalPayment }}">All</option>
                         </select>
-                        <p id="paymentDisplay">${{ number_format($totalPayment, 2) }}</p>
+                        <p id="paymentDisplay">{{ number_format($totalPayment, 2) }}</p>
                     </div>
                 </div>
 

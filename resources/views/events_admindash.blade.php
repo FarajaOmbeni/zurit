@@ -35,6 +35,17 @@
                         }, {{ session('success')['duration'] }});
                     </script>
                 @endif
+                @if (session('error'))
+                    <div class="alert alert-success" id="success-alert">
+                        {{ session('error')['message'] }}
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            $('#success-alert').fadeOut('fast');
+                        }, {{ session('success')['duration'] }});
+                    </script>
+                @endif
                 <div class="book_form" id="addBookForm">
                     <form method="POST" action="/events_admindash" enctype="multipart/form-data">
                         @csrf

@@ -15,7 +15,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <link rel="stylesheet" href="planners_res/style.css">
+        <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
         <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
         <!-- PWA  -->
         <meta name="theme-color" content="#fff" />
@@ -41,6 +41,28 @@
                                     <button type="button" class="button" data-toggle="modal"
                                         data-target="#expenseModal">Add Expense</button>
                                 </div>
+                                @if (session('success'))
+                                    <div class="alert alert-success" id="success-alert">
+                                        {{ session('success')['message'] }}
+                                    </div>
+                                
+                                    <script>
+                                        setTimeout(function() {
+                                            $('#success-alert').fadeOut('fast');
+                                        }, {{ session('success')['duration'] }});
+                                    </script>
+                                @endif
+                                @if (session('error'))
+                                    <div class="alert alert-danger" id="error-alert">
+                                        {{ session('error')['message'] }}
+                                    </div>
+                                    
+                                    <script>
+                                        setTimeout(function() {
+                                            $('#error-alert').fadeOut('fast');
+                                        }, {{ session('error')['duration'] }});
+                                    </script>
+                                @endif
                                 <!-- Income Modal -->
                                 <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog"
                                     aria-labelledby="incomeModalLabel" aria-hidden="true">
@@ -187,66 +209,97 @@
                                     @endif
                                 </h2>
 
-                                <!-- Budget table -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Income Type</th>
-                                                <th>Expected Income</th>
-                                                <th>Actual Income</th>
-                                                <th></th>
-                                                <th>Expense Type</th>
-                                                <th>Expected Expense</th>
-                                                <th>Actual Expense</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-@forelse($income->zip($expenses) as [$income, $expenses])
-    <tr>
-        @if ($income)
-            <td>{{ $income->income_type }}</td>
-            <td>{{ number_format($income->expected_income) }}</td>
-            <td>{{ number_format($income->actual_income) }}</td>
-            <td>
-                <form action="{{ route('income.destroy', $income) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </form>
-            </td>
-        @else
-            <td colspan="4">No Income data for this entry</td>
-        @endif
-        @if ($expenses)
-            <td>{{ $expenses->expense_type }}</td>
-            <td>{{ number_format($expenses->expected_expense) }}</td>
-            <td>{{ number_format($expenses->actual_expense) }}</td>
-            <td>
-                <form action="{{ route('expenses.destroy', $expenses) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </form>
-            </td>
-        @else
-            <td colspan="4">No expense data for this entry</td>
-        @endif
-    </tr>
-@empty
-    <tr>
-        <td colspan="8">No data found. Please add your income and expense data.</td>
-    </tr>
-@endforelse
+<!-- Budget table -->
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Income Type</th>
+                <th>Expected Income</th>
+                <th>Actual Income</th>
+                <th></th>
+                <th>Expense Type</th>
+                <th>Expected Expense</th>
+                <th>Actual Expense</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @php
+            $totalExpectedIncome = 0;
+            $totalActualIncome = 0;
+            $totalExpectedExpense = 0;
+            $totalActualExpense = 0;
+            @endphp
 
-                                        </tbody>
-                                    </table>
+            @forelse($income->zip($expenses) as [$income, $expenses])
+                <tr>
+                    @if ($income)
+                        <td>{{ $income->income_type }}</td>
+                        <td>{{ number_format($income->expected_income) }}</td>
+                        <td>{{ number_format($income->actual_income) }}</td>
+                        <td>
+                        <form action="{{ route('income.destroy', $income->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="text-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </form>
+                        </td>
+
+                        @php
+                        $totalExpectedIncome += $income->expected_income;
+                        $totalActualIncome += $income->actual_income;
+                        @endphp
+
+                    @else
+                        <td colspan="4">No Income data for this entry</td>
+                    @endif
+                    @if ($expenses)
+                        <td>{{ $expenses->expense_type }}</td>
+                        <td>{{ number_format($expenses->expected_expense) }}</td>
+                        <td>{{ number_format($expenses->actual_expense) }}</td>
+                        <td>
+                        <form action="{{ route('expenses.destroy', $expenses->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="text-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </form>
+                        </td>
+
+                        @php
+                        $totalExpectedExpense += $expenses->expected_expense;
+                        $totalActualExpense += $expenses->actual_expense;
+                        @endphp
+
+                    @else
+                        <td colspan="4">No expense data for this entry</td>
+                    @endif
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="8">No data found. Please add your income and expense data.</td>
+                </tr>
+            @endforelse
+
+            <tr>
+                <td><b>Total</td>
+                <td>{{ number_format($totalExpectedIncome) }}</td>
+                <td>{{ number_format($totalActualIncome) }}</td>
+                <td></td>
+                <td><b>Total</td>
+                <td>{{ number_format($totalExpectedExpense) }}</td>
+                <td>{{ number_format($totalActualExpense) }}</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
                                 </div>
 
                                 <!-- Net income card-->

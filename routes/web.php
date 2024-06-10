@@ -161,15 +161,17 @@ Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount']);
 Route::post('/storeIncome', [BudgetController::class, 'storeIncome'])->name('storeIncome');
 Route::post('/storeExpense', [BudgetController::class, 'storeExpense'])->name('storeExpense');
 Route::get('user_budgetplanner', [BudgetController::class, 'showBudgetData']);
-Route::get('budget', [BudgetController::class, 'showBudgetData']);
+Route::get('budget', [BudgetController::class, 'showBudgetData'])->name('user_budgetplanner');
 Route::get('netIncome', [BudgetController::class, 'showNetIncome']);
 Route::get('user_debtcalc', [BudgetController::class, 'pushtoDebtCalc']);
-Route::delete('/income/{income}', 'BudgetController@destroy')->name('income.destroy');
-Route::delete('/expense/{expense}', 'BudgetController@destroy')->name('expenses.destroy');
+Route::delete('/income/{id}', [BudgetController::class, 'destroyIncome'])->name('income.destroy');
+Route::delete('/expenses/{id}', [BudgetController::class, 'destroyExpense'])->name('expenses.destroy');
 
 //Investment Calculator Routes
 Route::post('storemonthlyInvestment', [InvestmentController::class, 'storemonthlyInvestment'])->name('storemonthlyInvestment');
-Route::get('user_investmentplanner', [InvestmentController::class, 'showinvestmentData']);
+Route::get('user_investmentplanner', [InvestmentController::class, 'showinvestmentData'])->name('user_investmentplanner');
+Route::delete('/investment/{id}', [InvestmentController::class, 'destroy'])->name('investment.destroy');
+
 
 //Net Worth Calculator Routes
 Route::post('storeAsset', [NetworthController::class, 'storeAsset'])->name('storeAsset');

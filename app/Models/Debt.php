@@ -19,7 +19,8 @@ class Debt extends Model
         'start_period',
         'end_period',
         'payment_strategy',
-        'debt_priority'
+        'debt_priority',
+        'category',
     ];
 
     const DEBT_TYPES = [

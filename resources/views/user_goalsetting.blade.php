@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="planners_res/style.css"> 
+    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}"> 
     <link rel="icon" href="your_icon_path/ico_logo.png">
     <!-- PWA -->
     <meta name="theme-color" content="#fff" />
@@ -30,6 +30,33 @@
     <button class="button mt-3" style="position:absolute; right:0; left: 580px; top:50px; width:20%;" data-toggle="modal" data-target="#goalModal">Add Goal</button>
 
     <!-- Alerts -->
+@if (session('success'))
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="alert alert-success" id="success-alert" style="width: 50%;">
+            {{ session('success')['message'] }}
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('fast');
+        }, {{ session('success')['duration'] }});
+    </script>
+@endif
+@if (session('error'))
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="alert alert-danger" id="error-alert">
+            {{ session('error')['message'] }}
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            $('#error-alert').fadeOut('fast');
+        }, {{ session('error')['duration'] }});
+    </script>
+@endif
+
     <!--  -->
 
     

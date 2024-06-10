@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="planner_res/css/style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
@@ -103,7 +102,7 @@
                                             <input type="number" class="" id="liabilityValue"
                                                 name="liabilityValue" placeholder="Enter liability value">
                                         </div>
-                                        <button type="submit" class="btn btn-success">Add Liability</button>
+                                        <button type="submit" class="btn btn-danger">Add Liability</button>
                                     </form>
 
                                 </div>

@@ -74,6 +74,7 @@ class BlogController extends Controller
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('blogs_res/img'), $imageName);
+            // $image->move('/home/zuriuhqx/public_html/blogs_res/img', $imageName);
         }
 
         //validate the inputs
@@ -102,9 +103,15 @@ class BlogController extends Controller
         try {
             $blog = Blog::findOrFail($id);
             $blog->delete();
-            return redirect()->route('blogs_admindash')->with('success', 'Blog deleted successfully.');
+            return redirect('/blogs_admindash')->with('success', [
+                'message' => 'Blog Deleted Successfully!',
+                'duration' => 3000,
+            ]);
         } catch (\Exception $e) {
-            return redirect()->route('blogs_admindash')->with('error', 'Failed to delete blog.');
+            return redirect('/blogs_admindash')->with('error', [
+                'message' => 'Error Deleting Blog!',
+                'duration' => 3000,
+            ]);
         }
     }
    
