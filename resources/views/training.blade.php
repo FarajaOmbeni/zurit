@@ -110,10 +110,11 @@
 
                 </div>
 
-                <div class="category_card wealth_wave">
+                <div class="category_card wealth_wave position-relative">
                     <img src="{{ asset('training_res/img/asset_class.webp') }}" alt="">
 
                     <div class="category_card_desc">
+                        <div class="position-absolute" style="right: -3rem; top:-2rem"><img style="width: 7rem;" src="{{ asset('training_res/img/free.png') }}" alt=""></div>
                         <p class="card_title">ASSET CLASS <span>TRAINING</span></p>
                         <p class="card_desc" style="margin-top:-20px;">Empowering Financial Literacy, Diversifying
                             Portfolios.</p>
@@ -192,7 +193,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>This is a <span class="gold_text">3-day</span>intense training for
+                        <p>This is an intense training for
                             pension trustees focused on grounding
                             them on the fundamentals of investments<br>
                         <p>
@@ -207,7 +208,7 @@
                         <p><b>Who should attend?</b></p>
                         <p>Pension Trustees, Human Resources professionals, Sacco Board</p>
                         <span style="font-size:20px;"><b>Price:</b> Kshs 79,000<br></span>
-                        <span style="font-size:20px;"><b>Duration:</b> 3-5 days<br></span>
+                        <span style="font-size:20px;"><b>Duration:</b> 5 days<br></span>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
@@ -332,8 +333,8 @@
                         <p><b>Who should attend?</b></p>
                         <p>Staff of Corporate institutions, owner management</p>
 
-                        <span style="font-size:20px;"><b>Price:</b> Tailor Made<br></span>
-                        <span style="font-size:20px;"><b>Duration:</b> ?<br></span>
+                        <span style="font-size:20px;"><b>Price:</b> Kshs 5,000/person/day OR Kshs 45,000/10 people/day<br></span>
+                        <span style="font-size:20px;"><b>Duration:</b> Specified by Client<br></span>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
@@ -374,10 +375,8 @@
                         <p>This program is ideal for individuals seeking to enhance their financial literacy, wealth
                             creation and preservation strategies.</p>
 
-                        <span style="font-size:20px;"><b>Price:</b>Kshs 1500<br></span>
-                        <span style="font-size:20px;"><b>Conducted Through Virtual sessions:</b> Enter Contact details
-                            for
-                            more info <br></span>
+                        <span style="font-size:20px;"><b>Price: </b>Kshs 3,000<br></span>
+                        <span style="font-size:20px;"><b>Duration: </b>3 hours <br></span>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-primary btn-enroll" data-toggle="modal"
