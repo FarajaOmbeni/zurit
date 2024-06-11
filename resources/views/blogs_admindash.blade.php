@@ -25,14 +25,29 @@
             <div id="content" class="p-md-5 pt-5">
                 <h2 class="mb-4">Blogs Management</h2>
                 @if (session('success'))
-                    <div class="alert alert-success" id="success-alert">
-                        {{ session('success') }}
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div class="alert alert-success" id="success-alert" style="width: 50%;">
+                            {{ session('success')['message'] }}
+                        </div>
                     </div>
-
+                
                     <script>
                         setTimeout(function() {
                             $('#success-alert').fadeOut('fast');
-                        }, 3000);
+                        }, {{ session('success')['duration'] }});
+                    </script>
+                @endif
+                @if (session('error'))
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div class="alert alert-danger" id="error-alert">
+                            {{ session('error')['message'] }}
+                        </div>
+                    </div>
+                    
+                    <script>
+                        setTimeout(function() {
+                            $('#error-alert').fadeOut('fast');
+                        }, {{ session('error')['duration'] }});
                     </script>
                 @endif
                 <!-- Cards -->

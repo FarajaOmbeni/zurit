@@ -30,7 +30,10 @@ class InvestmentController extends Controller
             InvestmentPlanner::create($validatedData);
         }
 
-        return redirect()->back()->with('success', 'Investment plan has been created successfully.');
+        return redirect()->route('user_investmentplanner')->with('success', [
+            'message' => 'Investment Plan Created Successfully',
+            'duration' => 3000,
+        ]);
     }
 
     public function showinvestmentData(Request $request)
@@ -126,8 +129,60 @@ foreach ($investments as $investment) {
     return view('user_investmentplanner', [
         'monthlyInvestments' => $monthlyInvestments,
         'withholdingTaxRates' => $withholdingTaxRates,
-        'defaultRate' => $defaultRate
+        'defaultRate' => $defaultRate,
     ]);
 }
-    
+
+// public function destroy($id)
+// {
+//     $investment = InvestmentPlanner::find($id);
+
+//     // Check if investment exists and if the user is authorized to delete it
+//     if ($investment && $investment->user_id == auth()->id()) {
+//         // Get the corresponding asset
+//         $withholdingTax = WithholdingTax::find($investment->withholding_tax_id);
+//         $withholdingTaxName = $withholdingTax ? $withholdingTax->investment_type : 'Investment';
+
+//         $asset = Asset::where('user_id', auth()->id())
+//             ->where('asset_description', $withholdingTaxName)
+//             ->first();
+
+//         // Delete the asset if its value matches the final cumulative investment value
+//         if ($asset && $asset->asset_value == end($monthlyInvestments[$investment->id])['cumulative_investment_value']) {
+//             $asset->delete();
+//         }
+
+//         $investment->delete();
+//         return redirect()->route('user_investmentplanner')->with('success', [
+//             'message' => 'Investment Deleted Successfully',
+//             'duration' => 3000,
+//         ]);
+//     }
+
+//     return redirect()->route('user_investmentplanner')->with('error', [
+//         'message' => 'Error Deleting Investment ',
+//         'duration' => 3000,
+//     ]);
+// }
+
+public function destroy($id)
+{
+    $investment = InvestmentPlanner::find($id);
+
+    // Check if investment exists and if the user is authorized to delete it
+    if ($investment && $investment->user_id == auth()->id()) {
+        $investment->delete();
+        return redirect()->route('user_investmentplanner')->with('success', [
+            'message' => 'Investment Deleted Successfully',
+            'duration' => 3000,
+        ]);
+    }
+
+    return redirect()->route('user_investmentplanner')->with('error', [
+        'message' => 'Error Deleting Investment ',
+        'duration' => 3000,
+    ]);
+}
+
+
 }

@@ -22,5 +22,23 @@ class InvestmentPlanner extends Model
     public function withholdingTax(){
         return $this->belongsTo(WithholdingTax::class);
     }
+    
+
+public function asset()
+{
+    return $this->hasOne(Asset::class, 'user_id', 'user_id');
+}
+
+
+
+
+    protected static function booted()
+    {
+        static::deleting(function ($investment) {
+            $investment->asset()->delete();
+        });
+    }
+
+
 
 }

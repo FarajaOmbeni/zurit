@@ -21,7 +21,7 @@
                     <a href="/"><img class="logo" src="admin_res/images/logo-white3.png" alt=""></a><span><br>User Dashboard</span>
                     <ul class="list-unstyled components mb-5 flex-container">
                             <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
-                                <a href="{{ url('user_goalsetting') }}"><span class="bi bi-target icon-class"></span>
+                                <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span>
                                     Goal Setting</a>
                             </li>
                             <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">

@@ -32,7 +32,10 @@ class BudgetController extends Controller
         }
     }
 
-    return redirect()->back()->with('success', 'Income data saved successfully');
+    return redirect()->route('user_budgetplanner')->with('success', [
+        'message' => 'Income added Successfully!',
+        'duration' => 3000,
+    ]);
 }
 
 
@@ -71,7 +74,10 @@ public function storeExpense(Request $request)
         }
     }
 
-    return redirect()->back()->with('success', 'Expense data saved successfully');
+    return redirect()->route('user_budgetplanner')->with('success', [
+        'message' => 'Expense added Successfully!',
+        'duration' => 3000,
+    ]);
 }
 
 
@@ -97,16 +103,22 @@ public function showBudgetData(){
     $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
     $netIncome = $actualIncome - $actualExpenses;
     // If net income is negative, add to debt manager
+
     if ($netIncome < 0) {
-        $income_debt= 'Income Overdraft';
-        Debt::create([
-            'user_id' => auth()->id(),
-            'debt' => abs($netIncome),
-            'debt_name' => $income_debt,
-            'category' => $income_debt,
-            'current_balance' => abs($netIncome),
-        ]);
+        $income_debt = 'Income Overdraft';
+        Debt::updateOrCreate(
+            [
+                'user_id' => auth()->id(),
+                'debt_name' => $income_debt,
+                'category' => $income_debt,
+            ],
+            [
+                'debt' => abs($netIncome),
+                'current_balance' => abs($netIncome),
+            ]
+        );
     }
+
 
     // Calculate monthly incomes and expenses
     $monthlyIncomes = Income::where('user_id', auth()->id())
@@ -144,16 +156,63 @@ public function showBudgetData(){
     ]);
 }
 
-
-public function destroy($id)
+public function destroyIncome($id)
 {
     $income = Income::find($id);
-    $income->delete();
-    $expense = Expense::find($id);
-    $expense->delete();
 
-    return redirect()->route('user_budgetplanner')->with('success', 'Income deleted successfully');
+    if ($income) {
+        $income->delete();
+        return redirect()->route('user_budgetplanner')->with('success', [
+            'message' => 'Income deleted Successfully!',
+            'duration' => 3000,
+        ]);
+    }
+
+    return redirect()->route('user_budgetplanner')->with('error', [
+        'message' => 'Error Deleting Income ',
+        'duration' => 3000,
+    ]);
 }
+
+public function destroyExpense($id)
+{
+    $expense = Expense::find($id);
+
+    if ($expense) {
+        // If the expense category is "Loans", delete from debt manager and debt_calc
+        if ($expense->category == 'Loans') {
+            $debt = Debt::where('user_id', auth()->id())
+                         ->where('debt', $expense->actual_expense)
+                         ->where('debt_name', 'Loan from Budget')
+                         ->first();
+
+            $debtCalc = DebtCalc::where('user_id', auth()->id())
+                                ->where('debt', $expense->actual_expense)
+                                ->where('debt_name', 'Loan from Budget')
+                                ->first();
+
+            if ($debt) {
+                $debt->delete();
+            }
+
+            if ($debtCalc) {
+                $debtCalc->delete();
+            }
+        }
+
+        $expense->delete();
+        return redirect()->route('user_budgetplanner')->with('success', [
+            'message' => 'Expense Deleted Successfully!',
+            'duration' => 3000,
+        ]);
+    }
+
+    return redirect()->route('user_budgetplanner')->with('error', [
+        'message' => 'Error Deleting Expense ',
+        'duration' => 3000,
+    ]);
+}
+
 
 }
 

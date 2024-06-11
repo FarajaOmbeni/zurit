@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -41,27 +42,55 @@
                                     data-target="#monthlyModal">Add Investment</button>
                                 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#yearlyModal">Yearly Calculations</button>-->
                             </div>
-                            <div class="type-row">
-    @foreach ($monthlyInvestments as $investmentId => $investmentData)
-        @foreach ($investmentData as $investment)
-            <div class="scrollable-card">
-                <div class="card mb-4 type_card">
-                    <div class="card-body">
-                        @php
-                            $withholdingTax = \App\Models\WithholdingTax::find($investment['withholding_tax_id']);
-                            if (!$withholdingTax) {
-                                throw new \Exception('Withholding tax not found for investment id: ' . $investmentId);
-                            }
-                            $investmentType = $withholdingTax->investment_type;
-                        @endphp
-                        <p class="card-title">{{ $investmentType }}</p>
-                        <a href="#" class="card-link text-danger float-right" data-investment-id="{{ $investmentId }}"><i class="bi bi-trash-fill"></i></a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    @endforeach
-</div>
+                            @if (session('success'))
+                                    <div class="alert alert-success" id="success-alert">
+                                        {{ session('success')['message'] }}
+                                    </div>
+                                
+                                    <script>
+                                        setTimeout(function() {
+                                            $('#success-alert').fadeOut('fast');
+                                        }, {{ session('success')['duration'] }});
+                                    </script>
+                                @endif
+                                @if (session('error'))
+                                    <div class="alert alert-danger" id="error-alert">
+                                        {{ session('error')['message'] }}
+                                    </div>
+                                    
+                                    <script>
+                                        setTimeout(function() {
+                                            $('#error-alert').fadeOut('fast');
+                                        }, {{ session('error')['duration'] }});
+                                    </script>
+                                @endif
+
+                            <!-- investment type cards -->
+                            <div class="type-row" style="display: flex; overflow-x: auto;">
+                                @foreach ($monthlyInvestments as $investmentId => $investmentData)
+                                    @php
+                                        $firstMonthData = reset($investmentData);
+                                        $withholdingTax = \App\Models\WithholdingTax::find($firstMonthData['withholding_tax_id']);
+                                        if (!$withholdingTax) {
+                                            throw new \Exception('Withholding tax not found for investment id: ' . $investmentId);
+                                        }
+                                        $investmentType = $withholdingTax->investment_type;
+                                    @endphp
+                                    <div class="scrollable-card mr-4 mt-3 ml-2" style="flex: 0 0 auto; width:20%; height:2%;">
+                                        <div class="card mb-4 type_card">
+                                            <div class="card-body">
+                                                <p class="card-title">{{ $investmentType }}</p>
+                                                <a href="{{ route('investment.destroy', $investmentId) }}" class="card-link text-danger float-right" data-investment-id="{{ $investmentId }}" onclick="event.preventDefault(); document.getElementById('delete-investment-form-{{ $investmentId }}').submit();"><i class="bi bi-trash-fill"></i></a>
+                                    
+                                                <form id="delete-investment-form-{{ $investmentId }}" action="{{ route('investment.destroy', $investmentId) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                             <!-- Monthly Modal -->
                             <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog"
                                 aria-labelledby="monthlyModalLabel" aria-hidden="true">
