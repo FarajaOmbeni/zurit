@@ -87,19 +87,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id): View
+    public function edit($id)
     {
         $user = User::find($id);
-
-        if (!$user) {
-            // Handle case where user with the given ID is not found
-            return abort(404);
-        }
-
-        // Assuming you have a 'roles' relationship defined in your User model
-        $roles = Role::all();
-
-        return view('users.edit', compact('user', 'roles'));
+        return view('user_editdash', ['user' => $user]);
     }
 
 
@@ -111,37 +102,39 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id): RedirectResponse
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'required',
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
+{
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'phone' => 'required',
+        'password' => 'same:confirm-password',
+        'roles' => 'required'
+    ]);
 
-        // Get the user from the database
-        $user = User::find($id);
+    // Get the user from the database
+    $user = User::find($id);
 
-        // Update user details
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
+    // Update user details
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->phone = $request->input('phone');
 
-        // Hash the password if it's present in the input
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->input('password'));
-        }
-
-        // Save the changes to the user
-        $user->save();
-
-        // Sync user roles
-        $user->syncRoles([$request->input('roles')]);
-
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+    // Hash the password if it's present in the input
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->input('password'));
     }
+
+    // Save the changes to the user
+    $user->save();
+
+    // Sync user roles
+    $user->syncRoles([$request->input('roles')]);
+
+    return redirect('/admin')->with('success', [
+        'message' => 'User Updated Successfully!',
+        'duration' => 3000,
+    ]);
+}
 
 
 
@@ -155,6 +148,16 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        if ($user) {
+            // Delete the user's income data
+            foreach ($user->incomes as $income) {
+                $income->delete();
+            }
+
+            // Delete the user's expense data
+            foreach ($user->expenses as $expense) {
+                $expense->delete();
+            }
         // Delete the user's assets
         foreach ($user->assets as $asset) {
             $asset->delete();
@@ -165,11 +168,45 @@ class UserController extends Controller
             $liability->delete();
         }
 
+        // Delete the user's debts
+        foreach ($user->debts as $debt) {
+            $debt->delete();
+        }
+
+        // Delete the user's goals
+        foreach ($user->goals as $goal) {
+            $goal->delete();
+        }
+
+        // Delete the user's investments
+        foreach ($user->investments as $investment) {
+            $investment->delete();
+        }
+
+        // Delete the user's marketing messages
+        foreach ($user->marketingMessages as $message) {
+            $message->delete();
+        }
+
+        // Delete the user's extra payments
+        foreach ($user->extraPayments as $extraPayment) {
+            $extraPayment->delete();
+        }
+
+
         // Delete the user
         $user->delete();
 
-        return redirect()->route('admin')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('admin')->with('success', [
+            'message' => 'User deleted Successfully!',
+            'duration' => 3000,
+        ]);
+        }
+
+        return redirect()->route('admin')->with('error', [
+            'message' => 'Error Deleting User!',
+            'duration' => 3000,
+        ]);
     }
 
     public function showBudgetPlanner()

@@ -3759,6 +3759,13 @@ input[type="button"].btn-block {
     .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
       color: #fff; }
 
+.card-text{
+  color: white;
+}
+.bordered-input {
+  border: 2px solid #BBB4B2;
+  border-radius: 10px;
+}
 .card {
   position: relative;
   display: -webkit-box;

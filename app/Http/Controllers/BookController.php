@@ -33,7 +33,6 @@ class BookController extends Controller
             'book_name' => 'required',
             'description' => 'required',
             'current_price' => 'required|numeric',
-            'previous_price' => 'required|numeric',
         ]);
 
         $imageName = '';
@@ -49,7 +48,6 @@ class BookController extends Controller
             'book_name' => $request->input('book_name'),
             'description' => $request->input('description'),
             'current_price' => $request->input('current_price'),
-            'previous_price' => $request->input('previous_price'),
         ]);
 
         return redirect()->route('books_admindash')->with('success', [
@@ -66,7 +64,6 @@ class BookController extends Controller
         'book_name' => 'required',
         'description' => 'required',
         'current_price' => 'required|numeric',
-        'previous_price' => 'required|numeric',
     ]);
 
     $book_image = $book->book_image;
@@ -81,7 +78,6 @@ class BookController extends Controller
         'book_name' => $request->input('book_name'),
         'description' => $request->input('description'),
         'current_price' => $request->input('current_price'),
-        'previous_price' => $request->input('previous_price'),
     ]);
 
     return redirect()->route('books_admindash')->with('success', [

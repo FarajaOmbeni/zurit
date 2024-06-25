@@ -56,14 +56,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card" style="background-color: rgba(255, 193, 7, 0.7);">
-                            <div class="card-body">
-                                <h5 class="card-title">Editors</h5>
-                                <p class="card-text">{{ $editors }}</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- User Growth Over Time Line Chart -->
@@ -87,7 +79,7 @@
                         </div>
                     </div>
 
-                    <!-- Recent Blogs Card -->
+                    <!-- Recent Blogs Card
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Recent Blogs</h5>
@@ -98,9 +90,9 @@
                                 @endforeach
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <!-- Recent Books Card -->
+                    <!-- Recent Books Card
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Recent Books</h5>
@@ -111,7 +103,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Total Books Card -->
                 <div class="card mt-4" style="background-color: rgba(33, 150, 243, 0.7);">
