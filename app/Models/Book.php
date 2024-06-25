@@ -15,6 +15,6 @@ class Book extends Model
      * @var array
      */
     protected $fillable = [
-       'book_image', 'book_name', 'description','current_price','previous_price'
+       'book_image', 'book_name', 'description','current_price'
     ];
 }

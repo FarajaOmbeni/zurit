@@ -21,8 +21,8 @@
 
         @extends('layouts.adminbar')
 
-        <div class="col-md-8 offset-md-2">
-            <div id="content" class="p-md-5 pt-5">
+        <div class="col-md-8 offset-md-2 pl-5">
+            <div id="content">
                 <h2 class="mb-4">Blogs Management</h2>
                 @if (session('success'))
                     <div style="display: flex; justify-content: center; align-items: center;">

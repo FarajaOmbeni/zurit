@@ -15,12 +15,11 @@ class InvestmentController extends Controller
         $investmentData = $request->input('investment');
 
         // Process only if all fields are filled
-        if (!empty($investmentData['initialInvestment']) && !empty($investmentData['AdditionalInvestment']) && !empty($investmentData['numberOfMonths']) && !empty($investmentData['projectedRateOfReturn']) && !empty($investmentData['investment_type'])) {
+        if (!empty($investmentData['initialInvestment']) && !empty($investmentData['numberOfMonths']) && !empty($investmentData['projectedRateOfReturn']) && !empty($investmentData['investment_type'])) {
             $validatedData = [
                 'user_id' => auth()->id(),
                 'initial_investment' => $investmentData['initialInvestment'],
                 'withholding_tax_id' => $investmentData['investment_type'],
-                'additional_investment' => $investmentData['AdditionalInvestment'],
                 'calc_duration' => $request->calc_duration,
                 'number_of_months' => $investmentData['numberOfMonths'],
                 'projected_rate_of_return' => $investmentData['projectedRateOfReturn'],
@@ -47,7 +46,6 @@ class InvestmentController extends Controller
     foreach ($investments as $investment) {
         $numberOfMonths = $investment->number_of_months;
         $initialInvestment = $investment->initial_investment;
-        $additionalDeposits = $investment->additional_investment;
         $projectedRateOfReturn = $investment->projected_rate_of_return / 100; // Divide by 100
         $withholdingTaxRate = WithholdingTax::find($investment->withholding_tax_id)->tax_rate / 100; // Divide by 100
 
@@ -59,7 +57,6 @@ class InvestmentController extends Controller
         $cumulativeInvestmentValue = $initialInvestment;
         $monthlyInvestments[$investment->id][$currentMonth] = [
             'initial_investment' => $initialInvestment,
-            'additional_deposits' => $additionalDeposits,
             'gross_interest' => 0,
             'withholding_tax' => 0,
             'net_interest' => 0,
@@ -76,11 +73,10 @@ class InvestmentController extends Controller
                 $withholdingTax = round($grossInterest * $withholdingTaxRate, 2);
                 $netInterest = round($grossInterest - $withholdingTax, 2);
             }
-            $cumulativeInvestmentValue = round($cumulativeInvestmentValue + $additionalDeposits + $netInterest, 2);
+            $cumulativeInvestmentValue = round($cumulativeInvestmentValue + $netInterest, 2);
             
             $monthlyInvestments[$investment->id][$currentMonth] = [
                 'initial_investment' => round($initialInvestment, 2),
-                'additional_deposits' => round($additionalDeposits, 2),
                 'gross_interest' => $grossInterest,
                 'withholding_tax' => $withholdingTax,
                 'net_interest' => $netInterest,

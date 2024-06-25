@@ -121,10 +121,6 @@
                                                     <input type="number" name="investment[initialInvestment]" placeholder="Enter initial investment">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="monthlyAdditionalInvestment">Monthly Additional Investment</label>
-                                                    <input type="number" name="investment[AdditionalInvestment]" placeholder="Enter monthly additional investment">
-                                                </div>
-                                                <div class="form-group">
                                                     <label for="numberOfMonths">Number of Months</label>
                                                     <input type="number" name="investment[numberOfMonths]" placeholder="Enter number of months">
                                                 </div>
@@ -151,8 +147,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Month</th>
-                                                <th>Initial Investment</th>
-                                                <th>Additional Deposits</th>
+                                                <th>Initial Investment</th>                                                
                                                 <th>Gross Interest</th>
                                                 <th>Withholding Tax</th>
                                                 <th>Net Interest</th>
@@ -165,7 +160,6 @@
                                                     <tr>
                                                         <td>{{ date('F', mktime(0, 0, 0, $month, 10)) }}</td>
                                                         <td>{{ number_format($investment['initial_investment']) }}</td>
-                                                        <td>{{ number_format($investment['additional_deposits']) }}</td>
                                                         <td>{{ number_format($investment['gross_interest']) }}</td>
                                                         <td>{{ number_format($investment['withholding_tax']) }}</td>
                                                         <td>{{ number_format($investment['net_interest']) }}</td>

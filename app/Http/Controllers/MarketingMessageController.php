@@ -20,43 +20,69 @@ class MarketingMessageController extends Controller
         return view('marketing_admindash', compact('subscribedUsers', 'allUsers'));
     }
 
-public function sendMessage(Request $request)
-{
-    // Validate request
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-        'user_ids' => 'required|array',
-        'user_ids.*' => 'exists:users,id',
-    ]);
-
-    // Save the message to the database for each user
-    foreach ($request->input('user_ids') as $userId) {
-        $marketingMessage = MarketingMessage::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'user_id' => $userId,
+    public function sendMessage(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'send_to' => 'required|in:all,subscribed',
         ]);
 
-        // Get the user's email address
-        $userEmail = User::findOrFail($userId)->email;
+        // Initialize users array
+        $users = [];
 
-        // Log information about the email sending process
-        Log::info("Sending email to user ID $userId, Email: $userEmail");
-
-        // Send email to the user
-        try {
-            //Mail::to($userEmail)->send(new MarketingMessageMail($marketingMessage));
-            Mail::to($userEmail)->send(new MarketingMessageMail(
-                $request->input('title'),
-                $request->input('content'), 
-            ));
-            Log::info("Email sent successfully to user ID $userId, Email: $userEmail");
-        } catch (\Exception $e) {
-            Log::error("Error sending email to user ID $userId, Email: $userEmail. Error: " . $e->getMessage());
+        // Get the users or subscriptions to send the message to
+        if ($request->input('send_to') === 'all') {
+            $users = User::all();
+            $subscriptions = Subscription::all();
+            foreach ($subscriptions as $subscription) {
+                $users[] = (object) ['id' => null, 'email' => $subscription->email];
+            }
+        } else if ($request->input('send_to') === 'subscribed') {
+            $subscriptions = Subscription::all();
+            foreach ($subscriptions as $subscription) {
+                $users[] = (object) ['id' => null, 'email' => $subscription->email];
+            }
         }
-    }
+    
 
-    return redirect()->route('marketing_admindash')->with('success', 'Messages sent successfully');
-}
+        foreach ($users as $user) {
+            if ($user->id !== null) {
+                $marketingMessage = MarketingMessage::create([
+                    'title' => $request->input('title'),
+                    'content' => $request->input('content'),
+                    'user_id' => $user->id,
+                ]);
+            }
+        
+            // Get the user's email address
+            $userEmail = $user->email;
+        
+            // Log information about the email sending process
+            Log::info("Sending email to user ID $user->id, Email: $userEmail");
+        
+            // Send email to the user
+            try {
+                Mail::to($userEmail)->send(new MarketingMessageMail(
+                    $request->input('title'),
+                    $request->input('content'), 
+                ));
+                Log::info("Email sent successfully to user ID $user->id, Email: $userEmail");
+            } catch (\Exception $e) {
+                Log::error("Error sending email to user ID $user->id, Email: $userEmail. Error: " . $e->getMessage());
+            }
+        }
+
+    
+        return redirect()->route('marketing_admindash')->with('success', [
+            'message' => 'Emails sent successfully!',
+            'duration' => 3000,
+        ]);
+
+        return redirect()->route('marketing_admindash')->with('error', [
+            'message' => 'Error sending Emails!',
+            'duration' => 3000,
+        ]);
+    }
 }

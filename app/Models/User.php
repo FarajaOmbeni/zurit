@@ -76,12 +76,43 @@ public function hasPermission(string $permission): bool
  *
  * 
  */
-public function assets(){
-    return $this->hasMany(Asset::class);
-}
-public function liabilities()
-{
-    return $this->hasMany(Liability::class);
-}
+    public function incomes(){
+        return $this->hasMany(Income::class);
+    }
+
+    public function expenses(){
+        return $this->hasMany(Expense::class);
+    }
+
+    public function assets(){
+        return $this->hasMany(Asset::class);
+    }
+
+    public function liabilities(){
+        return $this->hasMany(Liability::class);
+    }
+
+    public function debts(){
+        return $this->hasMany(Debt::class);
+    }
+
+    public function goals(){
+        return $this->hasMany(Goal::class);
+    }
+
+    public function investments()
+    {
+        return $this->hasMany(InvestmentPlanner::class);
+    }
     
+    public function marketingMessages()
+    {
+        return $this->hasMany(MarketingMessage::class);
+    }
+
+    public function extraPayments()
+    {
+        return $this->hasMany(ExtraPayment::class);
+    }
+
 }
