@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 
+
     <!-- PWA  -->
     <meta name="theme-color" content="#fff">
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
@@ -26,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="">
             </a>
 
@@ -159,18 +160,24 @@
                 </ul>
             </div>
         </div>
-    </nav>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show w-25 position-absolute m-auto z-100"
+                style="right: 5rem; top:5rem;">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show w-25 position-absolute m-auto z-100"
+                style="right: 5rem; top:5rem;">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </nav>
+
+
     <header class="header-background">
         <div class="img-circle"><img src="home_res/img/second-circle.svg" alt=""></div>
         <div class="img-dots"><img src="home_res/img/dots.svg" alt=""></div>
