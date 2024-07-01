@@ -150,7 +150,6 @@ public function showBudgetData(){
         'monthlyIncomes' => $monthlyIncomes,
         'monthlyExpenses' => $monthlyExpenses,
         'hasDataForCurrentMonth' => $hasDataForCurrentMonth,
-        'hasDataForCurrentMonth' => $hasDataForCurrentMonth,
         'currentMonth' => $currentMonth,
         'currentYear' => $currentYear
     ]);
