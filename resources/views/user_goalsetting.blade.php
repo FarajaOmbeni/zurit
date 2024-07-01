@@ -21,13 +21,12 @@
     <!-- Header -->
     @extends('layouts.userbar')
     @include('layouts.app')
-
-                            
-    <div class="container">
+                       
+    <div class="container-fluid">
     <h2 class="text-center mb-5 pt-3">Goal Setting</h2>
 
     <!-- Button to open the modal -->
-    <button class="button mt-3" style="position:absolute; right:0; left: 580px; top:50px; width:20%;" data-toggle="modal" data-target="#goalModal">Add Goal</button>
+    <button class="button mt-3" data-toggle="modal" data-target="#goalModal">Add Goal</button>
 
     <!-- Alerts -->
 @if (session('success'))

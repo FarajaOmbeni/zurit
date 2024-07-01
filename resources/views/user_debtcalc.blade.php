@@ -30,6 +30,7 @@
 
 
 
+        <div class="container-fluid"> 
         <div class="col-lg-8 offset-lg-2">
             <div class="container mt-5 ml-5">
                 <!-- Add Debt Button -->
@@ -225,6 +226,7 @@
                         <p id="paymentDisplay">{{ number_format($totalPayment, 2) }}</p>
                     </div>
                 </div>
+            </div>
 
                 {{-- PWA --}}
                 <script src="{{ asset('/sw.js') }}"></script>

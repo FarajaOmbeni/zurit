@@ -8458,43 +8458,69 @@ table th, table td {
   color: white;
   border: none;
 }
-/*sidebar edit*/
-#wrapper.toggled #sidebar {
-  margin-left: -250px;
-}
-
-@media (min-width: 768px) {
-  #wrapper {
-      padding-left: 250px;
-  }
-
-  #wrapper.toggled #sidebar {
-      margin-left: 0;
-  }
-}
-
-#menu-toggle {
+/* Dock styles */
+#dock {
   position: fixed;
-  top: 25px;
-  left: 4px;
-  z-index: 11;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 0;
+  z-index: 1000;
 }
 
-.blur-effect {
-  filter: blur(5px);
+#dock .icon-class {
+  font-size: 24px;
+  color: #fff; /* Icon color */
 }
 
-
-@media (min-width: 768px) {
-  .menu-button {
-      display: none;
+/* Media query for small screens */
+@media (max-width: 768px) {
+  #sidebar {
+      display: none; /* Hide sidebar on small screens */
   }
-}
 
-@media (max-width: 767px) {
-  .menu-button {
+  #dock {
+      display: flex; /* Show dock on small screens */
+  }
+
+  #dock ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Display list items in a row */
+    justify-content: center; /* Center items horizontally */
+    align-items: center;
+  }
+
+  #dock ul li {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    margin-right: 10px;
+  }
+  #dock ul li:last-child {
+    margin-right: 0; /* Remove margin for the last item */
+}
+  #dock ul li a {
+      display: block;
+      padding: 10px;
+  }
+
+  #dock ul li a span {
       display: block;
   }
+
+  #sidebar .components a span:not(.icon-class) {
+      display: none; /* Hide text labels in dock */
+  }
+}
+
+/* Dock specific icon styles */
+#dock ul li a span.icon-class {
+  font-size: 24px; /* Increase icon size */
+  color: #fff; /* Icon color */
 }
 
 select {
