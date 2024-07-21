@@ -30,7 +30,7 @@
                             {{ session('success')['message'] }}
                         </div>
                     </div>
-                
+
                     <script>
                         setTimeout(function() {
                             $('#success-alert').fadeOut('fast');
@@ -43,7 +43,7 @@
                             {{ session('error')['message'] }}
                         </div>
                     </div>
-                    
+
                     <script>
                         setTimeout(function() {
                             $('#error-alert').fadeOut('fast');
@@ -109,7 +109,8 @@
                                                         class="btn btn-warning btn-sm editEventButton">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('blogdelete', ['id' => $blog->id]) }}" method="POST" style="display: inline-block;">
+                                                    <form action="{{ route('blogdelete', ['id' => $blog->id]) }}"
+                                                        method="POST" style="display: inline-block;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>

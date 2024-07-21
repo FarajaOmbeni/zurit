@@ -9,6 +9,7 @@ use App\Models\Expense;
 use App\Models\Debt;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class BudgetController extends Controller
 {
@@ -80,7 +81,6 @@ public function storeExpense(Request $request)
     ]);
 }
 
-
 public function showBudgetData(){
     // Get current month and year using Carbon
     $currentMonth = Carbon::now()->month;
@@ -139,19 +139,19 @@ public function showBudgetData(){
     // Check if there is data for the current month
     $hasDataForCurrentMonth = isset($monthlyIncomes[$currentMonth]) && isset($monthlyExpenses[$currentMonth]);
 
-    // Pass the data to the view
+
     return view('user_budgetplanner', [
-        'budget' => $budget, 
-        'income' => $income, 
-        'expenses' => $expenses, 
-        'actualIncome' => $actualIncome, 
-        'actualExpenses' => $actualExpenses, 
+        'budget' => $budget,
+        'income' => $income,
+        'expenses' => $expenses,
+        'actualIncome' => $actualIncome,
+        'actualExpenses' => $actualExpenses,
         'netIncome' => $netIncome,
         'monthlyIncomes' => $monthlyIncomes,
         'monthlyExpenses' => $monthlyExpenses,
         'hasDataForCurrentMonth' => $hasDataForCurrentMonth,
         'currentMonth' => $currentMonth,
-        'currentYear' => $currentYear
+        'currentYear' => $currentYear,
     ]);
 }
 

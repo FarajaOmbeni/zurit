@@ -24,7 +24,7 @@
 
         <div class="col-lg-8 offset-lg-3 mt-5">
             <div class="container">
-            @if (session('success'))
+                @if (session('success'))
                     <div class="alert alert-success" id="success-alert">
                         {{ session('success')['message'] }}
                     </div>
@@ -47,19 +47,21 @@
                     </script>
                 @endif
 
-            <form action="{{ route('send.message') }}" method="post">
-                @csrf
-                <div class="form-group-plaintext">
-                    <label for="title">Message Title</label>
-                    <input type="text" name="title" class="form-control-plaintext bordered-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="content">Message Content</label>
-                    <textarea name="content" id="editor" class="form-control"></textarea>
-                </div>
-                <button type="submit" name="send_to" value="all" class="btn btn-primary">Send Email to All Users</button>
-                <button type="submit" name="send_to" value="subscribed" class="btn btn-primary">Send Email to Subscribed Users</button>
-            </form>
+                <form action="{{ route('send.message') }}" method="post">
+                    @csrf
+                    <div class="form-group-plaintext">
+                        <label for="title">Message Title</label>
+                        <input type="text" name="title" class="form-control-plaintext bordered-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Message Content</label>
+                        <textarea name="content" id="editor" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" name="send_to" value="all" class="btn btn-primary">Send Email to All
+                        Users</button>
+                    <button type="submit" name="send_to" value="subscribed" class="btn btn-primary">Send Email to
+                        Subscribed Users</button>
+                </form>
             </div>
         </div>
 

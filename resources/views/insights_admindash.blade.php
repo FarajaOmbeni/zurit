@@ -85,9 +85,9 @@
                             <h5 class="card-title">Recent Blogs</h5>
                             <ul class="list-group">
                                 @foreach ($recentBlogs as $blog)
-                                    <li class="list-group-item">{{ $blog->blog_title }} by
+<li class="list-group-item">{{ $blog->blog_title }} by
                                         {{ $blog->user ? $blog->user->name : 'Unknown User' }}</li>
-                                @endforeach
+@endforeach
                             </ul>
                         </div>
                     </div> -->
@@ -98,75 +98,75 @@
                             <h5 class="card-title">Recent Books</h5>
                             <ul class="list-group">
                                 @foreach ($recentBooks as $book)
-                                    <li class="list-group-item">{{ $book->book_name }} added.</li>
-                                @endforeach
+<li class="list-group-item">{{ $book->book_name }} added.</li>
+@endforeach
                             </ul>
                         </div>
                     </div>
                 </div> -->
 
-                <!-- Total Books Card -->
-                <div class="card mt-4" style="background-color: rgba(33, 150, 243, 0.7);">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Books</h5>
-                        <p class="card-text">{{ $totalBooks }}</p>
+                    <!-- Total Books Card -->
+                    <div class="card mt-4" style="background-color: rgba(33, 150, 243, 0.7);">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Books</h5>
+                            <p class="card-text">{{ $totalBooks }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Total Blogs Card -->
+                    <div class="card mt-4" style="background-color: rgba(156, 39, 176, 0.7);">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Blogs</h5>
+                            <p class="card-text">{{ $totalBlogs }}</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Total Blogs Card -->
-                <div class="card mt-4" style="background-color: rgba(156, 39, 176, 0.7);">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Blogs</h5>
-                        <p class="card-text">{{ $totalBlogs }}</p>
-                    </div>
-                </div>
-            </div>
-
-            {{-- PWA --}}
-            <script src="{{ asset('/sw.js') }}"></script>
-            <script>
-                if ("serviceWorker" in navigator) {
-                    // Register a service worker hosted at the root of the
-                    // site using the default scope.
-                    navigator.serviceWorker.register("/sw.js").then(
-                        (registration) => {
-                            console.log("Service worker registration succeeded:", registration);
-                        },
-                        (error) => {
-                            console.error(`Service worker registration failed: ${error}`);
-                        },
-                    );
-                } else {
-                    console.error("Service workers are not supported.");
-                }
-            </script>
-            {{-- END OF PWA --}}
-
-
-            <!-- Include necessary scripts -->
-            <script src="admin_res/js/jquery.min.js"></script>
-            <script src="admin_res/js/popper.js"></script>
-            <script src="admin_res/js/bootstrap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-            <script>
-                // Fetch user growth data from the server
-                var userGrowthData = {!! json_encode($userGrowthData) !!};
-
-                // User Growth Chart
-                var userGrowthChart = new Chart(document.getElementById("userGrowthChart"), {
-                    type: 'line',
-                    data: {
-                        labels: userGrowthData.labels,
-                        datasets: [{
-                            label: 'User Growth Over Time',
-                            data: userGrowthData.data,
-                            borderColor: '#007BFF',
-                            fill: false
-                        }]
+                {{-- PWA --}}
+                <script src="{{ asset('/sw.js') }}"></script>
+                <script>
+                    if ("serviceWorker" in navigator) {
+                        // Register a service worker hosted at the root of the
+                        // site using the default scope.
+                        navigator.serviceWorker.register("/sw.js").then(
+                            (registration) => {
+                                console.log("Service worker registration succeeded:", registration);
+                            },
+                            (error) => {
+                                console.error(`Service worker registration failed: ${error}`);
+                            },
+                        );
+                    } else {
+                        console.error("Service workers are not supported.");
                     }
-                });
-            </script>
+                </script>
+                {{-- END OF PWA --}}
+
+
+                <!-- Include necessary scripts -->
+                <script src="admin_res/js/jquery.min.js"></script>
+                <script src="admin_res/js/popper.js"></script>
+                <script src="admin_res/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    // Fetch user growth data from the server
+                    var userGrowthData = {!! json_encode($userGrowthData) !!};
+
+                    // User Growth Chart
+                    var userGrowthChart = new Chart(document.getElementById("userGrowthChart"), {
+                        type: 'line',
+                        data: {
+                            labels: userGrowthData.labels,
+                            datasets: [{
+                                label: 'User Growth Over Time',
+                                data: userGrowthData.data,
+                                borderColor: '#007BFF',
+                                fill: false
+                            }]
+                        }
+                    });
+                </script>
 
     </body>
 

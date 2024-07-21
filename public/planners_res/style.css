@@ -408,3 +408,14 @@ div[role="progressbar"] {
 .modal-content {
   width: 100%;
 }
+
+/* table spacings */
+.divider {
+  border-left: 3px solid grey;
+  border-radius: 30px;
+  width: 20px;
+}
+.goal_filter{
+  width: auto;
+}
+

@@ -12,50 +12,54 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
-<body>
-    <div id="content">
-        <div id="dock">
-    <ul class="list-unstyled components">
-        <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
-            <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span></a>
-        </li>
-        <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
-            <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span></a>
-        </li>
-        <li class="{{ Request::is('user_investmentplanner') ? 'active' : '' }}">
-            <a href="{{ url('/user_investmentplanner') }}"><span class="bi bi-building icon-class"></span></a>
-        </li>
-        <li class="{{ Request::is('user_networthcalc') ? 'active' : '' }}">
-            <a href="{{ url('/user_networthcalc') }}"><span class="bi bi-calculator icon-class"></span></a>
-        </li>
-        <li class="{{ Request::is('user_debtcalc') ? 'active' : '' }}">
-            <a href="{{ url('/user_debtcalc') }}"><span class="bi bi-bank icon-class"></span></a>
-        </li>
-        <li class="{{ Request::is('account_userdash') ? 'active' : '' }}">
-            <a href="{{ url('/account_userdash') }}"><span class="fa fa-book icon-class"></span></a>
-        </li>
-        <li>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <span class="fa fa-sign-out icon-class"></span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </li>
-    </ul>
-</div>
+    <body>
+        <div id="content">
+            <div id="dock">
+                <ul class="list-unstyled components">
+                    <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
+                        <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span></a>
+                    </li>
+                    <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
+                        <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span></a>
+                    </li>
+                    <li class="{{ Request::is('user_investmentplanner') ? 'active' : '' }}">
+                        <a href="{{ url('/user_investmentplanner') }}"><span
+                                class="bi bi-building icon-class"></span></a>
+                    </li>
+                    <li class="{{ Request::is('user_networthcalc') ? 'active' : '' }}">
+                        <a href="{{ url('/user_networthcalc') }}"><span class="bi bi-calculator icon-class"></span></a>
+                    </li>
+                    <li class="{{ Request::is('user_debtcalc') ? 'active' : '' }}">
+                        <a href="{{ url('/user_debtcalc') }}"><span class="bi bi-bank icon-class"></span></a>
+                    </li>
+                    <li class="{{ Request::is('account_userdash') ? 'active' : '' }}">
+                        <a href="{{ url('/account_userdash') }}"><span class="fa fa-book icon-class"></span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <span class="fa fa-sign-out icon-class"></span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="d-flex toggled" id="wrapper">
-            <nav id="sidebar" class="img" style="background-image: url(admin_res/images/bg_1.jpg);">
-                <div class="p-4">
-                    <a href="/"><img class="logo" src="admin_res/images/logo-white3.png" alt=""></a><span><br>User Dashboard</span>
-                    <ul class="list-unstyled components mb-5 flex-container">
+            <div class="d-flex toggled" id="wrapper">
+                <nav id="sidebar" class="img" style="background-image: url(admin_res/images/bg_1.jpg);">
+                    <div class="p-4">
+                        <a href="/"><img class="logo" src="admin_res/images/logo-white3.png"
+                                alt=""></a><span><br>User Dashboard</span>
+                        <ul class="list-unstyled components mb-5 flex-container">
                             <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
                                 <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span>
                                     Goal Setting</a>
                             </li>
                             <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
-                                <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span>
+                                <a href="{{ url('/user_budgetplanner') }}"><span
+                                        class="bi bi-wallet icon-class"></span>
                                     Budget Planner</a>
                             </li>
                             <li class="{{ Request::is('user_investmentplanner') ? 'active' : '' }}">
@@ -90,4 +94,5 @@
             </div>
         </div>
     </body>
+
 </html>

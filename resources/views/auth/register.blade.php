@@ -29,36 +29,37 @@
                 </div>
 
                 <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
-                @if (session('success'))
-    <div class="alert alert-success" id="success-alert">
-        {{ session('success')['message'] }}
-    </div>
+                    @if (session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success')['message'] }}
+                        </div>
 
-    <script>
-        setTimeout(function() {
-            $('#success-alert').fadeOut('fast');
-        }, {{ session('success')['duration'] }});
-    </script>
-@endif
-                @if (session('errors'))
-                    @if (session('errors')->has('password'))
-                        <div class="alert alert-danger">
-                            {{ session('errors')->first('password') }}
-                        </div>
+                        <script>
+                            setTimeout(function() {
+                                $('#success-alert').fadeOut('fast');
+                            }, {{ session('success')['duration'] }});
+                        </script>
                     @endif
-                    @if (session('errors')->has('email'))
-                        <div class="alert alert-danger">
-                            {{ session('errors')->first('email') }}
-                        </div>
-                    @endif 
-                @endif
+                    @if (session('errors'))
+                        @if (session('errors')->has('password'))
+                            <div class="alert alert-danger">
+                                {{ session('errors')->first('password') }}
+                            </div>
+                        @endif
+                        @if (session('errors')->has('email'))
+                            <div class="alert alert-danger">
+                                {{ session('errors')->first('email') }}
+                            </div>
+                        @endif
+                    @endif
                     @csrf
                     <span class="login100-form-title">
                         User Registration
-                    </span>                    
+                    </span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter Your full name">
-                        <input class="input100 @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Name" value="{{ old('name') }}" autocomplete=off>
+                    <div class="wrap-input100 validate-input" data-validate = "Enter Your full name">
+                        <input class="input100 @error('name') is-invalid @enderror" id="name" type="text"
+                            name="name" placeholder="Name" value="{{ old('name') }}" autocomplete=off>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -71,8 +72,9 @@
                     </div>
 
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                        <input class="input100 @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                        <input class="input100 @error('email') is-invalid @enderror" type="text" name="email"
+                            placeholder="Email" value="{{ old('email') }}">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -83,9 +85,12 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="wrap-input100 validate-input" data-validate = "Enter your phone number">
-                        <input class="input100 @error('phone') is-invalid @enderror" id="phone" type="text" name="phone" placeholder="Telephone" oninput="javascript: if (this.value.match(/[^0-9]/g)) this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" value="{{ old('phone') }}" autocomplete=off>
+                        <input class="input100 @error('phone') is-invalid @enderror" id="phone" type="text"
+                            name="phone" placeholder="Telephone"
+                            oninput="javascript: if (this.value.match(/[^0-9]/g)) this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            maxlength = "10" value="{{ old('phone') }}" autocomplete=off>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -96,9 +101,10 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password">
+                        <input class="input100 @error('password') is-invalid @enderror" type="password" name="password"
+                            placeholder="Password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -109,9 +115,11 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="wrap-input100 validate-input" data-validate = "Password does not match">
-                        <input class="input100 @error('password_confirmation') is-invalid @enderror" id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password">
+                        <input class="input100 @error('password_confirmation') is-invalid @enderror"
+                            id="password-confirm" type="password" name="password_confirmation"
+                            placeholder="Confirm Password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>

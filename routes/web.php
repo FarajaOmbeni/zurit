@@ -156,7 +156,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
     Route::post('/goal/store', [GoalController::class, 'storeGoal'])->name('storeGoal');
     Route::get('user_goalsetting', [GoalController::class, 'showGoalData'])->name('showGoalData');
-    Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount']);
+    Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount'])->name('addCurrentAmount');;
+    Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goal.destroy');
+    Route::get('/user_goalsetting', [GoalController::class, 'showGoalData'])->name('user_goalsetting');
+
 
     //Budget Planner Routes
     Route::post('/storeIncome', [BudgetController::class, 'storeIncome'])->name('storeIncome');
@@ -167,6 +170,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('user_debtcalc', [BudgetController::class, 'pushtoDebtCalc']);
     Route::delete('/income/{id}', [BudgetController::class, 'destroyIncome'])->name('income.destroy');
     Route::delete('/expenses/{id}', [BudgetController::class, 'destroyExpense'])->name('expenses.destroy');
+    Route::get('/api/currencies', [BudgetController::class, 'getCurrencies']);
+    Route::get('/api/currency-rate', [BudgetController::class, 'getCurrencyRate']);
 
     //Investment Calculator Routes
     Route::post('storemonthlyInvestment', [InvestmentController::class, 'storemonthlyInvestment'])->name('storemonthlyInvestment');

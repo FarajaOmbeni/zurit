@@ -48,14 +48,18 @@
                                     <div class="social_icon_main">
                                         <div class="social_icon">
                                             <ul>
-                                                <li><a href="https://www.linkedin.com/company/zuritconsultingke"><i class="bi bi-linkedin"></i></a></li>
-                                                <li><a href="https://www.facebook.com/ZuritConsultingKE/"><i class="bi bi-facebook"></i></a></li>
-                                                <li><a href="https://twitter.com/ZuritConsulting"><i class="bi bi-twitter"></i></a></li>
-                                                <li><a href="https://www.instagram.com/zuritconsultingke/"><i class="bi bi-instagram"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/company/zuritconsultingke"><i
+                                                            class="bi bi-linkedin"></i></a></li>
+                                                <li><a href="https://www.facebook.com/ZuritConsultingKE/"><i
+                                                            class="bi bi-facebook"></i></a></li>
+                                                <li><a href="https://twitter.com/ZuritConsulting"><i
+                                                            class="bi bi-twitter"></i></a></li>
+                                                <li><a href="https://www.instagram.com/zuritconsultingke/"><i
+                                                            class="bi bi-instagram"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="read_bt">
-                                        <a href="{{ route('blogdetails', ['slug' => $blog->slug]) }}">Read More</a>
+                                            <a href="{{ route('blogdetails', ['slug' => $blog->slug]) }}">Read More</a>
                                         </div>
                                     </div>
                                 </div>

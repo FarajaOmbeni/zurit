@@ -12,24 +12,32 @@ class GoalController extends Controller
 {
     public function showGoalData(){
         $goals = Goal::where('user_id', auth()->id())->get();
-        $projected_attainment_date = $this->calculateProjectedDates($goals);
+        $this->classifyGoals($goals);
     
-        // if ($goals->isEmpty()) {
-        //     return view('user_goalsetting', ['noDataMessage' => 'No goals set yet. Start setting your goals today😎!']);
-        // }else{
-
-            return view('user_goalsetting', ['goals' => $goals,]);
-        
+        $totalGoals = $goals->count();
+        $completedGoals = $goals->filter(function ($goal) {
+            return $goal->current_amount >= $goal->goal_amount;
+        })->count();
     
+        $completionPercentages = $goals->map(function ($goal) {
+            return ($goal->current_amount / $goal->goal_amount) * 100;
+        });
+    
+        return view('user_goalsetting', [
+            'goals' => $goals,
+            'totalGoals' => $totalGoals,
+            'completedGoals' => $completedGoals,
+            'completionPercentages' => $completionPercentages,
+        ]);
     }
+    
     
     public function storeGoal(Request $request){
         $validatedData = $request->validate([
-            'category' => 'required|string',
             'title' => 'required|string',
             'goal_amount'=> 'required|numeric',
             'current_amount'=> 'nullable|numeric',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'deadline' => 'required|date',
         ]);
 
@@ -37,7 +45,7 @@ class GoalController extends Controller
 
         Goal::create($validatedData);
 
-        return redirect('/user_goalsetting')->with('success', [
+        return redirect('user_goalsetting')->with('success', [
             'message' => 'Goal Set Successfully!',
             'duration' => 2000,
         ]);
@@ -51,7 +59,7 @@ class GoalController extends Controller
         $goal->save();
     
         
-        return redirect('/user_goalsetting')->with([
+        return redirect('user_goalsetting')->with([
             'success' => [
                 'amount_message' => 'Successfully added amount to the goal',
                 'duration' => 2000,
@@ -84,33 +92,44 @@ class GoalController extends Controller
     }
     
 
-public function classifyGoals()
+    public function classifyGoals($goals)
     {
-        $goals = Goal::all();
-
         foreach ($goals as $goal) {
             $createdAt = Carbon::parse($goal->created_at);
-            $currentDate = Carbon::now();
-            $durationInDays = $createdAt->diffInDays($currentDate);
+            $deadline = Carbon::parse($goal->deadline);
+            $durationInDays = $createdAt->diffInDays($deadline);
 
-            // Define time intervals for each period
-            $shortTermThreshold = 30; // For example, less than 30 days
-            $mediumTermThreshold = 180; // For example, between 30 and 180 days
-            // Long-term for anything greater than 180 days
+            $shortTermThreshold = 30; 
+            $middleTermThreshold = 180; 
 
-            // Classify the goal based on the duration
             if ($durationInDays <= $shortTermThreshold) {
-                $goal->period = 'Short-term';
-            } elseif ($durationInDays <= $mediumTermThreshold) {
-                $goal->period = 'Medium-term';
+                $goal->period = 'short-term';
+            } elseif ($durationInDays <= $middleTermThreshold) {
+                $goal->period = 'medium-term';
             } else {
-                $goal->period = 'Long-term';
+                $goal->period = 'long-term';
             }
 
-            // Save the classification
             $goal->save();
         }
+    }
 
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $goal = Goal::findOrFail($id);
+        $goal->delete();
+
+        return redirect()->route('user_goalsetting')->with('success', [
+            'message' => 'Goal Deleted Successfully!',
+            'duration' => 3000,
+        ]);
     }
 
 }

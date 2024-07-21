@@ -91,7 +91,8 @@
                         designed
                         for easy navigation and user-friendly interfaces.
                     </p>
-                    <a href="{{ Auth::check() ? url('user_networthcalc') : url('login') }}" class="button">Go to Net Worth Calculator</a>
+                    <a href="{{ Auth::check() ? url('user_networthcalc') : url('login') }}" class="button">Go to Net
+                        Worth Calculator</a>
                 </section>
 
             </div>
