@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationEmail;
@@ -52,6 +53,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
 {
+    // Log::info('Validation data:', $data);
+
     $messages = [
         'password.confirmed' => 'The passwords do not match.',
         'email.unique' => 'A user with this email already exists.',
@@ -75,7 +78,6 @@ class RegisterController extends Controller
     if ($validator->fails()) {
         throw new \Illuminate\Validation\ValidationException($validator);
     }
-
     return $validator;
 }
 
@@ -87,18 +89,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Log::info('Creating user:', $data);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->sendEmailVerificationNotification();
+
+        return $user;
+
+        // Log::info('User created successfully.', ['user_id' => $user->id]);
     }
 
 protected function registered(Request $request, $user)
 {
-    Mail::to($user->email)->send(new VerificationEmail($user));
+    // Log::info('User registered successfully.', ['user_id' => $user->id]);
+    // Mail::to($user->email)->send(new VerificationEmail($user));
 
-    return redirect($this->redirectPath())->with('status', 'Verification link sent to your email.');
+    return redirect($this->redirectPath())->with('success', [
+        'message' => 'Verification link sent to your email.',
+        'duration' => 3000,
+    ]);;
 }
 }

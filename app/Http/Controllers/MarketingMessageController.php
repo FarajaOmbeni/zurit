@@ -9,6 +9,7 @@ use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MarketingMessage as MarketingMessageMail;
+use App\Jobs\SendMarketingMessageJob;
 
 class MarketingMessageController extends Controller
 {
@@ -35,10 +36,10 @@ class MarketingMessageController extends Controller
         // Get the users or subscriptions to send the message to
         if ($request->input('send_to') === 'all') {
             $users = User::all();
-            $subscriptions = Subscription::all();
-            foreach ($subscriptions as $subscription) {
-                $users[] = (object) ['id' => null, 'email' => $subscription->email];
-            }
+            // $subscriptions = Subscription::all();
+            // foreach ($subscriptions as $subscription) {
+            //     $users[] = (object) ['id' => null, 'email' => $subscription->email];
+            // }
         } else if ($request->input('send_to') === 'subscribed') {
             $subscriptions = Subscription::all();
             foreach ($subscriptions as $subscription) {

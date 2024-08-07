@@ -24,6 +24,8 @@ use App\Http\Controllers\NetworthController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
@@ -40,7 +42,6 @@ use App\Http\Controllers\GoalController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', [IndexController::class, 'index']);
 Route::post('/', [IndexController::class, 'storeEvent']);
 Route::get('/logout', [HomeController::class, 'logout']);
@@ -72,7 +73,7 @@ Route::get('feedback', function () {
 });
 
 Route::get('login', function () {
-    return view('login');
+    return view('login')->middleware('no.cache');
 });
 
 Route::get('register', function () {
@@ -156,7 +157,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
     Route::post('/goal/store', [GoalController::class, 'storeGoal'])->name('storeGoal');
     Route::get('user_goalsetting', [GoalController::class, 'showGoalData'])->name('showGoalData');
-    Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount'])->name('addCurrentAmount');;
+    Route::post('/goals/{id}/add', [GoalController::class, 'addcurrentamount'])->name('addCurrentAmount');
     Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goal.destroy');
     Route::get('/user_goalsetting', [GoalController::class, 'showGoalData'])->name('user_goalsetting');
 
@@ -204,9 +205,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/add_one_contact', [MarketingController::class, 'add_one_contact']);
     Route::post('/upload_contacts', [MarketingController::class, 'upload_contacts']);
 
-    //Password reset Routes
-    Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
-
     //Contact Messages for admin Routes
     Route::get('contacts_admindash', function () {
         return view('contacts_admindash');
@@ -244,6 +242,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('extraPayment_store', [DebtController::class, 'storeExtraPayment'])->name('extraPayment_store');
 });
 
+//Password reset Routes
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
 //Imge optimization
 Route::get('optimize-images', [ImageController::class, 'optimizeImagesInDirectory'])->name('optimizeImages');
 
@@ -272,11 +277,12 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('status', 'Verification link sent!');
+    return back()->with('success', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('status', 'Verification link sent!');
+    return back()->with('success', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+

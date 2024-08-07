@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-        <title>Register</title>
-        <link rel="stylesheet" type="text/css" href="login_res/vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="login_res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="login_res/vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="login_res/vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="login_res/vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="login_res/css/util.css">
-        <link rel="stylesheet" type="text/css" href="login_res/css/main.css">
-        <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-        <!-- PWA  -->
-        <meta name="theme-color" content="#fff" />
-        <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-        <link rel="manifest" href="{{ asset('/manifest.json') }}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="login_res/css/util.css">
+    <link rel="stylesheet" type="text/css" href="login_res/css/main.css">
+    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+</head>
 
+<body>
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -28,7 +29,7 @@
                     <a href="{{ url('/') }}"><img src="login_res/images/logo-white2.png" alt="IMG"></a>
                 </div>
 
-                <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
+                <form class="login100-form validate-form" method="POST" action="{{ route('register') }}" autocomplete="off">
                     @if (session('success'))
                         <div class="alert alert-success" id="success-alert">
                             {{ session('success')['message'] }}
@@ -59,7 +60,7 @@
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter Your full name">
                         <input class="input100 @error('name') is-invalid @enderror" id="name" type="text"
-                            name="name" placeholder="Name" value="{{ old('name') }}" autocomplete=off>
+                            name="name" placeholder="Name" value="{{ old('name') }}" autocomplete="off">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -71,10 +72,9 @@
                         @enderror
                     </div>
 
-
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                         <input class="input100 @error('email') is-invalid @enderror" type="text" name="email"
-                            placeholder="Email" value="{{ old('email') }}">
+                            placeholder="Email" value="{{ old('email') }}" autocomplete="off">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -88,9 +88,9 @@
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter your phone number">
                         <input class="input100 @error('phone') is-invalid @enderror" id="phone" type="text"
-                            name="phone" placeholder="Telephone"
+                            name="phone" placeholder="07............."
                             oninput="javascript: if (this.value.match(/[^0-9]/g)) this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                            maxlength = "10" value="{{ old('phone') }}" autocomplete=off>
+                            maxlength = "10" value="{{ old('phone') }}" autocomplete="off">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -104,7 +104,7 @@
 
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
                         <input class="input100 @error('password') is-invalid @enderror" type="password" name="password"
-                            placeholder="Password">
+                            placeholder="Password" autocomplete="new-password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -119,7 +119,7 @@
                     <div class="wrap-input100 validate-input" data-validate = "Password does not match">
                         <input class="input100 @error('password_confirmation') is-invalid @enderror"
                             id="password-confirm" type="password" name="password_confirmation"
-                            placeholder="Confirm Password">
+                            placeholder="Confirm Password" autocomplete="new-password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -191,3 +191,5 @@
         })
     </script>
     <script src="login_res/js/main.js"></script>
+</body>
+</html>

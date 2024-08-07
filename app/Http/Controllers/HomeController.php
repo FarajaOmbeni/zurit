@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user_budgetplanner');
+        return view('/');
     }
 
     public function logout(Request $request): RedirectResponse

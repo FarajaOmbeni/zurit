@@ -110,7 +110,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'verify@zuritconsulting.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@zuritconsulting.com'),
         'name' => env('MAIL_FROM_NAME', 'Zurit'),
     ],
 

@@ -135,11 +135,11 @@
                                 @for ($i = 0; $i < $maxCount; $i++)
                                     <tr>
                                         <td>{{ $i < $assetCount ? $assets[$i]->asset_description : '' }}</td>
-                                        <td>{{ $i < $assetCount ? $assets[$i]->asset_value : '' }}</td>
+                                        <td>{{ $i < $assetCount ? number_format($assets[$i]->asset_value) : '' }}</td>
                                         <td></td> <!-- Empty cell for spacing -->
                                         <td>{{ $i < $liabilityCount ? $liabilities[$i]->liability_description : '' }}
                                         </td>
-                                        <td>-{{ $i < $liabilityCount ? $liabilities[$i]->liability_value : '' }}</td>
+                                        <td>-{{ $i < $liabilityCount ? number_format($liabilities[$i]->liability_value) : '' }}</td>
                                     </tr>
                                 @endfor
                             </tbody>
@@ -147,10 +147,10 @@
                             <tfoot>
                                 <tr>
                                     <th>Total Assets</th>
-                                    <td>{{ $assets->sum('asset_value') }}</td>
+                                    <td>{{ number_format($assets->sum('asset_value')) }}</td>
                                     <td></td> <!-- Add an empty cell for spacing -->
                                     <th>Total Liabilities</th>
-                                    <td>-{{ $liabilities->sum('liability_value') }}</td>
+                                    <td>-{{ number_format($liabilities->sum('liability_value')) }}</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -174,9 +174,9 @@
                                 @endphp
 
                                 <h5 class="card-title">Net Worth for {{ $currentMonthYear }}</h5>
-                                <p class="card-text">Total Assets: {{ number_format($totalAssets, 2) }}</p>
-                                <p class="card-text">Total Liabilities: -{{ number_format($totalLiabilities, 2) }}</p>
-                                <h4 class="card-text">Net Worth: {{ number_format($netWorth, 2) }}</h4>
+                                <p class="card-text">Total Assets: {{ number_format($totalAssets) }}</p>
+                                <p class="card-text">Total Liabilities: -{{ number_format($totalLiabilities) }}</p>
+                                <h4 class="card-text">Net Worth: {{ number_format($netWorth) }}</h4>
                             </div>
                     </div>
 

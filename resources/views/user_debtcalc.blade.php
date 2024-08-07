@@ -107,6 +107,7 @@
                     </div>
 
                     <!-- Payoff Progress Card -->
+                     <h2>Total Debt</h2>
                     <div class="card mt-3 custom-card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
@@ -123,10 +124,10 @@
                                     </div>
                                     <div class="text-container">
                                         <!-- Principal Paid -->
-                                        <p class="custom-text">Principal Paid: {{ number_format($principalPaid, 2) }}
+                                        <p class="custom-text">Principal Paid: {{ number_format($principalPaid) }}
                                         </p>
                                         <!-- Balance -->
-                                        <p class="custom-text">Balance: {{ number_format($remainingBalance, 2) }}</p>
+                                        <p class="custom-text">Balance: {{ number_format($remainingBalance) }}</p>
                                     </div>
                                 @endif
                             </div>
@@ -134,6 +135,7 @@
                     </div>
 
                     <!-- Categories Cards -->
+                    <h2>Pending debts</h2>
                     <div class="row mt-3">
                         @foreach ($debts as $debt)
                             <div class="col-md-4">
@@ -147,7 +149,7 @@
                                             $months = $now->copy()->addYears($years)->diffInMonths($endPeriod);
                                         @endphp
                                         <p>Paid off in {{ $years }} years {{ $months }} months</p>
-                                        <p>Amount Due {{ $debt->current_balance }}</p>
+                                        <p>Amount Due {{ number_format($debt->current_balance) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +173,7 @@
                     @endphp
 
                     <!-- Pay Off Card -->
+                    <h2>Debt Priority Tracker</h2>
                     <div class="card mt-3">
                         <div class="card-body">
                             @if ($nextDebt)
@@ -193,6 +196,7 @@
                     @endphp
 
                     <!-- Interest Card -->
+                    <h2>Monthly Interest</h2>
                     <div class="card mt-3">
                         <div class="card-body">
                             <h5 class="card-title">Next 30 days Total Interest</h5>
@@ -203,11 +207,12 @@
                                 @endforeach
                                 <option value="{{ $totalInterest }}">All</option>
                             </select>
-                            <p id="interestDisplay">{{ number_format($totalInterest, 2) }}</p>
+                            <p id="interestDisplay">{{ number_format($totalInterest) }}</p>
                         </div>
                     </div>
 
                     <!-- Payment Card -->
+                    <h2>Monthly Payments</h2>
                     @php
                         $debts = \App\Models\Debt::where('user_id', Auth::id())->get();
                         $totalPayment = $debts->sum(function ($debt) {
@@ -227,7 +232,7 @@
                                 @endforeach
                                 <option value="{{ $totalPayment }}">All</option>
                             </select>
-                            <p id="paymentDisplay">{{ number_format($totalPayment, 2) }}</p>
+                            <p id="paymentDisplay">{{ number_format($totalPayment) }}</p>
                         </div>
                     </div>
                 </div>

@@ -44,25 +44,36 @@
                         <script>
                             setTimeout(function() {
                                 $('#error-alert').fadeOut('fast');
-                            }, 3000);  // Set the duration to 3 seconds
+                            }, 3000); // Set the duration to 3 seconds
+                        </script>
+                    @endif
+                    @if (session('status'))
+                        <div class="alert alert-success" id="status-alert">
+                            {{ session('status') }}
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                $('#status-alert').fadeOut('fast');
+                            }, 3000); // Set the duration to 3 seconds
                         </script>
                     @endif
 
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
+                        <input class="input100" type="text" name="email" placeholder="Email">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
+                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
 
                     <div class="wrap-input100">
                         <div class="form-check">
@@ -78,9 +89,18 @@
                         </button>
                     </div>
 
-                    <div class="container-login100-form-btn">
+                    <!-- <div class="container-login100-form-btn">
                         <a href="{{ url('auth/google') }}" class="login100-form-btn">
                             <i class="fa fa-google" style="margin-right:20px; font-size:30px;"></i> Google Sign In
+                        </a>
+                    </div> -->
+
+                    <div class="text-center">
+                        <a class="txt2" href="{{ url('register') }}">
+                            <span class="txt1">
+                                Not registered?
+                            </span> Click Here to Create your Account
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                         </a>
                     </div>
 
@@ -90,13 +110,6 @@
                         </span>
                         <a class="txt2" href="{{ route('password.request') }}">
                             Username / Password?
-                        </a>
-                    </div>
-
-                    <div class="text-center p-t-136">
-                        <a class="txt2" href="{{ url('register') }}">
-                            Create your Account
-                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                         </a>
                     </div>
                 </form>

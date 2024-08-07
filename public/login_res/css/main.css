@@ -280,7 +280,6 @@ iframe {
 
 .symbol-input100 {
   font-size: 15px;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -291,6 +290,7 @@ iframe {
   border-radius: 25px;
   bottom: 0;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   padding-left: 35px;

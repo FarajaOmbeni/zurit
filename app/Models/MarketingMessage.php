@@ -14,4 +14,8 @@ class MarketingMessage extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function marketingMessages()
+    {
+        return $this->hasMany(MarketingMessage::class);
+    }
 }

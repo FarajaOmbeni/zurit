@@ -185,7 +185,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class
+        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class,
     ])->toArray(),
 
 ];

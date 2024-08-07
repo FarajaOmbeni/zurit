@@ -131,10 +131,10 @@
                                             @forelse($goals as $goal)
                                                 <tr class="goal-row" data-period="{{ strtolower($goal->period) }}">
                                                     <td>{{ $goal->title }}</td>
-                                                    <td>{{ $goal->goal_amount }}</td>
+                                                    <td>{{ number_format($goal->goal_amount) }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($goal->deadline)->format('d M Y') }}
                                                     </td>
-                                                    <td>{{ $goal->current_amount }}</td>
+                                                    <td>{{ number_format($goal->current_amount) }}</td>
                                                     <td>
                                                         <!-- Form for adding contributions -->
                                                         <form action="{{ route('addCurrentAmount', $goal->id) }}"

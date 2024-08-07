@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
-        'signed' => \App\Http\Middleware\ValidateSignature::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         /*midleware for roles*/
@@ -70,5 +70,7 @@ class Kernel extends HttpKernel
         'editor' => \App\Http\Middleware\Editor::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'permission' => \App\Http\Middleware\Permission::class,
+        'no.cache' => \App\Http\Middleware\NoCache::class,
+        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
     ];
 }
