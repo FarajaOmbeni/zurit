@@ -1,27 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/socialite/compare/v5.15.0...5.x)
-
-## [v5.15.0](https://github.com/laravel/socialite/compare/v5.14.0...v5.15.0) - 2024-06-11
-
-* Support the custom parameters of the access token request by [@maximepvrt](https://github.com/maximepvrt) in https://github.com/laravel/socialite/pull/707
-
-## [v5.14.0](https://github.com/laravel/socialite/compare/v5.13.2...v5.14.0) - 2024-05-03
-
-* Update Socialite Providers URL by [@DamianKRTurner](https://github.com/DamianKRTurner) in https://github.com/laravel/socialite/pull/703
-* [5.x] Add Slack OpenID provider by [@maartenpaauw](https://github.com/maartenpaauw) in https://github.com/laravel/socialite/pull/704
-
-## [v5.13.2](https://github.com/laravel/socialite/compare/v5.13.1...v5.13.2) - 2024-04-26
-
-* Update Socialite.php by [@adic3x](https://github.com/adic3x) in https://github.com/laravel/socialite/pull/701
-
-## [v5.13.1](https://github.com/laravel/socialite/compare/v5.13.0...v5.13.1) - 2024-04-24
-
-* Correct issue with GoogleProvider getUserByToken() method by [@ChengKaiChiang](https://github.com/ChengKaiChiang) in https://github.com/laravel/socialite/pull/700
-
-## [v5.13.0](https://github.com/laravel/socialite/compare/v5.12.1...v5.13.0) - 2024-04-15
-
-* Support OIDC token in Facebook provider (Facebook Limited Login) by [@gdebrauwer](https://github.com/gdebrauwer) in https://github.com/laravel/socialite/pull/698
+## [Unreleased](https://github.com/laravel/socialite/compare/v5.12.1...5.x)
 
 ## [v5.12.1](https://github.com/laravel/socialite/compare/v5.12.0...v5.12.1) - 2024-02-16
 

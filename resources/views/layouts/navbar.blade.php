@@ -65,7 +65,7 @@
                             </ul>
                         </div>
 
-                        <div class="offcanvas-link"><a href="{{ url('books') }}">Books</a></div>
+                        <div class="offcanvas-link"><a href="{{ url('books') }}">Buy Book</a></div>
                         <div class="offcanvas-link"><a href="{{ url('blogs') }}">Blogs</a></div>
                         <div class="nav-menu">
                             <input id="toggle" type="checkbox" checked>
@@ -133,7 +133,7 @@
                 </li>-->
 
                         <li class="nav-item {{ Request::is('books') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('books') }}">Books</a>
+                            <a class="nav-link" href="{{ url('books') }}">Buy Book</a>
                         </li>
                         <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('blogs') }}">Blogs</a>

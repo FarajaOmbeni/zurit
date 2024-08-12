@@ -19,8 +19,7 @@ body h2 {
 
 body .sub-header {
     color: #777;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding: 15px 0px;
 }
 
 html::-webkit-scrollbar {
@@ -109,6 +108,24 @@ nav .navbar-nav .nav-item .btn-item {
 }
 .nav-dark {
     background-color: #0c2533;
+}
+
+.testimonial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.testimonial-text {
+    text-align: justify;
+}
+
+
+
+.text {
+    border-right: 2px solid #000;
 }
 
 /* Custom CSS for the Prosperity Tools dropdown */
@@ -253,16 +270,33 @@ header .header-btn svg {
     background-size: auto 80%;
     background-position: center;
     padding-top: 50px;
-    border-bottom: 1px solid #0c2533;
-    padding-bottom: 50px;
+    border-bottom: 1px solid #000;
 }
 
 .light-gray-section {
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
+    display: flex; /* Use flexbox to align children side by side */
+    justify-content: space-between;
     background-color: #f7fafe;
+    border-bottom: 1px solid #000;
+    margin-bottom: 100px;
+}
+
+.whychooseus-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.light-1, .light-2 {
+    flex: 1; /* Allow both sections to take equal space */
+    margin: 80px 30px;
+}
+
+.light-1 {
+    margin-top: 80px;
+    border-right: 1px solid #000;
 }
 
 .light-gray-section li {
@@ -278,64 +312,6 @@ header .header-btn svg {
 
 .light-gray-section .bg-img img {
     width: 90%;
-}
-
-.bottom {
-    position: relative;
-}
-
-.bottom .img-circle-left img {
-    position: absolute;
-    height: 80%;
-    top: auto;
-    left: 0;
-    -webkit-transform: translate(-50%);
-    transform: translate(-50%);
-}
-
-.bottom .img-circle-right img {
-    position: absolute;
-    height: 80%;
-    top: auto;
-    right: 0;
-    -webkit-transform: translate(50%);
-    transform: translate(50%);
-}
-
-.bottom h2 {
-    font-weight: bold;
-    padding-bottom: 30px;
-}
-
-.testimonial .client .photo {
-    width: 280px;
-    height: 250px;
-    border-radius: 10px;
-    margin: auto;
-}
-
-.testimonial .client .photo img {
-    width: 100%;
-}
-
-.testimonial .client .name {
-    font-weight: 600;
-    font-size: 1.5em;
-    padding: 10px 0px;
-    margin: 0;
-}
-
-.testimonial .client .position {
-    font-size: 0.8em;
-}
-
-.testimonial .testimonial-text {
-    padding: 20px 5px;
-    font-size: 0.8em;
-}
-
-.testimonial .quote {
-    display: none;
 }
 
 .controllers {
@@ -407,31 +383,6 @@ footer .copyright p a:hover {
     }
     .bottom {
         text-align: left;
-    }
-    .testimonial {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-    }
-    .testimonial .client .photo {
-        width: 280px;
-        height: 250px;
-        border-radius: 7px;
-    }
-    .testimonial .client .photo img {
-        width: 100%;
-    }
-    .testimonial .client .name {
-        font-weight: 600;
-        font-size: 1.5em;
-        padding: 10px 0px;
-        margin: 0;
-    }
-    .testimonial .client .position {
-        font-size: 0.8em;
-    }
-    .testimonial .testimonial-text {
-        padding: 20px 80px;
     }
     .controllers {
         position: absolute;
@@ -516,10 +467,10 @@ footer .copyright p a:hover {
     visibility: hidden;
     opacity: 0;
 }
-.offcanvas{
+.offcanvas {
     width: 50%;
 }
-.close-canvas{
+.close-canvas {
     color: white;
     background-color: #0c2533;
     border: none;
@@ -533,7 +484,7 @@ footer .copyright p a:hover {
     color: white !important;
 }
 
-.download_button{
+.download_button {
     background-color: #0c2533;
     color: white;
     border: none;
@@ -557,14 +508,39 @@ footer .copyright p a:hover {
 .offcanvas-body {
     display: grid;
 }
-.offcanvas-body, .offcanvas-header{
+.offcanvas-body,
+.offcanvas-header {
     background-color: #0c2533;
     color: white;
 }
+
+
 @media (max-width: 767px) {
-    .video{
+    .video {
         display: flex;
         justify-content: center;
+    }
+    body .sub-header {
+        color: #777;
+        padding: 15px 0px;
+    }
+    .testimonial-text {
+        width: 80%;
+    }
+    .testimonials-header {
+        margin-top: 40px;
+    }
+    .whychooseus-list {
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .light-1 {
+        border-right: none;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        width: 80%;
     }
     .contact-icons {
         display: flex;
@@ -588,13 +564,33 @@ footer .copyright p a:hover {
     .bottom {
         text-align: left;
     }
+    .text {
+        width: 90%;
+    }
+
     .light-gray-section {
         position: relative;
-        text-align: left;
+        display: flex;
+        padding-top: 40px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    .light-gray-section .text {
-        z-index: 5;
+
+    .light-gray-section .container {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
     }
+
+    .light-gray-section .row {
+        flex-direction: column; /* Ensure row items stack vertically */
+    }
+
+    .light-gray-section .col-lg-6 {
+        width: 100%; /* Make columns full width */
+        margin-bottom: 20px; /* Add spacing between stacked items */
+    }
+
     .light-gray-section .bg-img {
         position: absolute;
         top: 0;
@@ -603,21 +599,8 @@ footer .copyright p a:hover {
     .light-gray-section .bg-img img {
         width: 90%;
     }
-    .quote img{
+    .quote img {
         display: none;
-    }
-    .testimonial .quote {
-        display: block;
-    }
-    .testimonial .testimonial-text {
-        font-size: 1em;
-        text-align: center;
-    }
-    .container h2{
-        text-align: center;
-    }
-    .testimonial .client .name, .testimonial .client .position {
-        text-align: center;
     }
     .controllers {
         display: none;
@@ -625,12 +608,11 @@ footer .copyright p a:hover {
     .training-link {
         font-size: 15px;
     }
-    .header{
+    .header {
         max-width: 100%;
     }
 
-    .photo{
-        display: flex;
+    .photo {
         justify-content: center;
     }
 }
@@ -665,12 +647,6 @@ footer .copyright p a:hover {
     }
     .light-gray-section .bg-img img {
         width: 90%;
-    }
-    .testimonial .quote {
-        display: block;
-    }
-    .testimonial .testimonial-text {
-        font-size: 1em;
     }
 }
 
@@ -742,6 +718,7 @@ footer .copyright p a:hover {
 /*contact us section*/
 .contact-us {
     padding-bottom: 40px;
+    margin-bottom: 50px;
 }
 .contact-us h2 {
     margin-bottom: 20px;
@@ -831,18 +808,21 @@ footer .copyright p a:hover {
     color: #f2ae30;
 }
 
-.map_image{
+.map_image {
     width: 100%;
 }
 /*end contact us section*/
 
 /*Partners*/
-.partners_container{
+.partners_container {
     background-color: white;
     margin-top: 20px;
+    border-top: 1px solid #000;
 }
 .partners-grid {
     display: flex;
+    justify-content: center;
+    align-items: center;
     animation: scroll 30s linear infinite; /* Adjust duration and timing function as needed */
 }
 .partners-grid:hover {
@@ -861,10 +841,11 @@ footer .copyright p a:hover {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-100% - 20px)); /* Adjust the value based on the width of the images and margin */
+        transform: translateX(
+            calc(-100% - 20px)
+        ); /* Adjust the value based on the width of the images and margin */
     }
 }
-
 
 .book_card {
     border-radius: 10px;

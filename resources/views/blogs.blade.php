@@ -94,14 +94,14 @@
                                 </div>
                             </div>
                         @endforeach
-                        <h4>Our Values</h4>
+                        {{-- <h4>Our Values</h4>
                         <ul class="text-list">
                             <li>Excellence</li>
                             <li>Innovation</li>
                             <li>Collaboration</li>
                             <li>Accountability</li>
                             <li>Impact</li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div>
