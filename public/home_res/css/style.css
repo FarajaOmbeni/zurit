@@ -295,7 +295,6 @@ header .header-btn svg {
 }
 
 .light-1 {
-    margin-top: 80px;
     border-right: 1px solid #000;
 }
 
@@ -525,10 +524,7 @@ footer .copyright p a:hover {
         padding: 15px 0px;
     }
     .testimonial-text {
-        width: 80%;
-    }
-    .testimonials-header {
-        margin-top: 40px;
+        width: 90%;
     }
     .whychooseus-list {
         margin-bottom: 40px;
@@ -541,6 +537,9 @@ footer .copyright p a:hover {
         text-align: center;
         border-bottom: 1px solid #000;
         width: 80%;
+    }
+    .light-2 {
+        margin-top: 10px;
     }
     .contact-icons {
         display: flex;
