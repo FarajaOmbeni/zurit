@@ -38,7 +38,7 @@ class ContactController extends Controller
     
             $contact = Contact::create($validatedData);
     
-            Mail::to('otaodavis.od@gmail.com')->send(new ContactFormMail(
+            Mail::to('info@zuritconsulting.com')->send(new ContactFormMail(
                 $request->input('name'),
                 $request->input('email'),
                 $request->input('userMessage')

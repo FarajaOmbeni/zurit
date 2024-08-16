@@ -132,6 +132,7 @@ Route::get('books', [BookController::class, 'index']);
 Route::get('bookdetails/{id}', [BookController::class, 'show'])->name('bookdetails');
 Route::get('booklist', [BookController::class, 'index'])->name('booklist');
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -209,7 +210,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('contacts_admindash', function () {
         return view('contacts_admindash');
     })->name('contacts_admindash');
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
     Route::get('/contacts_admindash', [ContactController::class, 'showAdminDashboard'])->name('contacts_admindash');
 
@@ -257,7 +257,7 @@ Route::post('stkpush', [PaymentController::class, 'stkPushRequest']);
 Route::post('callback', [PaymentController::class, 'callback']);
 
 // training enrollment
-Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll');
+Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll.store');
 
 //google auth sign in
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);

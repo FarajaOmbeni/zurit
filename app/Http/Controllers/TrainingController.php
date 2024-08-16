@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Training;
+use Illuminate\Http\Request;
+use App\Mail\TrainingEnrollment;
+use Illuminate\Support\Facades\Mail;
 
 class TrainingController extends Controller
 {
     public function store(Request $request)
     {
         // Validate the request data
-        $request->validate([
+        $validatedData = $request->validate([
             'training' => 'required|string',
             'email' => 'required|email',
             'phone' => 'nullable|numeric',
         ]);
     
         // Store the data in the database
-        Training::create($request->all());
+        Training::create($validatedData);
+
+        Mail::to('ombenigamer@gmail.com')->send(new TrainingEnrollment($validatedData));
     
         // Return a response
         return response()->json([
