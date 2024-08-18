@@ -13,46 +13,48 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    public function index(){
-    $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
-    return view('blogs', compact('blogs'));
-}
+    public function index()
+    {
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
+        return view('blogs', compact('blogs'));
+    }
 
-    public function create(){
+    public function create()
+    {
         return view('blogs');
     }
     public function store(Request $request)
-{
-    $request->validate([
-        'blog_tag' => 'required',
-        'blog_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'blog_title' => 'required',
-        'blog_message' => 'required',
-    ]);
+    {
+        $request->validate([
+            'blog_tag' => 'required',
+            'blog_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'blog_title' => 'required',
+            'content' => 'required',
+        ]);
 
-    $imageName = ''; // Initialize image name variable
+        $imageName = ''; // Initialize image name variable
 
-    // Handle file upload
-    if ($request->hasFile('blog_image')) {
-        $image = $request->file('blog_image');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('blogs_res/img'), time() . '_' . $imageName);
+        // Handle file upload
+        if ($request->hasFile('blog_image')) {
+            $image = $request->file('blog_image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('blogs_res/img'), time() . '_' . $imageName);
+        }
+
+        // Create blog with file path
+        Blog::create([
+            'blog_tag' => $request->input('blog_tag'),
+            'blog_image' => $imageName,
+            'blog_title' => $request->input('blog_title'),
+            'slug' => $request->input('blog_title'),
+            'blog_message' => $request->input('content'),
+        ]);
+
+        return redirect()->route('blogs_admindash')->with('success', [
+            'message' => 'Blog Created Successfully!',
+            'duration' => 3000,
+        ]);
     }
-
-    // Create blog with file path
-    Blog::create([
-        'blog_tag' =>$request->input('blog_tag'),
-        'blog_image' => $imageName,
-        'blog_title' => $request->input('blog_title'),
-        'slug' =>$request->input('blog_title'),
-        'blog_message' => $request->input('blog_message'),
-    ]);
-
-    return redirect()->route('blogs_admindash')->with('success', [
-        'message' => 'Blog Created Successfully!',
-        'duration' => 3000,
-    ]);
-}
     public function show($id)
     {
         return view('blogs');
@@ -82,13 +84,13 @@ class BlogController extends Controller
             'blog_image' => 'required|image',
             'blog_tag' => 'required',
             'blog_title' => 'required',
-            'blog_message' => 'required',
+            'content' => 'required',
         ]);
 
         $blog->blog_image = $request->file('blog_image')->store('public/blogs');
         $blog->blog_tag = $request->blog_tag;
         $blog->blog_title = $request->blog_title;
-        $blog->blog_message = $request->blog_message;
+        $blog->blog_message = $request->content;
 
         $blog->save();
 
@@ -97,7 +99,7 @@ class BlogController extends Controller
             'duration' => 3000,
         ]);
     }
-    
+
     public function destroy($id)
     {
         try {
@@ -114,11 +116,10 @@ class BlogController extends Controller
             ]);
         }
     }
-   
-    public function view($slug){
-    $blog = Blog::where('slug', $slug)->firstOrFail();
-    return view('blog_view', compact('blog'));
-}
 
-
+    public function view($slug)
+    {
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+        return view('blog_view', compact('blog'));
+    }
 }

@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Message Content</label>
-                        <textarea name="content" id="editor" class="form-control"></textarea>
+                        @include('layouts.editor')
                     </div>
                     <button type="submit" name="send_to" value="all" class="btn btn-primary">Send Email to All
                         Users</button>
@@ -85,11 +85,7 @@
         </script>
         {{-- END OF PWA --}}
 
-        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
-        <script>
-            CKEDITOR.replace('content');
-        </script>
     </body>
 
 </html>

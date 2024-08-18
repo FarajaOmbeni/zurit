@@ -46,7 +46,7 @@ class MarketingMessageController extends Controller
                 $users[] = (object) ['id' => null, 'email' => $subscription->email];
             }
         }
-    
+
 
         foreach ($users as $user) {
             if ($user->id !== null) {
@@ -56,18 +56,18 @@ class MarketingMessageController extends Controller
                     'user_id' => $user->id,
                 ]);
             }
-        
+
             // Get the user's email address
             $userEmail = $user->email;
-        
+
             // Log information about the email sending process
             Log::info("Sending email to user ID $user->id, Email: $userEmail");
-        
+
             // Send email to the user
             try {
                 Mail::to($userEmail)->send(new MarketingMessageMail(
                     $request->input('title'),
-                    $request->input('content'), 
+                    $request->input('content'),
                 ));
                 Log::info("Email sent successfully to user ID $user->id, Email: $userEmail");
             } catch (\Exception $e) {
@@ -75,7 +75,7 @@ class MarketingMessageController extends Controller
             }
         }
 
-    
+
         return redirect()->route('marketing_admindash')->with('success', [
             'message' => 'Emails sent successfully!',
             'duration' => 3000,

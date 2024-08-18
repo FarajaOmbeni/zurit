@@ -44,7 +44,7 @@
                         <div class="card" style="background-color: rgba(33, 150, 243, 0.7);">
                             <div class="card-body">
                                 <h5 class="card-title">Users</h5>
-                                <p class="card-text">{{ $regularUsers }}</p>
+                                <p class="card-text font-weight-bold h5">{{ $regularUsers }}</p>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,16 @@
                         <div class="card" style="background-color: rgba(156, 39, 176, 0.7);">
                             <div class="card-body">
                                 <h5 class="card-title">Admins</h5>
-                                <p class="card-text">{{ $admins }}</p>
+                                <p class="card-text font-weight-bold h5">{{ $admins }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Blogs Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="background-color: rgba(250, 205, 86, 1);">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Blogs</h5>
+                                <p class="card-text font-weight-bold h5">{{ $totalBlogs }}</p>
                             </div>
                         </div>
                     </div>
@@ -105,21 +114,7 @@
                     </div>
                 </div> -->
 
-                    <!-- Total Books Card -->
-                    <div class="card mt-4" style="background-color: rgba(33, 150, 243, 0.7);">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Books</h5>
-                            <p class="card-text">{{ $totalBooks }}</p>
-                        </div>
-                    </div>
-
-                    <!-- Total Blogs Card -->
-                    <div class="card mt-4" style="background-color: rgba(156, 39, 176, 0.7);">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Blogs</h5>
-                            <p class="card-text">{{ $totalBlogs }}</p>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {{-- PWA --}}

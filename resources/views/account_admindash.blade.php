@@ -62,7 +62,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <form class="form-horizontal form-material mx-2" method="post"
-                                    action="{{ route('update-adminprofile') }}">
+                                    action="{{ route('update_adminprofile') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label class="col-md-12">Full Name</label>

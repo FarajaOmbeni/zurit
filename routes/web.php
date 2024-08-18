@@ -2,13 +2,13 @@
 
 use App\Models\Event;
 use App\Models\PastEvent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -19,17 +19,18 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\InsightsController;
 use App\Http\Controllers\NetworthController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\MarketingMessageController;
-use App\Http\Controllers\GoalController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /*
@@ -222,7 +223,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //acconut management routes
     Route::middleware(['auth'])->group(function () {
         Route::get('/account_admindash', [UserController::class, 'account_admin'])->name('account_admindash');
-        Route::post('/update-profile', [UserController::class, 'updateadminProfile'])->name('update-adminprofile');
+        Route::post('/update_adminprofile', [UserController::class, 'updateadminProfile'])->name('update_adminprofile');
     });
 
     Route::middleware(['auth'])->group(function () {
@@ -258,6 +259,8 @@ Route::post('callback', [PaymentController::class, 'callback']);
 
 // training enrollment
 Route::post('/enroll', [TrainingController::class, 'store'])->name('enroll.store');
+
+Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 
 //google auth sign in
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);

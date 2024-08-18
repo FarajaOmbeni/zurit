@@ -69,7 +69,7 @@
                             <input type="text" name="blog_tag" placeholder="Blog Tag">
                             <input type="text" name="blog_title" placeholder="Blog Title">
                             <!--<input type="text" name="blog_summary" placeholder="Blog Summary">-->
-                            <textarea id="blog_message" name="blog_message" placeholder="Blog Message"></textarea>
+                            @include('layouts.editor')
                             <!--<textarea name="blog_message" form="usrform">Enter text here...</textarea>-->
                             <button type="submit">Submit</button>
                         </form>
@@ -157,11 +157,8 @@
         <script src="admin_res/js/popper.js"></script>
         <script src="admin_res/js/bootstrap.min.js"></script>
         <script src="admin_res/js/main.js"></script>
-        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
-        <script>
-            CKEDITOR.replace('blog_message');
-        </script>
+        
     </body>
 
 </html>
