@@ -9,6 +9,9 @@
     <style>
         .ck-editor__editable {
             min-height: 200px;
+            max-height: 250px;
+            max-width: 55em;
+            overflow-y: auto;
         }
     </style>
 </head>
