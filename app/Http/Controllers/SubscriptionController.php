@@ -17,7 +17,7 @@ class SubscriptionController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        return redirect('/')->with('success', 'Subscription successful!');
+        return redirect()->back()->with('success', 'Subscription successful!');
     }
 
     public function index()

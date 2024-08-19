@@ -90,8 +90,7 @@
                         At Zurit, we believe in simplifying budgeting. Our tool is designed for easy navigation and
                         user-friendly interfaces.
                     </p>
-                    <a href="{{ Auth::check() ? url('user_budgetplanner') : url('login') }}" class="button">Go to Budget
-                        Planner</a>
+                    <a href="{{ Auth::check() ? url('user_budgetplanner') : url('login') }}" class="button">Go to Budget Planner</a>
                 </section>
 
                 <!-- Add other sections similarly -->

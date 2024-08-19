@@ -22,8 +22,8 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <label for="email" class="label-input100">Email Address</label>
-                        <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus readonly>
+                        <label for="email" class="label-input100">Confirm Email Address</label>
+                        <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -39,7 +39,7 @@
                         <label for="password" class="label-input100">Password</label>
                         <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                         <span class="focus-input100"></span>
-                        <span class="symbol-input100">
+                        <span class="symbol-input100 mt-5">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                         @error('password')
@@ -52,6 +52,9 @@
                     <div class="wrap-input100">
                         <label for="password-confirm" class="label-input100">{{ __('Confirm Password') }}</label>
                         <input id="password-confirm" type="password" class="input100" name="password_confirmation" required autocomplete="new-password">
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
                     </div>
 
                     <div class="container-login100-form-btn">

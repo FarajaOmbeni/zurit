@@ -39,6 +39,9 @@
                         <label for="current_price">Current Price</label>
                         <input value="{{ $book->current_price }}" type="number" name="current_price" id="current_price"
                             required>
+                        <label for="previous_price">Previous Price</label>
+                        <input value="{{ $book->previous_price }}" type="number" name="previous_price"
+                            id="previous_price" required>
                         <button type="submit">Update</button>
                     </form>
                 </div>

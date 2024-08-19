@@ -10,34 +10,8 @@
 </head>
 
 <div class="col-lg-8 offset-lg-2">
-    <div id="content" class="p-md-5 pt-5">
+    <div id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4">User Management</h2>
-        @if (session('success'))
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <div class="alert alert-success" id="success-alert" style="width: 50%;">
-                    {{ session('success')['message'] }}
-                </div>
-            </div>
-
-            <script>
-                setTimeout(function() {
-                    $('#success-alert').fadeOut('fast');
-                }, {{ session('success')['duration'] }});
-            </script>
-        @endif
-        @if (session('error'))
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <div class="alert alert-danger" id="error-alert">
-                    {{ session('error')['message'] }}
-                </div>
-            </div>
-
-            <script>
-                setTimeout(function() {
-                    $('#error-alert').fadeOut('fast');
-                }, {{ session('error')['duration'] }});
-            </script>
-        @endif
 
         <hr class="separator">
 
@@ -70,17 +44,17 @@
                                         <td>{{ $user->phone }}</td>
                                         <td>{{ $user->role }}</td>
                                         <td>
-                                            <a href="{{ route('user.edit', $user->id) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <button type="button" class="btn btn-warning btn-sm editUserButton"
+                                                data-toggle="modal" data-target="#editUserModal"
+                                                data-userid="{{ $user->id }}">Edit</button>
                                         </td>
                                         <td>
                                             <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                style="display: inline-block;" onsubmit="return confirmDeleteUser();">
+                                                style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -205,9 +179,5 @@
                 });
             });
         });
-
-        function confirmDeleteUser() {
-            return confirm("Are you sure you want to delete this user?");
-        }
     </script>
 </div>

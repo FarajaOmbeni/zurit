@@ -52,7 +52,7 @@ class BlogController extends Controller
         } catch (\Exception $e) {
             Log::error('Blog creation failed: ' . $e->getMessage());
             return redirect()->back()->with('error', [
-                'message' => 'Failed to create blog. Please try again.',
+                'message' => 'Failed to create blog. Error: ' . $e->getMessage(),
                 'duration' => 5000,
             ])->withInput();
         }

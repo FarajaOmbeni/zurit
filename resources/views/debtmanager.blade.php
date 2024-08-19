@@ -92,8 +92,7 @@
                         <li>Customized repayment strategies</li>
                         <li>Real-time tracking of debt reduction</li>
                     </ul>
-                    <a href="{{ Auth::check() ? url('user_debtcalc') : url('login') }}" class="button">Access Debt
-                        Manager</a>
+                    <a href="{{ Auth::check() ? url('user_debtcalc') : url('login') }}" class="button">Access Debt Manager</a>
                 </section>
 
             </div>

@@ -21,7 +21,7 @@ class TrainingController extends Controller
         // Store the data in the database
         Training::create($validatedData);
 
-        Mail::to('ombenigamer@gmail.com')->send(new TrainingEnrollment($validatedData));
+        Mail::to('info@zuritconsulting.com')->send(new TrainingEnrollment($validatedData));
     
         // Return a response
         return response()->json([

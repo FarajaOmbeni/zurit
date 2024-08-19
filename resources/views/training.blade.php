@@ -584,6 +584,7 @@
                             $('#success-message').css('display', 'none');
                         }, 2000);
                         $('#modal_enroll').modal('hide');
+                        
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error(textStatus, errorThrown);

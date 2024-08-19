@@ -94,8 +94,7 @@
                         <li>Clear insights into market trends</li>
                         <li>User-friendly interfaces for a seamless experience</li>
                     </ul>
-                    <a href="{{ Auth::check() ? url('user_investmentplanner') : url('login') }}" class="button">Go to
-                        Investment Planner</a>
+                    <a href="{{ Auth::check() ? url('user_investmentplanner') : url('login') }}" class="button">Go to Investment Planner</a>
                 </section>
 
                 <!-- Add other sections similarly -->

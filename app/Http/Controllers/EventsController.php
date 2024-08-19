@@ -34,7 +34,7 @@ class EventsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('events_res/img'), $imageName);
+            $image->move('/home/zuriuhqx/public_html/events_res/img', $imageName);
         }
 
         // Create blog with file path
@@ -68,7 +68,7 @@ class EventsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('events_res/img'), $imageName);
+            $image->move('/home/zuriuhqx/public_html/events_res/img', $imageName);
         }
 
         //validate the inputs

@@ -15,9 +15,13 @@ class CKEditorController extends Controller
             $newName = $fileName . '_' . now()->timestamp . '.' . $extension;
 
             // Use $newName here instead of $fileName
-            $request->file('upload')->move(public_path('media'), $newName);
+            $request->file('upload')->move('/home/zuriuhqx/public_html/media', $newName);
+            
+            
+            
+            
 
-            $url = asset('media/' . $newName);
+            $url = 'https://zuritconsulting.com/media/' . $newName;
             return response()->json(['fileName' => $newName, 'uploaded' => 1, 'url' => $url]);
         }
     }
