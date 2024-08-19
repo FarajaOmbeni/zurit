@@ -147,7 +147,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('bookdelete/{id}', [BookController::class, 'destroy'])->name('bookdelete');
 
 
-    Route::get('blogadd', [BlogController::class, 'create'])->name('blogadd');
     Route::post('blogadd', [BlogController::class, 'store'])->name('blogadd.store');
     Route::get('/editblog/{id}', [BlogController::class, 'edit']);
     Route::put('/editblog/{id}', [BlogController::class, 'update'])->name('blogedit.update');
