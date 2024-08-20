@@ -11,6 +11,15 @@ body {
     position: relative;
     background-color: white;
     font-family: "Nunito Sans", sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%; /* Ensure body takes full width */
+    max-width: 100vw; /* Prevent body from exceeding viewport width */
+}
+
+/* Optional: Ensure images and videos are responsive */
+img, video {
+    max-width: 100%;
+    height: auto;
 }
 
 body h2 {
