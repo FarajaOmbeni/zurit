@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-use App\Models\MarketingMessage;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MarketingMessage as MarketingMessageMail;
-use App\Jobs\SendMarketingMessageJob;
+use App\Mail\MarketingMessage;
+use App\Models\TestEmail;
 
 class MarketingMessageController extends Controller
 {
@@ -27,36 +26,12 @@ class MarketingMessageController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'send_to' => 'required|in:all,subscribed',
         ]);
 
         // Initialize users array
-        $users = [];
-
-        // Get the users or subscriptions to send the message to
-        if ($request->input('send_to') === 'all') {
-            $users = User::all();
-            // $subscriptions = Subscription::all();
-            // foreach ($subscriptions as $subscription) {
-            //     $users[] = (object) ['id' => null, 'email' => $subscription->email];
-            // }
-        } else if ($request->input('send_to') === 'subscribed') {
-            $subscriptions = Subscription::all();
-            foreach ($subscriptions as $subscription) {
-                $users[] = (object) ['id' => null, 'email' => $subscription->email];
-            }
-        }
-
+        $users = TestEmail::all();
 
         foreach ($users as $user) {
-            if ($user->id !== null) {
-                $marketingMessage = MarketingMessage::create([
-                    'title' => $request->input('title'),
-                    'content' => $request->input('content'),
-                    'user_id' => $user->id,
-                ]);
-            }
-
             // Get the user's email address
             $userEmail = $user->email;
 
@@ -65,7 +40,7 @@ class MarketingMessageController extends Controller
 
             // Send email to the user
             try {
-                Mail::to($userEmail)->send(new MarketingMessageMail(
+                Mail::to($userEmail)->send(new MarketingMessage(
                     $request->input('title'),
                     $request->input('content'),
                 ));
