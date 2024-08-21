@@ -196,6 +196,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/insights_admindash', [InsightsController::class, 'insightdata']);
 
     Route::get('/events_admindash', [EventsController::class, 'index'])->name('events.index');
+    Route::get('/add_users_view', [MarketingController::class, 'add_users_view'])->name('add_users_view');
+    Route::post('/add_users', [MarketingController::class, 'add_users'])->name('add_users');
     Route::post('/events_admindash', [EventsController::class, 'store'])->name('events.store');
     Route::delete('/delete-event/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
     Route::post('/give-feedback', [EventsController::class, 'eventFeedback']);

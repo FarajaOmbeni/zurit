@@ -29,7 +29,7 @@ class MarketingMessageController extends Controller
         ]);
 
         // Initialize users array
-        $users = TestEmail::all();
+        $users = User::all();
 
         foreach ($users as $user) {
             // Get the user's email address

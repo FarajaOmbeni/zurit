@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Marketing_Contact;
+use Illuminate\Support\Facades\Hash;
 
 class MarketingController extends Controller
 {
@@ -14,20 +16,26 @@ class MarketingController extends Controller
         return view('upload_contacts', ['contacts' => $contacts]);
     }
 
-    public function add_one_contact(Request $request)
+
+    public function add_users_view()
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:marketing__contacts,email',
-            'phone' => 'required',
+        return view('add_users_admindash');
+    }
+
+    public function add_users(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:15',
+            'password' => 'required|string|min:8',
         ]);
 
-        Marketing_Contact::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-        ]);
-
-        return redirect('/marketing_contacts_admindash')->with('success', 'Contact added successfully');
+        try {
+            $user = User::create($validatedData);
+            return redirect()->back()->with('success', 'User added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['email' => 'The email address is already in use.'])->withInput();
+        }
     }
 }

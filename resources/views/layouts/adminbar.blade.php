@@ -49,6 +49,10 @@
                                 <a href="{{ url('/subscription_admindash') }}"><span
                                         class="fa fa-envelope mr-3"></span> Subscriptions Dash</a>
                             </li>
+                            <li class="{{ Request::is('add_users_view') ? 'active' : '' }}">
+                                <a href="{{ url('/add_users_view') }}"><span class="fa fa-cogs mr-3"></span>
+                                    Add Users</a>
+                            </li>
                             <li class="{{ Request::is('marketing_admindash') ? 'active' : '' }}">
                                 <a href="{{ url('/marketing_admindash') }}"><span class="fa fa-cogs mr-3"></span>
                                     Marketing emails</a>
