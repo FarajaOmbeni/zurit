@@ -2,27 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Goal;
 use Auth;
 use Carbon\Carbon;
+use App\Models\Goal;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 Use DateTime;
+
 
 class GoalController extends Controller
 {
-    public function showGoalData(){
+    public function showGoalData()
+    {
         $goals = Goal::where('user_id', auth()->id())->get();
         $this->classifyGoals($goals);
-    
+
         $totalGoals = $goals->count();
         $completedGoals = $goals->filter(function ($goal) {
             return $goal->current_amount >= $goal->goal_amount;
         })->count();
-    
+
         $completionPercentages = $goals->map(function ($goal) {
             return ($goal->current_amount / $goal->goal_amount) * 100;
         });
-    
+
+
         return view('user_goalsetting', [
             'goals' => $goals,
             'totalGoals' => $totalGoals,
@@ -30,6 +34,7 @@ class GoalController extends Controller
             'completionPercentages' => $completionPercentages,
         ]);
     }
+
     
     
     public function storeGoal(Request $request){
@@ -38,16 +43,22 @@ class GoalController extends Controller
             'goal_amount'=> 'required|numeric',
             'current_amount'=> 'nullable|numeric',
             'description' => 'nullable|string',
+            'otherDescription' => 'required_if:description,other|string|nullable',
             'deadline' => 'required|date',
         ]);
 
         $validatedData['user_id'] = Auth::id();
 
+        // Handle the 'other' category
+        if ($validatedData['description'] == 'other') {
+            $validatedData['description'] = $validatedData['otherDescription'];
+        }
+
         Goal::create($validatedData);
 
         return redirect('user_goalsetting')->with('success', [
-            'message' => 'Goal Set Successfully!',
-            'duration' => 2000,
+            'message' => 'Goal Added Succesfully',
+            'duration' => 3000,
         ]);
         
     }
@@ -57,15 +68,18 @@ class GoalController extends Controller
         $addedAmount = $request->input('addedAmount');
         $goal->current_amount += $addedAmount;
         $goal->save();
-    
-        
-        return redirect('user_goalsetting')->with([
-            'success' => [
-                'amount_message' => 'Successfully added amount to the goal',
-                'duration' => 2000,
-                'goal_id' => $id,
-            ],
-        ]);
+        try {
+        return redirect('user_goalsetting')->with('success', [
+                'message' => 'Amount updated Successfully',
+                'duration' => 3000,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Blog creation failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', [
+                'message' => 'Failed to create blog. Error: ' . $e->getMessage(),
+                'duration' => 5000,
+            ])->withInput();
+        };
 
     }
 

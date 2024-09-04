@@ -1,46 +1,68 @@
 <html>
 
-    <head>
-        <title>Debt Calculator</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Link your CSS files -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-        <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <!-- PWA  -->
-        <meta name="theme-color" content="#fff" />
-        <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-        <link rel="manifest" href="{{ asset('/manifest.json') }}">
+<head>
+    <title>Debt Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link your CSS files -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
+    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- PWA  -->
+    <meta name="theme-color" content="#fff" />
+    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
-    </head>
+</head>
 
-    <body>
-        @php
-            $debts = \App\Models\Debt::where('user_id', Auth::id())->get();
-        @endphp
+<body>
+    @php
+        $debts = \App\Models\Debt::where('user_id', Auth::id())->get();
+    @endphp
 
-        @include('layouts.app')
-        @extends('layouts.userbar')
+    @include('layouts.app')
+    @extends('layouts.userbar')
 
 
 
-        <div class="container-fluid">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="container mt-5 ml-5">
+    <div class="container-fluid">
+        <div class="col-lg-8 offset-lg-2">
+            @if (session('success'))
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="alert alert-success" id="success-alert" style="width: 50%;">
+                        {{ session('success')['message'] }}
+                    </div>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('fast');
+                    }, {{ session('success')['duration'] }});
+                </script>
+            @endif
+            <div class="container mt-5 ml-5">
+                <div class="mb-3">
                     <!-- Add Debt Button -->
                     <button class="button" id="add-debt-button">Add Debt</button>
 
                     <div id="overlay"
-                        style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 2; cursor: pointer;">
+                        style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 2; cursor: pointer;"
+                        onclick="closeModal(event)">
+
                         <!-- Debt Form -->
                         <div id="debt-form"
-                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); background-color: #fff; padding: 20px; z-index: 5; width: 80%; max-width: 500px;">
+                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); background-color: #fff; padding: 20px; z-index: 5; width: 80%; max-width: 500px;"
+                            onclick="event.stopPropagation();">
+
+                            <!-- Close Button -->
+                            <button onclick="closeModal(event)"
+                                style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; cursor: pointer;">&times;</button>
+
                             <form action="{{ route('debt_store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
@@ -63,20 +85,32 @@
                                     <input type="number" id="current_balance" name="debt[current_balance][value]"><br>
                                     <label for="interest_rate">Annual Rate:</label><br>
                                     <input type="number" id="interest_rate" name="debt[interest_rate][value]"><br>
-                                    <label for="minimum_payment">Minimum Payment:</label><br>
+                                    <label for="minimum_payment">Initial Payment:</label><br>
                                     <input type="number" id="minimum_payment" name="debt[minimum_payment][value]"><br>
-                                    <label for="start_period">Next Payment Due:</label><br>
-                                    <input type="text" id="start_period" name="debt[start_period][date]"><br>
-                                    <label for="payment_strategy">Payment Strategy:</label><br>
+                                    <label for="payment_strategy">Interest Behavior:</label><br>
                                     <select id="payment_strategy" name="debt[payment_strategy][strategy]">
                                         <option value="0">Constant</option>
                                         <option value="1">Reducing</option>
                                     </select><br>
-                                    <input type="submit" value="Submit">
+                                    <input class="btn btn-primary" style="margin-top: 20px" type="submit"
+                                        value="Submit">
                                 </div>
                             </form>
                         </div>
                     </div>
+
+                    <script>
+                        // Function to close the modal
+                        function closeModal(event) {
+                            document.getElementById('overlay').style.display = 'none';
+                        }
+
+                        // Example function to open the modal (you may already have a similar function)
+                        function openModal() {
+                            document.getElementById('overlay').style.display = 'block';
+                        }
+                    </script>
+
 
                     <!-- Debt Free Countdown Card -->
                     <div class="card mt-3"
@@ -87,7 +121,7 @@
                                 <p class="text-white">{{ $end_period->format('F Y') }}</p>
                                 <p class="text-white">You will be debt Free in {{ $remaining_time }} months</p>
 
-                                <form action="extraPayment_store" method="post">
+                                {{-- <form action="extraPayment_store" method="post">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="amount" class="form-label text-white">Extra Payment:</label>
@@ -99,7 +133,7 @@
                                         </div>
                                         <button id="save_extra_payment" class="btn btn-light mt-2">Save</button>
                                     </div>
-                                </form>
+                                </form> --}}
                             @else
                                 <p class="text-white">No debt data available.</p>
                             @endif
@@ -107,7 +141,7 @@
                     </div>
 
                     <!-- Payoff Progress Card -->
-                     <h2>Total Debt</h2>
+                    <h2>Payment Wheel</h2>
                     <div class="card mt-3 custom-card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
@@ -135,29 +169,83 @@
                     </div>
 
                     <!-- Categories Cards -->
-                    <h2>Pending debts</h2>
-                    <div class="row mt-3">
-                        @foreach ($debts as $debt)
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $debt->category }}</h5>
-                                        @php
-                                            $endPeriod = \Carbon\Carbon::parse($debt->end_period);
-                                            $now = \Carbon\Carbon::now();
-                                            $years = $now->diffInYears($endPeriod);
-                                            $months = $now->copy()->addYears($years)->diffInMonths($endPeriod);
-                                        @endphp
-                                        <p>Paid off in {{ $years }} years {{ $months }} months</p>
-                                        <p>Amount Due {{ number_format($debt->current_balance) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                    <h2 style="font-weight: bold;">Pending debts</h2>
+                    <div class="table-responsive" style="margin-bottom: 50px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Amount Due</th>
+                                    <th>Amount Paid</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($debts as $debt)
+                                    <tr>
+                                        @if ($debt->current_balance != $debt->minimum_payment)
+                                            <td>{{ $debt->debt_name }}</td>
+                                            <td>{{ number_format($debt->current_balance) }}</td>
+                                            <td><?php $balance = $debt->current_balance - $debt->minimum_payment;
+                                            echo number_format($debt->current_balance - $balance); ?></td>
+                                            <td><?php number_format($balance = $debt->current_balance - $debt->minimum_payment);
+                                            echo number_format($balance); ?></td>
+                                            <td>
+                                                <!-- Payoff Button -->
+                                                <form action="{{ route('payLoan', ['id' => $debt->id]) }}"
+                                                    method="POST">
+                                                        @csrf
+                                                        <input style="width: 8rem; height: 2rem;" type="number"
+                                                            name="pay_loan_amount" id="">
+                                                        <button style="width: 4rem; height: 2rem;" class="btn btn-success"
+                                                            type="submit">Pay</button>
+                                                </form>
+
+                                            </td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <h2 style="font-weight: bold;">Paid debts</h2>
+                    <div class="table-responsive" style="margin-bottom: 50px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Amount Due</th>
+                                    <th>Amount Paid</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($debts as $debt)
+                                    <tr>
+                                        @if ($debt->current_balance == $debt->minimum_payment)
+                                            <td>{{ $debt->debt_name }}</td>
+                                            <td>{{ number_format($debt->current_balance) }}</td>
+                                            <td><?php $balance = $debt->current_balance - $debt->minimum_payment;
+                                            echo number_format($debt->current_balance - $balance); ?></td>
+                                            <td><?php number_format($balance = $debt->current_balance - $debt->minimum_payment);
+                                            echo number_format($balance); ?></td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                     @php
-                        $debts = \App\Models\Debt::where('user_id', Auth::id())->orderBy('end_period')->get();
+                        $debts = \App\Models\Debt::where('user_id', Auth::id())
+                            ->whereColumn('current_balance', '!=', 'minimum_payment')
+                            ->orderBy('current_balance')
+                            ->get();
                         $nextDebt = $debts->first();
 
                         if ($debts->last()) {
@@ -178,7 +266,8 @@
                         <div class="card-body">
                             @if ($nextDebt)
                                 <h5 class="card-title">Next Debt to be Cleared:
-                                    <strong>{{ $nextDebt->debt_name }}</strong></h5>
+                                    <strong>{{ $nextDebt->debt_name }}</strong>
+                                </h5>
                                 <!-- <p>{{ \Carbon\Carbon::parse($nextDebt->end_period)->diffForHumans() }}</p> -->
                             @else
                                 <h5 class="card-title">No debts to be cleared.</h5>
@@ -325,6 +414,6 @@
                         });
                     });
                 </script>
-    </body>
+</body>
 
 </html>

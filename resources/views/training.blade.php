@@ -150,7 +150,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>This masterclass is a <span class="gold_text">6-week</span> program
+                    <p>This masterclass is a <span class="gold_text">5-week</span> program
                         tailored to individuals, covering the
                         fundamentals of personal finance and
                         investments.<br>

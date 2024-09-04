@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Auth;
+use App\Models\Debt;
 use App\Models\Asset;
 use App\Models\Liability;
-use Auth;
+use Illuminate\Http\Request;
 
 class NetworthController extends Controller
 {
@@ -26,7 +27,10 @@ class NetworthController extends Controller
         ]);
 
         // Redirect or perform any other action after storing
-        return redirect()->back()->with('success', 'Asset data saved successfully');
+        return redirect('user_networthcalc')->with('success', [
+            'message' => 'Assest Added Succesfully',
+            'duration' => 3000,
+        ]);
     }
 
     public function storeLiability(Request $request){
@@ -38,23 +42,23 @@ class NetworthController extends Controller
         ]);
 
         // Store the liability in the database
-        $liability = Liability::create([
+        $liability = Debt::create([
             'user_id' => $userId,
-            'liability_description' => $validatedData['liabilityDescription'],
-            'liability_value' => $validatedData['liabilityValue'],
+            'debt_name' => $validatedData['liabilityDescription'],
+            'current_balance' => $validatedData['liabilityValue'],
         ]);
 
-        return redirect()->back()->with('success', 'Liability data saved successfully');
+        return redirect('user_networthcalc')->with('success', [
+            'message' => 'Liability Added Succesfully',
+            'duration' => 3000,
+        ]);
     }
 
     public function showNetWorth(){
         $assets = Asset::where('user_id', auth()->id())->get();
-        $liabilities = Liability::where('user_id', auth()->id())->get();
+        $liabilities = Debt::where('user_id', auth()->id())->get();
+        $liabilities2 = Liability::where('user_id', auth()->id())->get();
     
-        return view('user_networthcalc', compact('assets', 'liabilities'));
-    }
-    
-    
-
-    
+        return view('user_networthcalc', compact('assets', 'liabilities','liabilities2'));
+    }  
 }

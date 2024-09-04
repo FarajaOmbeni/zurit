@@ -242,6 +242,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('debt_store', [DebtController::class, 'store'])->name('debt_store');
     Route::get('user_debtcalc', [DebtController::class, 'showDebtFreeCountdown']);
     Route::post('extraPayment_store', [DebtController::class, 'storeExtraPayment'])->name('extraPayment_store');
+    Route::post('/pay_loan/{id}', [DebtController::class, 'payLoan'])->name('payLoan');    
 });
 
 //Password reset Routes
