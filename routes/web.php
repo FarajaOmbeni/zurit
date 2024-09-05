@@ -191,6 +191,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('insights_admindash');
     })->name('insights_admindash');
 
+    Route::post('/import', [MarketingController::class, 'import'])->name('import');
+
     Route::get('/insights_admindash', 'InsightsController@index');
 
     Route::get('/insights_admindash', [InsightsController::class, 'insightdata']);

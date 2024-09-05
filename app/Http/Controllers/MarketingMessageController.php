@@ -8,6 +8,7 @@ use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MarketingMessage;
+use App\Models\Marketing_Contact;
 use App\Models\TestEmail;
 
 class MarketingMessageController extends Controller
@@ -15,7 +16,7 @@ class MarketingMessageController extends Controller
     public function index()
     {
         $subscribedUsers = Subscription::all();
-        $allUsers = User::all();
+        $allUsers = Marketing_Contact::all();
 
         return view('marketing_admindash', compact('subscribedUsers', 'allUsers'));
     }
@@ -29,7 +30,7 @@ class MarketingMessageController extends Controller
         ]);
 
         // Initialize users array
-        $users = User::all();
+        $users = Marketing_Contact::all();
 
         foreach ($users as $user) {
             // Get the user's email address
