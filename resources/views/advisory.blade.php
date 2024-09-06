@@ -48,6 +48,7 @@
                             Prosperity Tools
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
+                            <a class="dropdown-item" href="{{ url('goalsetting') }}">Goal Setting</a>
                             <a class="dropdown-item" href="{{ url('budgetplanner') }}">Budget Planner</a>
                             <a class="dropdown-item" href="{{ url('networthcalculator') }}">Networth Calculator</a>
                             <a class="dropdown-item" href="{{ url('debtmanager') }}">Debt Manager</a>

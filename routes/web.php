@@ -55,6 +55,10 @@ Route::get('budgetplanner', function () {
     return view('budgetplanner');
 });
 
+Route::get('goalsetting', function () {
+    return view('goalsetting');
+});
+
 Route::get('networthcalculator', function () {
     return view('networthcalculator');
 });

@@ -182,13 +182,6 @@ public function destroy($id): RedirectResponse
 }
 
 
-    public function showBudgetPlanner()
-    {
-        $incomeCategories = IncomeCategory::all();
-        $expenseCategories = ExpenseCategory::all();
-
-        return view('user_budgetplanner', compact('incomeCategories', 'expenseCategories'));
-    }
 
     public function account_admin()
     {

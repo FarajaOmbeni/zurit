@@ -74,6 +74,7 @@
                                 <img class="arrow-icon" src="{{ asset('img/icon/arrow.png') }}" alt="">
                             </div>
                             <ul>
+                                <li><a class="dropdown-link" href="{{ url('goalsetting') }}">Goal Setting</a></li>
                                 <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
                                 <li><a class="dropdown-link" href="{{ url('debtmanager') }}">Debt Manager</a></li>
                                 <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth
@@ -108,6 +109,7 @@
                                 Prosperity Tools
                             </a>
                             <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
+                                <a class="dropdown-item" href="{{ url('goalsetting') }}">Goal Setting</a>
                                 <a class="dropdown-item" href="{{ url('budgetplanner') }}">Budget Planner</a>
                                 <a class="dropdown-item" href="{{ url('networthcalculator') }}">Networth
                                     Calculator</a>
