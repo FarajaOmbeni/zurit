@@ -38,9 +38,7 @@
                         </span>
 
                         <div class="wrap-input100">
-                            Before proceeding, please check your email for a verification link.
-                            If you did not receive the email,
-                            <button type="submit" class="button p-2 m-3 align-baseline">click here to request
+                            <span>Did not Get?</span> <button type="submit" class="button p-2 m-3 align-baseline">Request
                                 another</button>.
                         </div>
                     </form>
