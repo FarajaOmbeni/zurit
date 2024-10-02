@@ -36,10 +36,16 @@
                             $currentMonth = date('n');
                         @endphp
 
+                        <!-- Net income card-->
+                        <div class="alert alert-info col-md-6 mx-auto">
+                                This tool helps you plan your investments without necessarily paying for them. Once you are pleased with the investment retuns, you can go to the Goals tool and add the investment there and contribute to it.
+                       </div>
+
                         <!-- Buttons for Monthly Calculations -->
                         <div class="text-center mb-5">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#monthlyModal">Add Investment</button>
+                            <a type="button" class="btn btn-dark" href="user_networthcalc">Calculate You Net Worth</a>
                         </div>
 
                         <!-- Success and Error Messages -->
@@ -217,7 +223,7 @@
                                 </div>
 
                                 <!-- Graph for Investment -->
-                                <div class="mt-4"  style="border-bottom: 1px solid black; margin-bottom: 10em">
+                                <div class="mt-4" style="border-bottom: 1px solid black; margin-bottom: 10em">
                                     <div id="investmentChart{{ $investmentId }}" style="width: auto; height: 50%;">
                                     </div>
                                 </div>
@@ -263,7 +269,7 @@
                     const cells = row.querySelectorAll('td');
                     categories{{ $investmentId }}.push(cells[0].textContent); // Month
                     data{{ $investmentId }}.push(Number(cells[5].textContent.replace(/,/g,
-                    ''))); // Cumulative Investment Value
+                        ''))); // Cumulative Investment Value
                 });
 
                 Highcharts.chart('investmentChart{{ $investmentId }}', {

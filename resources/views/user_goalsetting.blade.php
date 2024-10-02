@@ -33,6 +33,17 @@
                 <div id="content" class="p-md-5 pt-5">
                     <div class="goal_content">
                         <div class="container mt-2">
+                            <!-- Net income card-->
+                            <div class="alert alert-info">
+                                @if ($netIncome > 0)
+                                    You have KES {{ number_format($netIncome) }} as surplus. You can use this amount
+                                    to achieve your goals.
+                                @else
+                                    You have no surplus income to pay your debts. You have a deficit of KES
+                                    {{ number_format($netIncome) }}.
+                                @endif
+
+                            </div>
                             <!-- Add new goal button -->
                             <div class="mb-3">
                                 @if (session('success'))
@@ -50,6 +61,8 @@
                                 @endif
                                 <button type="button" class="button" data-toggle="modal" data-target="#goalModal">Add
                                     Goal</button>
+                                <a type="button" class="button" href="user_investmentplanner">Plan Investments
+                                </a>
                             </div>
                             <!-- Goal Modal -->
                             <div class="modal fade" id="goalModal" tabindex="-1" role="dialog"
@@ -95,8 +108,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="goal_amount">Goal Amount</label>
-                                                    <input required type="number" class="form-control" name="goal_amount"
-                                                        id="goal_amount" placeholder="Enter amount">
+                                                    <input required type="number" class="form-control"
+                                                        name="goal_amount" id="goal_amount" placeholder="Enter amount">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="description">Description</label><br>
@@ -119,14 +132,15 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deadline">When do you want achieve the goal?</label>
-                                                    <input required type="date" class="form-control" name="deadline"
-                                                        id="deadline">
+                                                    <input required type="date" class="form-control"
+                                                        name="deadline" id="deadline">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="current_amount">Would you like to contribute to your
                                                         goal now? (Leave blank if not)</label>
-                                                    <input required type="number" class="form-control" name="current_amount"
-                                                        id="current_amount" placeholder="Enter amount">
+                                                    <input required type="number" class="form-control"
+                                                        name="current_amount" id="current_amount"
+                                                        placeholder="Enter amount">
                                                 </div>
                                                 <button type="submit" class="button mt-3">Set Goal</button>
                                             </form>
@@ -176,7 +190,8 @@
                                                         @csrf
                                                         <input style="width: 8rem" type="number" name="addedAmount"
                                                             placeholder="Add Amount">
-                                                        <button style="width: 4rem" type="submit" class="btn btn-primary">Add</button>
+                                                        <button style="width: 4rem" type="submit"
+                                                            class="btn btn-primary">Add</button>
                                                     </form>
                                                 </td>
                                                 <td>

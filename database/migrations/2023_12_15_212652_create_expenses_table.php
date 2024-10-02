@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('expected_expense_type');
-            $table->decimal('expected_expense', 15, 2);
+            $table->decimal('expense_type', 15, 2);
             $table->decimal('actual_expense', 15, 2);
-            $table->string('year_month'); // YYYY-MM
+            $table->int('is_loan'); 
+            $table->int('is_goal'); 
             $table->timestamps();
         });
     }

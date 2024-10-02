@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\NetIncomeCalculator;
 use Illuminate\Http\Request;
 use App\Models\BudgetPlanner;
 use App\Models\Income;
@@ -13,25 +14,26 @@ use Illuminate\Support\Facades\Http;
 
 class BudgetController extends Controller
 {
+    use NetIncomeCalculator;
 
     public function storeIncome(Request $request)
     {
-        $incomeData = $request->input('income');
+        $request->validate([
+            'income_type' => 'required|string|max:255',
+            'income' => 'required|numeric',
+        ]);
 
-        foreach ($incomeData as $category => $data) {
-            if (!empty($data['expected_income']) && !empty($data['actual_income'])) {
-                // Process only if both expected_income and actual_income are filled
-                $validatedData = [
-                    'income_type' => $category,
-                    'expected_income' => $data['expected_income'],
-                    'actual_income' => $data['actual_income'],
-                    'user_id' => Auth::id(),
-                    'year_month' => Carbon::now()->month,
-                ];
+        // Calculate net income
+        $actualIncome = Income::where('user_id', auth()->id())->sum('actual_income');
+        $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
+        $netIncome = $actualIncome - $actualExpenses;
 
-                Income::create($validatedData);
-            }
-        }
+        $income = new Income();
+        $income->user_id = auth()->id();
+        $income->income_type = $request->income_type;
+        $income->actual_income = $request->income;
+
+        $income->save();
 
         return redirect('user_budgetplanner')->with('success', [
             'message' => 'Income added Successfully!',
@@ -45,35 +47,22 @@ class BudgetController extends Controller
 
     public function storeExpense(Request $request)
     {
-        $expenseData = $request->input('expense');
+        $request->validate([
+            'expense_type' => 'required|string|max:255',
+            'expense' => 'required|numeric',
+        ]);
 
-        foreach ($expenseData as $category => $data) {
-            if (!empty($data['expected_expense']) && !empty($data['actual_expense'])) {
-                // Process only if both expected_expense and actual_expense are filled
-                $validatedData = [
-                    'expense_type' => $category,
-                    'expected_expense' => $data['expected_expense'],
-                    'actual_expense' => $data['actual_expense'],
-                    'user_id' => auth()->id(),
-                    'year_month' => Carbon::now()->format('Y-m'),
-                ];
+        // Calculate net income
+        $actualIncome = Income::where('user_id', auth()->id())->sum('actual_income');
+        $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
+        $netIncome = $actualIncome - $actualExpenses;
 
-                Expense::create($validatedData);
+        $expense = new Expense();
+        $expense->user_id = auth()->id();
+        $expense->expense_type = $request->expense_type;
+        $expense->actual_expense = $request->expense;
 
-                // If the expense category is "Loans", add to debt manager
-                if ($category == 'Loans') {
-                    $debtName = 'Loan from Budget';
-                    $debt = Debt::create([
-                        'user_id' => auth()->id(),
-                        'debt' => $data['actual_expense'],
-                        'debt_name' => $debtName,
-                        'category' => $debtName, // Set category to be the same as debt_name
-                        'current_balance' => $data['actual_expense'],
-                    ]);
-                    $debtName = Debt::DEBT_TYPES['loan'];
-                }
-            }
-        }
+        $expense->save();
 
         return redirect('user_budgetplanner')->with('success', [
             'message' => 'Expense added Successfully!',
@@ -102,24 +91,9 @@ class BudgetController extends Controller
         // Calculate net income
         $actualIncome = Income::where('user_id', auth()->id())->sum('actual_income');
         $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
-        $netIncome = $actualIncome - $actualExpenses;
-        // If net income is negative, add to debt manager
 
-        if ($netIncome < 0) {
-            $income_debt = 'Income Overdraft';
-            Debt::updateOrCreate(
-                [
-                    'user_id' => auth()->id(),
-                    'debt_name' => $income_debt,
-                    'category' => $income_debt,
-                ],
-                [
-                    'debt' => abs($netIncome),
-                    'current_balance' => abs($netIncome),
-                ]
-            );
-        }
-
+        // Calculate net income
+        $netIncome = $this->calculateNetIncome(auth()->id());
 
         // Calculate monthly incomes and expenses
         $monthlyIncomes = Income::where('user_id', auth()->id())
@@ -140,10 +114,13 @@ class BudgetController extends Controller
         // Check if there is data for the current month
         $hasDataForCurrentMonth = isset($monthlyIncomes[$currentMonth]) && isset($monthlyExpenses[$currentMonth]);
 
+        $loans = Debt::where('user_id', auth()->id())->get();
+
 
         return view('user_budgetplanner', [
             'budget' => $budget,
             'income' => $income,
+            'loans' => $loans,
             'expenses' => $expenses,
             'actualIncome' => $actualIncome,
             'actualExpenses' => $actualExpenses,
@@ -170,6 +147,58 @@ class BudgetController extends Controller
 
         return redirect()->route('user_budgetplanner')->with('error', [
             'message' => 'Error Deleting Income ',
+            'duration' => 3000,
+        ]);
+    }
+
+    public function updateExpense(Request $request, $id)
+    {
+        $request->validate([
+            'expense_type' => 'required|string|max:255',
+            'actual_expense' => 'required|numeric',
+        ]);
+
+        $expense = Expense::find($id);
+
+        if ($expense) {
+            $expense->expense_type = $request->expense_type;
+            $expense->actual_expense = $request->actual_expense;
+            $expense->save();
+            
+            return redirect()->route('user_budgetplanner')->with('success', [
+                'message' => 'Expense updated successfully!',
+                'duration' => 3000,
+            ]);
+        }
+
+        return redirect()->route('user_budgetplanner')->with('error', [
+            'message' => 'Error updating expense',
+            'duration' => 3000,
+        ]);
+    }
+    public function updateIncome(Request $request, $id)
+    {
+        $request->validate([
+            'income_type' => 'required|string|max:255',
+            'actual_income' => 'required|numeric',
+        ]);
+
+        $income = Income::find($id);
+
+        if ($income) {
+            $income->income_type = $request->income_type;
+            $income->actual_income = $request->actual_income;
+
+            $income->save();
+
+            return redirect()->route('user_budgetplanner')->with('success', [
+                'message' => 'Income updated successfully!',
+                'duration' => 3000,
+            ]);
+        }
+
+        return redirect()->route('user_budgetplanner')->with('error', [
+            'message' => 'Error updating expense',
             'duration' => 3000,
         ]);
     }

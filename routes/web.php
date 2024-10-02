@@ -27,9 +27,11 @@ use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\MarketingMessageController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -170,6 +172,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Budget Planner Routes
     Route::post('/storeIncome', [BudgetController::class, 'storeIncome'])->name('storeIncome');
     Route::post('/storeExpense', [BudgetController::class, 'storeExpense'])->name('storeExpense');
+    Route::post('/updateExpense/{id}', [BudgetController::class, 'updateExpense'])->name('expenses.update');
+    Route::post('/updateIncome/{id}', [BudgetController::class, 'updateIncome'])->name('income.update');
     Route::get('user_budgetplanner', [BudgetController::class, 'showBudgetData']);
     Route::get('budget', [BudgetController::class, 'showBudgetData'])->name('user_budgetplanner');
     Route::get('netIncome', [BudgetController::class, 'showNetIncome']);
@@ -244,11 +248,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('sendMessage', [MarketingMessageController::class, 'sendMessage'])->name('send.message');
     });
 
+    //Testimonials management
+    Route::get('/testimonials_admindash', [TestimonialsController::class, 'index']);
+    Route::post('/addTestimonial', [TestimonialsController::class, 'addTestimonial']);
+    Route::post('/update/{id}', [TestimonialsController::class, 'update'])->name('testimonial.update');
+    Route::delete('/destroy/{id}', [TestimonialsController::class, 'destroy'])->name('testimonial.destroy');
+
     //Debt Manager Routes
     Route::post('debt_store', [DebtController::class, 'store'])->name('debt_store');
     Route::get('user_debtcalc', [DebtController::class, 'showDebtFreeCountdown']);
     Route::post('extraPayment_store', [DebtController::class, 'storeExtraPayment'])->name('extraPayment_store');
-    Route::post('/pay_loan/{id}', [DebtController::class, 'payLoan'])->name('payLoan');    
+    Route::post('/pay_loan/{id}', [DebtController::class, 'payLoan'])->name('payLoan'); 
+    
+    //Video Management
+    Route::get('video_admindash', [VideoController::class, 'index']);
+    Route::post('post_video', [VideoController::class, 'store']);
 });
 
 //Password reset Routes

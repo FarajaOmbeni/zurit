@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\InvestmentPlanner;
 use App\Models\WithholdingTax;
+use App\Traits\NetIncomeCalculator;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 
 class InvestmentController extends Controller
 {
+    use NetIncomeCalculator;
+
     public function storemonthlyInvestment(Request $request)
     {
         $investmentData = $request->input('investment');
@@ -120,14 +123,15 @@ class InvestmentController extends Controller
             );
         }
 
-
+        $netIncome = $this->calculateNetIncome(auth()->id());
 
 
         return view('user_investmentplanner', [
             'monthlyInvestments' => $monthlyInvestments,
             'withholdingTaxRates' => $withholdingTaxRates,
             'defaultRate' => $defaultRate,
-            'investments' => $investments
+            'investments' => $investments,
+            'netIncome' => $netIncome,
         ]);
     }
 

@@ -73,7 +73,8 @@
                             <img class="arrow-icon" src="{{ asset('home_res/img/icon/arrow.png') }}" alt="">
                         </div>
                         <ul>
-                            <a class="dropdown-item" href="{{ url('goalsetting') }}">Goal Setting</a>                            <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
+                            <a class="dropdown-item" href="{{ url('goalsetting') }}">Goal Setting</a>
+                            <li><a class="dropdown-link" href="{{ url('budgetplanner') }}">Budget Planner</a></li>
                             <li><a class="dropdown-link" href="{{ url('networthcalculator') }}">Networth
                                     Calculator</a>
                             </li>
@@ -202,13 +203,24 @@
                 </div>
                 <div class="col-md-6">
                     <!-- Video Container -->
-                    <div class="d-flex justify-content-center mt-3 video-container"
+                    {{-- <div class="d-flex justify-content-center mt-3 video-container"
                         onclick="window.open('https://www.youtube.com/@zuritconsulting', '_blank')">
                         <video class="video" src="home_res/vids/intro.mp4" autoplay muted loop></video>
                         <div class="play-button">
                             <img src="home_res/img/play_button.svg" alt="Play">
                         </div>
-                    </div>
+                    </div> --}}
+                    @if($video->video_link)
+                        <div style="display: flex; justify-content: center; margin-top: 5%; margin-left: 5%;">
+                            <iframe style="border: 1px solid #F2AE30; border-radius: 10px" width="600" height="300"
+                                src="https://www.youtube.com/embed/{{$video->video_link}}" frameborder="0" allowfullscreen>
+                            </iframe>
+                        </div>
+                    @else
+                        <div style="display: flex; justify-content: center; margin-top: 5%; margin-left: 5%;">
+                            <p>No video available.</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -327,60 +339,51 @@
                 <h2 class="text-center testimonials-header">Testimonials</h2>
                 <div id="carouseltestimonials" class="carousel slide w-100" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="testimonial">
-                                <div class="client">
-                                    <div class="photo">
-                                        <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
+                        @if (count($testimonials) > 0)
+                            @foreach ($testimonials as $index => $testimonial)
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <div class="testimonial">
+                                        <div class="client">
+                                            <div class="photo">
+                                                <img src="{{ asset('testimonial_images/' . $testimonial->image) }}"
+                                                    alt=""
+                                                    style="width: 10rem; height: 10rem; border-radius: 50%;">
+                                            </div><br><br>
+                                            <p class="name text-center fw-bold fs-5">{{ $testimonial->name }}</p>
+                                        </div><br>
+                                        <div class="testimonial-text">
+                                            <p>{{ strip_tags($testimonial->content) }}</p>
+                                        </div>
                                     </div>
-                                    <p class="name text-center">John Odende</p>
                                 </div>
-                                <div class="testimonial-text">
-                                    <p>Zurit Financial Consultancy has been an invaluable asset to our team,
-                                        providing
-                                        expert financial guidance tailored to the unique challenges of our DevOps
-                                        environment. Their strategic insights and tailored solutions have
-                                        significantly
-                                        optimized our financial processes. With a commitment to excellence, their
-                                        team's
-                                        responsiveness and proactive approach set them apart. I highly recommend
-                                        Zurit
-                                        Financial Consultancy to any DevOps professional seeking top-notch financial
-                                        expertise.</p>
+                            @endforeach
+                        @else
+                            <div class="carousel-item active">
+                                <div class="testimonial">
+                                    <div class="client">
+                                        <div class="photo">
+                                            <img src="path_to_default_image.jpg"
+                                                alt=""
+                                                style="width: 10rem; height: 10rem; border-radius: 50%;">
+                                        </div><br><br>
+                                        <p class="name text-center fw-bold fs-5">No Testimonials Available</p>
+                                    </div><br>
+                                    <div class="testimonial-text">
+                                        <p>Check back later for more testimonials.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="testimonial">
-                                <div class="client">
-                                    <div class="photo">
-                                        <i class="bi bi-person-fill" style="font-size: 10rem; color:#5e5e5e;"></i>
-                                    </div>
-                                    <p class="name text-center">Vincent Wafula</p>
-                                </div>
-                                <div class="testimonial-text">
-                                    <p>"I can't express enough gratitude for the invaluable guidance provided by
-                                        Zurit Consulting during Their recent discussion on the costly mistakes
-                                        people often make when investing.
-                                        They also helped highlight common pitfalls people tend to get into and
-                                        equipped me with practical strategies to navigate this journey with
-                                        confidence.
-                                        Thanks to their insights, I now approach investing with a newfound clarity
-                                        and assurance. I highly recommend Zurit Consulting to anyone seeking
-                                        comprehensive and reliable financial advice.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="controllers">
-                            <button type="button" data-bs-target="#carouseltestimonials" data-bs-slide="prev">
-                                <img src="img/arrow-left.svg" alt="" style="width:40px">
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button type="button" data-bs-target="#carouseltestimonials" data-bs-slide="next">
-                                <img src="img/arrow-right.svg" alt="" style="width:40px">
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
+                        @endif
+                    </div>
+                    <div class="controllers">
+                        <button type="button" data-bs-target="#carouseltestimonials" data-bs-slide="prev">
+                            <img src="img/arrow-left.svg" alt="" style="width:40px">
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button type="button" data-bs-target="#carouseltestimonials" data-bs-slide="next">
+                            <img src="img/arrow-right.svg" alt="" style="width:40px">
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>

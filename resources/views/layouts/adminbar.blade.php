@@ -57,6 +57,14 @@
                                 <a href="{{ url('/marketing_admindash') }}"><span class="fa fa-cogs mr-3"></span>
                                     Marketing emails</a>
                             </li>
+                            <li class="{{ Request::is('testimonials_admindash') ? 'active' : '' }}">
+                                <a href="{{ url('/testimonials_admindash') }}"><span class="fa fa-cogs mr-3"></span>
+                                    Testimonials</a>
+                            </li>
+                            <li class="{{ Request::is('video_admindash') ? 'active' : '' }}">
+                                <a href="{{ url('/video_admindash') }}"><span class="fa fa-cogs mr-3"></span>
+                                    Manage Videos</a>
+                            </li>
                             <li class="{{ Request::is('account_admindash') ? 'active' : '' }}">
                                 <a href="{{ url('/account_admindash') }}"><span class="fa fa-cogs mr-3"></span> Account
                                     Details</a>

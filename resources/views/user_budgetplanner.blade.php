@@ -13,6 +13,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
@@ -53,6 +55,7 @@
                                     Income</button>
                                 <button type="button" class="button" data-toggle="modal"
                                     data-target="#expenseModal">Add Expense</button>
+                                <a type="button" class="button" href="/user_debtcalc">Go to Debt Manager</a>
                             </div>
                             <!-- Income Modal -->
                             <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog"
@@ -70,67 +73,31 @@
                                             <form action="{{ route('storeIncome') }}" method="post">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="salary">Salary/Wages</label><br>
-                                                    <input type="number" name="income[Salary][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[Salary][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="consulting">Consulting/Freelance</label><br>
-                                                    <input type="number" name="income[Consulting][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[Consulting][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="dividends">Dividends/Investments</label><br>
-                                                    <input type="number" name="income[Dividends][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[Dividends][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="interest">Interest/Business Profit</label><br>
-                                                    <input type="number" name="income[Interest][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[Interest][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="rental_income">Rental income</label><br>
-                                                    <input type="number" name="income[rental_income][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[rental_income][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="pension">Retirement/Pension Income</label><br>
-                                                    <input type="number" name="income[pension][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[pension][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="bonuses">Bonuses</label><br>
-                                                    <input type="number" name="income[bonuses][expected_income]"
-                                                        placeholder="Expected Income">
-                                                    <input type="number" name="income[bonuses][actual_income]"
-                                                        placeholder="Actual Income">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    {{-- <button type="button" class="btn btn-primary"
-                                                        id="add-category-btn">Add Category</button> --}}
-                                                    <button type="submit" class="btn btn-primary">Save
+                                                    <label for="income_type">Income Type</label>
+                                                    <select class="form-control" required name="income_type"
+                                                        id="incomeType">
+                                                        <option value="Salary & Wages">Salary & Wages</option>
+                                                        <option value="Consultancy/Freelance">Consultancy/Freelance
+                                                        </option>
+                                                        <option value="Investments and Dividends">Investments and
+                                                            Dividends</option>
+                                                        <option value="Interest or Business Profit">Interest or Business
+                                                            Profit</option>
+                                                        <option value="Rental Income">Rental Income</option>
+                                                        <option value="Retirement or Pension Income">Retirement or
+                                                            Pension Income</option>
+                                                        <option value="Bonuses">Bonuses</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <div class="form-group">
+                                                        <label for="income">Amount</label>
+                                                        <input type="number" class="form-control" name="income"
+                                                            placeholder="Input Amount">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mt-3">Save
                                                         changes</button>
                                                 </div>
                                             </form>
-
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -152,85 +119,28 @@
                                             <form action="{{ route('storeExpense') }}" method="post">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="House">House(Rent/Mortgage)</label><br>
-                                                    <input type="number" name="expense[House][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[House][actual_expense]"
-                                                        placeholder="Actual Expense">
+                                                    <select name="expense_type" class="form-control" id="expenseType"
+                                                        onchange="showOtherInput(this)">
+                                                        <option value="Food/Groceries">Food/Groceries</option>
+                                                        <option value="Transport">Transport</option>
+                                                        <option value="Utilities and Electricity">Utilities and
+                                                            Electricity</option>
+                                                        <option value="Entertainment and Recreation">Entertainment and
+                                                            Recreation</option>
+                                                        <option value="Healthcare">Healthcare</option>
+                                                        <option value="Personal Care">Personal Care</option>
+                                                        <option value="Insurance">Insurance</option>
+                                                        <option value="Investments">Investments</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="House(Rent/Mortgage)">House(Rent/Mortgage)
+                                                        <option value="Other">Other</option>
+                                                        </option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="Savings and Investments">Savings</label><br>
-                                                    <input type="number" name="expense[Savings][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Savings][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Investments">Investments</label><br>
-                                                    <input type="number"
-                                                        name="expense[Investments][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Investments][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Food">Groceries/Food</label><br>
-                                                    <input type="number" name="expense[Food][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Food][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Transport">Transport</label><br>
-                                                    <input type="number" name="expense[Transport][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Transport][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="utilities">Utilities</label><br>
-                                                    <input type="number" name="expense[utilities][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[utilities][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="insurance">Insurance</label><br>
-                                                    <input type="number" name="expense[insurance][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[insurance][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="entertainment">Entertainment/Recreation</label><br>
-                                                    <input type="number"
-                                                        name="expense[entertainment][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number"
-                                                        name="expense[entertainment][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Loans">Loans</label><br>
-                                                    <input type="number" name="expense[Loans][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Loans][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Healthcare">Healthcare</label><br>
-                                                    <input type="number" name="expense[Loans][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Loans][actual_expense]"
-                                                        placeholder="Actual Expense">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Personl_care">Personl Care</label><br>
-                                                    <input type="number"
-                                                        name="expense[Personl_care][expected_expense]"
-                                                        placeholder="Expected Expense">
-                                                    <input type="number" name="expense[Personl_care][actual_expense]"
-                                                        placeholder="Actual Expense">
+                                                    <label for="expense">Amount</label>
+                                                    <input type="number" name="expense" placeholder="Input Amount"
+                                                        class="form-control">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -270,14 +180,14 @@
                                         </tr>
                                         <tr>
                                             <th>Income Type</th>
-                                            <th>Expected Income</th>
-                                            <th>Actual Income</th>
-                                            <th></th>
+                                            <th>Income</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
                                             <th class="divider"></th> <!-- Divider column -->
                                             <th>Expense Type</th>
-                                            <th>Expected Expense</th>
-                                            <th>Actual Expense</th>
-                                            <th></th>
+                                            <th>Expense</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -285,8 +195,99 @@
                                             <tr>
                                                 @if ($income)
                                                     <td>{{ $income->income_type }}</td>
-                                                    <td>{{ number_format($income->expected_income) }}</td>
                                                     <td>{{ number_format($income->actual_income) }}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#updateIncomeModal{{ $income->id }}">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade"
+                                                            id="updateIncomeModal{{ $income->id }}" tabindex="-1"
+                                                            role="dialog"
+                                                            aria-labelledby="updateIncomeModalLabel{{ $income->id }}"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="updateIncomeModalLabel{{ $income->id }}">
+                                                                            Update Income
+                                                                        </h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form
+                                                                            action="{{ route('income.update', $income->id) }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            <div class="form-group">
+                                                                                <select name="income_type"
+                                                                                    class="form-control"
+                                                                                    id="incomeType"
+                                                                                    onchange="showOtherInput(this)">
+                                                                                    <option value="Salary & Wages"
+                                                                                        {{ $income->income_type == 'Salary & Wages' ? 'selected' : '' }}>
+                                                                                        Salary & Wages</option>
+                                                                                    <option
+                                                                                        value="Interest or Business Profit"
+                                                                                        {{ $income->income_type == 'Interest or Business Profit' ? 'selected' : '' }}>
+                                                                                        Interest or Business Profit
+                                                                                    </option>
+                                                                                    <option
+                                                                                        value="Investments and Dividends"
+                                                                                        {{ $income->income_type == 'Investments and Dividends' ? 'selected' : '' }}>
+                                                                                        Investments and Dividends
+                                                                                    </option>
+                                                                                    <option value="Rental Income"
+                                                                                        {{ $income->income_type == 'Rental Income' ? 'selected' : '' }}>
+                                                                                        Rental Income</option>
+                                                                                    <option
+                                                                                        value="Consultancy/Freelance"
+                                                                                        {{ $income->income_type == 'Consultancy/Freelance' ? 'selected' : '' }}>
+                                                                                        Consultancy/Freelance
+                                                                                    </option>
+                                                                                    <option
+                                                                                        value="Retirement or Pension Income"
+                                                                                        {{ $income->income_type == 'Retirement or Pension Income' ? 'selected' : '' }}>
+                                                                                        Retirement or Pension Income
+                                                                                    </option>
+                                                                                    <option value="Bonuses"
+                                                                                        {{ $income->income_type == 'Bonuses' ? 'selected' : '' }}>
+                                                                                        Savings
+                                                                                    </option>
+                                                                                    <option value="Other"
+                                                                                        {{ $income->income_type == 'Other' ? 'selected' : '' }}>
+                                                                                        Other
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="income">Amount</label>
+                                                                                <input type="number"
+                                                                                    name="actual_income"
+                                                                                    placeholder="Input Amount"
+                                                                                    class="form-control"
+                                                                                    value="{{ $income->actual_income }}">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Save
+                                                                                    changes</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <form action="{{ route('income.destroy', $income) }}"
                                                             method="POST">
@@ -303,18 +304,135 @@
                                                 <td class="divider"></td> <!-- Divider column -->
                                                 @if ($expenses)
                                                     <td>{{ $expenses->expense_type }}</td>
-                                                    <td>{{ number_format($expenses->expected_expense) }}</td>
                                                     <td>{{ number_format($expenses->actual_expense) }}</td>
-                                                    <td>
-                                                        <form action="{{ route('expenses.destroy', $expenses) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
+                                                    @if ($expenses->is_loan == 0 && $expenses->is_goal == 0 && $expenses->is_investment == 0)
+                                                        <td>
+                                                            <a href="{{ route('expenses.update', $expenses) }}"
+                                                                class="btn btn-primary" data-toggle="modal"
+                                                                data-target="#updateExpenseModal{{ $expenses->id }}">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </a>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade"
+                                                                id="updateExpenseModal{{ $expenses->id }}"
+                                                                tabindex="-1" role="dialog"
+                                                                aria-labelledby="updateExpenseModalLabel{{ $expenses->id }}"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="updateExpenseModalLabel{{ $expenses->id }}">
+                                                                                Update Expense
+                                                                            </h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form
+                                                                                action="{{ route('expenses.update', $expenses->id) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                <div class="form-group">
+                                                                                    <select name="expense_type"
+                                                                                        class="form-control"
+                                                                                        id="expenseType"
+                                                                                        onchange="showOtherInput(this)">
+                                                                                        <option value="Food/Groceries"
+                                                                                            {{ $expenses->expense_type == 'Food/Groceries' ? 'selected' : '' }}>
+                                                                                            Food/Groceries</option>
+                                                                                        <option value="Transport"
+                                                                                            {{ $expenses->expense_type == 'Transport' ? 'selected' : '' }}>
+                                                                                            Transport
+                                                                                        </option>
+                                                                                        <option
+                                                                                            value="Utilities and Electricity"
+                                                                                            {{ $expenses->expense_type == 'Utilities and Electricity' ? 'selected' : '' }}>
+                                                                                            Utilities and
+                                                                                            Electricity</option>
+                                                                                        <option
+                                                                                            value="Entertainment and Recreation"
+                                                                                            {{ $expenses->expense_type == 'Entertainment and Recreation' ? 'selected' : '' }}>
+                                                                                            Entertainment and
+                                                                                            Recreation</option>
+                                                                                        <option value="Healthcare"
+                                                                                            {{ $expenses->expense_type == 'Healthcare' ? 'selected' : '' }}>
+                                                                                            Healthcare</option>
+                                                                                        <option value="Personal Care"
+                                                                                            {{ $expenses->expense_type == 'Personal Care' ? 'selected' : '' }}>
+                                                                                            Personal Care</option>
+                                                                                        <option value="Insurance"
+                                                                                            {{ $expenses->expense_type == 'Insurance' ? 'selected' : '' }}>
+                                                                                            Insurance
+                                                                                        </option>
+                                                                                        <option value="Investments"
+                                                                                            {{ $expenses->expense_type == 'Investments' ? 'selected' : '' }}>
+                                                                                            Investments</option>
+                                                                                        <option value="Savings"
+                                                                                            {{ $expenses->expense_type == 'Savings' ? 'selected' : '' }}>
+                                                                                            Savings
+                                                                                        </option>
+                                                                                        <option value="Other"
+                                                                                            {{ $expenses->expense_type == 'Other' ? 'selected' : '' }}>
+                                                                                            Other
+                                                                                        </option>
+                                                                                        <option
+                                                                                            value="House(Rent/Mortgage)"
+                                                                                            {{ $expenses->expense_type == 'House(Rent/Mortgage)' ? 'selected' : '' }}>
+                                                                                            House(Rent/Mortgage)
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="expense">Amount</label>
+                                                                                    <input type="number"
+                                                                                        name="actual_expense"
+                                                                                        placeholder="Input Amount"
+                                                                                        class="form-control"
+                                                                                        value="{{ $expenses->actual_expense }}">
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-dismiss="modal">Close</button>
+                                                                                    {{-- <button type="button" class="btn btn-primary"
+                                                        id="add-expense-category-btn">Add Category</button> --}}
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary">Save
+                                                                                        changes</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                        <td>
+                                                            <form action="{{ route('expenses.destroy', $expenses) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    @endif
+                                                    @if ($expenses->is_loan == 1)
+                                                        <td><span class="alert alert-danger">This is a LOAN. Go to <a
+                                                                    href="user_debtcalc">Debt Manager</a></span></td>
+                                                    @endif
+                                                    @if ($expenses->is_goal == 1)
+                                                        <td><span class="alert alert-info">This is a GOAL. Go to <a
+                                                                    href="user_goalsetting">Goal Setting</a></span>
+                                                        </td>
+                                                    @endif
                                                 @else
                                                     <td colspan="4">No expense data for this entry</td>
                                                 @endif
@@ -327,6 +445,21 @@
                                         @endforelse
                                     </tbody>
                                 </table>
+                                <h3>Totals</h3>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div style="font-size: 25px; font-weight: bold;">Income Total</div>
+                                        <div style="font-size: 20px; font-weight: bold;">KES
+                                            {{ number_format($actualIncome) }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 25px; font-weight: bold;">Expense Total</div>
+                                        <div style="font-size: 20px; font-weight: bold;">KES
+                                            {{ number_format($actualExpenses) }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -334,13 +467,15 @@
                             <div class="card mt-3"
                                 style="background: linear-gradient(45deg, rgba(41, 128, 185, 1), rgba(155, 89, 182, 1), rgba(255, 193, 7, 1));">
                                 <div class="card-body">
-                                    <h2 class="card-title text-white">Net for
+                                    <h2 class="card-title text-white">Surplus for
                                         {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
                                     @if ($actualIncome === null || $actualExpenses === null)
                                         <p class="card-text text-white">Please add your income and expense data to
                                             calculate the net income.</p>
                                     @else
-                                        <h3 class="card-text text-white">{{ $netIncome }}</h3>
+                                        <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
+                                        <p class="alert alert-info">You can use this amount to achieve your goals or
+                                            pay your debts.</p>
                                     @endif
                                 </div>
                             </div>
@@ -364,6 +499,16 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 
     {{-- PWA --}}
     <script src="{{ asset('/sw.js') }}"></script>

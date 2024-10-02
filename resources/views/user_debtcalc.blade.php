@@ -47,8 +47,21 @@
             @endif
             <div class="container mt-5 ml-5">
                 <div class="mb-3">
+                    <!-- Net income card-->
+                    <div class="alert alert-info">
+
+                        @if ($netIncome > 0)
+                            You have KES {{ number_format($netIncome) }} as surplus. You can use this amount to pay your
+                            debts.
+                        @else
+                            You have no surplus income to pay your debts. You have a deficit of KES
+                            {{ number_format($netIncome) }}.
+                        @endif
+                    </div>
+
                     <!-- Add Debt Button -->
                     <button class="button" id="add-debt-button">Add Debt</button>
+                    <a class="button" id="add-debt-button" href="/user_goalsetting">Set Goals</a>
 
                     <div id="overlay"
                         style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 2; cursor: pointer;"
@@ -195,11 +208,11 @@
                                                 <!-- Payoff Button -->
                                                 <form action="{{ route('payLoan', ['id' => $debt->id]) }}"
                                                     method="POST">
-                                                        @csrf
-                                                        <input style="width: 8rem; height: 2rem;" type="number"
-                                                            name="pay_loan_amount" id="">
-                                                        <button style="width: 4rem; height: 2rem;" class="btn btn-success"
-                                                            type="submit">Pay</button>
+                                                    @csrf
+                                                    <input style="width: 8rem; height: 2rem;" type="number"
+                                                        name="pay_loan_amount" id="">
+                                                    <button style="width: 4rem; height: 2rem;" class="btn btn-success"
+                                                        type="submit">Pay</button>
                                                 </form>
 
                                             </td>

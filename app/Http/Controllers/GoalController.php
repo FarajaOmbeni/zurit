@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Carbon\Carbon;
+use App\Models\Debt;
 use App\Models\Goal;
+use App\Models\Expense;
 use Illuminate\Http\Request;
+use App\Traits\NetIncomeCalculator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 Use DateTime;
 
 
 class GoalController extends Controller
 {
+    use NetIncomeCalculator;
+
     public function showGoalData()
     {
         $goals = Goal::where('user_id', auth()->id())->get();
@@ -26,9 +31,12 @@ class GoalController extends Controller
             return ($goal->current_amount / $goal->goal_amount) * 100;
         });
 
+        $netIncome = $this->calculateNetIncome(auth()->id());
+
 
         return view('user_goalsetting', [
             'goals' => $goals,
+            'netIncome' => $netIncome,
             'totalGoals' => $totalGoals,
             'completedGoals' => $completedGoals,
             'completionPercentages' => $completionPercentages,
@@ -54,6 +62,13 @@ class GoalController extends Controller
             $validatedData['description'] = $validatedData['otherDescription'];
         }
 
+        $expense = new Expense;
+        $expense->user_id = Auth::id();
+        $expense->expense_type = $request->input('title');
+        $expense->actual_expense = $request->input('current_amount');
+        $expense->is_goal = 1;
+        $expense->save();
+
         Goal::create($validatedData);
 
         return redirect('user_goalsetting')->with('success', [
@@ -68,6 +83,26 @@ class GoalController extends Controller
         $addedAmount = $request->input('addedAmount');
         $goal->current_amount += $addedAmount;
         $goal->save();
+
+        // Find the expense that matches the debt name for the current user
+        $expense = Expense::where('expense_type', $goal->title)
+        ->where('user_id', auth()->id())
+        ->first();
+
+        // Check if the expense exists before updating
+        if ($expense) {
+            $expense->actual_expense += $request->input('addedAmount');
+            $expense->save();
+        } else {
+            // If the expense doesn't exist, create a new one
+            Expense::create([
+                'user_id' => auth()->id(),
+                'expense_type' => $goal->title,
+                'actual_expense' => $request->input('addedAmount'),
+                'is_goal' => 1,
+                // Add any other necessary fields
+            ]);
+        }
         try {
         return redirect('user_goalsetting')->with('success', [
                 'message' => 'Amount updated Successfully',

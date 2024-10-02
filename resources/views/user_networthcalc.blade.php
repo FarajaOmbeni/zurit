@@ -167,7 +167,7 @@
                                     <td></td> <!-- Empty cell for spacing -->
                                     <td>{{ $i < $liabilityCount ? $liabilities[$i]->debt_name : ''}}
                                     </td>
-                                    <td>-{{ $i < $liabilityCount ? number_format($liabilities[$i]->current_balance) : '' }}
+                                    <td>-{{ $i < $liabilityCount ? number_format($liabilities[$i]->current_balance - $liabilities[$i]->minimum_payment) : '' }}
                                     </td>
                                 </tr>
                             @endfor

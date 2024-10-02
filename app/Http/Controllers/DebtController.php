@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Debt;
-use App\Models\ExtraPayment;
-use App\Models\MonthlyPayment;
-use Auth;
 use Carbon\Carbon;
+use App\Models\Debt;
+use App\Models\Expense;
+use App\Models\ExtraPayment;
+use Illuminate\Http\Request;
+use App\Models\MonthlyPayment;
+use App\Traits\NetIncomeCalculator;
+use Illuminate\Support\Facades\Auth;
 
 class DebtController extends Controller
 {
+    use NetIncomeCalculator;
+
     private function calculateEndPeriod($current_balance, $interest_rate, $minimum_payment)
     {
         $monthly_interest_rate = $interest_rate / 12 / 100;
@@ -27,12 +31,19 @@ class DebtController extends Controller
         $debt->current_balance = $request->debt['current_balance']['value'];
         $debt->interest_rate = $request->debt['interest_rate']['value'];
         $debt->minimum_payment = $request->debt['minimum_payment']['value'];
-        $start_period = Carbon::parse($request->debt['start_period']['date']);
-        $debt->start_period = $start_period;
+        // $start_period = Carbon::parse($request->debt['start_period']['date']);
+        // $debt->start_period = $start_period;
         $debt->payment_strategy = $request->debt['payment_strategy']['strategy'];
         $end_period_months = $this->calculateEndPeriod($request->debt['current_balance']['value'], $request->debt['interest_rate']['value'], $request->debt['minimum_payment']['value']);
-        $debt->end_period = $start_period->copy()->addMonths($end_period_months);
+        // $debt->end_period = $start_period->copy()->addMonths($end_period_months);
         $debt->save();
+
+        $expense = new Expense;
+        $expense->expense_type = $request->debt['debt_name']['name'];
+        $expense->actual_expense = $request->debt['minimum_payment']['value'];
+        $expense->user_id = Auth::id();
+        $expense->is_loan = 1;
+        $expense->save();
 
         return redirect('user_debtcalc')->with('success', [
             'message' => 'Debt Added Succesfully',
@@ -58,7 +69,11 @@ class DebtController extends Controller
 
         //progress circle
         $monthlyPayments = MonthlyPayment::where('user_id', Auth::id())->get();
-        $extraPayments = ExtraPayment::where('user_id', Auth::id())->get();
+
+        //Calculate the net income
+        $netIncome = $this->calculateNetIncome(auth()->id());
+
+        $debts = Debt::where('user_id', Auth::id())->get();
 
         $totalDebt = $debts->sum('current_balance');
         $principalPaid = $monthlyPayments->sum('current_balance');
@@ -73,6 +88,7 @@ class DebtController extends Controller
             'end_period' => $end_period,
             'remaining_time' => $remaining_time,
             'totalDebt' => $totalDebt,
+            'netIncome' => $netIncome,
             'principalPaid' => $principalPaid,
             'remainingBalance' => $remainingBalance,
         ]);
@@ -126,13 +142,32 @@ class DebtController extends Controller
 
         // Find the loan by ID
         $debt = Debt::findOrFail($id);
-
+        
         // Calculate the new balance
         $newBalance = $debt->minimum_payment + $request->input('pay_loan_amount');
+
+        // Find the expense that matches the debt name for the current user
+        $expense = Expense::where('expense_type', $debt->debt_name)
+        ->where('user_id', auth()->id())
+        ->first();
 
         // Update the current balance
         $debt->minimum_payment = $newBalance;
         $debt->save();
+
+        // Check if the expense exists before updating
+        if ($expense) {
+            $expense->actual_expense += $request->input('pay_loan_amount');
+            $expense->save();
+        } else {
+            // If the expense doesn't exist, create a new one
+            Expense::create([
+                'user_id' => auth()->id(),
+                'expense_type' => $debt->debt_name,
+                'actual_expense' => $request->input('pay_loan_amount'),
+                // Add any other necessary fields
+            ]);
+        }
 
         // Redirect back with a success message
         return redirect('user_debtcalc')->with('success', [
