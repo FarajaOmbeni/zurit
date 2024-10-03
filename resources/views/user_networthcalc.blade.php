@@ -22,6 +22,18 @@
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZMJCGHRR4');
+</script>
 
 <body>
     @include('layouts.app')
@@ -165,7 +177,7 @@
                                     <td>{{ $i < $assetCount ? $assets[$i]->asset_description : '' }}</td>
                                     <td>{{ $i < $assetCount ? number_format($assets[$i]->asset_value) : '' }}</td>
                                     <td></td> <!-- Empty cell for spacing -->
-                                    <td>{{ $i < $liabilityCount ? $liabilities[$i]->debt_name : ''}}
+                                    <td>{{ $i < $liabilityCount ? $liabilities[$i]->debt_name : '' }}
                                     </td>
                                     <td>-{{ $i < $liabilityCount ? number_format($liabilities[$i]->current_balance - $liabilities[$i]->minimum_payment) : '' }}
                                     </td>

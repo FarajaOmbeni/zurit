@@ -21,6 +21,18 @@
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZMJCGHRR4');
+</script>
 
 <body>
     @extends('layouts.userbar')
@@ -38,8 +50,10 @@
 
                         <!-- Net income card-->
                         <div class="alert alert-info col-md-6 mx-auto">
-                                This tool helps you plan your investments without necessarily paying for them. Once you are pleased with the investment retuns, you can go to the Goals tool and add the investment there and contribute to it.
-                       </div>
+                            This tool helps you plan your investments without necessarily paying for them. Once you are
+                            pleased with the investment retuns, you can go to the Goals tool and add the investment
+                            there and contribute to it.
+                        </div>
 
                         <!-- Buttons for Monthly Calculations -->
                         <div class="text-center mb-5">

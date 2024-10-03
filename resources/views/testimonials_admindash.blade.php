@@ -19,6 +19,18 @@
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZMJCGHRR4');
+</script>
 
 <body>
     @include('layouts.app')
@@ -81,7 +93,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($testimonials->count() > 0)
+                                    @if ($testimonials->count() > 0)
                                         @foreach ($testimonials as $testimonial)
                                             <tr>
                                                 <td>{{ $testimonial->name }}</td>
@@ -95,13 +107,17 @@
                                                     </button>
 
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="editTestimonialModal{{ $testimonial->id }}" tabindex="-1"
-                                                        role="dialog" aria-labelledby="editTestimonialModalLabel{{ $testimonial->id }}"
+                                                    <div class="modal fade"
+                                                        id="editTestimonialModal{{ $testimonial->id }}" tabindex="-1"
+                                                        role="dialog"
+                                                        aria-labelledby="editTestimonialModalLabel{{ $testimonial->id }}"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="editTestimonialModalLabel{{ $testimonial->id }}">Edit Testimonial</h5>
+                                                                    <h5 class="modal-title"
+                                                                        id="editTestimonialModalLabel{{ $testimonial->id }}">
+                                                                        Edit Testimonial</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -115,8 +131,8 @@
                                                                         @method('POST')
                                                                         <label for="name">Name</label>
                                                                         <input type="text"
-                                                                            value="{{ $testimonial->name }}" name="name"
-                                                                            id="" required>
+                                                                            value="{{ $testimonial->name }}"
+                                                                            name="name" id="" required>
                                                                         <label for="image">Image</label>
                                                                         <input type="file" name="image" required>
                                                                         <label for="content">Content</label><br>
@@ -133,67 +149,67 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('testimonial.destroy', $testimonial->id) }}"
-                                                        method="POST" style="display: inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="5">No testimonials available.</td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
                         </div>
-                    @else
-                        <tr>
-                            <td colspan="5">0 results</td>
+                        </td>
+                        <td>
+                            <form action="{{ route('testimonial.destroy', $testimonial->id) }}" method="POST"
+                                style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
                         </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="5">No testimonials available.</td>
+                    </tr>
                     @endif
-                    </ul>
+                    </tbody>
+                    </table>
                 </div>
+            @else
+                <tr>
+                    <td colspan="5">0 results</td>
+                </tr>
+                @endif
+                </ul>
             </div>
         </div>
+    </div>
 
 
 
-        {{-- PWA --}}
-        <script src="{{ asset('/sw.js') }}"></script>
-        <script>
-            if ("serviceWorker" in navigator) {
-                // Register a service worker hosted at the root of the
-                // site using the default scope.
-                navigator.serviceWorker.register("/sw.js").then(
-                    (registration) => {
-                        console.log("Service worker registration succeeded:", registration);
-                    },
-                    (error) => {
-                        console.error(`Service worker registration failed: ${error}`);
-                    },
-                );
-            } else {
-                console.error("Service workers are not supported.");
-            }
-        </script>
-        {{-- END OF PWA --}}
+    {{-- PWA --}}
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
+    {{-- END OF PWA --}}
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 
 
 </body>

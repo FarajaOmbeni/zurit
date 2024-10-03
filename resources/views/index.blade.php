@@ -23,6 +23,18 @@
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZMJCGHRR4');
+</script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
@@ -210,10 +222,11 @@
                             <img src="home_res/img/play_button.svg" alt="Play">
                         </div>
                     </div> --}}
-                    @if($video->video_link)
+                    @if ($video->video_link)
                         <div style="display: flex; justify-content: center; margin-top: 5%; margin-left: 5%;">
-                            <iframe style="border: 1px solid #F2AE30; border-radius: 10px" width="600" height="300"
-                                src="https://www.youtube.com/embed/{{$video->video_link}}" frameborder="0" allowfullscreen>
+                            <iframe style="border: 1px solid #F2AE30; border-radius: 10px" width="600"
+                                height="300" src="https://www.youtube.com/embed/{{ $video->video_link }}"
+                                frameborder="0" allowfullscreen>
                             </iframe>
                         </div>
                     @else
@@ -362,8 +375,7 @@
                                 <div class="testimonial">
                                     <div class="client">
                                         <div class="photo">
-                                            <img src="path_to_default_image.jpg"
-                                                alt=""
+                                            <img src="path_to_default_image.jpg" alt=""
                                                 style="width: 10rem; height: 10rem; border-radius: 50%;">
                                         </div><br><br>
                                         <p class="name text-center fw-bold fs-5">No Testimonials Available</p>
