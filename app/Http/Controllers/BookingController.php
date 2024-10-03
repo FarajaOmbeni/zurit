@@ -21,7 +21,7 @@ class BookingController extends Controller
         Booking::create($validatedData);
 
         // Send email only if the validation and database insertion are successful
-Mail::to('otaodavis.od@gmail.com')->send(new BookingFormMail(
+    Mail::to('info@zuritconsulting.com')->send(new BookingFormMail(
     $request->input('name'),
     $request->input('email'),
     $request->input('booking_datetime'),

@@ -4,6 +4,7 @@
 <head>
     <title>Net Worth Calculator</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Link your CSS files -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -21,6 +22,19 @@
     <meta name="theme-color" content="#fff" />
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    <style>
+        #send_advice,
+        #send_help {
+            color: blue;
+            cursor: pointer;
+        }
+
+        #send_advice:hover,
+        #send_help:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
@@ -66,11 +80,22 @@
 
                     @endphp
                     @if ($netWorth < 0)
-                        <div class="alert alert-warning d-flex justify-content-center" id="success-alert"
+                        <div class="alert alert-warning" id="success-alert"
                             style="width: 50%;">
-                            You are in the danger zone. Your liabilities exceed your assets. But Worry not, we are here
-                            to
-                            help. Call us on 0713544255 so that we can help you get back on track.
+                            <p>You are in the danger zone. Your liabilities exceed your assets. But Worry not, we are
+                                here to help. Click the button below to
+                                reach us so that we can help you get
+                                back on track.</p>
+                            <form action="">@csrf<span id="send_help">Send Request</span></form>
+                        </div>
+                    @elseif ($netWorth >= 0)
+                        <div class="alert alert-success" id="success-alert" style="width: 50%;">
+                            <p>Congratulations! You are doing great. To optimize your porfolio for more returns,
+                                click the link below
+                                to reach us and we will be
+                                there to assist you.
+                            </p>
+                            <form action="">@csrf<span id="send_advice">Send Request</span></form>
                         </div>
                     @endif
                     <div class="mb-3">
@@ -132,7 +157,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Liability form -->
-                                    <form action="{{ route('storeLiability') }}" method="post" id="addLiabilityForm">
+                                    <form action="{{ route('storeLiability') }}" method="post"
+                                        id="addLiabilityForm">
                                         @csrf
                                         <div class="form-group">
                                             <label for="liabilityDescription">Liability Description</label>
@@ -264,6 +290,63 @@
     </script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const helpLink = document.getElementById('send_help');
+            const adviceLink = document.getElementById('send_advice');
+
+            const sendEmail = async (type) => {
+                console.log('sendEmail function called with type:', type);
+                try {
+                    // First, check if the token is actually available
+                    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+                    const response = await fetch('/send-financial-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': token,
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            type: type,
+                            _token: token
+                        })
+                    });
+
+                    // Check if response is ok
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Server responded with:', errorText);
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('Response received:', data);
+
+                    if (data.success) {
+                        alert('Thank you! Our team will contact you soon.');
+                    } else {
+                        alert('Something went wrong. Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Error in sendEmail:', error);
+                    alert('An error occurred. Please try again later.');
+                }
+            };
+
+            if (helpLink) {
+                helpLink.addEventListener('click', () => {
+                    sendEmail('help');
+                });
+            }
+
+            if (adviceLink) {
+                adviceLink.addEventListener('click', () => {
+                    sendEmail('advice');
+                });
+            }
+        });
+
         let barGraph, pieChart;
         // Select the footer row
         const footerRow = document.querySelector('table.table tfoot tr');

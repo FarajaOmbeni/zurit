@@ -193,6 +193,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('storeAsset', [NetworthController::class, 'storeAsset'])->name('storeAsset');
     Route::post('storeLiability', [NetworthController::class, 'storeLiability'])->name('storeLiability');
     Route::get('user_networthcalc', [NetworthController::class, 'showNetworth']);
+    Route::post('/send-financial-email', [NetworthController::class, 'sendEmail'])->name('send.financial.email')->middleware('web');
+
 
     //Insights Routes
     Route::get('insights_admindash', function () {
@@ -270,7 +272,6 @@ Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestF
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
 
 //Imge optimization
 Route::get('optimize-images', [ImageController::class, 'optimizeImagesInDirectory'])->name('optimizeImages');

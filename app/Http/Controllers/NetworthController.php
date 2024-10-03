@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\Debt;
 use App\Models\Asset;
 use App\Models\Liability;
 use Illuminate\Http\Request;
+use App\Mail\FinancialAssistance;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class NetworthController extends Controller
 {
     //
-    public function storeAsset(Request $request){
+    public function storeAsset(Request $request)
+    {
         $userId = Auth::id();
         // Validate the form data
         $validatedData = $request->validate([
@@ -33,7 +36,8 @@ class NetworthController extends Controller
         ]);
     }
 
-    public function storeLiability(Request $request){
+    public function storeLiability(Request $request)
+    {
         $userId = Auth::id();
         // Validate the form data
         $validatedData = $request->validate([
@@ -54,11 +58,25 @@ class NetworthController extends Controller
         ]);
     }
 
-    public function showNetWorth(){
+    public function showNetWorth()
+    {
         $assets = Asset::where('user_id', auth()->id())->get();
         $liabilities = Debt::where('user_id', auth()->id())->get();
         $liabilities2 = Liability::where('user_id', auth()->id())->get();
-    
-        return view('user_networthcalc', compact('assets', 'liabilities','liabilities2'));
-    }  
+
+        return view('user_networthcalc', compact('assets', 'liabilities', 'liabilities2'));
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $user = Auth::user();
+        $type = $request->type;
+
+        try {
+            Mail::to('info@zuritconsulting.com')->send(new FinancialAssistance($user, $type));
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 }
