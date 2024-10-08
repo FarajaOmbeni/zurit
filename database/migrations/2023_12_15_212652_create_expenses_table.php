@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('actual_expense', 15, 2);
             $table->int('is_loan'); 
             $table->int('is_goal'); 
+            $table->int('is_investment'); 
             $table->timestamps();
         });
     }

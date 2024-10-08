@@ -169,6 +169,25 @@ class DebtController extends Controller
             ]);
         }
 
+        // Compare expenses with debt calculations and delete if they match
+        $loanExpenseComparison = Expense::where('expenses.user_id', auth()->id())
+        ->join('debt_calc', function ($join) {
+            $join->on('expenses.expense_type', '=', 'debt_calc.debt_name')
+            ->where('debt_calc.user_id',
+                '=',
+                auth()->id()
+            );
+        })
+        ->select('expenses.id', 'expenses.actual_expense', 'debt_calc.current_balance', 'debt_calc.debt_name')
+        ->get();
+
+        foreach ($loanExpenseComparison as $comparison) {
+            if ($comparison->actual_expense == $comparison->current_balance) {
+                // Find the specific expense by id and delete it
+                Expense::find($comparison->id)->delete();
+            }
+        }
+
         // Redirect back with a success message
         return redirect('user_debtcalc')->with('success', [
             'message' => 'Debt Paid Succesfully',

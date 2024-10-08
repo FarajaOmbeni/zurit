@@ -150,36 +150,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-public function destroy($id): RedirectResponse
-{
-    $user = User::find($id);
+    public function destroy($id): RedirectResponse
+    {
+        $user = User::find($id);
 
-    if ($user) {
-        // Delete related data
-        $user->incomes()->delete();
-        $user->expenses()->delete();
-        $user->assets()->delete();
-        $user->liabilities()->delete();
-        $user->debts()->delete();
-        $user->goals()->delete();
-        $user->investments()->delete();
-        $user->marketingMessages()->delete();
-        $user->extraPayments()->delete();
+        if ($user) {           
+            $user->delete();
 
-        // Delete the user
-        $user->delete();
+            return redirect()->route('admin')->with('success', [
+                'message' => 'User deleted successfully!',
+                'duration' => 3000,
+            ]);
+        }
 
-        return redirect()->route('admin')->with('success', [
-            'message' => 'User deleted successfully!',
+        return redirect()->route('admin')->with('error', [
+            'message' => 'Error deleting user!',
             'duration' => 3000,
         ]);
     }
-
-    return redirect()->route('admin')->with('error', [
-        'message' => 'Error deleting user!',
-        'duration' => 3000,
-    ]);
-}
 
 
 

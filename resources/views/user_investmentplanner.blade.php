@@ -33,6 +33,9 @@
 
     gtag('config', 'G-QZMJCGHRR4');
 </script>
+@php
+    use Carbon\Carbon; // Import the Carbon class with the full namespace
+@endphp
 
 <body>
     @extends('layouts.userbar')
@@ -93,33 +96,23 @@
                                     <thead>
                                         <tr>
                                             <th>Investment</th>
+                                            <th>Amount</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($monthlyInvestments as $investmentId => $investmentData)
-                                            @php
-                                                $firstMonthData = reset($investmentData);
-                                                $withholdingTax = \App\Models\WithholdingTax::find(
-                                                    $firstMonthData['withholding_tax_id'],
-                                                );
-                                                if (!$withholdingTax) {
-                                                    throw new \Exception(
-                                                        'Withholding tax not found for investment id: ' . $investmentId,
-                                                    );
-                                                }
-                                                $investmentType = $withholdingTax->investment_type;
-                                            @endphp
+                                        @foreach ($investments as $investment)
                                             <tr>
-                                                <td>{{ $investmentType }}</td>
+                                                <td>{{ $investment->investment_type }}</td>
+                                                <td>{{ number_format($investment->total_investment) }}</td>
                                                 <td>
-                                                    <a href="{{ route('investment.destroy', $investmentId) }}"
+                                                    <a href="{{ route('investment.destroy', $investment->id) }}"
                                                         class="card-link text-danger float-right"
-                                                        data-investment-id="{{ $investmentId }}"
-                                                        onclick="event.preventDefault(); document.getElementById('delete-investment-form-{{ $investmentId }}').submit();"><i
+                                                        data-investment-id="{{ $investment->id }}"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-investment-form-{{ $investment->id }}').submit();"><i
                                                             class="bi bi-trash-fill"></i></a>
-                                                    <form id="delete-investment-form-{{ $investmentId }}"
-                                                        action="{{ route('investment.destroy', $investmentId) }}"
+                                                    <form id="delete-investment-form-{{ $investment->id }}"
+                                                        action="{{ route('investment.destroy', $investment->id) }}"
                                                         method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
@@ -138,7 +131,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="monthlyModalLabel">Monthly Calculations</h5>
+                                        <h5 class="modal-title" id="monthlyModalLabel">Add Investment</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -147,33 +140,67 @@
                                         <form action="{{ route('storemonthlyInvestment') }}" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="investmentType">Investment Type</label>
-                                                <select name="investment[investment_type]" id="investmentType"
+                                                <label for="investment_type">Investment Type</label>
+                                                <select name="investment_type" id="investment_type"
                                                     class="form-control">
-                                                    @foreach ($withholdingTaxRates as $rate)
-                                                        <option value="{{ $rate->id }}"
-                                                            data-rate="{{ $rate->tax_rate }}">
-                                                            {{ $rate->investment_type }}
+                                                    @foreach ($existing_investments as $ex_investment)
+                                                        <option value="{{ $ex_investment->investment_type }}"">
+                                                            {{ $ex_investment->investment_type }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="initialInvestment">Initial Investment</label>
-                                                <input type="number" name="investment[initialInvestment]"
+                                            <div class="form-group hidden" id="initial_investment">
+                                                <label for="initial_investment">Initial Investment</label>
+                                                <input type="number" name="initial_investment"
                                                     placeholder="Enter initial investment" class="form-control">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="numberOfMonths">Number of Months</label>
-                                                <input type="number" name="investment[numberOfMonths]"
+                                            <div class="form-group hidden" id="total_investment">
+                                                <label for="total_investment">Total Investment</label>
+                                                <input type="number" name="total_investment"
+                                                    placeholder="Enter the total investment" class="form-control">
+                                            </div>
+                                            <div class="form-group hidden" id="number_of_years">
+                                                <label for="number_of_years">Number of Years</label>
+                                                <input type="number" name="number_of_years"
+                                                    placeholder="Enter number of years" class="form-control">
+                                            </div>
+                                            <div class="form-group hidden" id="number_of_months">
+                                                <label for="number_of_months">Number of Months</label>
+                                                <input type="number" name="number_of_months"
                                                     placeholder="Enter number of months" class="form-control">
+                                            </div>
+                                            <div class="form-group hidden" id="number_of_days">
+                                                <label for="number_of_days">Number of Days</label>
+                                                <select type="number" name="number_of_days"
+                                                    placeholder="Enter number of days" class="form-control">
+                                                    <option value="91">91 Days</option>
+                                                    <option value="182">182 Days</option>
+                                                    <option value="364">364 Days</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group hidden" id="mmf_name">
+                                                <label for="mmf_name">Name of Money Market</label>
+                                                <select type="text" name="mmf_name"
+                                                    placeholder="Enter name of MMF" class="form-control"
+                                                    id="funds">
+                                                    <!-- The options are being filled with JavaScript -->
+                                                </select>
+                                            </div>
+                                            <div class="form-group hidden" id="details_of_investment">
+                                                <label for="details_of_investment">Details of Investment</label>
+                                                <select type="text" name="details_of_investment"
+                                                    placeholder="Enter Details of Investment" class="form-control" required>
+                                                    <option value="1">DEET 1</option>
+                                                    <option value="2">DEET 2</option>
+                                                    <option value="3">DEET 3</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="projectedRateOfReturn">Projected Rate of Return</label>
-                                                <input type="number" name="investment[projectedRateOfReturn]"
-                                                    id="projectedRateOfReturn"
-                                                    placeholder="Enter projected rate of return" step="0.01"
-                                                    class="form-control">
+                                                <input type="number" placeholder="Enter projected rate of return" name="rate_of_return"
+                                                    id="projectedRateOfReturn" step="0.01"
+                                                    class="form-control" required>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -181,7 +208,6 @@
                                                 <button type="submit" class="btn btn-primary">Save
                                                     changes</button>
                                             </div>
-                                            <input type="hidden" name="calc_duration" value="monthly">
                                         </form>
                                     </div>
                                 </div>
@@ -190,128 +216,604 @@
 
                         <!-- Monthly Section -->
                         <div>
-                            <h3>Interest Calculations</h3>
-                            @foreach ($monthlyInvestments as $investmentId => $monthlyData)
-                                @php
-                                    $firstMonthData = reset($monthlyData);
-                                    $withholdingTax = \App\Models\WithholdingTax::find(
-                                        $firstMonthData['withholding_tax_id'],
-                                    );
-                                    if (!$withholdingTax) {
-                                        throw new \Exception(
-                                            'Withholding tax not found for investment id: ' . $investmentId,
-                                        );
-                                    }
-                                    $investmentType = $withholdingTax->investment_type;
-                                @endphp
-                                <!-- Investment Table -->
-                                <div id="investmentTable{{ $investmentId }}" class="investment-table">
-                                    <h5 style="font-weight: bold">{{ $investmentType }}</h5>
-                                    <div class="table-responsive">
+                            <h2 style="font-weight: semibold; margin-bottom: 50px">Manage Investments</h2>
+
+                            @if (
+                                ($t_bills && count($t_bills)) ||
+                                    ($gov_bonds && count($gov_bonds)) ||
+                                    ($infra_bonds && count($infra_bonds)) ||
+                                    ($saccos && count($saccos)) ||
+                                    ($mmfs && count($mmfs)))
+                                <h3 style="font-weight: bold">Contribution Investments</h3>
+
+                                <!-- Sacco Investments Table -->
+                                @if ($saccos && count($saccos) > 0)
+                                    <div class="table-responsive" style="margin-bottom: 40px;">
+                                        <h4 style="font-weight: 600">Sacco Investments</h4>
                                         <table class="table table-striped">
                                             <thead>
-                                                <tr>
-                                                    <th>Month</th>
-                                                    <th>Initial Investment</th>
-                                                    <th>Gross Interest</th>
-                                                    <th>Withholding Tax</th>
-                                                    <th>Net Interest</th>
-                                                    <th>Cumulative Investment Value</th>
-                                                </tr>
+                                                <th>Name</th>
+                                                <th>Initial Investment</th>
+                                                <th>Cumulative Investment</th>
+                                                <th>Nbr. of Months</th>
+                                                <th>RoR</th>
+                                                <th>Tax</th>
+                                                <th>Maturity</th>
+                                                <th>Gross Income</th>
+                                                <th>Net Income</th>
+                                                <th>Edit RoR</th>
+                                                <th>Contribute</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($monthlyData as $month => $investment)
+                                                @foreach ($saccos as $sacco)
+                                                    <!-- Sacco row calculations -->
+                                                    @php
+                                                        // Parse created_at date
+                                                        $created_at = \Carbon\Carbon::parse($sacco->created_at);
+
+                                                        // Calculate maturity
+                                                        $month_days = $sacco->number_of_months * 30;
+                                                        $year_days = $sacco->number_of_years * 365;
+                                                        $total_maturity_days =
+                                                            $sacco->number_of_days + $month_days + $year_days;
+                                                        $maturity_date = $created_at->addDays($total_maturity_days);
+                                                        $remaining_days = Carbon::now()
+                                                            ->startOfDay()
+                                                            ->diffInDays($maturity_date->startOfDay(), false);
+                                                    @endphp
                                                     <tr>
-                                                        <td>{{ date('F', mktime(0, 0, 0, $month, 10)) }}</td>
-                                                        <td>{{ number_format($investment['initial_investment']) }}</td>
-                                                        <td>{{ number_format($investment['gross_interest']) }}</td>
-                                                        <td>{{ number_format($investment['withholding_tax']) }}</td>
-                                                        <td>{{ number_format($investment['net_interest']) }}</td>
-                                                        <td>{{ number_format($investment['cumulative_investment_value']) }}
+                                                        <td>{{ $sacco->investment_type }}</td>
+                                                        <td>{{ number_format($sacco->initial_investment) }}</td>
+                                                        <td>{{ number_format($sacco->total_investment) }}</td>
+                                                        <td>{{ $sacco->number_of_months }} months</td>
+                                                        <td>{{ $sacco->rate_of_return }}%</td>
+                                                        <td>15%</td>
+                                                        <td>In {{ $remaining_days }} days</td>
+                                                        <td>{{ number_format($sacco->total_investment + ($sacco->total_investment * $sacco->rate_of_return) / 100) }}
+                                                        <td>{{ number_format($sacco->total_investment + (($sacco->total_investment + ($sacco->total_investment * $sacco->rate_of_return) / 100) - $sacco->total_investment)*0.85) }}
+                                                        </td>
+                                                        <!-- Edit RoR Form -->
+                                                        <td>
+                                                            <form action="{{ route('updateRate', $sacco->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="number" name="update_rate"
+                                                                    value="{{ $sacco->rate_of_return }}"
+                                                                    min="0" style="width: 80px;">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary mt-1">Update</button>
+                                                            </form>
+                                                        </td>
+                                                        <!-- Contribute Form -->
+                                                        <td>
+                                                            <form action="{{ route('contribute', $sacco->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="number" name="contribution_amount"
+                                                                    min="0" placeholder="Amount"
+                                                                    style="width: 80px;">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-success mt-1">Contribute</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                    <hr>
+                                @endif
 
-                                <!-- Graph for Investment -->
-                                <div class="mt-4" style="border-bottom: 1px solid black; margin-bottom: 10em">
-                                    <div id="investmentChart{{ $investmentId }}" style="width: auto; height: 50%;">
+                                <!-- Money Market Funds (MMFs) Table -->
+                                @if ($mmfs && count($mmfs) > 0)
+                                    <div class="table-responsive" style="margin-bottom: 40px;">
+                                        <h4 style="font-weight: 600">Money Market Funds</h4>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Initial Investment</th>
+                                                <th>Cumulative Investment</th>
+                                                <th>Nbr. of Months</th>
+                                                <th>RoR</th>
+                                                <th>Tax</th>
+                                                <th>Maturity</th>
+                                                <th>Gross Income</th>
+                                                <th>Net Income</th>
+                                                <th>Edit RoR</th>
+                                                <th>Contribute</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($mmfs as $mmf)
+                                                    @php
+                                                        $created_at = \Carbon\Carbon::parse($mmf->created_at);
+                                                        $month_days = $mmf->number_of_months * 30;
+                                                        $year_days = $mmf->number_of_years * 365;
+                                                        $total_maturity_days =
+                                                            $mmf->number_of_days + $month_days + $year_days;
+                                                        $maturity_date = $created_at->addDays($total_maturity_days);
+                                                        $remaining_days = Carbon::now()
+                                                            ->startOfDay()
+                                                            ->diffInDays($maturity_date->startOfDay(), false);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $mmf->mmf_name }}</td>
+                                                        <td>{{ number_format($mmf->initial_investment) }}</td>
+                                                        <td>{{ number_format($mmf->total_investment) }}</td>
+                                                        <td>{{ $mmf->number_of_months }} months</td>
+                                                        <td>{{ $mmf->rate_of_return }}%</td>
+                                                        <td>15%</td>
+                                                        <td>In {{ $remaining_days }} days</td>
+                                                        <td>{{ number_format($mmf->total_investment + ($mmf->total_investment * $mmf->rate_of_return) / 100) }}
+                                                        <td>{{ number_format($mmf->total_investment + (($mmf->total_investment + ($mmf->total_investment * $mmf->rate_of_return) / 100) - $mmf->total_investment)*0.85) }}
+                                                        </td>
+                                                        <!-- Edit RoR Form -->
+                                                        <td>
+                                                            <form action="{{ route('updateRate', $mmf->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="number" name="update_rate"
+                                                                    value="{{ $mmf->rate_of_return }}" min="0"
+                                                                    style="width: 80px;">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary mt-1">Update</button>
+                                                            </form>
+                                                        </td>
+                                                        <!-- Contribute Form -->
+                                                        <td>
+                                                            <form action="{{ route('contribute', $mmf->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="number" name="contribution_amount"
+                                                                    min="0" placeholder="Amount"
+                                                                    style="width: 80px;">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-success mt-1">Contribute</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
-                            @endforeach
+                                    <hr>
+                                @endif
+
+                                <h3 style="font-weight: bold;">Fixed Investments</h3>
+
+                                <!-- Treasury Bills Table -->
+                                @if ($t_bills && count($t_bills) > 0)
+                                    <div class="table-responsive" style="margin-bottom: 40px;">
+                                        <h4 style="font-weight: 600">Treasury Bills</h4>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Total Investment</th>
+                                                <th>Number of Days</th>
+                                                <th>Rate of Return</th>
+                                                <th>Tax</th>
+                                                <th>Maturity</th>
+                                                <th>Gross Income</th>
+                                                <th>Net Income</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($t_bills as $bill)
+                                                    <tr>
+                                                        <td>{{ $bill->investment_type }}</td>
+                                                        <td>{{ number_format($bill->total_investment) }}</td>
+                                                        <td>{{ $bill->number_of_days }} days</td>
+                                                        <td>{{ $bill->rate_of_return }}%</td>
+                                                        <td>15%</td>
+                                                        <td>In {{ $bill->number_of_days }} days</td>
+                                                        <td>{{ number_format($bill->total_investment + ($bill->total_investment * $bill->rate_of_return) / 100) }}
+                                                        <td>{{ number_format($bill->total_investment + (($bill->total_investment + ($bill->total_investment * $bill->rate_of_return) / 100) - $bill->total_investment)*0.85)}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                @endif
+
+                                <!-- Government Bonds Table -->
+                                @if ($gov_bonds && count($gov_bonds) > 0)
+                                    <div class="table-responsive" style="margin-top: 40px;">
+                                        <h4 style="font-weight: 600">Government Bonds</h4>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Total Investment</th>
+                                                <th>Number of Years</th>
+                                                <th>Details of Investment</th>
+                                                <th>Rate of Return</th>
+                                                <th>Tax</th>
+                                                <th>Maturity</th>
+                                                <th>Gross Income</th>
+                                                <th>Net Income</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gov_bonds as $govbond)
+                                                    @php
+                                                        $created_at = \Carbon\Carbon::parse($govbond->created_at);
+                                                        $month_days = $govbond->number_of_months * 30;
+                                                        $year_days = $govbond->number_of_years * 365;
+                                                        $total_maturity_days =
+                                                            $govbond->number_of_days + $month_days + $year_days;
+                                                        $maturity_date = $created_at->addDays($total_maturity_days);
+                                                        $remaining_days = Carbon::now()
+                                                            ->startOfDay()
+                                                            ->diffInDays($maturity_date->startOfDay(), false);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $govbond->investment_type }}</td>
+                                                        <td>{{ number_format($govbond->total_investment) }}</td>
+                                                        <td>{{ $govbond->number_of_years }} years</td>
+                                                        <td>{{ $govbond->details }}</td>
+                                                        <td>{{ $govbond->rate_of_return }}%</td>
+                                                        <td>15%</td>
+                                                        <td>In {{ $remaining_days }} days</td>
+                                                        <td>{{ number_format($govbond->total_investment + ($govbond->total_investment * $govbond->rate_of_return) / 100) }}
+                                                        <td>{{ number_format($govbond->total_investment + (($govbond->total_investment + ($govbond->total_investment * $govbond->rate_of_return) / 100) - $govbond->total_investment)*0.85) }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                @endif
+
+                                <!-- Infrastructure Bonds Table -->
+                                @if ($infra_bonds && count($infra_bonds) > 0)
+                                    <div class="table-responsive" style="margin-top: 40px;">
+                                        <h4 style="font-weight: 600">Infrastructure Bonds</h4>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Total Investment</th>
+                                                <th>Number of Years</th>
+                                                <th>Details of Investment</th>
+                                                <th>Rate of Return</th>
+                                                <th>Maturity</th>
+                                                <th>Projected Revenue</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($infra_bonds as $infrabond)
+                                                    @php
+                                                        $created_at = \Carbon\Carbon::parse($infrabond->created_at);
+                                                        $month_days = $infrabond->number_of_months * 30;
+                                                        $year_days = $infrabond->number_of_years * 365;
+                                                        $total_maturity_days =
+                                                            $infrabond->number_of_days + $month_days + $year_days;
+                                                        $maturity_date = $created_at->addDays($total_maturity_days);
+                                                        $remaining_days = Carbon::now()
+                                                            ->startOfDay()
+                                                            ->diffInDays($maturity_date->startOfDay(), false);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $infrabond->investment_type }}</td>
+                                                        <td>{{ number_format($infrabond->total_investment) }}</td>
+                                                        <td>{{ $infrabond->number_of_years }} years</td>
+                                                        <td>{{ $infrabond->details }}</td>
+                                                        <td>{{ $infrabond->rate_of_return }}%</td>
+                                                        <td>In {{ $remaining_days }} days</td>
+                                                        <td>{{ number_format($infrabond->total_investment + ($infrabond->total_investment * $infrabond->rate_of_return) / 100) }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="alert alert-warning">You do not have any investments. Add an Investment to start tracking!</div>
+                            @endif
                         </div>
-
-
-
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
-
-    <script>
-        window.onload = function() {
-            @foreach ($monthlyInvestments as $investmentId => $monthlyData)
-                const categories{{ $investmentId }} = [];
-                const data{{ $investmentId }} = [];
-
-                const table{{ $investmentId }} = document.querySelector('#investmentTable{{ $investmentId }} .table');
-                const rows{{ $investmentId }} = table{{ $investmentId }}.querySelectorAll('tbody tr');
-                rows{{ $investmentId }}.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    categories{{ $investmentId }}.push(cells[0].textContent); // Month
-                    data{{ $investmentId }}.push(Number(cells[5].textContent.replace(/,/g,
-                        ''))); // Cumulative Investment Value
-                });
-
-                Highcharts.chart('investmentChart{{ $investmentId }}', {
-                    title: {
-                        text: 'Profit Trend'
+        {{-- PWA --}}
+        <script src="{{ asset('/sw.js') }}"></script>
+        <script>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("/sw.js").then(
+                    (registration) => {
+                        console.log("Service worker registration succeeded:", registration);
                     },
-                    xAxis: {
-                        categories: categories{{ $investmentId }}
+                    (error) => {
+                        console.error(`Service worker registration failed: ${error}`);
                     },
-                    yAxis: {
-                        title: {
-                            text: 'Cumulative Investment Value'
+                );
+            } else {
+                console.error("Service workers are not supported.");
+            }
+        </script>
+        {{-- END OF PWA --}}
+
+        <script>
+            // Your data array
+            const moneyMarketFundData = [{
+                    rank: 1,
+                    fundManager: "Cytonn",
+                    effectiveAnnualRate: "18.14%"
+                },
+                {
+                    rank: 2,
+                    fundManager: "Lofty-Corban",
+                    effectiveAnnualRate: "18.04%"
+                },
+                {
+                    rank: 3,
+                    fundManager: "Etica",
+                    effectiveAnnualRate: "17.35%"
+                },
+                {
+                    rank: 4,
+                    fundManager: "Arvocap",
+                    effectiveAnnualRate: "17.13%"
+                },
+                {
+                    rank: 5,
+                    fundManager: "Kuza",
+                    effectiveAnnualRate: "17.00%"
+                },
+                {
+                    rank: 6,
+                    fundManager: "GenAfrica",
+                    effectiveAnnualRate: "16.47%"
+                },
+                {
+                    rank: 7,
+                    fundManager: "Nabo Africa",
+                    effectiveAnnualRate: "16.01%"
+                },
+                {
+                    rank: 8,
+                    fundManager: "Enwealth",
+                    effectiveAnnualRate: "15.98%"
+                },
+                {
+                    rank: 9,
+                    fundManager: "Jubilee",
+                    effectiveAnnualRate: "15.71%"
+                },
+                {
+                    rank: 10,
+                    fundManager: "Madison",
+                    effectiveAnnualRate: "15.62%"
+                },
+                {
+                    rank: 11,
+                    fundManager: "Ndovu",
+                    effectiveAnnualRate: "15.51%"
+                },
+                {
+                    rank: 12,
+                    fundManager: "Co-op",
+                    effectiveAnnualRate: "15.36%"
+                },
+                {
+                    rank: 13,
+                    fundManager: "KCB",
+                    effectiveAnnualRate: "15.34%"
+                },
+                {
+                    rank: 14,
+                    fundManager: "Mali",
+                    effectiveAnnualRate: "15.24%"
+                },
+                {
+                    rank: 15,
+                    fundManager: "Sanlam",
+                    effectiveAnnualRate: "15.11%"
+                },
+                {
+                    rank: 16,
+                    fundManager: "Absa Shilling",
+                    effectiveAnnualRate: "15.03%"
+                },
+                {
+                    rank: 17,
+                    fundManager: "Apollo",
+                    effectiveAnnualRate: "15.00%"
+                },
+                {
+                    rank: 18,
+                    fundManager: "Orient Kasha",
+                    effectiveAnnualRate: "14.80%"
+                },
+                {
+                    rank: 19,
+                    fundManager: "AA Kenya Shillings Fund",
+                    effectiveAnnualRate: "14.57%"
+                },
+                {
+                    rank: 20,
+                    fundManager: "Stanbic",
+                    effectiveAnnualRate: "14.48%"
+                },
+                {
+                    rank: 21,
+                    fundManager: "Genghis",
+                    effectiveAnnualRate: "14.40%"
+                },
+                {
+                    rank: 22,
+                    fundManager: "Dry Associates",
+                    effectiveAnnualRate: "14.05%"
+                },
+                {
+                    rank: 23,
+                    fundManager: "Old Mutual",
+                    effectiveAnnualRate: "14.02%"
+                },
+                {
+                    rank: 24,
+                    fundManager: "ICEA Lion",
+                    effectiveAnnualRate: "13.76%"
+                },
+                {
+                    rank: 25,
+                    fundManager: "CIC",
+                    effectiveAnnualRate: "13.70%"
+                },
+                {
+                    rank: 26,
+                    fundManager: "Equity",
+                    effectiveAnnualRate: "13.25%"
+                },
+                {
+                    rank: 27,
+                    fundManager: "British-American",
+                    effectiveAnnualRate: "13.12%"
+                },
+                {
+                    rank: 28,
+                    fundManager: "Mayfair",
+                    effectiveAnnualRate: "11.92%"
+                }
+            ];
+
+            // Get reference to the select element
+            const selectElement = document.getElementById('funds');
+            const projectedRateOfReturnInput = document.getElementById('projectedRateOfReturn');
+
+            // Populate the select options
+            moneyMarketFundData.forEach(fund => {
+                // Create a new option element
+                const option = document.createElement('option');
+                option.value = fund.fundManager; // Set the value attribute
+                option.text = fund.fundManager; // Set the displayed text
+
+                // Append the option to the select element
+                selectElement.appendChild(option);
+            });
+
+            // Add event listener to update the input based on selected fund
+            selectElement.addEventListener('change', function() {
+                const selectedFund = this.value;
+
+                // Find the selected fund object
+                const fund = moneyMarketFundData.find(f => f.fundManager === selectedFund);
+
+                if (fund) {
+                    // Remove the '%' from the rate and convert to a number
+                    const rate = parseFloat(fund.effectiveAnnualRate.replace('%', ''));
+                    // Set the value of the input field
+                    projectedRateOfReturnInput.value = rate;
+                }
+            });
+
+            const InvestmentManager = {
+                // Elements
+                elements: {
+                    investmentType: document.getElementById('investment_type'),
+                    numberOfDays: document.getElementById('number_of_days'),
+                    numberOfYears: document.getElementById('number_of_years'),
+                    numberOfMonths: document.getElementById('number_of_months'),
+                    initialInvestment: document.getElementById('initial_investment'),
+                    totalInvestment: document.getElementById('total_investment'),
+                    mmfName: document.getElementById('mmf_name'),
+                    detailsOfInvestment: document.getElementById('details_of_investment')
+                },
+
+                // Investment types
+                types: {
+                    BILLS: "Treasury Bills",
+                    GOV_BONDS: "Government Bonds",
+                    INFRA_BONDS: "Infrastructure Bonds",
+                    MMF: "Money Market Fund",
+                    SACCO: "Sacco Investments"
+                },
+
+                // Current state
+                currentSelection: null,
+
+                // Initialize
+                init() {
+                    this.currentSelection = this.elements.investmentType.value;
+                    this.elements.investmentType.addEventListener('change', () => {
+                        this.currentSelection = this.elements.investmentType.value;
+                        this.updateFields();
+                    });
+
+                    // Initial update
+                    this.updateFields();
+                },
+
+                // Update fields based on selection
+                updateFields() {
+                    // Reset all fields first
+                    this.hideAllFields();
+
+                    switch (this.currentSelection) {
+                        case this.types.BILLS:
+                            this.showField('numberOfDays');
+                            this.showField('totalInvestment');
+                            break;
+
+                        case this.types.GOV_BONDS:
+                            this.showField('numberOfYears');
+                            this.showField('totalInvestment');
+                            this.showField('detailsOfInvestment');
+                            break;
+
+                        case this.types.INFRA_BONDS:
+                            this.showField('numberOfYears');
+                            this.showField('totalInvestment');
+                            this.showField('detailsOfInvestment');
+                            break;
+
+                        case this.types.MMF:
+                            this.showField('numberOfMonths');
+                            this.showField('initialInvestment');
+                            this.showField('mmfName');
+                            break;
+
+                        case this.types.SACCO:
+                            this.showField('numberOfMonths');
+                            this.showField('initialInvestment');
+                            break;
+                    }
+                },
+
+                // Helper method to hide all fields
+                hideAllFields() {
+                    Object.keys(this.elements).forEach(key => {
+                        if (key !== 'investmentType') { // Don't hide the investment type selector
+                            const element = this.elements[key];
+                            if (element) { // Check if element exists
+                                element.style.display = 'none';
+                                element.disabled = true;
+                            }
                         }
-                    },
-                    series: [{
-                        name: '{{ $investmentType }}',
-                        data: data{{ $investmentId }}
-                    }]
-                });
-            @endforeach
-        };
+                    });
+                },
 
-        document.getElementById('investmentType').addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var rate = selectedOption.getAttribute('data-rate');
-            document.getElementById('projectedRateOfReturn').value = rate;
-        });
-    </script>
+                // Helper method to show specific field
+                showField(fieldName) {
+                    const element = this.elements[fieldName];
+                    if (element) { // Check if element exists
+                        element.style.display = 'block';
+                        element.disabled = false;
+                    }
+                },
+
+                // Get current selection
+                getCurrentSelection() {
+                    return {
+                        type: this.currentSelection,
+                        value: this.elements.investmentType.options[this.elements.investmentType.selectedIndex].textContent
+                    };
+                }
+            };
+
+            // Initialize the manager
+            InvestmentManager.init();
+        </script>
 </body>
 
 </html>

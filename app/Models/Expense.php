@@ -17,6 +17,9 @@ class Expense extends Model
         'expected_expense',
         'actual_expense',
         'year_month',
+        'is_loan',
+        'is_goal',
+        'is_investment',
     ];
 
     protected static function boot()

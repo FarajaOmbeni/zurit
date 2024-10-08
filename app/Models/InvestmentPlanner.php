@@ -11,7 +11,16 @@ class InvestmentPlanner extends Model
     protected $table = 'investments';
 
     protected $fillable = [
-        'user_id', 'initial_investment', 'additional_investment', 'calc_duration', 'number_of_months', 'projected_rate_of_return', 'year_month','withholding_tax_id'
+        'user_id',
+        'initial_investment',
+        'total_investment',
+        'investment_type',
+        'number_of_months',
+        'number_of_years',
+        'number_of_days',
+        'rate_of_return',
+        'details_of_investment',
+        'mmf_name',
     ];
 
     public function user()
@@ -19,15 +28,16 @@ class InvestmentPlanner extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function withholdingTax(){
+    public function withholdingTax()
+    {
         return $this->belongsTo(WithholdingTax::class);
     }
-    
 
-public function asset()
-{
-    return $this->hasOne(Asset::class, 'user_id', 'user_id');
-}
+
+    public function asset()
+    {
+        return $this->hasOne(Asset::class, 'user_id', 'user_id');
+    }
 
 
 
@@ -38,7 +48,4 @@ public function asset()
             $investment->asset()->delete();
         });
     }
-
-
-
 }

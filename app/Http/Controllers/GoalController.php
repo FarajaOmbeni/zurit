@@ -103,6 +103,26 @@ class GoalController extends Controller
                 // Add any other necessary fields
             ]);
         }
+        // Compare expenses with goals and delete if they match
+        $goalExpenseComparison = Expense::where('expenses.user_id', auth()->id())
+        ->join('goals', function ($join) {
+            $join->on('expenses.expense_type', '=', 'goals.title')
+            ->where(
+                'goals.user_id',
+                '=',
+                auth()->id()
+            );
+        })
+        ->select('expenses.id', 'expenses.actual_expense', 'goals.goal_amount', 'goals.title')
+        ->get();
+
+        foreach ($goalExpenseComparison as $comparison) {
+            if ($comparison->actual_expense == $comparison->goal_amount) {
+                // Find the specific expense by id and delete it
+                Expense::find($comparison->id)->delete();
+            }
+        }
+        
         try {
         return redirect('user_goalsetting')->with('success', [
                 'message' => 'Amount updated Successfully',
@@ -174,6 +194,13 @@ class GoalController extends Controller
     {
         $goal = Goal::findOrFail($id);
         $goal->delete();
+
+        // Find the expense that matches the debt name for the current user
+        $expense = Expense::where('expense_type', $goal->title)
+        ->where('user_id', auth()->id())
+        ->where('actual_expense', $goal->current_amount)
+        ->first();
+        $expense->delete();
 
         return redirect()->route('user_goalsetting')->with('success', [
             'message' => 'Goal Deleted Successfully!',

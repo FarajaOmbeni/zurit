@@ -32,6 +32,7 @@ use App\Http\Controllers\MarketingMessageController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\VideoController;
+use App\Models\InvestmentPlanner;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -188,6 +189,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('user_investmentplanner', [InvestmentController::class, 'showinvestmentData'])->name('user_investmentplanner');
     Route::delete('/investment/{id}', [InvestmentController::class, 'destroy'])->name('investment.destroy');
 
+    //Edit MMF and Sacco 
+    Route::post('/investment/{id}/updateRate', [InvestmentController::class, 'updateRate'])->name('updateRate');
+    Route::post('/investment/{id}/contribute', [InvestmentController::class, 'contribute'])->name('contribute');
 
     //Net Worth Calculator Routes
     Route::post('storeAsset', [NetworthController::class, 'storeAsset'])->name('storeAsset');

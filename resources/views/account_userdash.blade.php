@@ -70,6 +70,14 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <p>Delete Account</p>
+                    <form action="/delete_user/{{ $user->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete Account</button>
+                    </form>
+                </div>
                 <div class="col-lg-8 col-xlg-9">
                     <div class="card">
                         <div class="card-body">

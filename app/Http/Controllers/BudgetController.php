@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\NetIncomeCalculator;
-use Illuminate\Http\Request;
-use App\Models\BudgetPlanner;
-use App\Models\Income;
-use App\Models\Expense;
-use App\Models\Debt;
 use Auth;
 use Carbon\Carbon;
+use App\Models\Debt;
+use App\Models\Goal;
+use App\Models\Income;
+use App\Models\Expense;
+use Illuminate\Http\Request;
+use App\Models\BudgetPlanner;
+use App\Traits\NetIncomeCalculator;
 use Illuminate\Support\Facades\Http;
 
 class BudgetController extends Controller
@@ -52,11 +53,6 @@ class BudgetController extends Controller
             'expense' => 'required|numeric',
         ]);
 
-        // Calculate net income
-        $actualIncome = Income::where('user_id', auth()->id())->sum('actual_income');
-        $actualExpenses = Expense::where('user_id', auth()->id())->sum('actual_expense');
-        $netIncome = $actualIncome - $actualExpenses;
-
         $expense = new Expense();
         $expense->user_id = auth()->id();
         $expense->expense_type = $request->expense_type;
@@ -84,6 +80,7 @@ class BudgetController extends Controller
 
         // Fetch all expenses for the currently logged-in user
         $expenses = Expense::where('user_id', auth()->id())->get();
+        // Find the expense that matches the debt name for the current user
 
         // Combine the incomes and expenses into the budget data
         $budget = $income->concat($expenses);
@@ -114,13 +111,10 @@ class BudgetController extends Controller
         // Check if there is data for the current month
         $hasDataForCurrentMonth = isset($monthlyIncomes[$currentMonth]) && isset($monthlyExpenses[$currentMonth]);
 
-        $loans = Debt::where('user_id', auth()->id())->get();
-
 
         return view('user_budgetplanner', [
             'budget' => $budget,
             'income' => $income,
-            'loans' => $loans,
             'expenses' => $expenses,
             'actualIncome' => $actualIncome,
             'actualExpenses' => $actualExpenses,
@@ -164,7 +158,7 @@ class BudgetController extends Controller
             $expense->expense_type = $request->expense_type;
             $expense->actual_expense = $request->actual_expense;
             $expense->save();
-            
+
             return redirect()->route('user_budgetplanner')->with('success', [
                 'message' => 'Expense updated successfully!',
                 'duration' => 3000,

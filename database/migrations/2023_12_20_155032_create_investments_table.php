@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('investments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('withholding_tax_id')->constrained('withholding_tax_rates');
-            $table->decimal('initial_investment', 15, 2);
-            $table->decimal('additional_investment', 15, 2);
-            $table->string('calc_duration');
-            $table->integer('number_of_months');
-            $table->decimal('projected_rate_of_return', 5, 2);
-            $table->string('year_month');
+            $table->decimal('investment_type');
+            $table->decimal('initial_investment', 15, 2)->nullable();
+            $table->integer('total_investment')->nullable();
+            $table->integer('mmf_name')->nullable();
+            $table->string('details_of_investments')->nullable();
+            $table->integer('number_of_months')->nullable();
+            $table->integer('number_of_years')->nullable();
+            $table->integer('number_of_days')->nullable();
+            $table->decimal('rate_of_return', 5, 2);
             $table->timestamps();
         });
     }

@@ -38,6 +38,17 @@
     gtag('config', 'G-QZMJCGHRR4');
 </script>
 
+<style>
+    #manage_debt {
+        color: white;
+    }
+
+    #manage_debt:hover {
+        text-decoration: underline;
+        color: rgba(245, 245, 245, 0.824);
+    }
+</style>
+
 <body>
     @extends('layouts.userbar')
     @include('layouts.app')
@@ -45,7 +56,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <div id="content" class="p-md-5 pt-5">
+                <div id="content" class="pt-5" style="margin-left: 120px;">
                     @if (session('success'))
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <div class="alert alert-success" id="success-alert" style="width: 50%;">
@@ -437,13 +448,20 @@
                                                         </td>
                                                     @endif
                                                     @if ($expenses->is_loan == 1)
-                                                        <td><span class="alert alert-danger">This is a LOAN. Go to <a
-                                                                    href="user_debtcalc">Debt Manager</a></span></td>
+                                                        <td><span class="alert alert-danger" role="alert"
+                                                                style="background-color: #C82333;"><a id="manage_debt"
+                                                                    href="user_debtcalc">Manage Debt</a></span></td>
+                                                    @endif
+                                                    @if ($expenses->is_investment == 1)
+                                                        <td><span class="alert alert-success" role="alert"
+                                                                style="background-color: #049c27;"><a id="manage_debt"
+                                                                    href="user_investmentplanner">Manage
+                                                                    Investment</a></span></td>
                                                     @endif
                                                     @if ($expenses->is_goal == 1)
-                                                        <td><span class="alert alert-info">This is a GOAL. Go to <a
-                                                                    href="user_goalsetting">Goal Setting</a></span>
-                                                        </td>
+                                                        <td><span class="alert alert-success" role="alert"
+                                                                style="background-color: #049c27;"><a id="manage_debt"
+                                                                    href="user_goalsetting">Manage Goal</a></span></td>
                                                     @endif
                                                 @else
                                                     <td colspan="4">No expense data for this entry</td>
@@ -479,15 +497,24 @@
                             <div class="card mt-3"
                                 style="background: linear-gradient(45deg, rgba(41, 128, 185, 1), rgba(155, 89, 182, 1), rgba(255, 193, 7, 1));">
                                 <div class="card-body">
-                                    <h2 class="card-title text-white">Surplus for
-                                        {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+                                    @if ($netIncome <= 0)
+                                        <h2 class="card-title text-white">Deficit for
+                                            {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+                                    @else
+                                        <h2 class="card-title text-white">Surplus for
+                                            {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+                                    @endif
                                     @if ($actualIncome === null || $actualExpenses === null)
                                         <p class="card-text text-white">Please add your income and expense data to
                                             calculate the net income.</p>
-                                    @else
+                                    @elseif ($netIncome > 0)
                                         <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
                                         <p class="alert alert-info">You can use this amount to achieve your goals or
                                             pay your debts.</p>
+                                    @else
+                                        <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
+                                        <p class="alert alert-danger">You are in the danger zone. Adjust your budget.
+                                        </p>
                                     @endif
                                 </div>
                             </div>

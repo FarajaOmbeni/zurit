@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Asset;
+use App\Models\Expense;
 use Illuminate\Http\Request;
-use App\Models\InvestmentPlanner;
 use App\Models\WithholdingTax;
+use App\Models\InvestmentPlanner;
+use Illuminate\Support\Facades\DB;
 use App\Traits\NetIncomeCalculator;
 use Illuminate\Support\Facades\Log;
-use App\Models\Asset;
 
 class InvestmentController extends Controller
 {
@@ -15,174 +18,203 @@ class InvestmentController extends Controller
 
     public function storemonthlyInvestment(Request $request)
     {
-        $investmentData = $request->input('investment');
+        // Retrieve only the specified fields from the request
+        $investment = new InvestmentPlanner;
+        $investment->investment_type = $request->investment_type;
+        $investment->details_of_investment = $request->details_of_investment;
+        $investment->initial_investment = $request->initial_investment;
+        $investment->total_investment = $request->initial_investment + $request->total_investment;
+        $investment->number_of_months = $request->number_of_months;
+        $investment->number_of_years = $request->number_of_years;
+        $investment->number_of_days = $request->number_of_days;
+        $investment->mmf_name = $request->mmf_name;
+        $investment->rate_of_return = $request->rate_of_return;
+        $investment->user_id = auth()->id();
 
-        // Process only if all fields are filled
-        if (!empty($investmentData['initialInvestment']) && !empty($investmentData['numberOfMonths']) && !empty($investmentData['projectedRateOfReturn']) && !empty($investmentData['investment_type'])) {
-            $validatedData = [
-                'user_id' => auth()->id(),
-                'initial_investment' => $investmentData['initialInvestment'],
-                'withholding_tax_id' => $investmentData['investment_type'],
-                'calc_duration' => $request->calc_duration,
-                'number_of_months' => $investmentData['numberOfMonths'],
-                'projected_rate_of_return' => $investmentData['projectedRateOfReturn'],
-                'year_month' => now()->format('Y-m'),
-            ];
+        $expense = new Expense;
+        $expense->user_id = auth()->id();
+        $expense->expense_type = $request->investment_type;
+        $expense->actual_expense = $request->initial_investment + $request->total_investment;
+        $expense->is_investment = 1;
 
-            InvestmentPlanner::create($validatedData);
-        }
+        $asset = new Asset;
+        $asset->user_id = auth()->id();
+        $asset->asset_description = $request->investment_type;
+        $asset->asset_value = $request->initial_investment + $request->total_investment;
+
+        // Create a new Investment Planner record
+        $investment->save();
+        $expense->save();
+        $asset->save();
 
         return redirect()->route('user_investmentplanner')->with('success', [
-            'message' => 'Investment Plan Created Successfully',
+            'message' => 'Investment Created Successfully',
             'duration' => 3000,
         ]);
     }
 
-    public function showinvestmentData(Request $request)
+
+    public function showinvestmentData()
     {
-        $investments = InvestmentPlanner::where('user_id', auth()->id())->get();
-        $withholdingTaxRates = WithholdingTax::all();
-        $defaultRate = $withholdingTaxRates->isEmpty() ? null : $withholdingTaxRates->first()->tax_rate;
+        $investments = InvestmentPlanner::where('user_id', auth()
+            ->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        $monthlyInvestments = [];
-
-        foreach ($investments as $investment) {
-            $numberOfMonths = $investment->number_of_months;
-            $initialInvestment = $investment->initial_investment;
-            $projectedRateOfReturn = $investment->projected_rate_of_return / 100; // Divide by 100
-            $withholdingTaxRate = WithholdingTax::find($investment->withholding_tax_id)->tax_rate / 100; // Divide by 100
-
-
-            // Get the current month and year
-            $currentMonth = date('n');
-            $currentYear = date('Y');
-
-            // Set initial values
-            $cumulativeInvestmentValue = $initialInvestment;
-            $monthlyInvestments[$investment->id][$currentMonth] = [
-                'initial_investment' => $initialInvestment,
-                'gross_interest' => 0,
-                'withholding_tax' => 0,
-                'net_interest' => 0,
-                'cumulative_investment_value' => $cumulativeInvestmentValue,
-            ];
-
-            for ($i = 1; $i <= $numberOfMonths; $i++) {
-                // Calculate for each month
-                $grossInterest = 0;
-                $withholdingTax = 0;
-                $netInterest = 0;
-                if ($i > 1) { // Skip the first month
-                    $grossInterest = round($cumulativeInvestmentValue * ($projectedRateOfReturn / 12), 2);
-                    $withholdingTax = round($grossInterest * $withholdingTaxRate, 2);
-                    $netInterest = round($grossInterest - $withholdingTax, 2);
-                }
-                $cumulativeInvestmentValue = round($cumulativeInvestmentValue + $netInterest, 2);
-
-                $monthlyInvestments[$investment->id][$currentMonth] = [
-                    'initial_investment' => round($initialInvestment, 2),
-                    'gross_interest' => $grossInterest,
-                    'withholding_tax' => $withholdingTax,
-                    'net_interest' => $netInterest,
-                    'cumulative_investment_value' => $cumulativeInvestmentValue,
-                    'withholding_tax_id' => $investment->withholding_tax_id,
-                ];
-
-                $currentMonth++;
-
-                // Adjust year when reaching December
-                if ($currentMonth > 12) {
-                    $currentMonth = 1;
-                    $currentYear++;
-                }
-            }
-        }
-
-
-
-        // After the investment calculations
-
-        // After the investment calculations
-        foreach ($investments as $investment) {
-            // Get the selected withholding tax
-            $withholdingTax = WithholdingTax::find($investment->withholding_tax_id);
-
-            if ($withholdingTax) {
-                $withholdingTaxName = $withholdingTax->investment_type;
-            } else {
-                $withholdingTaxName = 'Investment';
-            }
-
-            // Get the last cumulative investment value
-            $lastCumulativeInvestmentValue = end($monthlyInvestments[$investment->id])['cumulative_investment_value'];
-
-            // Create a new asset
-            Asset::updateOrCreate(
-                ['user_id' => auth()->id(), 'asset_description' => $withholdingTaxName],
-                ['asset_value' => $lastCumulativeInvestmentValue]
-            );
-        }
-
+        $existing_investments = WithholdingTax::all();
         $netIncome = $this->calculateNetIncome(auth()->id());
-
+        $t_bills = InvestmentPlanner::where('investment_type', 'Treasury Bills')->orderBy('created_at', 'desc')->get();
+        $gov_bonds = InvestmentPlanner::where('investment_type', 'Government Bonds')->orderBy('created_at', 'desc')->get();
+        $infra_bonds = InvestmentPlanner::where('investment_type', 'Infrastructure Bonds')->orderBy('created_at', 'desc')->get();
+        $saccos = InvestmentPlanner::where('investment_type', 'Sacco Investments')->orderBy('created_at', 'desc')->get();
+        $mmfs = InvestmentPlanner::where('investment_type', 'Money Market Fund')->orderBy('created_at', 'desc')->get();
 
         return view('user_investmentplanner', [
-            'monthlyInvestments' => $monthlyInvestments,
-            'withholdingTaxRates' => $withholdingTaxRates,
-            'defaultRate' => $defaultRate,
-            'investments' => $investments,
+
             'netIncome' => $netIncome,
+            'investments' => $investments,
+            'existing_investments' => $existing_investments,
+            't_bills' => $t_bills,
+            'gov_bonds' => $gov_bonds,
+            'infra_bonds' => $infra_bonds,
+            'saccos' => $saccos,
+            'mmfs' => $mmfs,
         ]);
     }
 
-    // public function destroy($id)
-    // {
-    //     $investment = InvestmentPlanner::find($id);
-
-    //     // Check if investment exists and if the user is authorized to delete it
-    //     if ($investment && $investment->user_id == auth()->id()) {
-    //         // Get the corresponding asset
-    //         $withholdingTax = WithholdingTax::find($investment->withholding_tax_id);
-    //         $withholdingTaxName = $withholdingTax ? $withholdingTax->investment_type : 'Investment';
-
-    //         $asset = Asset::where('user_id', auth()->id())
-    //             ->where('asset_description', $withholdingTaxName)
-    //             ->first();
-
-    //         // Delete the asset if its value matches the final cumulative investment value
-    //         if ($asset && $asset->asset_value == end($monthlyInvestments[$investment->id])['cumulative_investment_value']) {
-    //             $asset->delete();
-    //         }
-
-    //         $investment->delete();
-    //         return redirect()->route('user_investmentplanner')->with('success', [
-    //             'message' => 'Investment Deleted Successfully',
-    //             'duration' => 3000,
-    //         ]);
-    //     }
-
-    //     return redirect()->route('user_investmentplanner')->with('error', [
-    //         'message' => 'Error Deleting Investment ',
-    //         'duration' => 3000,
-    //     ]);
-    // }
 
     public function destroy($id)
     {
-        $investment = InvestmentPlanner::find($id);
+        DB::beginTransaction();
+        try {
+            $investment = InvestmentPlanner::find($id);
 
-        // Check if investment exists and if the user is authorized to delete it
-        if ($investment && $investment->user_id == auth()->id()) {
-            $investment->delete();
+            // Ensure the investment exists and the user is authorized
+            if (!$investment || $investment->user_id != auth()->id()) {
+                return redirect()->route('user_investmentplanner')->with('error', [
+                    'message' => 'Error: Investment not found or unauthorized action',
+                    'duration' => 3000,
+                ]);
+            }
+
+            // Find and delete ONLY the specific asset
+            $asset = Asset::where('created_at', $investment->created_at)
+                ->where('asset_description', $investment->investment_type)
+                ->where('user_id', auth()->id())
+                ->first();
+
+            if ($asset) {
+                // Use direct query to avoid any model events
+                DB::table('assets')
+                    ->where('id', $asset->id)
+                    ->where('user_id', auth()->id())
+                    ->delete();
+            }
+
+            // Find and delete the specific expense
+            $expense = Expense::where('created_at', $investment->created_at)
+                ->where('expense_type', $investment->investment_type)
+                ->where('user_id', auth()->id())
+                ->first();
+
+            if ($expense) {
+                $expense->delete();
+            }
+
+            // Delete the investment using direct query to avoid cascade
+            DB::table('investments')->where('id', $investment->id)->delete();
+
+            DB::commit();
+
             return redirect()->route('user_investmentplanner')->with('success', [
                 'message' => 'Investment Deleted Successfully',
                 'duration' => 3000,
             ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('user_investmentplanner')->with('error', [
+                'message' => 'Error occurred while deleting investment',
+                'duration' => 3000,
+            ]);
         }
+    }
 
-        return redirect()->route('user_investmentplanner')->with('error', [
-            'message' => 'Error Deleting Investment ',
+    public function updateRate(Request $request, $id)
+    {
+        // Validate the request
+        $request->validate([
+            'update_rate' => 'required|numeric|min:0',
+        ]);
+
+        // Find the investment
+        $investment = InvestmentPlanner::findOrFail($id);
+
+        // Update rate of return
+        $investment->rate_of_return = $request->update_rate;
+        $investment->save();
+
+        return redirect()->route('user_investmentplanner')->with('success', [
+            'message' => 'Rate Updated Succesfully!',
             'duration' => 3000,
         ]);
     }
+
+    public function contribute(Request $request, $id)
+    {
+        // Validate the request
+        $request->validate([
+            'contribution_amount' => 'required|numeric|min:0',
+        ]);
+
+        // Find the investment
+        $investment = InvestmentPlanner::findOrFail($id);
+
+        // Add the contribution to total_investment
+        $investment->total_investment += $request->contribution_amount;
+        $investment->save();
+
+        // Find the expense that matches the debt name for the current user
+        $expense = Expense::where('expense_type', $investment->title)
+        ->where('user_id', auth()->id())
+        ->first();
+
+        // Check if the expense exists before updating
+        if ($expense) {
+            $expense->actual_expense += $request->input('contribution_amount');
+            $expense->save();
+        } else {
+            // If the expense doesn't exist, create a new one
+            Expense::create([
+                'user_id' => auth()->id(),
+                'expense_type' => $expense->title,
+                'actual_expense' => $request->input('current'),
+                'is_goal' => 1,
+                // Add any other necessary fields
+            ]);
+        }
+
+        // Find the expense that matches the debt name for the current user
+        $asset = Asset::where('asset_description', $investment->title)
+        ->where('user_id', auth()->id())
+        ->first();
+
+        // Check if the asset exists before updating
+        if ($asset) {
+            $asset->asset_value += $request->input('contribution_amount');
+            $asset->save();
+        } else {
+            // If the asset doesn't exist, create a new one
+            asset::create([
+                'user_id' => auth()->id(),
+                'asset_description' => $asset->title,
+                'asset_value' => $request->input('contribution_amount'),
+            ]);
+        }
+
+        return redirect()->route('user_investmentplanner')->with('success', [
+            'message' => 'Amount contributed Succesfully!',
+            'duration' => 3000,
+        ]);
+    }
+
 }
