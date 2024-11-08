@@ -72,6 +72,12 @@
                     @endif
                     <div class="budget_content">
                         <div class="container mt-2">
+                            <div style="width: 40%; margin: auto; margin-bottom: 25px;" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                You are currently using these tools for free. Beginning of next, year the tools will be available on a subscription basis of <b>KES. 500</b> per month.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <!-- Add new income and expense buttons -->
                             <div class="mb-3">
                                 <button type="button" class="button" data-toggle="modal" data-target="#incomeModal">Add

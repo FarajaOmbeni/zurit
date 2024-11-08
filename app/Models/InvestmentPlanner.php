@@ -15,6 +15,7 @@ class InvestmentPlanner extends Model
         'initial_investment',
         'total_investment',
         'investment_type',
+        'monthly_contribution',
         'number_of_months',
         'number_of_years',
         'number_of_days',

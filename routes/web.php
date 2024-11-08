@@ -205,6 +205,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('insights_admindash');
     })->name('insights_admindash');
 
+    //Investment Calculcator
+    Route::get('user_calculators', function(){
+        return view('user_calculators');
+    });
+
     Route::post('/import', [MarketingController::class, 'import'])->name('import');
 
     Route::get('/insights_admindash', 'InsightsController@index');

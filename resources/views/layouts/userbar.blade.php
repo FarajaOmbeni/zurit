@@ -74,6 +74,10 @@
                                 <a href="{{ url('/user_networthcalc') }}"><span
                                         class="bi bi-calculator icon-class"></span> Networth Calculator</a>
                             </li>
+                            <li class="{{ Request::is('user_calculators') ? 'active' : '' }}">
+                                <a href="{{ url('/user_calculators') }}"><span
+                                        class="bi bi-calculator icon-class"></span>Calculators</a>
+                            </li>
                             <li class="{{ Request::is('account_userdash') ? 'active' : '' }}">
                                 <a href="{{ url('/account_userdash') }}"><span class="fa fa-book mr-3"></span> Account
                                     Management</a>

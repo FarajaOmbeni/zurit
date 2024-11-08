@@ -16,6 +16,8 @@
     <meta name="theme-color" content="#fff" />
     <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
@@ -58,6 +60,14 @@
                     }, {{ session('success')['duration'] }});
                 </script>
             @endif
+
+            <div>
+                <form id="messageForm">
+                    @csrf
+                    <textarea name="message" placeholder="Enter Message" id="messageContent" cols="30" rows="10"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
 
             <div>
                 <h3>Send Marketing Email</h3>

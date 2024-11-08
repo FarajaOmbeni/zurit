@@ -23,7 +23,7 @@ class InvestmentController extends Controller
         $investment->investment_type = $request->investment_type;
         $investment->details_of_investment = $request->details_of_investment;
         $investment->initial_investment = $request->initial_investment;
-        $investment->total_investment = $request->initial_investment + $request->total_investment;
+        $investment->total_investment = $request->initial_investment + $request->total_investment + $request->monthly_contribution + $request->real_estate_price;
         $investment->number_of_months = $request->number_of_months;
         $investment->number_of_years = $request->number_of_years;
         $investment->number_of_days = $request->number_of_days;
@@ -34,13 +34,13 @@ class InvestmentController extends Controller
         $expense = new Expense;
         $expense->user_id = auth()->id();
         $expense->expense_type = $request->investment_type;
-        $expense->actual_expense = $request->initial_investment + $request->total_investment;
+        $expense->actual_expense = $request->initial_investment + $request->total_investment + $request->monthly_contribution + $request->real_estate_price;
         $expense->is_investment = 1;
 
         $asset = new Asset;
         $asset->user_id = auth()->id();
         $asset->asset_description = $request->investment_type;
-        $asset->asset_value = $request->initial_investment + $request->total_investment;
+        $asset->asset_value = $request->initial_investment + $request->total_investment + $request->monthly_contribution + $request->monthly_income;
 
         // Create a new Investment Planner record
         $investment->save();
@@ -54,7 +54,7 @@ class InvestmentController extends Controller
     }
 
 
-    public function showinvestmentData()
+    public function showinvestmentData(Request $request)
     {
         $investments = InvestmentPlanner::where('user_id', auth()
             ->id())
@@ -68,6 +68,19 @@ class InvestmentController extends Controller
         $infra_bonds = InvestmentPlanner::where('investment_type', 'Infrastructure Bonds')->orderBy('created_at', 'desc')->get();
         $saccos = InvestmentPlanner::where('investment_type', 'Sacco Investments')->orderBy('created_at', 'desc')->get();
         $mmfs = InvestmentPlanner::where('investment_type', 'Money Market Fund')->orderBy('created_at', 'desc')->get();
+        $investments_chart = InvestmentPlanner::where('user_id', auth()
+            ->id())
+            ->orderBy('total_investment', 'desc')
+            ->get();
+        $investment_values = [];
+        $investment_names = [];
+
+
+        foreach ($investments_chart as $monthly_investment) {
+            $investment_values[] = $monthly_investment->total_investment;
+            $investment_names[] = $monthly_investment->investment_type;
+            $investment_months[] = $monthly_investment->created_at->format('m');
+        }
 
         return view('user_investmentplanner', [
 
@@ -79,6 +92,11 @@ class InvestmentController extends Controller
             'infra_bonds' => $infra_bonds,
             'saccos' => $saccos,
             'mmfs' => $mmfs,
+            'investment_values' => $investment_values,
+            'investment_names' => $investment_names,
+            'investment_months' => $investment_months,
+            'investments_chart' => $investments_chart
+
         ]);
     }
 
@@ -175,8 +193,8 @@ class InvestmentController extends Controller
 
         // Find the expense that matches the debt name for the current user
         $expense = Expense::where('expense_type', $investment->title)
-        ->where('user_id', auth()->id())
-        ->first();
+            ->where('user_id', auth()->id())
+            ->first();
 
         // Check if the expense exists before updating
         if ($expense) {
@@ -195,8 +213,8 @@ class InvestmentController extends Controller
 
         // Find the expense that matches the debt name for the current user
         $asset = Asset::where('asset_description', $investment->title)
-        ->where('user_id', auth()->id())
-        ->first();
+            ->where('user_id', auth()->id())
+            ->first();
 
         // Check if the asset exists before updating
         if ($asset) {
@@ -216,5 +234,4 @@ class InvestmentController extends Controller
             'duration' => 3000,
         ]);
     }
-
 }

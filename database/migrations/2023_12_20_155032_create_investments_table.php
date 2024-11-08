@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->decimal('investment_type');
             $table->decimal('initial_investment', 15, 2)->nullable();
+            $table->decimal('monthly_contribution')->nullable();
             $table->integer('total_investment')->nullable();
             $table->integer('mmf_name')->nullable();
             $table->string('details_of_investments')->nullable();
