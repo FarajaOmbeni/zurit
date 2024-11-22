@@ -37,7 +37,7 @@
             <h3>A new day to update your portfolio, and we are here to help!</h3>
             <p>From the Zurit Consulting team, I am writing this email to remind you to update your investment portfolio
                 so that you can maximize your returns. Log on to our website to track and manage your portfolio. Also,
-                do not hesitate to give us a call for any queries. <br> Click <a href="www.zuritconsulting.com/">here</a> to update your portfolio</p>
+                do not hesitate to give us a call for any queries. <br> Click <a href="https://zuritconsulting.com/user_budgetplanner">here</a> to update your portfolio</p>
             <div class="footer">
                 <div class="logo">
                     <img src="{{ asset('home_res/img/logo-white3.webp') }}" alt="Zurit Consulting Logo">

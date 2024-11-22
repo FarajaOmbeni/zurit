@@ -851,9 +851,13 @@
             let myChart = null;
 
             // Store all your data
-            const allLabels = @json($investment_names);
-            const allData = @json($investment_values);
-            const allMonths = @json($investment_months);
+            if($investment_names && $investment_values && $investment_months){
+                const allLabels = @json($investment_names);
+                const allData = @json($investment_values);
+                const allMonths = @json($investment_months);
+            } else {
+                console.log("No data at the moment")
+            }
 
             document.getElementById('chartContainer').style.display = 'none';
             const ctx = document.getElementById('investmentChart');
