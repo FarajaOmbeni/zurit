@@ -72,14 +72,15 @@
                     @endif
                     <div class="budget_content">
                         <div class="container mt-2">
-                            <div style="width: 40%; margin: auto; margin-bottom: 25px;" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                You are currently using these tools for free. Beginning of next, year the tools will be available on a subscription basis of <b>KES. 500</b> per month.
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                You are currently using these tools for free. Beginning of next, year the tools will be
+                                available on a subscription basis of <b>KES. 500</b> per month.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <!-- Add new income and expense buttons -->
-                            <div class="mb-3">
+                            <div class="mb-3 manage_buttons">
                                 <button type="button" class="button" data-toggle="modal" data-target="#incomeModal">Add
                                     Income</button>
                                 <button type="button" class="button" data-toggle="modal"
@@ -197,51 +198,41 @@
                                 </div>
                             </div>
 
-
-                            <!-- Budget table -->
+                            <!-- Income Table -->
+                            <h2 class="budget_title">Income</h2>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table>
                                     <thead>
-                                        <tr>
-                                            <th colspan="4" class="text-center">Income</th>
-                                            <th class="divider"></th> <!-- Divider column -->
-                                            <th colspan="4" class="text-center">Expenses</th>
-                                        </tr>
                                         <tr>
                                             <th>Income Type</th>
                                             <th>Income</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
-                                            <th class="divider"></th> <!-- Divider column -->
-                                            <th>Expense Type</th>
-                                            <th>Expense</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($income->zip($expenses) as [$income, $expenses])
-                                            <tr>
-                                                @if ($income)
-                                                    <td>{{ $income->income_type }}</td>
-                                                    <td>{{ number_format($income->actual_income) }}</td>
+                                        @if ($income->isNotEmpty())
+                                            @foreach ($income as $item)
+                                                <tr>
+                                                    <td>{{ $item->income_type }}</td>
+                                                    <td>{{ number_format($item->actual_income) }}</td>
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#updateIncomeModal{{ $income->id }}">
+                                                            data-target="#updateIncomeModal{{ $item->id }}">
                                                             <i class="bi bi-pencil"></i>
                                                         </button>
 
                                                         <!-- Modal -->
                                                         <div class="modal fade"
-                                                            id="updateIncomeModal{{ $income->id }}" tabindex="-1"
+                                                            id="updateIncomeModal{{ $item->id }}" tabindex="-1"
                                                             role="dialog"
-                                                            aria-labelledby="updateIncomeModalLabel{{ $income->id }}"
+                                                            aria-labelledby="updateIncomeModalLabel{{ $item->id }}"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title"
-                                                                            id="updateIncomeModalLabel{{ $income->id }}">
+                                                                            id="updateIncomeModalLabel{{ $item->id }}">
                                                                             Update Income
                                                                         </h5>
                                                                         <button type="button" class="close"
@@ -251,46 +242,47 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <form
-                                                                            action="{{ route('income.update', $income->id) }}"
-                                                                            method="post">
+                                                                            action="{{ route('income.update', $item->id) }}"
+                                                                            method="POST">
                                                                             @csrf
+                                                                            @method('PUT')
                                                                             <div class="form-group">
                                                                                 <select name="income_type"
                                                                                     class="form-control"
                                                                                     id="incomeType"
                                                                                     onchange="showOtherInput(this)">
                                                                                     <option value="Salary & Wages"
-                                                                                        {{ $income->income_type == 'Salary & Wages' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Salary & Wages' ? 'selected' : '' }}>
                                                                                         Salary & Wages</option>
                                                                                     <option
                                                                                         value="Interest or Business Profit"
-                                                                                        {{ $income->income_type == 'Interest or Business Profit' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Interest or Business Profit' ? 'selected' : '' }}>
                                                                                         Interest or Business Profit
                                                                                     </option>
                                                                                     <option
                                                                                         value="Investments and Dividends"
-                                                                                        {{ $income->income_type == 'Investments and Dividends' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Investments and Dividends' ? 'selected' : '' }}>
                                                                                         Investments and Dividends
                                                                                     </option>
                                                                                     <option value="Rental Income"
-                                                                                        {{ $income->income_type == 'Rental Income' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Rental Income' ? 'selected' : '' }}>
                                                                                         Rental Income</option>
                                                                                     <option
                                                                                         value="Consultancy/Freelance"
-                                                                                        {{ $income->income_type == 'Consultancy/Freelance' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Consultancy/Freelance' ? 'selected' : '' }}>
                                                                                         Consultancy/Freelance
                                                                                     </option>
                                                                                     <option
                                                                                         value="Retirement or Pension Income"
-                                                                                        {{ $income->income_type == 'Retirement or Pension Income' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Retirement or Pension Income' ? 'selected' : '' }}>
                                                                                         Retirement or Pension Income
                                                                                     </option>
                                                                                     <option value="Bonuses"
-                                                                                        {{ $income->income_type == 'Bonuses' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Bonuses' ? 'selected' : '' }}>
                                                                                         Savings
                                                                                     </option>
                                                                                     <option value="Other"
-                                                                                        {{ $income->income_type == 'Other' ? 'selected' : '' }}>
+                                                                                        {{ $item->income_type == 'Other' ? 'selected' : '' }}>
                                                                                         Other
                                                                                     </option>
                                                                                 </select>
@@ -301,7 +293,7 @@
                                                                                     name="actual_income"
                                                                                     placeholder="Input Amount"
                                                                                     class="form-control"
-                                                                                    value="{{ $income->actual_income }}">
+                                                                                    value="{{ $item->actual_income }}">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
@@ -318,7 +310,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('income.destroy', $income) }}"
+                                                        <form action="{{ route('income.destroy', $item->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -327,32 +319,54 @@
                                                             </button>
                                                         </form>
                                                     </td>
-                                                @else
-                                                    <td colspan="4">No Income data for this entry</td>
-                                                @endif
-                                                <td class="divider"></td> <!-- Divider column -->
-                                                @if ($expenses)
-                                                    <td>{{ $expenses->expense_type }}</td>
-                                                    <td>{{ number_format($expenses->actual_expense) }}</td>
-                                                    @if ($expenses->is_loan == 0 && $expenses->is_goal == 0 && $expenses->is_investment == 0)
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="4">No Income data available</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Expense Table -->
+                            <h2 class="budget_title" style="margin-top: 5rem;">Expenses</h2>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Expense Type</th>
+                                            <th>Amount</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($expenses->isNotEmpty())
+                                            @foreach ($expenses as $expense)
+                                                <tr>
+                                                    <td>{{ $expense->expense_type }}</td>
+                                                    <td>{{ number_format($expense->actual_expense) }}</td>
+                                                    @if ($expense->is_loan == 0 && $expense->is_goal == 0 && $expense->is_investment == 0)
                                                         <td>
-                                                            <a href="{{ route('expenses.update', $expenses) }}"
-                                                                class="btn btn-primary" data-toggle="modal"
-                                                                data-target="#updateExpenseModal{{ $expenses->id }}">
+                                                            <a href="#" class="btn btn-primary"
+                                                                data-toggle="modal"
+                                                                data-target="#updateExpenseModal{{ $expense->id }}">
                                                                 <i class="bi bi-pencil"></i>
                                                             </a>
 
                                                             <!-- Modal -->
                                                             <div class="modal fade"
-                                                                id="updateExpenseModal{{ $expenses->id }}"
+                                                                id="updateExpenseModal{{ $expense->id }}"
                                                                 tabindex="-1" role="dialog"
-                                                                aria-labelledby="updateExpenseModalLabel{{ $expenses->id }}"
+                                                                aria-labelledby="updateExpenseModalLabel{{ $expense->id }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title"
-                                                                                id="updateExpenseModalLabel{{ $expenses->id }}">
+                                                                                id="updateExpenseModalLabel{{ $expense->id }}">
                                                                                 Update Expense
                                                                             </h5>
                                                                             <button type="button" class="close"
@@ -363,55 +377,59 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <form
-                                                                                action="{{ route('expenses.update', $expenses->id) }}"
-                                                                                method="post">
+                                                                                action="{{ route('expenses.update', $expense->id) }}"
+                                                                                method="POST">
                                                                                 @csrf
+                                                                                @method('PUT')
                                                                                 <div class="form-group">
                                                                                     <select name="expense_type"
                                                                                         class="form-control"
-                                                                                        id="expenseType"
-                                                                                        onchange="showOtherInput(this)">
+                                                                                        id="expenseType">
                                                                                         <option value="Food/Groceries"
-                                                                                            {{ $expenses->expense_type == 'Food/Groceries' ? 'selected' : '' }}>
-                                                                                            Food/Groceries</option>
+                                                                                            {{ $expense->expense_type == 'Food/Groceries' ? 'selected' : '' }}>
+                                                                                            Food/Groceries
+                                                                                        </option>
                                                                                         <option value="Transport"
-                                                                                            {{ $expenses->expense_type == 'Transport' ? 'selected' : '' }}>
+                                                                                            {{ $expense->expense_type == 'Transport' ? 'selected' : '' }}>
                                                                                             Transport
                                                                                         </option>
                                                                                         <option
                                                                                             value="Utilities and Electricity"
-                                                                                            {{ $expenses->expense_type == 'Utilities and Electricity' ? 'selected' : '' }}>
-                                                                                            Utilities and
-                                                                                            Electricity</option>
+                                                                                            {{ $expense->expense_type == 'Utilities and Electricity' ? 'selected' : '' }}>
+                                                                                            Utilities and Electricity
+                                                                                        </option>
                                                                                         <option
                                                                                             value="Entertainment and Recreation"
-                                                                                            {{ $expenses->expense_type == 'Entertainment and Recreation' ? 'selected' : '' }}>
-                                                                                            Entertainment and
-                                                                                            Recreation</option>
+                                                                                            {{ $expense->expense_type == 'Entertainment and Recreation' ? 'selected' : '' }}>
+                                                                                            Entertainment and Recreation
+                                                                                        </option>
                                                                                         <option value="Healthcare"
-                                                                                            {{ $expenses->expense_type == 'Healthcare' ? 'selected' : '' }}>
-                                                                                            Healthcare</option>
+                                                                                            {{ $expense->expense_type == 'Healthcare' ? 'selected' : '' }}>
+                                                                                            Healthcare
+                                                                                        </option>
                                                                                         <option value="Personal Care"
-                                                                                            {{ $expenses->expense_type == 'Personal Care' ? 'selected' : '' }}>
-                                                                                            Personal Care</option>
+                                                                                            {{ $expense->expense_type == 'Personal Care' ? 'selected' : '' }}>
+                                                                                            Personal Care
+                                                                                        </option>
                                                                                         <option value="Insurance"
-                                                                                            {{ $expenses->expense_type == 'Insurance' ? 'selected' : '' }}>
+                                                                                            {{ $expense->expense_type == 'Insurance' ? 'selected' : '' }}>
                                                                                             Insurance
                                                                                         </option>
                                                                                         <option value="Investments"
-                                                                                            {{ $expenses->expense_type == 'Investments' ? 'selected' : '' }}>
-                                                                                            Investments</option>
+                                                                                            {{ $expense->expense_type == 'Investments' ? 'selected' : '' }}>
+                                                                                            Investments
+                                                                                        </option>
                                                                                         <option value="Savings"
-                                                                                            {{ $expenses->expense_type == 'Savings' ? 'selected' : '' }}>
+                                                                                            {{ $expense->expense_type == 'Savings' ? 'selected' : '' }}>
                                                                                             Savings
                                                                                         </option>
                                                                                         <option value="Other"
-                                                                                            {{ $expenses->expense_type == 'Other' ? 'selected' : '' }}>
+                                                                                            {{ $expense->expense_type == 'Other' ? 'selected' : '' }}>
                                                                                             Other
                                                                                         </option>
                                                                                         <option
                                                                                             value="House(Rent/Mortgage)"
-                                                                                            {{ $expenses->expense_type == 'House(Rent/Mortgage)' ? 'selected' : '' }}>
+                                                                                            {{ $expense->expense_type == 'House(Rent/Mortgage)' ? 'selected' : '' }}>
                                                                                             House(Rent/Mortgage)
                                                                                         </option>
                                                                                     </select>
@@ -423,14 +441,12 @@
                                                                                         name="actual_expense"
                                                                                         placeholder="Input Amount"
                                                                                         class="form-control"
-                                                                                        value="{{ $expenses->actual_expense }}">
+                                                                                        value="{{ $expense->actual_expense }}">
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
                                                                                         class="btn btn-secondary"
                                                                                         data-dismiss="modal">Close</button>
-                                                                                    {{-- <button type="button" class="btn btn-primary"
-                                                        id="add-expense-category-btn">Add Category</button> --}}
                                                                                     <button type="submit"
                                                                                         class="btn btn-primary">Save
                                                                                         changes</button>
@@ -440,10 +456,10 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </td>
                                                         <td>
-                                                            <form action="{{ route('expenses.destroy', $expenses) }}"
+                                                            <form
+                                                                action="{{ route('expenses.destroy', $expense->id) }}"
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -452,97 +468,96 @@
                                                                 </button>
                                                             </form>
                                                         </td>
+                                                    @elseif ($expense->is_loan == 1)
+                                                        <td colspan="2"><span class="alert alert-danger"
+                                                                style="background-color: #C82333;">
+                                                                <a id="manage_debt" href="user_debtcalc">Mng Debt</a>
+                                                            </span></td>
+                                                    @elseif ($expense->is_investment == 1)
+                                                        <td colspan="2"><span class="alert alert-success"
+                                                                style="background-color: #049c27;">
+                                                                <a id="manage_investment"
+                                                                    href="user_investmentplanner">Mng Investment</a>
+                                                            </span></td>
+                                                    @elseif ($expense->is_goal == 1)
+                                                        <td colspan="2"><span class="alert alert-success"
+                                                                style="background-color: #049c27;">
+                                                                <a id="manage_goal" href="user_goalsetting"> Mng
+                                                                    Goal</a>
+                                                            </span></td>
                                                     @endif
-                                                    @if ($expenses->is_loan == 1)
-                                                        <td><span class="alert alert-danger" role="alert"
-                                                                style="background-color: #C82333;"><a id="manage_debt"
-                                                                    href="user_debtcalc">Manage Debt</a></span></td>
-                                                    @endif
-                                                    @if ($expenses->is_investment == 1)
-                                                        <td><span class="alert alert-success" role="alert"
-                                                                style="background-color: #049c27;"><a id="manage_debt"
-                                                                    href="user_investmentplanner">Manage
-                                                                    Investment</a></span></td>
-                                                    @endif
-                                                    @if ($expenses->is_goal == 1)
-                                                        <td><span class="alert alert-success" role="alert"
-                                                                style="background-color: #049c27;"><a id="manage_debt"
-                                                                    href="user_goalsetting">Manage Goal</a></span></td>
-                                                    @endif
-                                                @else
-                                                    <td colspan="4">No expense data for this entry</td>
-                                                @endif
-                                            </tr>
-                                        @empty
+                                                </tr>
+                                            @endforeach
+                                        @else
                                             <tr>
-                                                <td colspan="9">No data found. Please add your income and
-                                                    expense data.</td>
+                                                <td colspan="4">No expense data available</td>
                                             </tr>
-                                        @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
-                                <h3>Totals</h3>
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <div style="font-size: 25px; font-weight: bold;">Income Total</div>
-                                        <div style="font-size: 20px; font-weight: bold;">KES
-                                            {{ number_format($actualIncome) }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 25px; font-weight: bold;">Expense Total</div>
-                                        <div style="font-size: 20px; font-weight: bold;">KES
-                                            {{ number_format($actualExpenses) }}
-                                        </div>
+                            </div>
+                            <h3 class="budget_title" style="margin-top: 5rem;">Totals</h3>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div style="font-size: 25px; font-weight: bold;">Income Total</div>
+                                    <div style="font-size: 20px; font-weight: bold;">KES
+                                        {{ number_format($actualIncome) }}
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <!-- Net income card-->
-                            <div class="card mt-3"
-                                style="background: linear-gradient(45deg, rgba(41, 128, 185, 1), rgba(155, 89, 182, 1), rgba(255, 193, 7, 1));">
-                                <div class="card-body">
-                                    @if ($netIncome <= 0)
-                                        <h2 class="card-title text-white">Deficit for
-                                            {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
-                                    @else
-                                        <h2 class="card-title text-white">Surplus for
-                                            {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
-                                    @endif
-                                    @if ($actualIncome === null || $actualExpenses === null)
-                                        <p class="card-text text-white">Please add your income and expense data to
-                                            calculate the net income.</p>
-                                    @elseif ($netIncome > 0)
-                                        <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
-                                        <p class="alert alert-info">You can use this amount to achieve your goals or
-                                            pay your debts.</p>
-                                    @else
-                                        <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
-                                        <p class="alert alert-danger">You are in the danger zone. Adjust your budget.
-                                        </p>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <!-- Bar graph and pie chart for the last 12 months -->
-                            <div class="mt-4">
-                                <h2>Income and Expenses for the Last 12 Months</h2>
-                                <div style="max-width: 600px;">
-                                    <!-- Bar graph -->
-                                    <canvas id="barGraph"></canvas>
-                                </div>
-                                <div style="max-width: 400px; margin-top: 20px;">
-                                    <!-- Pie chart -->
-                                    <canvas id="pieChart"></canvas>
+                                <div>
+                                    <div style="font-size: 25px; font-weight: bold;">Expense Total</div>
+                                    <div style="font-size: 20px; font-weight: bold;">KES
+                                        {{ number_format($actualExpenses) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+
+                        <!-- Net income card-->
+                        <div class="card mt-3"
+                            style="background: linear-gradient(45deg, rgba(41, 128, 185, 1), rgba(155, 89, 182, 1), rgba(255, 193, 7, 1));">
+                            <div class="card-body">
+                                @if ($netIncome <= 0)
+                                    <h2 class="card-title text-white">Deficit for
+                                        {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+                                @else
+                                    <h2 class="card-title text-white">Surplus for
+                                        {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+                                @endif
+                                @if ($actualIncome === null || $actualExpenses === null)
+                                    <p class="card-text text-white">Please add your income and expense data to
+                                        calculate the net income.</p>
+                                @elseif ($netIncome > 0)
+                                    <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
+                                    <p class="alert alert-info">You can use this amount to achieve your goals or
+                                        pay your debts.</p>
+                                @else
+                                    <h3 class="card-text text-white">KES {{ number_format($netIncome) }}</h3>
+                                    <p class="alert alert-danger">You are in the danger zone. Adjust your budget.
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Bar graph and pie chart for the last 12 months -->
+                        <div class="mt-4">
+                            <h2>Income and Expenses for the Last 12 Months</h2>
+                            <div style="max-width: 600px;">
+                                <!-- Bar graph -->
+                                <canvas id="barGraph"></canvas>
+                            </div>
+                            <div style="max-width: 400px; margin-top: 20px;">
+                                <!-- Pie chart -->
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

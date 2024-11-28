@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Link your CSS files -->
+    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -81,7 +82,7 @@
                     @endphp
                     @if ($netWorth < 0)
                         <div class="alert alert-warning" id="success-alert"
-                            style="width: 50%;">
+                            >
                             <p>You are in the danger zone. Your liabilities exceed your assets. But Worry not, we are
                                 here to help. Click the button below to
                                 reach us so that we can help you get
@@ -89,7 +90,7 @@
                             <form action="">@csrf<span id="send_help">Send Request</span></form>
                         </div>
                     @elseif ($netWorth >= 0)
-                        <div class="alert alert-success" id="success-alert" style="width: 50%;">
+                        <div class="alert alert-success" id="success-alert">
                             <p>Congratulations! You are doing great. To optimize your porfolio for more returns,
                                 click the link below
                                 to reach us and we will be
@@ -100,7 +101,7 @@
                     @endif
                     <div class="mb-3">
                         <!-- Trigger button for the asset modal -->
-                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
+                        <button type="button" class="btn btn-success mr-2" data-toggle="modal"
                             data-target="#addAssetModal">
                             Add New Asset
                         </button>
@@ -181,7 +182,7 @@
 
 
                     <!-- Net worth table -->
-                    <table class="table">
+                    <table class="table-responsive">
                         <thead>
                             <tr>
                                 <th>Assets</th>

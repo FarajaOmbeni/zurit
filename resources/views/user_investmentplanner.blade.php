@@ -59,7 +59,7 @@
                         </div>
 
                         <!-- Buttons for Monthly Calculations -->
-                        <div class="text-center mb-5">
+                        <div class="text-center mb-5 manage_investments">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#monthlyModal">Add Investment</button>
                             <a type="button" class="btn btn-dark" href="user_networthcalc">Calculate You Net Worth</a>

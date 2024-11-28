@@ -8458,23 +8458,49 @@ table th, table td {
   color: white;
   border: none;
 }
-/* Dock styles */
-#dock {
+#hamburger-menu {
   display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: black;
-  border-top: 1px solid #e0e0e0;
-  padding: 10px 0;
-  z-index: 1000;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #4b0082; /* Purple */
+    cursor: pointer;
+    z-index: 1000;
 }
 
-#dock .icon-class {
-  font-size: 24px;
-  color: #fff; /* Icon color */
+#mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0; /* Changed from left to right */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Adjusted shadow to the left */
+    z-index: 999;
+    overflow-y: auto;
+    transform: translateX(100%); /* Start the sidebar off-screen to the right */
+    transition: transform 0.3s ease;
 }
+
+#mobile-sidebar.sidebar-visible {
+    transform: translateX(0); /* Move the sidebar into view from the right */
+}
+
+.sidebar-hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #hamburger-menu {
+        display: block;
+    }
+
+    #mobile-sidebar.sidebar-hidden {
+        display: block;
+    }
+}
+
 
 /* Media query for small screens */
 @media (max-width: 768px) {
