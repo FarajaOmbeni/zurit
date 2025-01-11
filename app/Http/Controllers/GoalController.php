@@ -23,6 +23,19 @@ class GoalController extends Controller
         $this->classifyGoals($goals);
 
         $totalGoals = $goals->count();
+        $totalAmount = $goals->filter(function($goal) {
+            return $goal->current_amount < $goal->goal_amount;
+        })->sum('goal_amount');
+        $totalCompleted = $goals->filter(function($goal) {
+            return $goal->current_amount == $goal->goal_amount;
+        })->sum('goal_amount');
+
+        $totalBalance = $goals->filter(function($goal) {
+            return $goal->current_amount < $goal->goal_amount;
+        })->sum(function($goal) {
+            return $goal->goal_amount - $goal->current_amount;
+        });
+        
         $completedGoals = $goals->filter(function ($goal) {
             return $goal->current_amount >= $goal->goal_amount;
         })->count();
@@ -40,6 +53,9 @@ class GoalController extends Controller
             'totalGoals' => $totalGoals,
             'completedGoals' => $completedGoals,
             'completionPercentages' => $completionPercentages,
+            'totalAmount' => $totalAmount,
+            'totalCompleted' => $totalCompleted,
+            'totalBalance' => $totalBalance
         ]);
     }
 

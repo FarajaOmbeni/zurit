@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('expense_type', 15, 2);
             $table->decimal('actual_expense', 15, 2);
+            $table->text('description')->default('No description');
             $table->int('is_loan'); 
             $table->int('is_goal'); 
             $table->int('is_investment'); 

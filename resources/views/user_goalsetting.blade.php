@@ -149,7 +149,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="current_amount">Would you like to contribute to your
-                                                        goal now? (Leave blank if not)</label>
+                                                        goal now? (Input 0 if not)</label>
                                                     <input required type="number" class="form-control"
                                                         name="current_amount" id="current_amount"
                                                         placeholder="Enter amount">
@@ -171,6 +171,7 @@
                                             <th>Goal Amount</th>
                                             <th>Deadline</th>
                                             <th>Additional Deposits</th>
+                                            <th>Balance</th>
                                             <th>Contribute</th>
                                             <th>Delete</th>
                                             {{-- <th>
@@ -195,6 +196,7 @@
                                                 <td>{{ \Carbon\Carbon::parse($goal->deadline)->format('d M Y') }}
                                                 </td>
                                                 <td>{{ number_format($goal->current_amount) }}</td>
+                                                <td>{{ number_format($goal->goal_amount - $goal->current_amount) }}</td>
                                                 <td>
                                                     <!-- Form for adding contributions -->
                                                     <form action="{{ route('addCurrentAmount', $goal->id) }}"
@@ -210,7 +212,7 @@
                                                     <form action="{{ route('goal.destroy', $goal) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this goal?')">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </form>
@@ -222,6 +224,16 @@
                                             </tr>
                                         @endforelse
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Totals</th>
+                                            <td></td>
+                                            <td>{{ number_format($totalAmount) }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{ number_format($totalBalance) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
 
@@ -290,6 +302,13 @@
                                             </tr>
                                         @endforelse
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Totals</th>
+                                            <td></td>
+                                            <td>{{ number_format($totalCompleted) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>

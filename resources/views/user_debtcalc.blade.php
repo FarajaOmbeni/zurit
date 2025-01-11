@@ -233,6 +233,14 @@
                                     <tr>
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Totals</th>
+                                    <td>{{ number_format($totalDebt) }}</td>
+                                    <td>{{ number_format($totalPaid) }}</td>
+                                    <td>{{ number_format($totalDebt - $totalPaid) }}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 
@@ -245,7 +253,6 @@
                                     <th>Name</th>
                                     <th>Amount Due</th>
                                     <th>Amount Paid</th>
-                                    <th>Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -256,8 +263,6 @@
                                             <td>{{ number_format($debt->current_balance) }}</td>
                                             <td><?php $balance = $debt->current_balance - $debt->minimum_payment;
                                             echo number_format($debt->current_balance - $balance); ?></td>
-                                            <td><?php number_format($balance = $debt->current_balance - $debt->minimum_payment);
-                                            echo number_format($balance); ?></td>
                                         @endif
                                     </tr>
                                     <tr>

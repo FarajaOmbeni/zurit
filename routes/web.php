@@ -198,6 +198,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('storeLiability', [NetworthController::class, 'storeLiability'])->name('storeLiability');
     Route::get('user_networthcalc', [NetworthController::class, 'showNetworth']);
     Route::post('/send-financial-email', [NetworthController::class, 'sendEmail'])->name('send.financial.email')->middleware('web');
+    Route::delete('/assets/{id}', [NetworthController::class, 'destroy_asset'])->name('assets.destroy');
+    Route::delete('/liabilities/{id}', [NetworthController::class, 'destroy_liability'])->name('liabilities.destroy');
 
 
     //Insights Routes

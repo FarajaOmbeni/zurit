@@ -75,6 +75,7 @@ class InvestmentController extends Controller
         $investment_values = [];
         $investment_names = [];
 
+        $totalInvestments = InvestmentPlanner::where('user_id', auth()->id())->sum('total_investment');
 
         foreach ($investments_chart as $monthly_investment) {
             $investment_values[] = $monthly_investment->total_investment;
@@ -95,7 +96,8 @@ class InvestmentController extends Controller
             'investment_values' => $investment_values,
             'investment_names' => $investment_names,
             'investment_months' => $investment_months,
-            'investments_chart' => $investments_chart
+            'investments_chart' => $investments_chart,
+            'totalInvestments' => $totalInvestments
 
         ]);
     }

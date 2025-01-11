@@ -172,6 +172,11 @@
                                                     <input type="number" name="expense" placeholder="Input Amount"
                                                         class="form-control">
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="description">Description</label>
+                                                    <input type="text" name="description" placeholder="Input Amount"
+                                                        class="form-control">
+                                                </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
@@ -314,7 +319,8 @@
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">
+                                                            <button type="submit" class="btn btn-danger" 
+                                                                onclick="return confirm('Are you sure you want to delete this income?')">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                         </form>
@@ -327,6 +333,12 @@
                                             </tr>
                                         @endif
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Totals</th>
+                                            <td>{{ number_format($actualIncome) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
 
@@ -338,16 +350,18 @@
                                         <tr>
                                             <th>Expense Type</th>
                                             <th>Amount</th>
+                                            <th>Description</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                    </thead>
+                                </thead>
                                     <tbody>
                                         @if ($expenses->isNotEmpty())
                                             @foreach ($expenses as $expense)
                                                 <tr>
                                                     <td>{{ $expense->expense_type }}</td>
                                                     <td>{{ number_format($expense->actual_expense) }}</td>
+                                                    <td>{{ $expense->description }}</td>
                                                     @if ($expense->is_loan == 0 && $expense->is_goal == 0 && $expense->is_investment == 0)
                                                         <td>
                                                             <a href="#" class="btn btn-primary"
@@ -463,7 +477,8 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">
+                                                                <button type="submit" class="btn btn-danger" 
+                                                                        onclick="return confirm('Are you sure you want to delete this expense?')">
                                                                     <i class="bi bi-trash"></i>
                                                                 </button>
                                                             </form>
@@ -494,6 +509,12 @@
                                             </tr>
                                         @endif
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Totals</th>
+                                            <td>{{ number_format($actualExpenses) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <h3 class="budget_title" style="margin-top: 5rem;">Totals</h3>
@@ -542,7 +563,7 @@
 
                         <!-- Bar graph and pie chart for the last 12 months -->
                         <div class="mt-4">
-                            <h2>Income and Expenses for the Last 12 Months</h2>
+                            <h2>Income and Expenses for this Year</h2>
                             <div style="max-width: 600px;">
                                 <!-- Bar graph -->
                                 <canvas id="barGraph"></canvas>

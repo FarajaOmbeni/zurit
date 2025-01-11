@@ -134,21 +134,26 @@
                                                 <td>{{ $investment->investment_type }}</td>
                                                 <td>{{ number_format($investment->total_investment) }}</td>
                                                 <td>
-                                                    <a href="{{ route('investment.destroy', $investment->id) }}"
-                                                        class="card-link text-danger float-right"
-                                                        data-investment-id="{{ $investment->id }}"
-                                                        onclick="event.preventDefault(); document.getElementById('delete-investment-form-{{ $investment->id }}').submit();"><i
-                                                            class="bi bi-trash-fill"></i></a>
-                                                    <form id="delete-investment-form-{{ $investment->id }}"
-                                                        action="{{ route('investment.destroy', $investment->id) }}"
-                                                        method="POST" style="display: none;">
+                                                    <form action="{{ route('investment.destroy', $investment->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
+                                                        <button type="submit" 
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Are you sure you want to delete this investment?')">
+                                                            <i class="bi bi-trash-fill"></i> Delete
+                                                        </button>
                                                     </form>
+                                                </td>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Totals</th>
+                                            <td>{{ number_format($totalInvestments) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>

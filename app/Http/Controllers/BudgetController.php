@@ -57,6 +57,7 @@ class BudgetController extends Controller
         $expense->user_id = auth()->id();
         $expense->expense_type = $request->expense_type;
         $expense->actual_expense = $request->expense;
+        $expense->description = $request->description;
 
         $expense->save();
 

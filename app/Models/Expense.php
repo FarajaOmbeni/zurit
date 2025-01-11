@@ -16,6 +16,7 @@ class Expense extends Model
         'expense_type',
         'expected_expense',
         'actual_expense',
+        'description',
         'year_month',
         'is_loan',
         'is_goal',

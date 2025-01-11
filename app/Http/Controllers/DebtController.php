@@ -75,8 +75,15 @@ class DebtController extends Controller
 
         $debts = Debt::where('user_id', Auth::id())->get();
 
-        $totalDebt = $debts->sum('current_balance');
         $principalPaid = $monthlyPayments->sum('current_balance');
+        
+        $totalDebt = $debts->filter(function($goal) {
+            return $goal->current_balance != $goal->minimum_payment;
+        })->sum('current_balance');
+
+        $totalPaid = Debt::where('user_id', auth()->id())
+            ->whereRaw('current_balance != minimum_payment')
+            ->sum('minimum_payment');
 
         $remainingBalance = $debts->sum(function ($debt) {
             return $debt->current_balance - $debt->minimum_payment;
@@ -91,6 +98,7 @@ class DebtController extends Controller
             'netIncome' => $netIncome,
             'principalPaid' => $principalPaid,
             'remainingBalance' => $remainingBalance,
+            'totalPaid' => $totalPaid,
         ]);
     }
 
@@ -169,22 +177,19 @@ class DebtController extends Controller
             ]);
         }
 
-        // Compare expenses with debt calculations and delete if they match
+        // Compare expenses with debt calculations and delete matching expenses only
         $loanExpenseComparison = Expense::where('expenses.user_id', auth()->id())
-        ->join('debt_calc', function ($join) {
-            $join->on('expenses.expense_type', '=', 'debt_calc.debt_name')
-            ->where('debt_calc.user_id',
-                '=',
-                auth()->id()
-            );
-        })
-        ->select('expenses.id', 'expenses.actual_expense', 'debt_calc.current_balance', 'debt_calc.debt_name')
-        ->get();
+            ->join('debt_calc', function ($join) {
+                $join->on('expenses.expense_type', '=', 'debt_calc.debt_name')
+                    ->where('debt_calc.user_id', '=', auth()->id());
+            })
+            ->select('expenses.id', 'expenses.actual_expense', 'debt_calc.current_balance')
+            ->get();
 
         foreach ($loanExpenseComparison as $comparison) {
-            if ($comparison->actual_expense == $comparison->current_balance) {
-                // Find the specific expense by id and delete it
-                Expense::find($comparison->id)->delete();
+            if ($comparison->actual_expense >= $comparison->current_balance) {
+                // Only delete from expenses table
+                Expense::where('id', $comparison->id)->delete();
             }
         }
 
