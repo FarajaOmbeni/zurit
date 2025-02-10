@@ -74,6 +74,7 @@ class InvestmentController extends Controller
             ->get();
         $investment_values = [];
         $investment_names = [];
+        $investment_months = [];
 
         $totalInvestments = InvestmentPlanner::where('user_id', auth()->id())->sum('total_investment');
 

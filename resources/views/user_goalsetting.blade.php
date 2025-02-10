@@ -196,7 +196,8 @@
                                                 <td>{{ \Carbon\Carbon::parse($goal->deadline)->format('d M Y') }}
                                                 </td>
                                                 <td>{{ number_format($goal->current_amount) }}</td>
-                                                <td>{{ number_format($goal->goal_amount - $goal->current_amount) }}</td>
+                                                <td>{{ number_format($goal->goal_amount - $goal->current_amount) }}
+                                                </td>
                                                 <td>
                                                     <!-- Form for adding contributions -->
                                                     <form action="{{ route('addCurrentAmount', $goal->id) }}"
@@ -212,7 +213,8 @@
                                                     <form action="{{ route('goal.destroy', $goal) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this goal?')">
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Are you sure you want to delete this goal?')">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </form>
@@ -343,21 +345,49 @@
         }
 
         // Data from PHP
-        const goalLabels = {!! json_encode($goals->pluck('title')) !!};
-        const completionPercentages = {!! json_encode($completionPercentages) !!};
+        const goalsData = {!! json_encode($goalsData) !!};
 
         // Bar graph for goals
         const goalsBarCtx = document.getElementById('goalsBarGraph').getContext('2d');
         const goalsBarGraph = new Chart(goalsBarCtx, {
             type: 'bar',
             data: {
-                labels: goalLabels,
+                labels: goalsData.map(goal => `${goal.title} (${goal.created_at})`),
                 datasets: [{
                     label: 'Completion Percentage',
                     backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    data: completionPercentages,
+                    data: goalsData.map(goal => goal.completion),
                 }],
             },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                }
+            }
         });
 
         //Other option add

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Traits\NetIncomeCalculator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-Use DateTime;
+use DateTime;
 
 
 class GoalController extends Controller
@@ -23,19 +23,19 @@ class GoalController extends Controller
         $this->classifyGoals($goals);
 
         $totalGoals = $goals->count();
-        $totalAmount = $goals->filter(function($goal) {
+        $totalAmount = $goals->filter(function ($goal) {
             return $goal->current_amount < $goal->goal_amount;
         })->sum('goal_amount');
-        $totalCompleted = $goals->filter(function($goal) {
+        $totalCompleted = $goals->filter(function ($goal) {
             return $goal->current_amount == $goal->goal_amount;
         })->sum('goal_amount');
 
-        $totalBalance = $goals->filter(function($goal) {
+        $totalBalance = $goals->filter(function ($goal) {
             return $goal->current_amount < $goal->goal_amount;
-        })->sum(function($goal) {
+        })->sum(function ($goal) {
             return $goal->goal_amount - $goal->current_amount;
         });
-        
+
         $completedGoals = $goals->filter(function ($goal) {
             return $goal->current_amount >= $goal->goal_amount;
         })->count();
@@ -46,26 +46,35 @@ class GoalController extends Controller
 
         $netIncome = $this->calculateNetIncome(auth()->id());
 
+        // Format goals data with titles and creation dates
+        $goalsData = $goals->map(function ($goal) {
+            return [
+                'title' => $goal->title,
+                'completion' => ($goal->current_amount / $goal->goal_amount) * 100,
+                'created_at' => Carbon::parse($goal->created_at)->format('M Y')
+            ];
+        })->sortByDesc('created_at')->values();
 
         return view('user_goalsetting', [
             'goals' => $goals,
             'netIncome' => $netIncome,
             'totalGoals' => $totalGoals,
             'completedGoals' => $completedGoals,
-            'completionPercentages' => $completionPercentages,
+            'goalsData' => $goalsData,
             'totalAmount' => $totalAmount,
             'totalCompleted' => $totalCompleted,
             'totalBalance' => $totalBalance
         ]);
     }
 
-    
-    
-    public function storeGoal(Request $request){
+
+
+    public function storeGoal(Request $request)
+    {
         $validatedData = $request->validate([
             'title' => 'required|string',
-            'goal_amount'=> 'required|numeric',
-            'current_amount'=> 'nullable|numeric',
+            'goal_amount' => 'required|numeric',
+            'current_amount' => 'nullable|numeric',
             'description' => 'nullable|string',
             'otherDescription' => 'required_if:description,other|string|nullable',
             'deadline' => 'required|date',
@@ -91,10 +100,10 @@ class GoalController extends Controller
             'message' => 'Goal Added Succesfully',
             'duration' => 3000,
         ]);
-        
     }
 
-    public function addcurrentamount(Request $request, $id){
+    public function addcurrentamount(Request $request, $id)
+    {
         $goal = Goal::find($id);
         $addedAmount = $request->input('addedAmount');
         $goal->current_amount += $addedAmount;
@@ -102,8 +111,8 @@ class GoalController extends Controller
 
         // Find the expense that matches the debt name for the current user
         $expense = Expense::where('expense_type', $goal->title)
-        ->where('user_id', auth()->id())
-        ->first();
+            ->where('user_id', auth()->id())
+            ->first();
 
         // Check if the expense exists before updating
         if ($expense) {
@@ -121,16 +130,16 @@ class GoalController extends Controller
         }
         // Compare expenses with goals and delete if they match
         $goalExpenseComparison = Expense::where('expenses.user_id', auth()->id())
-        ->join('goals', function ($join) {
-            $join->on('expenses.expense_type', '=', 'goals.title')
-            ->where(
-                'goals.user_id',
-                '=',
-                auth()->id()
-            );
-        })
-        ->select('expenses.id', 'expenses.actual_expense', 'goals.goal_amount', 'goals.title')
-        ->get();
+            ->join('goals', function ($join) {
+                $join->on('expenses.expense_type', '=', 'goals.title')
+                    ->where(
+                        'goals.user_id',
+                        '=',
+                        auth()->id()
+                    );
+            })
+            ->select('expenses.id', 'expenses.actual_expense', 'goals.goal_amount', 'goals.title')
+            ->get();
 
         foreach ($goalExpenseComparison as $comparison) {
             if ($comparison->actual_expense == $comparison->goal_amount) {
@@ -138,9 +147,9 @@ class GoalController extends Controller
                 Expense::find($comparison->id)->delete();
             }
         }
-        
+
         try {
-        return redirect('user_goalsetting')->with('success', [
+            return redirect('user_goalsetting')->with('success', [
                 'message' => 'Amount updated Successfully',
                 'duration' => 3000,
             ]);
@@ -151,10 +160,10 @@ class GoalController extends Controller
                 'duration' => 5000,
             ])->withInput();
         };
-
     }
 
-    public function calculateProjectedDates($goals){
+    public function calculateProjectedDates($goals)
+    {
         foreach ($goals as $goal) {
             // Calculate the projected completion date
             if ($goal->current_amount < $goal->goal_amount) {
@@ -162,7 +171,7 @@ class GoalController extends Controller
                 $startDate = new DateTime($goal->start_date);
                 $daysBetweenAdds = $updatedAt->diff($startDate)->days;
                 $remainingAmount = $goal->goal_amount - $goal->current_amount;
-    
+
                 // Check if last_added_amount is not zero
                 if ($goal->last_added_amount != 0) {
                     $daysToComplete = $remainingAmount / $goal->last_added_amount * $daysBetweenAdds;
@@ -175,7 +184,7 @@ class GoalController extends Controller
             }
         }
     }
-    
+
 
     public function classifyGoals($goals)
     {
@@ -184,8 +193,8 @@ class GoalController extends Controller
             $deadline = Carbon::parse($goal->deadline);
             $durationInDays = $createdAt->diffInDays($deadline);
 
-            $shortTermThreshold = 30; 
-            $middleTermThreshold = 180; 
+            $shortTermThreshold = 30;
+            $middleTermThreshold = 180;
 
             if ($durationInDays <= $shortTermThreshold) {
                 $goal->period = 'short-term';
@@ -213,9 +222,9 @@ class GoalController extends Controller
 
         // Find the expense that matches the debt name for the current user
         $expense = Expense::where('expense_type', $goal->title)
-        ->where('user_id', auth()->id())
-        ->where('actual_expense', $goal->current_amount)
-        ->first();
+            ->where('user_id', auth()->id())
+            ->where('actual_expense', $goal->current_amount)
+            ->first();
         $expense->delete();
 
         return redirect()->route('user_goalsetting')->with('success', [
@@ -223,5 +232,4 @@ class GoalController extends Controller
             'duration' => 3000,
         ]);
     }
-
 }
