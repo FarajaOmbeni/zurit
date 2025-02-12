@@ -20,6 +20,8 @@ class Debt extends Model
         'end_period',
         'payment_strategy',
         'debt_priority',
+        'number_of_months',
+        'minimum_monthly_payment',
         'category',
     ];
 

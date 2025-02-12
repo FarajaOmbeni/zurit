@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('debt_name');
             $table->integer('current_balance');
             $table->integer('interest_rate');
-            $table->integer('minimum_payment');
+            $table->integer('minimum_payment'); //This is a field to keep track of expenses and if the user wants to contrubute as they record the loan
+            $table->integer('minimum_monthly_payment');
             $table->integer('extra_payment');
             $table->dateTime('start_period');
             $table->dateTime('end_period');
+            $table->integer('number_of_months');
             //0=constant, 1=reducing
             $table->tinyInteger('payment_strategy')->default(0);
             //0=highestBalance, 1=highestRate

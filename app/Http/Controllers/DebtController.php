@@ -31,16 +31,20 @@ class DebtController extends Controller
         $debt->current_balance = $request->debt['current_balance']['value'];
         $debt->interest_rate = $request->debt['interest_rate']['value'];
         $debt->minimum_payment = $request->debt['minimum_payment']['value'];
-        // $start_period = Carbon::parse($request->debt['start_period']['date']);
-        // $debt->start_period = $start_period;
-        $debt->payment_strategy = $request->debt['payment_strategy']['strategy'];
-        $end_period_months = $this->calculateEndPeriod($request->debt['current_balance']['value'], $request->debt['interest_rate']['value'], $request->debt['minimum_payment']['value']);
-        // $debt->end_period = $start_period->copy()->addMonths($end_period_months);
+        $start_period = Carbon::parse($request->input('start_date'));
+        $end_period = Carbon::parse($request->input('end_date'));
+        $debt->start_period = $start_period;
+        $debt->end_period = $end_period;
+
+        // Calculate months between start_date and end_date
+        $num_months = $start_period->diffInMonths($end_period);
+        $debt->number_of_months = $num_months;
+        $debt->minimum_monthly_payment = $debt->current_balance / $num_months;
         $debt->save();
 
         $expense = new Expense;
         $expense->expense_type = $request->debt['debt_name']['name'];
-        $expense->actual_expense = $request->debt['minimum_payment']['value'];
+        $expense->actual_expense = $request->debt['minimum_payment']['value']; //this is a field to keep track of expenses and if the user wants to contrubute as they record the loan
         $expense->user_id = Auth::id();
         $expense->is_loan = 1;
         $expense->save();
@@ -67,17 +71,17 @@ class DebtController extends Controller
             $remaining_time = Carbon::now()->diffInMonths($end_period);
         }
 
-        //progress circle
+        // Progress circle
         $monthlyPayments = MonthlyPayment::where('user_id', Auth::id())->get();
 
-        //Calculate the net income
+        // Calculate net income
         $netIncome = $this->calculateNetIncome(auth()->id());
 
         $debts = Debt::where('user_id', Auth::id())->get();
 
         $principalPaid = $monthlyPayments->sum('current_balance');
-        
-        $totalDebt = $debts->filter(function($goal) {
+
+        $totalDebt = $debts->filter(function ($goal) {
             return $goal->current_balance != $goal->minimum_payment;
         })->sum('current_balance');
 
@@ -91,6 +95,9 @@ class DebtController extends Controller
 
         $principalPaid = $debts->sum('current_balance') - $remainingBalance;
 
+        // **Calculate total monthly payments**
+        $totalMonthlyPayments = Debt::where('user_id', auth()->id())->sum('minimum_monthly_payment');
+
         return view('user_debtcalc', [
             'end_period' => $end_period,
             'remaining_time' => $remaining_time,
@@ -99,8 +106,10 @@ class DebtController extends Controller
             'principalPaid' => $principalPaid,
             'remainingBalance' => $remainingBalance,
             'totalPaid' => $totalPaid,
+            'totalMonthlyPayments' => $totalMonthlyPayments, // Pass total monthly payments to view
         ]);
     }
+
 
     public function storeExtraPayment(Request $request)
     {

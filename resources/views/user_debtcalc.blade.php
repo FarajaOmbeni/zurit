@@ -92,7 +92,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="category">Category:</label><br>
-                                    <select id="category" name="debt[category][name]">
+                                    <select style="width: 17rem; height: 2.5rem;" id="category" name="debt[category][name]">
                                         <option value="Car Loan">Car Loan</option>
                                         <option value="Student Loan">Student Loan</option>
                                         <option value="Credit Card Loan">Credit Card Loan</option>
@@ -105,13 +105,17 @@
                                     <input type="text" id="other-category" name="debt[other-category][name]"
                                         style="display: none;"><br>
                                     <label for="debt_name">Debt Name:</label><br>
-                                    <input type="text" id="debt_name" name="debt[debt_name][name]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="text" id="debt_name" name="debt[debt_name][name]"><br>
                                     <label for="current_balance">Current Balance:</label><br>
-                                    <input type="number" id="current_balance" name="debt[current_balance][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="current_balance" name="debt[current_balance][value]"><br>
                                     <label for="interest_rate">Annual Rate:</label><br>
-                                    <input type="number" id="interest_rate" name="debt[interest_rate][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="interest_rate" name="debt[interest_rate][value]"><br>
                                     <label for="minimum_payment">Initial Payment:</label><br>
-                                    <input type="number" id="minimum_payment" name="debt[minimum_payment][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="minimum_payment" name="debt[minimum_payment][value]"><br>
+                                    <label for="payment_strategy">Start Date:</label><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="start_date" id="start_date"><br>
+                                    <label for="payment_strategy">End Date:</label><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="end_date" id="end_date"><br>
                                     <label for="payment_strategy">Interest Behavior:</label><br>
                                     <select id="payment_strategy" name="debt[payment_strategy][strategy]">
                                         <option value="0">Constant</option>
@@ -202,6 +206,7 @@
                                     <th>Name</th>
                                     <th>Amount Due</th>
                                     <th>Amount Paid</th>
+                                    <th>Monthly Payment</th>
                                     <th>Balance</th>
                                     <th>Action</th>
                                 </tr>
@@ -214,6 +219,8 @@
                                             <td>{{ number_format($debt->current_balance) }}</td>
                                             <td><?php $balance = $debt->current_balance - $debt->minimum_payment;
                                             echo number_format($debt->current_balance - $balance); ?></td>
+                                            <td><?php $minimum_payment = $debt->current_balance / $debt->number_of_months;
+                                            echo number_format($minimum_payment); ?></td>
                                             <td><?php number_format($balance = $debt->current_balance - $debt->minimum_payment);
                                             echo number_format($balance); ?></td>
                                             <td>
@@ -238,6 +245,7 @@
                                     <th>Totals</th>
                                     <td>{{ number_format($totalDebt) }}</td>
                                     <td>{{ number_format($totalPaid) }}</td>
+                                    <td>{{ number_format($totalMonthlyPayments) }}</td>
                                     <td>{{ number_format($totalDebt - $totalPaid) }}</td>
                                 </tr>
                             </tfoot>
