@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Marketing Dash</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link your CSS files -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="admin_res/css/style.css">
-    <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+@include('layouts.head')
+<title>Marketing Dash</title>
+<link rel="stylesheet" href="admin_res/css/style.css">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <body>
-    @include('layouts.app')
+
     @extends('layouts.adminbar')
 
     <div class="col-lg-5 offset-lg-3 mt-5">
@@ -85,25 +56,7 @@
         </div>
     </div>
 
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
+    @include('layouts.foot')
 
 
 </body>

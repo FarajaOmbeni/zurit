@@ -1,40 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-    <title>Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('home_res/css/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
-
-
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff">
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+@include('layouts.head')
+<title>Home</title>
+<link rel="stylesheet" href="{{ asset('home_res/css/style.css') }}?v={{ time() }}">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-1">
@@ -116,8 +83,8 @@
                     </li>
                     <li
                         class="nav-item dropdown d-md-inline {{ Request::is('budgetplanner', 'networthcalculator', 'debtmanager', 'investmentplanner') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="prosperityToolsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Prosperity Tools
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
@@ -480,104 +447,59 @@
             <div class="img-circle-right"><img src="home_res/img/circle.svg" alt=""></div>
         </div> --}}
         @include('layouts.footer')
-    </main>
+        @include('layouts.foot')
 
-    {{-- PWA --}}
-    <script>
-        let deferredPrompt;
-
-        function showInstallPromotion() {}
-
-        function hideInstallPromotion() {}
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showInstallPromotion();
-        });
-
-        window.addEventListener('appinstalled', () => {
-            hideInstallPromotion();
-            deferredPrompt = null;
-            console.log('PWA was installed');
-        });
-    </script>
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="home_res/js/addshadow.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            // e.preventDefault();
-            grecaptcha.enterprise.ready(async function() {
-                const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
-                const token = await grecaptcha.enterprise.execute(recaptchaKey, {
-                    action: 'submit'
+        <script>
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                // e.preventDefault();
+                grecaptcha.enterprise.ready(async function() {
+                    const recaptchaKey = "{{ env('RECAPTCHA_KEY') }}";
+                    const token = await grecaptcha.enterprise.execute(recaptchaKey, {
+                        action: 'submit'
+                    });
+                    // Add the token to the form
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'g-recaptcha-response';
+                    input.value = token;
+                    document.getElementById('contact-form').appendChild(input);
+                    // Submit the form
+                    document.getElementById('contact-form').submit();
                 });
-                // Add the token to the form
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'g-recaptcha-response';
-                input.value = token;
-                document.getElementById('contact-form').appendChild(input);
-                // Submit the form
-                document.getElementById('contact-form').submit();
             });
-        });
 
-        function openAccordion(event) {
-            const accordion = event.target;
-            const item = accordion.nextElementSibling;
-            if (item.style.maxHeight) {
-                item.style.maxHeight = null;
-                accordion.style.borderBottomLeftRadius = '12px';
-                accordion.style.borderBottomRightRadius = '12px';
+            function openAccordion(event) {
+                const accordion = event.target;
+                const item = accordion.nextElementSibling;
+                if (item.style.maxHeight) {
+                    item.style.maxHeight = null;
+                    accordion.style.borderBottomLeftRadius = '12px';
+                    accordion.style.borderBottomRightRadius = '12px';
 
-            } else {
-                item.style.maxHeight = 150 + "px";
-                accordion.style.borderBottomLeftRadius = '0px';
-                accordion.style.borderBottomRightRadius = '0px';
+                } else {
+                    item.style.maxHeight = 150 + "px";
+                    accordion.style.borderBottomLeftRadius = '0px';
+                    accordion.style.borderBottomRightRadius = '0px';
+                }
             }
-        }
-        const video = document.getElementById('sectionVideo');
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
-        };
+            const video = document.getElementById('sectionVideo');
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
+            };
 
-        // const observer = new IntersectionObserver((entries) => {
-        //     entries.forEach(entry => {
-        //         if (entry.isIntersecting) {
-        //             video.play();
-        //             observer.unobserve(entry.target);
-        //         }
-        //     });
-        // }, options);
+            // const observer = new IntersectionObserver((entries) => {
+            //     entries.forEach(entry => {
+            //         if (entry.isIntersecting) {
+            //             video.play();
+            //             observer.unobserve(entry.target);
+            //         }
+            //     });
+            // }, options);
 
-        // observer.observe(document.querySelector('.light-section2'));
-    </script>
+            // observer.observe(document.querySelector('.light-section2'));
+        </script>
 </body>
 
 </html>

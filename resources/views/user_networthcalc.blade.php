@@ -1,57 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('layouts.head')
+<title>Net Worth Calculator</title>
+<link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
 
-<head>
-    <title>Net Worth Calculator</title>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link your CSS files -->
-    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
-
-    <style>
-        #send_advice,
-        #send_help {
-            color: blue;
-            cursor: pointer;
-        }
-
-        #send_advice:hover,
-        #send_help:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
+<style>
+    #send_advice,
+    #send_help {
+        color: blue;
+        cursor: pointer;
     }
-    gtag('js', new Date());
 
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
+    #send_advice:hover,
+    #send_help:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
 
 <body>
-    @include('layouts.app')
+
     @extends('layouts.userbar')
 
     <div class="container-fluid">
@@ -157,8 +123,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Liability form -->
-                                    <form action="{{ route('storeLiability') }}" method="post"
-                                        id="addLiabilityForm">
+                                    <form action="{{ route('storeLiability') }}" method="post" id="addLiabilityForm">
                                         @csrf
                                         <div class="form-group">
                                             <label for="liabilityDescription">Liability Description</label>
@@ -323,24 +288,7 @@
             </div>
         </div>
 
-        {{-- PWA --}}
-        <script src="{{ asset('/sw.js') }}"></script>
-        <script>
-            if ("serviceWorker" in navigator) {
-                // Register a service worker hosted at the root of the
-                // site using the default scope.
-                navigator.serviceWorker.register("/sw.js").then(
-                    (registration) => {
-                        console.log("Service worker registration succeeded:", registration);
-                    },
-                    (error) => {
-                        console.error(`Service worker registration failed: ${error}`);
-                    },
-                );
-            } else {
-                console.error("Service workers are not supported.");
-            }
-        </script>
+        @include('layouts.foot')
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {

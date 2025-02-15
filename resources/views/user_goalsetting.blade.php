@@ -1,43 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Goal Setting Tool</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link your CSS files -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+@include('layouts.head')
+<title>Goal Setting Tool</title>
+<link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <body>
     @extends('layouts.userbar')
-    @include('layouts.app')
+
 
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -144,8 +112,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deadline">When do you want achieve the goal?</label>
-                                                    <input required type="date" class="form-control"
-                                                        name="deadline" id="deadline">
+                                                    <input required type="date" class="form-control" name="deadline"
+                                                        id="deadline">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="current_amount">Would you like to contribute to your
@@ -321,23 +289,8 @@
         </div>
     </div>
 
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
+    @include('layouts.foot')
     <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-        // END OF PWA
-
         //Activate other option
         function checkOther(select) {
             let otherField = document.getElementById('otherDescription');

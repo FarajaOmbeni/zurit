@@ -1,45 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('layouts.head')
+<title>Investment Planner</title>
+<link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
 
-<head>
-    <title>Investment Planner</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="planners_res/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 @php
     use Carbon\Carbon; // Import the Carbon class with the full namespace
 @endphp
 
 <body>
     @extends('layouts.userbar')
-    @include('layouts.app')
+
 
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -161,23 +132,7 @@
             </div>
         </div>
 
-        {{-- PWA --}}
-        <script src="{{ asset('/sw.js') }}"></script>
-        <script>
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("/sw.js").then(
-                    (registration) => {
-                        console.log("Service worker registration succeeded:", registration);
-                    },
-                    (error) => {
-                        console.error(`Service worker registration failed: ${error}`);
-                    },
-                );
-            } else {
-                console.error("Service workers are not supported.");
-            }
-        </script>
-        {{-- END OF PWA --}}
+        @include('layouts.foot')
 
         <script>
             // Get form elements
@@ -278,7 +233,7 @@
             // Initialize the form by triggering the change event
             investmentTypeSelect.dispatchEvent(new Event('change'));
             console.log(totalRevenue);
-            
+
             // Your data array
             const moneyMarketFundData = [{
                     rank: 1,

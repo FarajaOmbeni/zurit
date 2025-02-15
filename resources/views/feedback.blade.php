@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-    <title>Service Feedback</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="feedback_res/css/style.css">
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
-
+@include('layouts.head')
+<title>Service Feedback</title>
+<link rel="stylesheet" href="feedback_res/css/style.css">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
@@ -149,8 +127,8 @@
                     <textarea rows="4" type="text" name="suggestion" required></textarea>
                     <br><label for="fav_trainor">Who was your favourite trainor/trainors?</label><br>
                     <textarea rows="4" type="text" name="fav_trainor" required></textarea>
-                    <div class="d-flex justify-content-center g-recaptcha"
-                        data-sitekey="{{ env('RECAPTCHA_API_KEY') }}" data-action="SendContact"></div>
+                    <div class="d-flex justify-content-center g-recaptcha" data-sitekey="{{ env('RECAPTCHA_API_KEY') }}"
+                        data-action="SendContact"></div>
                     <button class="feedback-button" type="submit">Submit</button>
                 </form>
             </section>
@@ -159,33 +137,8 @@
     </div>
 
     @include('layouts.footer')
-    </main>
 
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/addshadow.js"></script>
+    @include('layouts.foot')
 
     <script>
         document.getElementById('feedback-form').addEventListener('submit', function(e) {

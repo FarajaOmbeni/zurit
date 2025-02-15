@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-
-    <title>About Us</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="about_res/css/style.css">
-    <link rel="icon" href="{{ asset('home_res/img/ico_logo.webp') }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+@include('layouts.head')
+<title>About Us</title>
+<link rel="stylesheet" href="about_res/css/style.css">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <body>
     @include('layouts.navbar')
@@ -58,40 +30,41 @@
                     <h2>Meet Our Team</h2>
                     <div class="team">
                         <div class="col-12 team-item text-center">
-                            <div class="photo" style="position: relative; margin: auto;"><img src="about_res/img/liz.webp"
-                                    alt="Elizabeth Nkukuu" style="position: absolute; left: -10%;"></div>
+                            <div class="photo" style="position: relative; margin: auto;"><img
+                                    src="about_res/img/liz.webp" alt="Elizabeth Nkukuu"
+                                    style="position: absolute; left: -10%;"></div>
                             <div class="text-center">
                                 <strong><span>Elizabeth Nkukuu</span></strong>
                                 <span><br>Founder - Team Leader</span>
                             </div>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/brian.webp" alt="Brian Salau"
-                                    style="width: 100%; height: auto;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/brian.webp"
+                                    alt="Brian Salau" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Brian Salau</span>
                             <span class="position">Manager</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/ken_img.webp" alt="Ken Ndwigah"
-                                    style="width: 100%; height: auto;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/ken_img.webp"
+                                    alt="Ken Ndwigah" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Ken Ndwigah</span>
                             <span class="position">Head Of Finance</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/noelle.webp" alt="Noel Jentrix"
-                                    style="width: 100%; height: auto; margin-top:-80px;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/noelle.webp"
+                                    alt="Noel Jentrix" style="width: 100%; height: auto; margin-top:-80px;"></div>
                             <span class="name d-block">Noel Jentrix</span>
                             <span class="position">Client Relations</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/gitia.webp" alt="Bryan Gitia"
-                                    style="width: 100%; height: auto;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/gitia.webp"
+                                    alt="Bryan Gitia" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Bryan Gitia</span>
                             <span class="position">Investment Specialist</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/Bramwel.webp" alt="Bramwel Tum"
-                                    style="width: 100%; height: auto;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/Bramwel.webp"
+                                    alt="Bramwel Tum" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Bramwel Tum</span>
                             <span class="position">Developer</span>
                         </div>
@@ -102,8 +75,8 @@
                             <span class="position">Developer</span>
                         </div>
                         <div class="team-item">
-                            <div class="photo"><img class="uniform-img" src="about_res/img/faraja.webp" alt="Ombeni Faraja"
-                                    style="width: 100%; height: auto;"></div>
+                            <div class="photo"><img class="uniform-img" src="about_res/img/faraja.webp"
+                                    alt="Ombeni Faraja" style="width: 100%; height: auto;"></div>
                             <span class="name d-block">Ombeni Faraja</span>
                             <span class="position">Developer</span>
                         </div>
@@ -167,7 +140,8 @@
                     <!-- Investment Planner Benefits -->
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="about_res/img/invest.webp" alt="Investment Planner Icon"></div>
+                            <div class="icon"><img src="about_res/img/invest.webp" alt="Investment Planner Icon">
+                            </div>
                             <p class="title">Investment Planner</p>
                         </div>
                         <div class="text-gray">
@@ -181,7 +155,8 @@
                     <!-- Net Worth Calculator Benefits -->
                     <div class="sidebar-benefits-item">
                         <div class="sidebar-benefits-item-title d-flex">
-                            <div class="icon"><img src="about_res/img/networth.webp" alt="Net Worth Calculator Icon"></div>
+                            <div class="icon"><img src="about_res/img/networth.webp"
+                                    alt="Net Worth Calculator Icon"></div>
                             <p class="title">Net Worth Calculator</p>
                         </div>
                         <div class="text-gray">
@@ -210,33 +185,9 @@
         </div>
     </div>
 
-@include('layouts.footer')
+    @include('layouts.footer')
+    @include('layouts.foot')
 
-    </main>
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/addshadow.js"></script>
 </body>
 
 </html>

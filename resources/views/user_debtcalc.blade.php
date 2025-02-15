@@ -1,43 +1,15 @@
-<html>
-
-<head>
-    <title>Debt Calculator</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link your CSS files -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+@include('layouts.head')
+<title>Debt Calculator</title>
+<link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
 
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <body>
     @php
         $debts = \App\Models\Debt::where('user_id', Auth::id())->get();
     @endphp
 
-    @include('layouts.app')
+
     @extends('layouts.userbar')
 
 
@@ -92,7 +64,8 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="category">Category:</label><br>
-                                    <select style="width: 17rem; height: 2.5rem;" id="category" name="debt[category][name]">
+                                    <select style="width: 17rem; height: 2.5rem;" id="category"
+                                        name="debt[category][name]">
                                         <option value="Car Loan">Car Loan</option>
                                         <option value="Student Loan">Student Loan</option>
                                         <option value="Credit Card Loan">Credit Card Loan</option>
@@ -105,17 +78,23 @@
                                     <input type="text" id="other-category" name="debt[other-category][name]"
                                         style="display: none;"><br>
                                     <label for="debt_name">Debt Name:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="text" id="debt_name" name="debt[debt_name][name]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="text" id="debt_name"
+                                        name="debt[debt_name][name]"><br>
                                     <label for="current_balance">Current Balance:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="current_balance" name="debt[current_balance][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="current_balance"
+                                        name="debt[current_balance][value]"><br>
                                     <label for="interest_rate">Annual Rate:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="interest_rate" name="debt[interest_rate][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="interest_rate"
+                                        name="debt[interest_rate][value]"><br>
                                     <label for="minimum_payment">Initial Payment:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="minimum_payment" name="debt[minimum_payment][value]"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="number" id="minimum_payment"
+                                        name="debt[minimum_payment][value]"><br>
                                     <label for="payment_strategy">Start Date:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="start_date" id="start_date"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="start_date"
+                                        id="start_date"><br>
                                     <label for="payment_strategy">End Date:</label><br>
-                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="end_date" id="end_date"><br>
+                                    <input style="width: 17rem; height: 2.5rem;" type="date" name="end_date"
+                                        id="end_date"><br>
                                     <label for="payment_strategy">Interest Behavior:</label><br>
                                     <select id="payment_strategy" name="debt[payment_strategy][strategy]">
                                         <option value="0">Constant</option>
@@ -364,25 +343,7 @@
                     </div>
                 </div>
 
-                {{-- PWA --}}
-                <script src="{{ asset('/sw.js') }}"></script>
-                <script>
-                    if ("serviceWorker" in navigator) {
-                        // Register a service worker hosted at the root of the
-                        // site using the default scope.
-                        navigator.serviceWorker.register("/sw.js").then(
-                            (registration) => {
-                                console.log("Service worker registration succeeded:", registration);
-                            },
-                            (error) => {
-                                console.error(`Service worker registration failed: ${error}`);
-                            },
-                        );
-                    } else {
-                        console.error("Service workers are not supported.");
-                    }
-                </script>
-                {{-- END OF PWA --}}
+                @include('layouts.foot')
 
                 <script>
                     //datepicker

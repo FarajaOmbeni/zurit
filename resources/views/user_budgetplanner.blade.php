@@ -1,42 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Budget Planner</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link your CSS files -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.png') }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+@include('layouts.head')
+<title>Budget Planner</title>
+<link rel="stylesheet" href="{{ asset('planners_res/style.css') }}?v={{ time() }}">
 
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMJCGHRR4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZMJCGHRR4');
-</script>
 
 <style>
     #manage_debt {
@@ -51,7 +17,7 @@
 
 <body>
     @extends('layouts.userbar')
-    @include('layouts.app')
+
 
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -174,8 +140,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="description">Description</label>
-                                                    <input type="text" name="description" placeholder="Input Amount"
-                                                        class="form-control">
+                                                    <input type="text" name="description"
+                                                        placeholder="Input Amount" class="form-control">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -319,7 +285,7 @@
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger" 
+                                                            <button type="submit" class="btn btn-danger"
                                                                 onclick="return confirm('Are you sure you want to delete this income?')">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
@@ -354,7 +320,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                </thead>
+                                    </thead>
                                     <tbody>
                                         @if ($expenses->isNotEmpty())
                                             @foreach ($expenses as $expense)
@@ -477,8 +443,8 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger" 
-                                                                        onclick="return confirm('Are you sure you want to delete this expense?')">
+                                                                <button type="submit" class="btn btn-danger"
+                                                                    onclick="return confirm('Are you sure you want to delete this expense?')">
                                                                     <i class="bi bi-trash"></i>
                                                                 </button>
                                                             </form>
@@ -581,35 +547,7 @@
     </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
+    @include('layouts.foot')
 
     <script>
         // Dummy data for the last 12 months

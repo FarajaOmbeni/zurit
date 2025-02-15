@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('layouts.head')
+<title>Trainings_Zurit</title>
+<link rel="stylesheet" href="{{ asset('training_res/css/style.css') }}?v={{ time() }}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Firmbee.com - Free Project Management Platform for remote teams">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Trainings_Zurit</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('training_res/css/style.css') }}?v={{ time() }}">
-    <link rel="icon" href="{{ asset('img/ico_logo.webp') }}?v={{ time() }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#fff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo-white.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body>
@@ -127,8 +110,8 @@
                 <div class="category_card_desc">
                     <p class="card_title">PODCAST</p>
                     <p class="card_desc">Navigating Finance's Dynamic World</p>
-                    <button class="brochure_btn" type="button" data-toggle="modal"
-                        data-target="#modal_podcast">Learn more</button>
+                    <button class="brochure_btn" type="button" data-toggle="modal" data-target="#modal_podcast">Learn
+                        more</button>
                 </div>
 
             </div>
@@ -510,41 +493,7 @@
 
     @include('layouts.footer')
 
-    {{-- PWA --}}
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("/sw.js").then(
-                (registration) => {
-                    console.log("Service worker registration succeeded:", registration);
-                },
-                (error) => {
-                    console.error(`Service worker registration failed: ${error}`);
-                },
-            );
-        } else {
-            console.error("Service workers are not supported.");
-        }
-    </script>
-    {{-- END OF PWA --}}
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-
-    <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="training_res/js/script.js"></script>
-
+    @include('layouts.foot')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $(".category_btn").click(function() {

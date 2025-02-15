@@ -23,31 +23,35 @@
         <div id="mobile-sidebar" class="sidebar-hidden">
             <ul class="list-unstyled components mb-5">
                 <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
-                    <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span> Budget
+                    <a href="{{ url('/user_budgetplanner') }}"><i class="fa fa-pie-chart" aria-hidden="true"
+                            style="margin-right: 8px"></i> Budget
                         Planner</a>
                 </li>
                 <li class="{{ Request::is('user_debtcalc') ? 'active' : '' }}">
-                    <a href="{{ url('/user_debtcalc') }}"><span class="bi bi-bank icon-class"></span> Debt Manager</a>
+                    <a href="{{ url('/user_debtcalc') }}"><i class="fa fa-money" aria-hidden="true"
+                            style="margin-right: 8px"></i> Debt Manager</a>
                 </li>
                 <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
-                    <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span> Goal
+                    <a href="{{ url('user_goalsetting') }}"><i class="fa fa-bullseye" aria-hidden="true"
+                            style="margin-right: 8px"></i> Goal
                         Setting</a>
                 </li>
                 <li class="{{ Request::is('user_investmentplanner') ? 'active' : '' }}">
-                    <a href="{{ url('/user_investmentplanner') }}"><span class="bi bi-building icon-class"></span>
+                    <a href="{{ url('/user_investmentplanner') }}"><i class="fa fa-line-chart" aria-hidden="true"
+                            style="margin-right: 8px"></i>
                         Investment Planner</a>
                 </li>
                 <li class="{{ Request::is('user_networthcalc') ? 'active' : '' }}">
-                    <a href="{{ url('/user_networthcalc') }}"><span class="bi bi-calculator icon-class"></span> Networth
+                    <a href="{{ url('/user_networthcalc') }}"><i class="fa fa-balance-scale" aria-hidden="true"
+                            style="margin-right: 8px"></i> Networth
                         Calculator</a>
                 </li>
                 <li class="{{ Request::is('user_calculators') ? 'active' : '' }}">
-                    <a href="{{ url('/user_calculators') }}"><span
-                            class="bi bi-calculator icon-class"></span>Calculators</a>
+                    <a href="{{ url('/user_calculators') }}"><i class="fa fa-calculator" aria-hidden="true"
+                            style="margin-right: 8px"></i>Calculators</a>
                 </li>
                 <li class="{{ Request::is('account_userdash') ? 'active' : '' }}">
-                    <a href="{{ url('/account_userdash') }}"><span class="fa fa-book mr-3"></span> Account
-                        Management</a>
+                    <a href="{{ url('/account_userdash') }}"><i class="fa fa-user" aria-hidden="true" style="margin-right: 8px"></i> Account Management</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"
@@ -68,32 +72,35 @@
                             alt=""></a><span><br>User Dashboard</span>
                     <ul class="list-unstyled components mb-5 flex-container">
                         <li class="{{ Request::is('user_budgetplanner') ? 'active' : '' }}">
-                            <a href="{{ url('/user_budgetplanner') }}"><span class="bi bi-wallet icon-class"></span>
+                            <a href="{{ url('/user_budgetplanner') }}"><i class="fa fa-pie-chart" aria-hidden="true"
+                                    style="margin-right: 8px"></i>
                                 Budget Planner</a>
                         </li>
                         <li class="{{ Request::is('user_debtcalc') ? 'active' : '' }}">
-                            <a href="{{ url('/user_debtcalc') }}"><span class="bi bi-bank icon-class"></span> Debt
+                            <a href="{{ url('/user_debtcalc') }}"><i class="fa fa-money" aria-hidden="true"
+                                    style="margin-right: 8px"></i> Debt
                                 Manager</a>
                         </li>
                         <li class="{{ Request::is('user_goalsetting') ? 'active' : '' }}">
-                            <a href="{{ url('user_goalsetting') }}"><span class="fa fa-bullseye icon-class"></span>
+                            <a href="{{ url('user_goalsetting') }}"><i class="fa fa-bullseye" aria-hidden="true"
+                                    style="margin-right: 8px"></i>
                                 Goal Setting</a>
                         </li>
                         <li class="{{ Request::is('user_investmentplanner') ? 'active' : '' }}">
-                            <a href="{{ url('/user_investmentplanner') }}"><span
-                                    class="bi bi-building icon-class"></span> Investment Planner</a>
+                            <a href="{{ url('/user_investmentplanner') }}"><i class="fa fa-line-chart"
+                                    aria-hidden="true" style="margin-right: 8px"></i> Investment Planner</a>
                         </li>
                         <li class="{{ Request::is('user_networthcalc') ? 'active' : '' }}">
-                            <a href="{{ url('/user_networthcalc') }}"><span class="bi bi-calculator icon-class"></span>
+                            <a href="{{ url('/user_networthcalc') }}"><i class="fa fa-balance-scale" aria-hidden="true"
+                                    style="margin-right: 8px"></i>
                                 Networth Calculator</a>
                         </li>
                         <li class="{{ Request::is('user_calculators') ? 'active' : '' }}">
-                            <a href="{{ url('/user_calculators') }}"><span
-                                    class="bi bi-calculator icon-class"></span>Calculators</a>
+                            <a href="{{ url('/user_calculators') }}"><i class="fa fa-calculator" aria-hidden="true"
+                                    style="margin-right: 8px"></i>Calculators</a>
                         </li>
                         <li class="{{ Request::is('account_userdash') ? 'active' : '' }}">
-                            <a href="{{ url('/account_userdash') }}"><span class="fa fa-book mr-3"></span> Account
-                                Management</a>
+                            <a href="{{ url('/account_userdash') }}"><i class="fa fa-user" aria-hidden="true" style="margin-right: 8px"></i> Account Management</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}"
