@@ -190,7 +190,8 @@
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#updateIncomeModal{{ $item->id }}">
-                                                            <i class="bi bi-pencil"></i>
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+
                                                         </button>
 
                                                         <!-- Modal -->
@@ -287,12 +288,12 @@
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger"
                                                                 onclick="return confirm('Are you sure you want to delete this income?')">
-                                                                <i class="bi bi-trash"></i>
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
                                                             </button>
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                        @endforeach
                                         @else
                                             <tr>
                                                 <td colspan="4">No Income data available</td>
@@ -333,7 +334,7 @@
                                                             <a href="#" class="btn btn-primary"
                                                                 data-toggle="modal"
                                                                 data-target="#updateExpenseModal{{ $expense->id }}">
-                                                                <i class="bi bi-pencil"></i>
+                                                                <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </a>
 
                                                             <!-- Modal -->
@@ -445,7 +446,7 @@
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger"
                                                                     onclick="return confirm('Are you sure you want to delete this expense?')">
-                                                                    <i class="bi bi-trash"></i>
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
                                                             </form>
                                                         </td>

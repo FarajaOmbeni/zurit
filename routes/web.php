@@ -31,6 +31,7 @@ use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\MarketingMessageController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\VideoController;
 use App\Models\InvestmentPlanner;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -49,6 +50,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', [IndexController::class, 'index']);
 Route::post('/', [IndexController::class, 'storeEvent']);
 Route::get('/logout', [HomeController::class, 'logout']);
+Route::post('/submit-questionnaire', [QuestionnaireController::class, 'submitQuestionnaire'])->name('submit.questionnaire');
 
 Route::get('about', function () {
     return view('about');

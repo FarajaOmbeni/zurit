@@ -104,14 +104,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="prosperityToolsDropdown">
                             <a class="dropdown-item" href="{{ url('training') }}">Training</a>
-                            <!-- <a class="dropdown-item" href="{{ url('advisory') }}">Advisory</a>
-                            <a class="dropdown-item" href="{{ url('chama') }}">Chama Advisory</a>
-                            <a class="dropdown-item" href="{{ url('trustees') }}">Trustees Advisory</a> -->
                         </div>
                     </li>
-                    <!--<li class="nav-item {{ Request::is('advisory') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('advisory') }}">Advisory</a>
-                </li>-->
                     <li class="nav-item {{ Request::is('books') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('books') }}">Buy Book</a>
                     </li>
@@ -181,14 +175,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <!-- Video Container -->
-                    {{-- <div class="d-flex justify-content-center mt-3 video-container"
-                        onclick="window.open('https://www.youtube.com/@zuritconsulting', '_blank')">
-                        <video class="video" src="home_res/vids/intro.mp4" autoplay muted loop></video>
-                        <div class="play-button">
-                            <img src="home_res/img/play_button.svg" alt="Play">
-                        </div>
-                    </div> --}}
                     @if ($video->video_link)
                         <div style="display: flex; justify-content: center; margin-top: 5%; margin-left: 5%;">
                             <iframe style="border: 1px solid #F2AE30; border-radius: 10px" width="600"
@@ -209,6 +195,15 @@
     </header>
     <main>
 
+        <!-- Questionnaire Modal -->
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#zuritQuestionnaireModal" style="position: fixed; bottom: 20px; right: 20px; z-index: 5;">
+                Help us serve you better
+            </button>
+            <x-zurit-questionnaire></x-zurit-questionnaire>
+        </div>
+
         <section class="light-section">
             <h2 style="text-align:center; margin-bottom:50px;">UPCOMING EVENTS</h2>
             <div class="upcoming-trainings">
@@ -228,39 +223,6 @@
                 @endforeach
             </div>
 
-            {{-- <div>
-                    <h2 style="text-align:center; margin-bottom:50px;">Past Events</h2>
-                    <div class="past-trainings">
-                        @foreach ($pastevents as $pastevent)
-                            <div class="container">
-                                <div class="accordion" id="accordion" onclick="openAccordion(event)">
-                                    <div class="accordion-title">
-                                        {{ $pastevent->name }}
-                                    </div>
-
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                            fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="accordion-item" id="accordion-item">
-                                    <img class="accordion-image"
-                                        src="{{ asset('events_res/img/' . $pastevent->image) }}" alt="Event Image">
-                                    <div class="accordion-content">
-                                        <h4><b>{{ $pastevent->name }}</b></h4>
-                                        <h5>{{ $pastevent->date }}</h5>
-                                        <a class="registration-link" href="/feedback" target="_blank">Leave a
-                                            review!</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div> --}}
-            <!--PARTNERS SECTION-->
             <h2 style="text-align:center; margin-top:20px; color: #F2AE30;">Our Partners</h2>
 
             <div class="partners_container">
@@ -368,41 +330,6 @@
             </div>
         </section>
 
-        <!--gamification section
-        <section class="light-section">
-  <div class="row">
-    <div class="col-md-6">
-      <div id="what-is-budget-planner" class="card">
-        <div class="card-body">
-          <input type="text" class="form-control" placeholder="Search...">
-
-          <!-- Donut chart
-          <canvas id="donutChart"></canvas>
-
-          <!-- List of expense types at the bottom
-          <ul id="expenseTypes" class="list-group mt-3">
-            <!-- Expense types will be added here -->
-        </ul>
-        <!-- Original content ends here
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <!-- Input fields for expense name and expense amount
-      <input type="text" class="form-control mb-3" placeholder="Expense Name">
-      <input type="number" class="form-control mb-3" placeholder="Expense Amount">
-
-      <!-- Card showing the net income
-      <div class="card">
-        <div class="card-body">
-          Net Income: $0
-        </div>
-      </div>
-    </div>
-  </div>
-</section>-->
-
-
         <section class="contact-us" id="contact-us">
             <div class="container">
                 <h2>Contact Us</h2>
@@ -442,10 +369,6 @@
             </div>
         </section>
 
-        {{-- <div class="light-gray-section bottom">
-            <div class="img-circle-left"><img src="home_res/img/circle.svg" alt=""></div>
-            <div class="img-circle-right"><img src="home_res/img/circle.svg" alt=""></div>
-        </div> --}}
         @include('layouts.footer')
         @include('layouts.foot')
 
@@ -488,17 +411,6 @@
                 rootMargin: '0px',
                 threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
             };
-
-            // const observer = new IntersectionObserver((entries) => {
-            //     entries.forEach(entry => {
-            //         if (entry.isIntersecting) {
-            //             video.play();
-            //             observer.unobserve(entry.target);
-            //         }
-            //     });
-            // }, options);
-
-            // observer.observe(document.querySelector('.light-section2'));
         </script>
 </body>
 

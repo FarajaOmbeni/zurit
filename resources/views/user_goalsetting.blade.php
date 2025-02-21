@@ -183,7 +183,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"
                                                             onclick="return confirm('Are you sure you want to delete this goal?')">
-                                                            <i class="bi bi-trash"></i>
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </button>
                                                     </form>
                                                 </td>

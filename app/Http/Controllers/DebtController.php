@@ -142,6 +142,11 @@ class DebtController extends Controller
     {
         $debts = Debt::where('user_id', Auth::id())->get();
 
+        $totalDebt = $debts->sum('current_balance');
+        $remainingBalance = $debts->sum(function ($debt) {
+            return $debt->current_balance - $debt->minimum_payment;
+        });
+        $principalPaid = $totalDebt - $remainingBalance;
 
         return view('user_debtcalc', [
             'totalDebt' => $totalDebt,
@@ -159,14 +164,14 @@ class DebtController extends Controller
 
         // Find the loan by ID
         $debt = Debt::findOrFail($id);
-        
+
         // Calculate the new balance
         $newBalance = $debt->minimum_payment + $request->input('pay_loan_amount');
 
         // Find the expense that matches the debt name for the current user
         $expense = Expense::where('expense_type', $debt->debt_name)
-        ->where('user_id', auth()->id())
-        ->first();
+            ->where('user_id', auth()->id())
+            ->first();
 
         // Update the current balance
         $debt->minimum_payment = $newBalance;

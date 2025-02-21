@@ -24,13 +24,12 @@ class MarketingMessage extends Mailable
     }
 
     public function build()
-{
-    return $this->view('emails.marketing_message')
-        ->with([
-            'title' => $this->title,
-            'content' => $this->content,
-        ])
-        ->subject($this->title);
-}
-
+    {
+        return $this->view('emails.marketing_message')
+            ->with([
+                'title' => $this->title,
+                'content' => $this->content,
+            ])
+            ->subject($this->title);
+    }
 }
