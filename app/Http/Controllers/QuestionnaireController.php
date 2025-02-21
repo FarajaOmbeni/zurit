@@ -15,7 +15,7 @@ class QuestionnaireController extends Controller
         $formData = $request->all();
 
         // Send email
-        Mail::to('ombenifaraja@gmail.com')->send(new QuestionnaireResponseMail($formData)); 
+        Mail::to('jmugonyi@zuritconsulting.com')->send(new QuestionnaireResponseMail($formData)); 
 
         // You can add a success message or redirect here if needed
         return redirect()->back()->with('success', 'Questionnaire submitted successfully! We will be in touch.');

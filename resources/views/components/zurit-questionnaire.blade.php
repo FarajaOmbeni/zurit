@@ -38,35 +38,35 @@
                             <p class="fw-bold">What is your most important short-term financial goal?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="short_term_goal"
-                                    id="short_term_goal_gadget" value="gadget">
+                                    id="short_term_goal_gadget" value="Save for a gadget (phone, laptop, etc.)">
                                 <label class="form-check-label" for="short_term_goal_gadget">
                                     Save for a gadget (phone, laptop, etc.)
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="short_term_goal"
-                                    id="short_term_goal_course" value="course">
+                                    id="short_term_goal_course" value="Pay for a course or certification">
                                 <label class="form-check-label" for="short_term_goal_course">
                                     Pay for a course or certification
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="short_term_goal"
-                                    id="short_term_goal_business" value="business">
+                                    id="short_term_goal_business" value="Start a small business">
                                 <label class="form-check-label" for="short_term_goal_business">
                                     Start a small business
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="short_term_goal"
-                                    id="short_term_goal_emergency_fund" value="emergency_fund">
+                                    id="short_term_goal_emergency_fund" value="Build an emergency fund">
                                 <label class="form-check-label" for="short_term_goal_emergency_fund">
                                     Build an emergency fund
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="short_term_goal"
-                                    id="short_term_goal_other" value="other_short_term">
+                                    id="short_term_goal_other" value="Other Short Term">
                                 <label class="form-check-label" for="short_term_goal_other">
                                     Other (please specify)
                                 </label>
@@ -79,35 +79,35 @@
                             <p class="fw-bold">What is your main long-term financial goal?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="long_term_goal"
-                                    id="long_term_goal_car_home" value="car_home">
+                                    id="long_term_goal_car_home" value="Save to buy a car or home">
                                 <label class="form-check-label" for="long_term_goal_car_home">
                                     Save to buy a car or home
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="long_term_goal"
-                                    id="long_term_goal_invest_business" value="invest_business">
+                                    id="long_term_goal_invest_business" value="Invest in a business">
                                 <label class="form-check-label" for="long_term_goal_invest_business">
                                     Invest in a business
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="long_term_goal"
-                                    id="long_term_goal_financial_independence" value="financial_independence">
+                                    id="long_term_goal_financial_independence" value="Achieve financial independence">
                                 <label class="form-check-label" for="long_term_goal_financial_independence">
                                     Achieve financial independence
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="long_term_goal"
-                                    id="long_term_goal_retirement" value="retirement">
+                                    id="long_term_goal_retirement" value="Save for retirement">
                                 <label class="form-check-label" for="long_term_goal_retirement">
                                     Save for retirement
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="long_term_goal"
-                                    id="long_term_goal_other" value="other_long_term">
+                                    id="long_term_goal_other" value="Other Long Term">
                                 <label class="form-check-label" for="long_term_goal_other">
                                     Other (please specify)
                                 </label>
@@ -120,28 +120,28 @@
                             <p class="fw-bold">How do you keep yourself motivated to achieve your financial goals?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="motivation_system"
-                                    id="motivation_system_track_goals" value="track_goals">
+                                    id="motivation_system_track_goals" value="I write down my goals and track progress">
                                 <label class="form-check-label" for="motivation_system_track_goals">
                                     I write down my goals and track progress
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="motivation_system"
-                                    id="motivation_system_reward_milestones" value="reward_milestones">
+                                    id="motivation_system_reward_milestones" value="I reward myself when I hit small milestones">
                                 <label class="form-check-label" for="motivation_system_reward_milestones">
                                     I reward myself when I hit small milestones
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="motivation_system"
-                                    id="motivation_system_financial_influencers" value="financial_influencers">
+                                    id="motivation_system_financial_influencers" value="I follow financial influencers for motivation">
                                 <label class="form-check-label" for="motivation_system_financial_influencers">
                                     I follow financial influencers for motivation
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="motivation_system"
-                                    id="motivation_system_no_system" value="no_system">
+                                    id="motivation_system_no_system" value="I don't have a motivation system yet">
                                 <label class="form-check-label" for="motivation_system_no_system">
                                     I don't have a motivation system yet
                                 </label>
@@ -156,21 +156,21 @@
                             <p class="fw-bold">Have you started investing?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="started_investing"
-                                    id="started_investing_yes_active" value="yes_active">
+                                    id="started_investing_yes_active" value="Yes, I actively invest">
                                 <label class="form-check-label" for="started_investing_yes_active">
                                     Yes, I actively invest
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="started_investing"
-                                    id="started_investing_plan_soon" value="plan_soon">
+                                    id="started_investing_plan_soon" value="No, but I plan to start soon">
                                 <label class="form-check-label" for="started_investing_plan_soon">
                                     No, but I plan to start soon
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="started_investing"
-                                    id="started_investing_not_interested" value="not_interested">
+                                    id="started_investing_not_interested" value="No, I’m not interested">
                                 <label class="form-check-label" for="started_investing_not_interested">
                                     No, I’m not interested
                                 </label>
@@ -180,28 +180,28 @@
                             <p class="fw-bold">Which investment option interests you the most?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_option"
-                                    id="investment_option_stocks" value="stocks">
+                                    id="investment_option_stocks" value="Stocks or shares">
                                 <label class="form-check-label" for="investment_option_stocks">
                                     Stocks or shares
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_option"
-                                    id="investment_option_real_estate" value="real_estate">
+                                    id="investment_option_real_estate" value="real_eReal estatestate">
                                 <label class="form-check-label" for="investment_option_real_estate">
                                     Real estate
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_option"
-                                    id="investment_option_business_ventures" value="business_ventures">
+                                    id="investment_option_business_ventures" value="Business ventures">
                                 <label class="form-check-label" for="investment_option_business_ventures">
                                     Business ventures
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_option"
-                                    id="investment_option_crypto" value="crypto">
+                                    id="investment_option_crypto" value="Digital currencies (e.g., crypto)">
                                 <label class="form-check-label" for="investment_option_crypto">
                                     Digital currencies (e.g., crypto)
                                 </label>
@@ -221,7 +221,7 @@
                             <p class="fw-bold">How comfortable are you with investment risks?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
-                                    name="investment_risk_comfort" id="investment_risk_comfort_low" value="low">
+                                    name="investment_risk_comfort" id="investment_risk_comfort_low" value="Low – I prefer stable and guaranteed returns">
                                 <label class="form-check-label" for="investment_risk_comfort_low">
                                     Low – I prefer stable and guaranteed returns
                                 </label>
@@ -229,14 +229,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="investment_risk_comfort" id="investment_risk_comfort_moderate"
-                                    value="moderate">
+                                    value="Moderate – I can take some risks for better returns">
                                 <label class="form-check-label" for="investment_risk_comfort_moderate">
                                     Moderate – I can take some risks for better returns
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
-                                    name="investment_risk_comfort" id="investment_risk_comfort_high" value="high">
+                                    name="investment_risk_comfort" id="investment_risk_comfort_high" value="High – I’m open to risky investments with high potential rewards">
                                 <label class="form-check-label" for="investment_risk_comfort_high">
                                     High – I’m open to risky investments with high potential rewards
                                 </label>
@@ -246,28 +246,28 @@
                             <p class="fw-bold">What’s your biggest challenge in starting to invest?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_challenge"
-                                    id="investment_challenge_lack_info" value="lack_info">
+                                    id="investment_challenge_lack_info" value="Lack of information">
                                 <label class="form-check-label" for="investment_challenge_lack_info">
                                     Lack of information
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_challenge"
-                                    id="investment_challenge_lack_capital" value="lack_capital">
+                                    id="investment_challenge_lack_capital" value="Lack of capital">
                                 <label class="form-check-label" for="investment_challenge_lack_capital">
                                     Lack of capital
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_challenge"
-                                    id="investment_challenge_fear_loss" value="fear_loss">
+                                    id="investment_challenge_fear_loss" value="Fear of losing money">
                                 <label class="form-check-label" for="investment_challenge_fear_loss">
                                     Fear of losing money
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="investment_challenge"
-                                    id="investment_challenge_not_thought" value="not_thought">
+                                    id="investment_challenge_not_thought" value="I haven’t thought about it seriously yet">
                                 <label class="form-check-label" for="investment_challenge_not_thought">
                                     I haven’t thought about it seriously yet
                                 </label>
@@ -282,21 +282,21 @@
                             <p class="fw-bold">Do you currently have any outstanding debt?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="outstanding_debt"
-                                    id="outstanding_debt_loan_credit_card" value="loan_credit_card">
+                                    id="outstanding_debt_loan_credit_card" value="Yes, I have a loan/credit card balance">
                                 <label class="form-check-label" for="outstanding_debt_loan_credit_card">
                                     Yes, I have a loan/credit card balance
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="outstanding_debt"
-                                    id="outstanding_debt_owe_family_friends" value="owe_family_friends">
+                                    id="outstanding_debt_owe_family_friends" value="Yes, I owe money to family or friends">
                                 <label class="form-check-label" for="outstanding_debt_owe_family_friends">
                                     Yes, I owe money to family or friends
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="outstanding_debt"
-                                    id="outstanding_debt_no_debt" value="no_debt">
+                                    id="outstanding_debt_no_debt" value="No, I don’t have any debt">
                                 <label class="form-check-label" for="outstanding_debt_no_debt">
                                     No, I don’t have any debt
                                 </label>
@@ -306,28 +306,28 @@
                             <p class="fw-bold">If you had to take a loan, what would be your main reason?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="loan_reason"
-                                    id="loan_reason_business_asset" value="business_asset">
+                                    id="loan_reason_business_asset" value="To invest in a business or asset">
                                 <label class="form-check-label" for="loan_reason_business_asset">
                                     To invest in a business or asset
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="loan_reason"
-                                    id="loan_reason_education_skill" value="education_skill">
+                                    id="loan_reason_education_skill" value="To fund education or a skill upgrade">
                                 <label class="form-check-label" for="loan_reason_education_skill">
                                     To fund education or a skill upgrade
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="loan_reason"
-                                    id="loan_reason_personal_items" value="personal_items">
+                                    id="loan_reason_personal_items" value="To buy personal items (phone, car, etc.)">
                                 <label class="form-check-label" for="loan_reason_personal_items">
                                     To buy personal items (phone, car, etc.)
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="loan_reason"
-                                    id="loan_reason_no_loans" value="no_loans">
+                                    id="loan_reason_no_loans" value="I don’t believe in taking loans">
                                 <label class="form-check-label" for="loan_reason_no_loans">
                                     I don’t believe in taking loans
                                 </label>
@@ -338,7 +338,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="debt_management_approach" id="debt_management_approach_pay_off_soon"
-                                    value="pay_off_soon">
+                                    value="Pay off as soon as possible">
                                 <label class="form-check-label" for="debt_management_approach_pay_off_soon">
                                     Pay off as soon as possible
                                 </label>
@@ -347,7 +347,7 @@
                                 <input class="form-check-input" type="radio"
                                     name="debt_management_approach"
                                     id="debt_management_approach_min_installments_invest"
-                                    value="min_installments_invest">
+                                    value="Pay minimum installments and invest the rest">
                                 <label class="form-check-label"
                                     for="debt_management_approach_min_installments_invest">
                                     Pay minimum installments and invest the rest
@@ -356,7 +356,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="debt_management_approach" id="debt_management_approach_avoid_loans"
-                                    value="avoid_loans">
+                                    value="Avoid taking any loans if possible">
                                 <label class="form-check-label" for="debt_management_approach_avoid_loans">
                                     Avoid taking any loans if possible
                                 </label>
@@ -364,7 +364,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="debt_management_approach" id="debt_management_approach_not_thought"
-                                    value="not_thought_debt_management">
+                                    value="I haven’t thought much about it">
                                 <label class="form-check-label" for="debt_management_approach_not_thought">
                                     I haven’t thought much about it
                                 </label>
@@ -379,7 +379,7 @@
                             <p class="fw-bold">How do you track your income and expenses?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
-                                    name="income_expense_tracking" id="income_expense_tracking_app" value="app">
+                                    name="income_expense_tracking" id="income_expense_tracking_app" value="I use a budgeting app">
                                 <label class="form-check-label" for="income_expense_tracking_app">
                                     I use a budgeting app
                                 </label>
@@ -387,7 +387,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="income_expense_tracking" id="income_expense_tracking_notebook"
-                                    value="notebook">
+                                    value="I record everything in a notebook or spreadsheet">
                                 <label class="form-check-label" for="income_expense_tracking_notebook">
                                     I record everything in a notebook or spreadsheet
                                 </label>
@@ -395,7 +395,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="income_expense_tracking" id="income_expense_tracking_no_tracking"
-                                    value="no_tracking">
+                                    value="I don’t track my expenses">
                                 <label class="form-check-label" for="income_expense_tracking_no_tracking">
                                     I don’t track my expenses
                                 </label>
@@ -406,7 +406,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="monthly_savings_decision" id="monthly_savings_decision_save_leftover"
-                                    value="save_leftover">
+                                    value="I save whatever is left after spending">
                                 <label class="form-check-label" for="monthly_savings_decision_save_leftover">
                                     I save whatever is left after spending
                                 </label>
@@ -414,7 +414,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="monthly_savings_decision" id="monthly_savings_decision_fixed_percentage"
-                                    value="fixed_percentage">
+                                    value="I set aside a fixed percentage of my income">
                                 <label class="form-check-label" for="monthly_savings_decision_fixed_percentage">
                                     I set aside a fixed percentage of my income
                                 </label>
@@ -422,7 +422,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="monthly_savings_decision" id="monthly_savings_decision_save_extra"
-                                    value="save_extra">
+                                    value="I save only when I have extra money">
                                 <label class="form-check-label" for="monthly_savings_decision_save_extra">
                                     I save only when I have extra money
                                 </label>
@@ -430,7 +430,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
                                     name="monthly_savings_decision" id="monthly_savings_decision_no_saving_habit"
-                                    value="no_saving_habit">
+                                    value="I don’t have a saving habit yet">
                                 <label class="form-check-label" for="monthly_savings_decision_no_saving_habit">
                                     I don’t have a saving habit yet
                                 </label>
@@ -440,28 +440,28 @@
                             <p class="fw-bold">What is your biggest challenge in budgeting?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="budgeting_challenge"
-                                    id="budgeting_challenge_impulsive_spending" value="impulsive_spending">
+                                    id="budgeting_challenge_impulsive_spending" value="I spend impulsively">
                                 <label class="form-check-label" for="budgeting_challenge_impulsive_spending">
                                     I spend impulsively
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="budgeting_challenge"
-                                    id="budgeting_challenge_low_income" value="low_income">
+                                    id="budgeting_challenge_low_income" value="My income is too low to budget properly">
                                 <label class="form-check-label" for="budgeting_challenge_low_income">
                                     My income is too low to budget properly
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="budgeting_challenge"
-                                    id="budgeting_challenge_no_financial_plan" value="no_financial_plan">
+                                    id="budgeting_challenge_no_financial_plan" value="I don’t have a clear financial plan">
                                 <label class="form-check-label" for="budgeting_challenge_no_financial_plan">
                                     I don’t have a clear financial plan
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="budgeting_challenge"
-                                    id="budgeting_challenge_forget_tracking" value="forget_tracking">
+                                    id="budgeting_challenge_forget_tracking" value="I often forget to track my expenses">
                                 <label class="form-check-label" for="budgeting_challenge_forget_tracking">
                                     I often forget to track my expenses
                                 </label>
@@ -477,14 +477,14 @@
                                 responses?</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="personalized_tips"
-                                    id="personalized_tips_yes" value="yes">
+                                    id="personalized_tips_yes" value="Yes, I’d love that">
                                 <label class="form-check-label" for="personalized_tips_yes">
                                     Yes, I’d love that
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="personalized_tips"
-                                    id="personalized_tips_no" value="no">
+                                    id="personalized_tips_no" value="No, I prefer researching on my own">
                                 <label class="form-check-label" for="personalized_tips_no">
                                     No, I prefer researching on my own
                                 </label>
