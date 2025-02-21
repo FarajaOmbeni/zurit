@@ -197,10 +197,11 @@
 
         <!-- Questionnaire Modal -->
         <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#zuritQuestionnaireModal" style="position: fixed; bottom: 20px; right: 20px; z-index: 5;">
+            <a href="{{ url('/?openQuestionnaire=true') }}" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#zuritQuestionnaireModal"
+                style="position: fixed; bottom: 20px; right: 20px; z-index: 5;">
                 Help us serve you better
-            </button>
+            </a>
             <x-zurit-questionnaire></x-zurit-questionnaire>
         </div>
 
@@ -411,6 +412,14 @@
                 rootMargin: '0px',
                 threshold: 0.5 // Intersection ratio to consider (0.5 means at least 50% of the element is visible)
             };
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('openQuestionnaire') === 'true') {
+                    const modal = new bootstrap.Modal(document.getElementById('zuritQuestionnaireModal'));
+                    modal.show();
+                }
+            });
         </script>
 </body>
 
